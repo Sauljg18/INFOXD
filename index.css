@@ -1,4 +1,4 @@
-.cuadro{
+.fondo{
     margin: 0;
     position: fixed;
     top: 0;
@@ -19,7 +19,7 @@ width: 15% 15%;
 height: 100%;
 }
 
-.cuadro2{
+.fondo2{
     z-index: 1;
     margin: auto;
     position:fixed;
@@ -31,7 +31,7 @@ height: 100%;
     background: rgb(18, 66, 130);
 }
 
-.cuadro3{
+.fondo3{
     z-index: -1;
     margin: auto;
     position:relative;
