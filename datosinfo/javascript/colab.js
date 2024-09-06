@@ -6,16 +6,19 @@ let password = document.getElementById('password');
 let cuadrado = document.getElementById('cuadro');
       let viewPassword = document.getElementById('viewPassword');
       let click = false;
-      
+      formula2.style.display='none';
 detalles.onclick =function(){
     formula1.style.display='block';
     formula2.style.display='none';
+
 }
 
 configurar.onclick =function(){
     formula1.style.display='none';
     formula2.style.display='block';
+    
 }
+
 
       viewPassword.addEventListener('click', (e)=>{
           if(!click){
