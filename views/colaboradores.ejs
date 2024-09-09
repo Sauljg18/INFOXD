@@ -1,0 +1,143 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="resources/estilo/form-colab.css">
+   <link rel="stylesheet" href="resources/index.css"> 
+    <title>colaboradores</title>
+   
+<body>
+  
+  <div class="fondo1"></div>
+
+    </div>
+    <div class = "fondo2" id="estrella-12">
+    </div>
+    <a>
+    <div class="container" >
+
+    <form action="/validar" method="post" class="lista">
+        <ul>
+          <li>
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="user_name" required/><p>
+          </li>
+          <li>
+            <label for="name">Usuario:</label>
+            <input type="text" id="USER" name="User" required /><p>
+          </li>
+          <li>
+            <label for="mail">Correo electrónico:</label>
+            <input type="email" id="mail" name="user_mail" required/><p>
+          </li>
+          <li>
+            <label for="cargo">Cargo:</label>
+            <select name="cargo" id="cargo" form="carg">
+                <option value="volvo">Administrador</option>
+                <option value="saab">Sapo</option>
+              </select>
+          </li>
+          <li>
+            <label for="cont">Contacto:</label>
+            <input type="text" id="contact" name="contacto" required>
+          </li>
+        </ul>
+        
+      
+    </div>
+    </div>
+   
+    <div class="container2" id="contend" >
+      
+     <div class="lista"  id="formu1">
+         <ul>
+            <li>
+              <label for="acces">Perfil de Acceso:</label>
+              <select name="acceso" id="acceso" form="acces">
+                  <option value="admin">Administrador</option>
+                  <option value="super">Supervisor</option>
+                  <option value="usuario">Usuario</option>
+                </select><p>
+            </li>
+             <label for="Acceso">Contraseña:</label>
+             <input type="password" id="password" required/>
+             <div class="col">
+              <nav class="press0" type="button" id="viewPassword">Mostrar Contraseña</nav><p>
+            </div>
+           <li>
+             <label for="Confirmacion">Confirmar Contraseña:</label>
+             <input type="password" name="password" required /><p>
+           </li>
+           <li>
+            <label for="acces">Check-it:</label>
+            <select name="acceso" id="acceso" form="acces">
+                <option value="admin">Automatico</option>
+                <option value="super">Manual</option>
+              </select><p>
+           </li>
+           <li>
+             <label for="valor">Valor por Hora trabajada:</label>
+             <input type="text" id="valor" name="valor" required>
+           </li>
+         </ul>
+         <ul>
+        
+          <li class="col"><nav class="press" id="config">Configuración</nav></li>
+        </ul> 
+      </div>
+     
+      </div>
+    </div>
+    <div class="lista" id="formu2">
+     <div class="barra">
+      <ul>
+        <li>
+      <label for="opcion1">
+      <input type="checkbox" id="opcion1" name="username">
+      Puede Crear Tareas</label><p></li>
+        <li><label for="opcion2">
+      <input type="checkbox" id="opcion2" name="tipos">
+       Todos los tipos de Tarea</label><p></li>
+      <li><label for="opcion3">
+       <input type="checkbox" id="opcion3" name="realizar">
+        Puede realizar tareas</label><p></li>
+       <li> <label for="opcion4">   
+      <input type="checkbox" id="opcion4" name="editar">
+      Puede editar tareas</label><p></li>
+     <li> <label for="opcion5">
+      <input type="checkbox" id="opcion5" name="eliminar">
+      Puede eliminar tareas</label><p></li>
+      <li><label for="opcion6">
+        <input type="checkbox"id="opcion6" name="pausar">
+        Pausar tareas</label><p></li>
+        <li> <label for="opcion7">
+    <input type="checkbox" id="opcion7" name="reagendar">
+    Reagendar tareas </label><p></li>
+    <li><label for="opcion8">
+    <input type="checkbox" id="opcion8" name="galerias">
+    Puede utilizar galerias <br> de las tareas</label><p>
+    </li> </ul>
+  </div>
+    <button class="press1" id="detalle">Cerrar</button>
+ </div>
+    
+    
+
+     <div class="container3">
+      <div class="cuadro3"> </div>
+      <nav class= "lista" enctype="multipart/form-data">
+        <div>
+          <img src="https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="avatar" id="img" />
+          <input type="file" name="foto" id="foto" accept="image/*" class="imglol" />
+          <label for="foto" name="foto" id="foto" accept="image/*">Cambiar foto</label>
+        </div>
+        <input type="submit" value="ENVIAR">
+  </div>
+ 
+</nav>
+
+    </form>
+    <script src="resources/javascript/colab.js"></script>
+</body>
+</head>
+</html>
