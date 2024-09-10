@@ -1,0 +1,38 @@
+
+.fondo1{
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw ;
+    height: 120px ;
+  z-index: 1;
+    background:  rgb(41, 114, 210);
+  }
+  
+  
+  
+  .logo{
+    z-index: 2;
+    display:block;
+    margin-right:auto;
+    top: 0;
+  width: 15% 15%;
+  height: 50%;
+  }
+  
+  .fondo2{
+    z-index: 1;
+    margin: auto;
+    position:fixed;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 80vw ;
+    height: 120px ;
+    background: rgb(18, 66, 130);
+  }
+.container{
+    top:200px;
+    margin-top: 20%;
+  }
