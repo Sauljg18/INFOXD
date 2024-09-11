@@ -18,16 +18,20 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-router.get("/", function(req, res) {
+app.get("/", function (req, res) {
+    res.render('registrocliente');
+});
+
+/*app.get("/", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
-    conexion.query('SELECT * FROM colaborador', (error, results) => {
+    conexion.query('SELECT * FROM colaboradores ', (error, results) => {
         if (error) {
             throw error;
         } else {
             res.render('tablacolaboradores', { results: results });
         }
     });
-});
+});*/
 
 app.get("/registro", (req,res) => {
     res.render('colaboradores');
@@ -49,7 +53,7 @@ app.post("/validar", function(req,res){
    let valor = datos.valor;
    let photo = datos.foto;
 
-   let registrar = "INSERT INTO colaborador (nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, checar, valor, foto) VALUE ('"+nombre +"','"+usuario +"','"+correo +"','"+carga +"','"+contacto +"','"+acceso +"','"+password +"','"+confirmar +"','"+checar +"','"+valor +"','"+photo +"')";
+   let registrar = "INSERT INTO colaboradores (nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, checar, valor, foto) VALUE ('"+nombre +"','"+usuario +"','"+correo +"','"+carga +"','"+contacto +"','"+acceso +"','"+password +"','"+confirmar +"','"+checar +"','"+valor +"','"+photo +"')";
                 
    conexion.query(registrar,function(error){
        if(error){

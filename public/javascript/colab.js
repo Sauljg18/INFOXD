@@ -4,8 +4,9 @@ let formula1= document.getElementById("formu1");
 let formula2= document.getElementById("formu2");
 let password = document.getElementById('password');
 let cuadrado = document.getElementById('cuadro');
-      let viewPassword = document.getElementById('viewPassword');
-      let click = false;
+let viewPassword = document.getElementById('viewPassword');
+      
+let click = false;
       formula2.style.display='none';
 detalles.onclick =function(){
     formula1.style.display='block';
@@ -39,6 +40,8 @@ file.addEventListener( 'change', e => {
     const reader = new FileReader( );
     reader.onload = function( e ){
       img.src = e.target.result;
+      img.style.width ='100%'
+      img.style.height ='100%'
     }
     reader.readAsDataURL(e.target.files[0])
   }else{
