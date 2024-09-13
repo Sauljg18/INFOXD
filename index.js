@@ -10,7 +10,9 @@ let conexion = mysql.createConnection({
     database: "infoenlace",
     user: "root",
     password: ""
-})
+});
+
+app.set("views", "/home/soporte/views");
 
 app.set("view engine", "ejs");
 
