@@ -12,7 +12,7 @@ let conexion = mysql.createConnection({
     password: ""
 });
 
-app.set("views", "/home/soporte/views");
+app.set("views", path.join(__dirname,'views'));
 
 app.set("view engine", "ejs");
 
@@ -134,7 +134,9 @@ app.post("/aceptar", function(req,res){
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 
-app.listen(3000,function(){
-    console.log("Servidor creado http://localhost:3000");
+const port =process.env.PORT || 3000;
+
+app.listen(port,() => {
+    console.log("Servidor creado ${port}");
 });
 
