@@ -24,24 +24,34 @@
           
         <tr class="bg-primary">
             <th scope="col">Nombre</th>
-            <th scope="col">Usuario</th>
+            <th scope="col">indentificiacion</th>
             <th scope="col">Correo</th>
-            <th scope="col">Contacto</th>
-            <th scope="col">Cargo</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Responsable</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Region</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Estado</th>
+
         </tr>
         
     
     </thead>
     <tbody>
-            <% results.forEach((colaboradores) => { %>
+            <% results.forEach((cliente) => { %>
                 
           
         <tr>
-            <td scope="row" class="table-primary"><%= colaboradores.nombre %></td>
-            <td scope="row" ><%= colaboradores.usuario %></td>
-            <td scope="row" class="table-primary"><%= colaboradores.correo %></td>
-            <td scope="row" ><%= colaboradores.contacto %></td>
-            <td scope="row" class="table-primary"><%= colaboradores.cargo %></td>
+            <td scope="row" class="table-primary"><%= cliente.nombre %></td>
+            <td scope="row" ><%= cliente.indentificiacion %></td>
+            <td scope="row" class="table-primary"><%= cliente.correocliente %></td>
+            <td scope="row" ><%= cliente.telefonocorp %></td>
+            <td scope="row" ><%= cliente.responsable %></td>
+            <td scope="row" class="table-primary"><%= cliente.direccion %></td>
+            <td scope="row" class="table-primary"><%= cliente.region %></td>
+            <td scope="row" class="table-primary"><%= cliente.ciudad %></td>
+            <td scope="row" class="table-primary"><%= cliente.estado %></td>
+
             <td>
               <a href="/edit" class="btn btn-outline-info">editar</a>
               <a href="/edit" class="btn btn-outline-info">borrar</a>
@@ -52,7 +62,7 @@
            
 </table>
 </div>
-<button> <a class="nav*links" href="registro">crear</a></button>
+<button> <a class="nav*links" href="registrocliente">crear</a></button>
 
 
   </body>

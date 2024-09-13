@@ -12,6 +12,21 @@ let conexion = mysql.createConnection({
     password: ""
 })
 
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+
 app.set("view engine", "ejs");
 
 //se utiliza para manejar datos
@@ -19,10 +34,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 app.get("/", function (req, res) {
-    res.render('registrocliente');
+    res.render('inicio');
 });
 
-/*app.get("/", (req, res) => {
+app.get("/colab", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
     conexion.query('SELECT * FROM colaboradores ', (error, results) => {
         if (error) {
@@ -31,10 +46,36 @@ app.get("/", function (req, res) {
             res.render('tablacolaboradores', { results: results });
         }
     });
-});*/
+});
+
+app.get("/cliente", (req, res) => {
+    // Realiza la consulta y renderiza la vista con los resultados
+    conexion.query('SELECT * FROM tabcliente ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('tablacliente', { results: results });
+        }
+    });
+});
+
+app.get("/equipo", (req, res) => {
+    // Realiza la consulta y renderiza la vista con los resultados
+    conexion.query('SELECT * FROM tabcliente ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('tablacliente', { results: results });
+        }
+    });
+});
 
 app.get("/registro", (req,res) => {
     res.render('colaboradores');
+});
+
+app.get("/registrocliente", (req,res) => {
+    res.render('registrocliente');
 });
 
 
