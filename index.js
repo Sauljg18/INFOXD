@@ -69,6 +69,7 @@ app.get("/registrocliente", (req,res) => {
 app.post("/validar", function(req,res){
     const datos = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
+   let id_colab = datos.id_colab;
    let nombre = datos.nombre;
    let usuario = datos.usuario;
    let correo = datos.correo;
@@ -81,7 +82,7 @@ app.post("/validar", function(req,res){
    let valor = datos.valor;
    let photo = datos.foto;
 
-   let registrar = "INSERT INTO colaboradores (nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, checar, valor, foto) VALUE ('"+nombre +"','"+usuario +"','"+correo +"','"+carga +"','"+contacto +"','"+acceso +"','"+password +"','"+confirmar +"','"+checar +"','"+valor +"','"+photo +"')";
+   let registrar = "INSERT INTO colaboradores (id_colab, nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, checar, valor, foto) VALUE ('"+id_colab +"','"+nombre +"','"+usuario +"','"+correo +"','"+carga +"','"+contacto +"','"+acceso +"','"+password +"','"+confirmar +"','"+checar +"','"+valor +"','"+photo +"')";
                 
    conexion.query(registrar,function(error){
        if(error){
@@ -137,6 +138,6 @@ app.use('/resources', express.static("public"));
 const port =process.env.PORT || 3000;
 
 app.listen(port,() => {
-    console.log("Servidor creado ${port}");
+    console.log("Servidor creado http://localhost/3000");
 });
 
