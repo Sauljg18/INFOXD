@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 app.get("/", function (req, res) {
-    res.render('registrocliente');
+    res.render('colaboradores');
 });
 
 app.get("/colab", (req, res) => {
