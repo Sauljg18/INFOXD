@@ -9,7 +9,7 @@ let conexion = mysql.createConnection({
     host:"localhost",
     database: "infoenlace",
     user: "root",
-    password: ""
+    password: "1$34GMococo"
 });
 
 app.set("views", path.join(__dirname,'views'));
