@@ -9,7 +9,7 @@ let conexion = mysql.createConnection({
     host:"localhost",
     database: "infoenlace",
     user: "root",
-    password: "1$34GMococo"
+    password: ""
 });
 
 app.set("views", path.join(__dirname,'views'));
@@ -136,14 +136,14 @@ app.post("/aceptar", function(req,res){
 app.use('/resources', express.static("public"));
 
 
-/*app.listen(3000,function(){
+app.listen(3000,function(){
     console.log("Servidor creado http://localhost:3000");
 });/*se necesita activar el xammp*/
 
 
-const port =process.env.PORT || 3006;
+/*const port =process.env.PORT || 3006;
 
 app.listen(port,() => {
     console.log("Servidor creado ${port}");
-});
+});*/
 
