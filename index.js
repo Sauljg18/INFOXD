@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 app.get("/", function (req, res) {
-    res.render('colaboradores');
+    res.render('inicio');
 });
 
 app.get("/colab", (req, res) => {
@@ -141,7 +141,7 @@ app.use('/resources', express.static("public"));
 });/*se necesita activar el xammp*/
 
 
-const port =process.env.PORT || 3000;
+const port =process.env.PORT || 3006;
 
 app.listen(port,() => {
     console.log("Servidor creado ${port}");
