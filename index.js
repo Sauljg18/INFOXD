@@ -136,16 +136,14 @@ app.post("/aceptar", function(req,res){
 app.use('/resources', express.static("public"));
 
 
-app.use('/resources', express.static("public"));
-
-/*app.listen(3000,function()){
+app.listen(3000,function(){
     console.log("Servidor creado http://localhost:3000");
-}*/ /*se necesita activar el xammp*/
+});/*se necesita activar el xammp*/
 
 
-const port =process.env.PORT || 3000;
+/*const port =process.env.PORT || 3000;
 
 app.listen(port,() => {
     console.log("Servidor creado ${port}");
-});
+});*/
 
