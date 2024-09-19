@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Equipo</title>
+    <link rel="stylesheet" href="resources/estilo/RegistroEquipos.css">
+</head>
+<body>
+    <nav>
+        <h1>Registro de Equipos</h1>
+    
+        <label for="" class="brand">
+            <a href="">Logo</a>
+        
+        </label>
+        <ul>
+            <li><a href="/">inicio</a></li>
+            <li><a href="/cliente">cliente</li>
+            <li><a href="/colab">COLABORADOR</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <a href="#" class="back-btn"> < Volver</a>
+            <h1>Equipo</h1>
+            <button class="save-btn">Guardar</button>
+        </div>
+        
+        <!-- Formulario -->
+        <div class="main">
+            <!-- Imagen y Datos del Equipo -->
+            <div class="left-panel">
+                <div class="image-upload">
+                    <div class="image-placeholder">Arrastre o haga clic</div>
+                </div>
+                <label>Nombre*</label>
+                <input type="text" placeholder="Ingrese el nombre">
+                <label>Identificador</label>
+                <div class="identifier">
+                    <input type="text" placeholder="Generado automáticamente">
+                    <button class="refresh-btn">🔄</button>
+                </div>
+                <label>Fecha de validez</label>
+                <input type="date">
+            </div>
+
+            <!-- Sección de Tabs -->
+            <div class="right-panel">
+                <!-- Stock y Tabs -->
+                <div class="top-section">
+                    <div class="stock-section">
+                        <div class="stock-icon">🔗</div>
+                        <span>Stock</span>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active">General</button>
+                    <button class="tab">Especificaciones</button>
+                    <button class="tab">Anexos</button>
+                    <button class="tab">Movimientos</button>
+                    <button class="tab">Tareas</button>
+                </div>
+
+                <!-- Contenido de Tab -->
+                <div class="tab-content">
+                    <label>Descripción</label>
+                    <textarea placeholder="Ingrese la descripción"></textarea>
+                    
+                    <label>Categoría</label>
+                    <select>
+                        <option>Seleccione una categoría</option>
+                    </select>
+
+                    <label>Asociar al equipo</label>
+                    <input type="text" placeholder="Identificador o nombre">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

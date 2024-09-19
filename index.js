@@ -9,7 +9,7 @@ let conexion = mysql.createConnection({
     host:"localhost",
     database: "infoenlace",
     user: "root",
-    password: "1$34GMococo"
+    password: ""
 });
 
 app.set("views", path.join(__dirname,'views'));
@@ -20,8 +20,9 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+//Ver en online server
 app.get("/", function (req, res) {
-    res.render('colaboradores');
+    res.render('RegistroProducto');
 });
 
 app.get("/colab", (req, res) => {
@@ -135,9 +136,13 @@ app.post("/aceptar", function(req,res){
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 
-const port =process.env.PORT || 3000;
+app.listen(3000,function(){
+    console.log("Servidor creado http://localhost:3000");
+});
+
+/*const port =process.env.PORT || 3000;
 
 app.listen(port,() => {
     console.log("Servidor creado http://localhost/3000");
-});
+});*/
 
