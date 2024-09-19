@@ -22,7 +22,7 @@ app.use(express.urlencoded({extended:false}));
 
 //Ver en online server
 app.get("/", function (req, res) {
-    res.render('TablaServicios');
+    res.render('TablaProductos');
 });
 
 app.get("/colab", (req, res) => {
