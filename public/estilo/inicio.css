@@ -2,8 +2,8 @@ body{
     height: 100vh;
 
     display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: 100px 1fr;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 80px 1fr;
     grid-template-areas: 
     "side header"
     "side main";
@@ -24,21 +24,28 @@ body{
 }
 
 main{
-    background-color: #e5e2e2;
-    padding: 25px;
-    grid-area: main;
+    background-color: #e9e7e7;
+    padding: 30px;
+    grid-area:main;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+    "c1 c2";
     gap:15px;
 }
 
 .card{
     background-color: #ffff;
     border-radius: 10px;
+    width: 25%;
+    height: 50px;
+    left: 10% ;
+    display:inline-block;
+    transition-duration: 0.5s;
   }
   
-  .card:nth-child(1){
-    grid-area: c1;
-  }
+ .card:hover{
+    background-color: #979595;
+ }
