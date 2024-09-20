@@ -22,11 +22,7 @@ app.use(express.urlencoded({extended:false}));
 
 //Ver en online server
 app.get("/", function (req, res) {
-<<<<<<< HEAD
-    res.render('registrocliente');
-=======
-    res.render('TablaProductos');
->>>>>>> f280ff4ecf386475547dd6eb5600fe0771477f52
+    res.render('inicio')
 });
 
 app.get("/colab", (req, res) => {
@@ -53,11 +49,11 @@ app.get("/cliente", (req, res) => {
 
 app.get("/equipo", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
-    conexion.query('SELECT * FROM tabcliente ', (error, results) => {
+    conexion.query('SELECT * FROM tablaequipos ', (error, results) => {
         if (error) {
             throw error;
         } else {
-            res.render('tablacliente', { results: results });
+            res.render('TablaProductos', { results: results });
         }
     });
 });
