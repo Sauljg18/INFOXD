@@ -36,8 +36,8 @@
     
     .container {
       position : absolute;
-      top: 45%;
-      left : 20%;
+      top: 40%;
+      left : 30%;
       transform :
       
       translate(-50%,-40%); 
@@ -45,8 +45,8 @@
   
     .container2 {
         position : absolute;
-        top: 35%;
-        left : 55%;
+        top: 30%;
+        left : 60%;
         width: 35%;
         height: 300px;
         transform :
