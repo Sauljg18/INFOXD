@@ -114,8 +114,8 @@
   }
   
   .barra{
-    width: 430px;
-    height: 420px;
+    width: 410px;
+    height: 390px;
     background-color: #ffffff;
     overflow: scroll;
   }
@@ -136,7 +136,7 @@
     button{float:right;padding:8px 12px;font-family:'Montserrat',sans-serif;border:2px solid #5d5dbe;background:0;color:#5a5a6e;cursor:pointer;transition:all .3s}
     button:hover{background:#8484d3;color:#2018ad;}
   
-    .col{border-radius: 15px; float:right;padding:8px 12px;font-family:'Montserrat',sans-serif;border:2px solid #3333bb;background:0;color:#8484b7;cursor:pointer;transition:all .3s}
+    .col{border-radius: 20px; float:right;padding:6px 12px;font-family:'Montserrat',sans-serif;border:2px solid #3333bb;background:0;color:#8484b7;cursor:pointer;transition:all .3s}
     .col:hover{background:#2b9ff3;color:#fff;}
     
   
