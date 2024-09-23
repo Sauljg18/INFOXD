@@ -2,7 +2,7 @@ body{
     height: 100vh;
 
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 20px 1fr;
     grid-template-rows: 80px 1fr;
     grid-template-areas: 
     "side header"
@@ -16,6 +16,25 @@ body{
     grid-row: 1 / 2;
 }
 
+.header ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+    margin: 50px;
+    font-size: 20px;
+    padding-left:20px ;
+}
+
+.header li{
+    padding-left: 20px;
+   
+}
+
+.header a{
+    color: #e9e7e7;
+   
+}
 .sidebar{
     background-color: #5e7fb7;
 
@@ -39,8 +58,8 @@ main{
 .card{
     background-color: #ffff;
     border-radius: 10px;
-    width: 25%;
-    height: 50px;
+    width: 20%;
+    height: 80px;
     left: 10% ;
     display:inline-block;
     transition-duration: 0.5s;
@@ -49,3 +68,4 @@ main{
  .card:hover{
     background-color: #979595;
  }
+
