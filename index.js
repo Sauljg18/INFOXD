@@ -22,7 +22,7 @@ app.use(express.urlencoded({extended:false}));
 
 //Ver en online server
 app.get("/", function (req, res) {
-    res.render('RegistroTareas');
+    res.render('inicio');
 });
 
 app.get("/colab", (req, res) => {
@@ -48,7 +48,19 @@ app.get("/cliente", (req, res) => {
 });
 
 app.get("/equipo", (req,res) => {
-    res.render('Equipo');
+    res.render('RegistroEquipos');
+});
+
+app.get("/producto", (req,res) => {
+    res.render('TablaProductos');
+});
+
+app.get("/servicio", (req,res) => {
+    res.render('TablaServicios');
+});
+
+app.get("/tarea", (req,res) => {
+    res.render('RegistroTareas');
 });
 
 app.get("/registro", (req,res) => {
