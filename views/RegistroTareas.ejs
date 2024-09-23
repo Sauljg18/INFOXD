@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Tarea</title>
+    <link rel="stylesheet" href="resources/estilo/RegistroTareas.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navegación entre secciones -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'General')">General</button>
+            <button class="tab-link" onclick="openTab(event, 'Ubicacion')">Ubicación</button>
+            <button class="tab-link" onclick="openTab(event, 'Valores')">Valores</button>
+        </div>
+
+        <!-- Sección General -->
+        <div id="General" class="tab-content active">
+            <form>
+                <label for="colaborador">Tarea será ejecutada por:</label>
+                <select id="colaborador">
+                    <option value="">Seleccionar Colaborador</option>
+                    <!-- Opciones dinámicas -->
+                </select>
+
+                <label for="informar">Informar:</label>
+                <select id="informar">
+                    <option value="">Seleccionar persona</option>
+                    <!-- Opciones dinámicas -->
+                </select>
+
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha">
+
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora">
+
+                <label for="tipoTarea">Tipo de Tarea:</label>
+                <select id="tipoTarea">
+                    <option value="">Seleccionar Tipo</option>
+                    <!-- Opciones dinámicas -->
+                </select>
+
+                <label for="duracion">Tiempo de duración:</label>
+                <input type="text" id="duracion">
+
+                <label for="prioridad">Prioridad:</label>
+                <select id="prioridad">
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select>
+
+                <label for="descripcion">Descripción de la tarea:</label>
+                <textarea id="descripcion" rows="4"></textarea>
+
+                <label for="palabraClave">Palabra Clave:</label>
+                <input type="text" id="palabraClave">
+
+                <label for="codigoExterno">Código Externo:</label>
+                <input type="text" id="codigoExterno">
+
+                <label for="satisfaccion">Encuesta de Satisfacción:</label>
+                <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
+                <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
+
+                <!-- Botones de acción -->
+                <button type="reset">Guardar y agregar otra tarea</button>
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+
+        <!-- Sección Ubicación -->
+        <div id="Ubicacion" class="tab-content">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" placeholder="Escribe una dirección">
+
+            <label for="latitud">Latitud:</label>
+            <input type="text" id="latitud">
+
+            <label for="longitud">Longitud:</label>
+            <input type="text" id="longitud">
+
+            <!-- Mapa -->
+            <div id="map"></div>
+        </div>
+
+        <!-- Sección Valores -->
+        <div id="Valores" class="tab-content">
+            <h3>Productos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Valor Unitario (MXN)</th>
+                        <th>Descuento</th>
+                        <th>Valor Total (MXN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Ningún producto fue seleccionado</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Incluir Producto</button>
+            <button>Eliminar Todo</button>
+
+            <h3>Servicios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Cantidad</th>
+                        <th>Valor Unitario (MXN)</th>
+                        <th>Descuento</th>
+                        <th>Valor Total (MXN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Ningún servicio fue seleccionado</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Incluir Servicio</button>
+            <button>Eliminar Todo</button>
+        </div>
+    </div>
+
+    <script src="resources/javascript/RegistroTarea.js"></script>
+</body>
+</html>

@@ -18,7 +18,7 @@ Proyecto que basicamente conciste en la creacion de una pagina web para la empre
 > https://www.apachefriends.org/download.html
 > <p>4. Git <br>
 > https://git-scm.com/downloads
->
+><br>
 > <img width="50" src="public/IMAGENES/SVG/apache-color.svg">
 > <img width="50" src="public/IMAGENES/SVG/phpmyadmin.svg">
 > <img width="50" src="public/IMAGENES/SVG/nodedotjs.svg">
