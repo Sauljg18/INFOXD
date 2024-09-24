@@ -36,7 +36,7 @@ Proyecto que basicamente conciste en la creacion de una pagina web para la empre
 # Para iniciar. -Clonar Repositorio-
 <p> Crear una carpeta donde clonaras el repositorio que se muestra en la pagina web donde estas leyendo esto. <br>
 
->[!TIP] 🚩
+>[!TIP]
 > <p> Puedes iniciar git en la carpeta de entranda dando clic derecho y dando a "Open Git Bash here" </p>
 
 Con la ventana de Git Bash abierta en la carpeta que utilizaras clonas en repositorio con el siguiente enlace. <br>

@@ -9,6 +9,34 @@ body {
     background-color: #f4f4f9;
 }
 
+
+.header{
+    background-color: #0958d8;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.header ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+    margin: 50px;
+    font-size: 20px;
+    padding-left:20px ;
+}
+
+.header li{
+    padding-left: 20px;
+   
+}
+
+.header a{
+    color: #e9e7e7;
+   
+}
+
+
 .container {
     width: 90%;
     margin: auto;

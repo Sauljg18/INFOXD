@@ -20,9 +20,20 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-//Ver en online server
+//Inicia visualización del proyecto con "node index" en una terminal 
 app.get("/", function (req, res) {
-    res.render('RegistroTareas');
+    res.render('Inicio');
+});
+
+app.get("/Inicio", (req, res) => {
+    // Realiza la consulta y renderiza la vista con los resultados
+    conexion.query('SELECT * FROM colaboradores ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('inicio', { results: results });
+        }
+    });
 });
 
 app.get("/colab", (req, res) => {
@@ -36,7 +47,7 @@ app.get("/colab", (req, res) => {
     });
 });
 
-app.get("/cliente", (req, res) => {
+app.get("/clientes", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
     conexion.query('SELECT * FROM tabcliente ', (error, results) => {
         if (error) {
@@ -48,7 +59,7 @@ app.get("/cliente", (req, res) => {
 });
 
 app.get("/equipo", (req,res) => {
-    res.render('Equipo');
+    res.render('Equipos');
 });
 
 app.get("/registro", (req,res) => {
