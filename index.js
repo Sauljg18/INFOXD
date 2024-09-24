@@ -62,6 +62,18 @@ app.get("/equipo", (req,res) => {
     res.render('Equipos');
 });
 
+app.get("/producto", (req,res) => {
+    res.render('TablaProductos');
+});
+
+app.get("/servicio", (req,res) => {
+    res.render('TablaServicios');
+});
+
+app.get("/tarea", (req,res) => {
+    res.render('RegistroTareas');
+});
+
 app.get("/registro", (req,res) => {
     res.render('colaboradores');
 });
