@@ -25,20 +25,42 @@
             <button class="tab-link" onclick="openTab(event, 'Valores')">Valores</button>
         </div>
 
-        <!-- Sección General -->
-        <div id="General" class="tab-content active">
-            <form>
-                <label for="colaborador">Tarea será ejecutada por:</label>
-                <select id="colaborador">
-                    <option value="">Seleccionar Colaborador</option>
-                   
-                <!-- Opciones dinámicas -->
-                </select>
+    <!-- Sección General -->
+<div id="General" class="tab-content active">
+    <form>
+        <!-- Filtra los nombres de clientes para evitar duplicados -->
+        <label for="cliente">Tarea será ejecutada por:</label>
+        <select id="cliente">
+            <% 
+                const uniqueClientes = [];
+                results.forEach((row) => {
+                    if (!uniqueClientes.includes(row.clienteNombre)) {
+                        uniqueClientes.push(row.clienteNombre);
+            %>
+                <option value="<%= row.clienteNombre %>"><%= row.clienteNombre %></option>
+            <% 
+                    }
+                });
+            %>
+        </select>
 
-                <label for="informar">Informar:</label>
-                <select id="informar">
-                    <option value="">Seleccionar persona</option>
-                
+        <!-- Filtra los nombres de colaboradores para evitar duplicados -->
+        <label for="informar">Informar:</label>
+        <select id="informar">
+            <% 
+                const uniqueColaboradores = [];
+                results.forEach((row) => {
+                    if (!uniqueColaboradores.includes(row.colaboradorNombre)) {
+                        uniqueColaboradores.push(row.colaboradorNombre);
+            %>
+                <option value="<%= row.colaboradorNombre %>"><%= row.colaboradorNombre %></option>
+            <% 
+                    }
+                });
+            %>
+       
+    </form>
+</div>
                 <!-- Opciones dinámicas -->
                 </select>
 
@@ -71,7 +93,18 @@
                 <input type="text" id="palabraClave">
 
                 <label for="codigoExterno">Código Externo:</label>
-                <input type="text" id="codigoExterno">
+                <select id="codidoExterno">
+            <% 
+                const uniqueClientex = [];
+                results.forEach((row) => {
+                    if (!uniqueClientex.includes(row.clientecodigo)) {
+                        uniqueClientex.push(row.clientecodigo);
+            %>
+                <option value="<%= row.clientecodigo %>"><%= row.clientecodigo %></option>
+            <% 
+                    }
+                });
+            %>
 
                 <label for="satisfaccion">Encuesta de Satisfacción:</label>
                 <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">

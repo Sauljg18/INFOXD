@@ -75,9 +75,17 @@ app.get("/servicio", (req,res) => {
     res.render('TablaServicios');
 });
 
-app.get("/tarea", (req,res) => {
-    res.render('RegistroTareas');
+app.get("/tarea", (req, res) => {
+    // Realiza la consulta y renderiza la vista con los resultados
+    conexion.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('RegistroTareas', { results: results });
+        }
+    });
 });
+    
 
 app.get("/registro", (req,res) => {
     res.render('colaboradores');
