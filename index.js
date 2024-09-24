@@ -62,6 +62,11 @@ app.get("/equipo", (req,res) => {
     res.render('Equipos');
 });
 
+app.get("/resequipo", (req,res) => {
+    res.render('RegistroEquipos');
+});
+
+
 app.get("/producto", (req,res) => {
     res.render('TablaProductos');
 });
