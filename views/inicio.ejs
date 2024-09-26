@@ -59,20 +59,8 @@
             <div class="event-day">wed</div>
             <div class="event-date">12th december 2022</div>
           </div>
-          <h3>Lista de Tareas</h3>
-          <ul class="task-list">
-              <!-- Aquí puedes agregar el código para iterar sobre las tareas -->
-              <% tareas.forEach(tarea => { %>
-                  <li class="task-item">
-                      <strong>Tarea:</strong> <%= tarea.descripcion %><br>
-                      <strong>Fecha:</strong> <%= tarea.fecha %> <%= tarea.hora %><br>
-                      <strong>Colaborador:</strong> <%= tarea.colaborador %><br>
-                      <strong>Prioridad:</strong> <%= tarea.prioridad %>
-                  </li>
-              <% }) %>
-          </ul>
+        
           <div class="events"> 
-           
         </div>
           <div class="add-event-wrapper">
             <div class="add-event-header">
@@ -110,7 +98,9 @@
   
     
 
-    <script src="resources/javascript/agenda.js"></script>
+    <script src="resources/javascript/agenda.js">
+    
+    </script>
     </main>
    
 

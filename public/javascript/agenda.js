@@ -17,7 +17,6 @@ const calendar = document.querySelector(".calendar"),
   addEventTo = document.querySelector(".event-time-to "),
   addEventSubmit = document.querySelector(".add-event-btn ");
 
-
 let today = new Date();
 let activeDay;
 let month = today.getMonth();
@@ -289,6 +288,64 @@ addEventTitle.addEventListener("input", (e) => {
   addEventTitle.value = addEventTitle.value.slice(0, 60);
 });
 
+function defineProperty() {
+  var osccred = document.createElement("div");
+  
+  osccred.style.position = "absolute";
+  osccred.style.bottom = "0";
+  osccred.style.right = "0";
+  osccred.style.fontSize = "10px";
+  osccred.style.color = "#ccc";
+  osccred.style.fontFamily = "sans-serif";
+  osccred.style.padding = "5px";
+  osccred.style.background = "#fff";
+  osccred.style.borderTopLeftRadius = "5px";
+  osccred.style.borderBottomRightRadius = "5px";
+  osccred.style.boxShadow = "0 0 5px #ccc";
+  document.body.appendChild(osccred);
+}
+   // Hacer una petición AJAX para obtener las tareas desde el servidor
+  fetch('/api/tareas')
+    .then(response => response.json()) // Convertir la respuesta a JSON
+    .then(tareas => {
+      // Recorrer las tareas y mostrarlas en el calendario
+      tareas.forEach(tarea => {
+        let date = new Date(tarea.fecha);
+
+        // Lógica para mostrar la tarea en el calendario
+        marcarFechaConTareaEnCalendario(date, tarea);
+      });
+    })
+    .catch(error => {
+      console.error('Error al obtener las tareas:', error);
+    });
+
+function marcarFechaConTareaEnCalendario(date, tarea) {
+    // Aquí se implementa la lógica para marcar el día y mostrar la información
+    // Esto puede variar dependiendo de cómo estés renderizando el calendario.
+
+    // Un ejemplo podría ser buscar el día en el calendario y agregar un tooltip o una ventana emergente
+    let dayElement = document.querySelector(`[data-date='${formatDate(date)}']`);
+    
+    if (dayElement) {
+        // Agregar los detalles como un tooltip o texto adicional en el día marcado
+        dayElement.innerHTML += `<div class="tarea-detalles">
+                                    <strong>Cliente:</strong> ${tarea.cliente}<br>
+                                    <strong>Colaborador:</strong> ${tarea.colaborador}<br>
+                                    <strong>Descripción:</strong> ${tarea.descripcion}
+                                 </div>`;
+        // Si el calendario usa popups o tooltips, podrías mostrarlo con CSS/JS
+        dayElement.classList.add('marcado'); // Añadir una clase para resaltar
+    }
+}
+
+// Formato para que coincida con el de tu calendario
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);  // Mes con dos dígitos
+    const day = ("0" + date.getDate()).slice(-2);            // Día con dos dígitos
+    return `${year}-${month}-${day}`;
+}
 
 defineProperty();
 
@@ -458,3 +515,5 @@ function convertTime(time) {
   time = timeHour + ":" + timeMin + " " + timeFormat;
   return time;
 }
+
+

@@ -16,34 +16,40 @@ app.set("views", path.join(__dirname,'views'));
 
 app.set("view engine", "ejs");
 
+
 //se utiliza para manejar datos
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 //Inicia visualización del proyecto con "node index" en una terminal 
 app.get('/', (req, res) => {
-    // Consulta para obtener todas las tareas
-    conexion.query('SELECT * FROM tareas', (error, results) => {
+    // Consulta para obtener todas las tareas con los datos requeridos
+    conexion.query('SELECT cliente, colaborador, descripcion, fecha FROM tareas', (error, results) => {
         if (error) {
             console.log(error);
             res.status(500).send("Error al cargar las tareas");
         } else {
             // Renderiza la página de inicio con los datos de las tareas
+            const tareas = results.map(row => ({
+                cliente: row.cliente,
+                colaborador: row.colaborador,
+                descripcion: row.descripcion,
+                fecha: row.fecha
+            }));
+
             res.render('inicio', { tareas: results });
         }
     });
 });
 
-app.get("/Inicio", (req, res) => {
-    // Realiza la consulta y renderiza la vista con los resultados
-    conexion.query('SELECT * FROM colaboradores ', (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            res.render('inicio', { results: results });
-        }
+app.get('/api/tareas', (req, res) => {
+    conexion.query('SELECT * FROM tareas', (error, results) => {
+      if (error) {
+        return res.status(500).json({ error: 'Error al obtener tareas' });
+      }
+      res.json(results); // Enviamos las tareas al cliente
     });
-});
+  });
 
 app.get("/colab", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
@@ -188,7 +194,6 @@ app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
            throw error;
        }else{
           console.log("Datos almacenados correctamente"); 
-          res.render('inicio', { results: results });
        }
    });
 });
