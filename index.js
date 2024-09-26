@@ -96,7 +96,7 @@ app.get("/registrocliente", (req,res) => {
 });
 
 
-app.post("/validar", function(req,res){
+app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     const datos = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
    let id_colab = datos.id_colab;
@@ -108,7 +108,6 @@ app.post("/validar", function(req,res){
    let acceso = datos.acceso;
    let password = datos.contrasena;
    let confirmar = datos.confirmar;
-   let checar = datos.checar;
    let valor = datos.valor;
    let photo = datos.foto;
 
@@ -126,8 +125,7 @@ app.post("/validar", function(req,res){
 
 });
 
-
-app.post("/aceptar", function(req,res){
+app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
     const client = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
    let namecliente = client.namecliente;
@@ -161,7 +159,30 @@ app.post("/aceptar", function(req,res){
 
 });
 
+app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
+    const tarea = req.body;
+   // Corregir los nombres de las variables para que coincidan con el formulario
+   let id_tarea = tarea.id_tarea;
+   let cliente = tarea.cliente;
+   let colaborador = tarea.colaborador;
+   let fecha = tarea.fecha;
+   let hora = tarea.hora; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+   let tipo = tarea.tipo;
+   let prioridad = tarea.prioridad;
+   let descripcion = tarea.descripcion;
+   
 
+   let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, prioridad, descripcion) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+prioridad +"','"+descripcion +"')";
+                
+   conexion.query(registrar,function(error){
+       if(error){
+           throw error;
+       }else{
+          console.log("Datos almacenados correctamente"); 
+          res.render('inicio', { results: results });
+       }
+   });
+});
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 

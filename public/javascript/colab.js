@@ -1,9 +1,8 @@
 let detalles = document.getElementById("detalle");
 let configurar = document.getElementById("config");
-let formula1= document.getElementById("formu1");
-let formula2= document.getElementById("formu2");
-let password = document.getElementById('password');
-let cuadrado = document.getElementById('cuadro');
+let formula1= document.getElementById("formu1"); //Primer Formulario
+let formula2= document.getElementById("formu2"); //Segundo Formulario
+let password = document.getElementById('password'); //Para los datos de una contrañesa
 let viewPassword = document.getElementById('viewPassword');
       
 let click = false;

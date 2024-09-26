@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Tarea</title>
     <link rel="stylesheet" href="resources/estilo/RegistroTareas.css">
+    <link rel="stylesheet" href="resources/estilo/mapa.css"/>
+    <script src="resources/estilo/javascript/mapa.js" type="module"></script>
 </head>
 <body>
     <div class="container">
@@ -25,10 +27,10 @@
 
     <!-- Sección General -->
 <div id="General" class="tab-content active">
-    <form>
+    <form method="post" action="/aceptartarea">
         <!-- Filtra los nombres de clientes para evitar duplicados -->
         <label for="cliente">Tarea será ejecutada por:</label>
-        <select id="cliente">
+        <select name="cliente" id="cliente">
             <% 
                 const uniqueClientes = [];
                 results.forEach((row) => {
@@ -43,9 +45,9 @@
         </select>
 
         <!-- Filtra los nombres de colaboradores para evitar duplicados -->
-        <label for="informar">Informar:</label>
-        <select id="informar">
-            <% 
+        <label for="colaborador">colaborador:</label>
+        <select name="colaborador" id="colaborador"> 
+            <%  
                 const uniqueColaboradores = [];
                 results.forEach((row) => {
                     if (!uniqueColaboradores.includes(row.colaboradorNombre)) {
@@ -59,62 +61,45 @@
        
     </form>
 </div>
-                <!-- Opciones dinámicas -->
+                
                 </select>
 
                 <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha">
+                <input type="date" name="fecha" id="fecha">
 
                 <label for="hora">Hora:</label>
-                <input type="time" id="hora">
+                <input type="time" name="hora" id="hora">
 
-                <label for="tipoTarea">Tipo de Tarea:</label>
-                <select id="tipoTarea">
-                    <option value="">Seleccionar Tipo</option>
-                    <!-- Opciones dinámicas -->
+                <label for="tipo">Tipo de Tarea:</label>
+                <select name="tipo" id="tipo">
+                    <option value="tipo">Seleccionar Tipo</option>
+                   <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
                 </select>
 
                 <label for="duracion">Tiempo de duración:</label>
-                <input type="text" id="duracion">
+                <input type="text" name="duracion" id="duracion">
 
                 <label for="prioridad">Prioridad:</label>
-                <select id="prioridad">
+                <select name="prioridad" id="prioridad">
                     <option value="alta">Alta</option>
                     <option value="media">Media</option>
                     <option value="baja">Baja</option>
                 </select>
 
                 <label for="descripcion">Descripción de la tarea:</label>
-                <textarea id="descripcion" rows="4"></textarea>
-
-                <label for="palabraClave">Palabra Clave:</label>
-                <input type="text" id="palabraClave">
-
-                <label for="codigoExterno">Código Externo:</label>
-                <select id="codidoExterno">
-            <% 
-                const uniqueClientex = [];
-                results.forEach((row) => {
-                    if (!uniqueClientex.includes(row.clientecodigo)) {
-                        uniqueClientex.push(row.clientecodigo);
-            %>
-                <option value="<%= row.clientecodigo %>"><%= row.clientecodigo %></option>
-            <% 
-                    }
-                });
-            %>
+                <textarea name="descripcion" id="descripcion" rows="4"></textarea>
 
                 <label for="satisfaccion">Encuesta de Satisfacción:</label>
                 <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
                 <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
 
-                <!-- Botones de acción -->
-                <button type="reset">Guardar y agregar otra tarea</button>
+             
+                <button type="reset">Guardar y agregar otra tarea</></button>
                 <button type="submit">Guardar</button>
             </form>
         </div>
 
-        <!-- Sección Ubicación -->
+      
         <div id="Ubicacion" class="tab-content">
             <label for="direccion">Dirección:</label>
             <input type="text" id="direccion" placeholder="Escribe una dirección">
@@ -125,11 +110,11 @@
             <label for="longitud">Longitud:</label>
             <input type="text" id="longitud">
 
-            <!-- Mapa -->
-            <div id="map"></div>
+          
+            <div id="map">
         </div>
 
-        <!-- Sección Valores -->
+        
         <div id="Valores" class="tab-content">
             <h3>Productos</h3>
             <table>
