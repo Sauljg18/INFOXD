@@ -21,8 +21,17 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 //Inicia visualización del proyecto con "node index" en una terminal 
-app.get("/", function (req, res) {
-    res.render('Inicio');
+app.get('/', (req, res) => {
+    // Consulta para obtener todas las tareas
+    conexion.query('SELECT * FROM tareas', (error, results) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send("Error al cargar las tareas");
+        } else {
+            // Renderiza la página de inicio con los datos de las tareas
+            res.render('inicio', { tareas: results });
+        }
+    });
 });
 
 app.get("/Inicio", (req, res) => {
