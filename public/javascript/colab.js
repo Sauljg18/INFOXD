@@ -7,6 +7,9 @@ let viewPassword = document.getElementById('viewPassword');
       
 let click = false;
       formula2.style.display='none';
+
+
+      
 detalles.onclick =function(){
     formula1.style.display='block';
     formula2.style.display='none';

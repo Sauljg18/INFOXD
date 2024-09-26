@@ -12,7 +12,7 @@ let tab_vista_Especificaciones = document.getElementById("Especificaciones-vista
 let tab_vista_Anexos = document.getElementById("Anexos-vista")
 let tab_vista_Tareas = document.getElementById("Tareas-vista")
 
-let click = false;      
+let click = true;      
 tab_descripcion.style.display='block';//Opción predeterminada
 tab_vista_Especificaciones.style.display='none'; 
 tab_vista_Anexos.style.display='none';

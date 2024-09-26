@@ -7,46 +7,53 @@
     <link rel="stylesheet" href="resources/estilo/RegistroEquipos.css">
 </head>
 <body>
-    <nav>
-        <h1>Registro de Equipos</h1>
-    
-        <label for="" class="brand">
-            <a href="">Logo</a>
-        </label>
 
+    <header class="header" >
         <ul>
-            <li><a href="/">inicio</a></li>
-            <li><a href="/clientes">cliente</li>
-            <li><a href="/colab">COLABORADOR</a></li>
-        </ul>
-
-    </nav>
+        <li><a href="/clientes">Cliente</a></li>
+        <li> <a href="/colab">Colaborador</a></h2></li>
+        <li> <a href="/equipo">Equipo</a></h2></li>
+        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/servicio">Servicio</a></h2></li>
+        <li> <a href="/tarea">Tarea</a></h2></ul></li>
+        
+        </header>
+       
+        <section class="sidebar">
+             
+        </section>
 
     <div class="container">
         <!-- Header -->
-        <div class="header">
-            <a href="#" class="back-btn"> < Volver</a>
+        <div class="Titulo01">
+            <a href="/equipo" class="back-btn"> < Volver</a>
             <h1>Equipo</h1>
             <button class="save-btn">Guardar</button>
         </div>
         
         <!-- Formulario -->
-        <div class="main">
+            <!-- Imagen y Datos del Equipo -->        
+            <div class="image-upload">
+                <div class="image-placeholder" id="imagePreview">Arrastre o haga clic</div>
+                <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+                <label for="imageUpload" class="image-upload-label">Subir Imagen</label>
+            </div>
+            
+            <div>
+            <label>Nombre</label>
+            <input type="text" placeholder="Ingrese el nombre">
+            <label>Identificador</label>    
+            </div>
+            
+           
+            <div class="identifier">
+                <input type="text" placeholder="Generado automáticamente">
+                <button class="refresh-btn">🔄</button>
+            </div>
 
-            <!-- Imagen y Datos del Equipo -->
-            <div class="left-panel">
-                <div class="image-upload">
-                    <div class="image-placeholder">Arrastre o haga clic</div>
-                </div>
-                <label>Nombre</label>
-                <input type="text" placeholder="Ingrese el nombre">
-                <label>Identificador</label>
-                <div class="identifier">
-                    <input type="text" placeholder="Generado automáticamente">
-                    <button class="refresh-btn">🔄</button>
-                </div>
-                <label>Fecha de validez</label>
-                <input type="date">
+            <div>
+            <label>Fecha de validez</label>
+            <input type="date">
             </div>
 
             <!-- Sección de Tabs -->
@@ -61,11 +68,11 @@
 
                 <!-- Tabs -->
                 <div class="tabs">
-                    <button class="tab_General" onclick="openTap(event,'General')">General</button>
-                    <button class="tab_Especificaciones" onclick="openTap(event,'Especificaciones')">Especificaciones</button>
-                    <button class="tab_Anexos" onclick="openTap(event,'Anexos')">Anexos</button>
-                    <button class="tab_Movimientos" onclick="openTap(event,'Movimientos')">Movimientos</button>
-                    <button class="tab_Tareas" onclick="openTap(event,'Tareas')">Tareas</button>
+                    <button id="General" class="tab_General" onclick="openTap(event,'General')">General</button>
+                    <button id="Especificaciones" class="tab_Especificaciones" onclick="openTap(event,'Especificaciones')">Especificaciones</button>
+                    <button id="Anexos" class="tab_Anexos" onclick="openTap(event,'Anexos')">Anexos</button>
+                    <button id="Movimientos" class="tab_Movimientos" onclick="openTap(event,'Movimientos')">Movimientos</button>
+                    <button id="Tareas" class="tab_Tareas" onclick="openTap(event,'Tareas')">Tareas</button>
                 </div>
 
                 <!-- Contenido de Tab General-->
@@ -79,59 +86,29 @@
                     </select>
 
                     <label>Asociar al equipo</label>
-                    <input type="text" placeholder="Identificador o nombre">
+                    <input type="text" placeholder="">
                     <button class="search-btn">🔍</button>
                 </div>
 
                 <!-- Contenido de Tab Especificaciones-->
                 <div class="tab-vista-Especificaciones" id="Especificaciones-vista">
-                <label>Descripción</label>
-                <textarea placeholder="Ingrese la descripción"></textarea>
-                <label>Categoría</label>
-
-                <select>
-                <option>Seleccione una categoría</option>
-                </select>
-
-                <label>Asociar al equipo</label>
-                <input type="text" placeholder="Identificador o nombre">
+                <label>Especificaciones</label>
                 <button class="search-btn">🚩</button>
                 </div>
             
                 <!-- Contenido de Tab Anexos-->
                 <div class="tab_vista_Anexos" id="Anexos-vista">
-                    <label>Descripción</label>
-                    <textarea placeholder="Ingrese la descripción"></textarea>
-                    <label>Categoría</label>
-    
-                    <select>
-                    <option>Seleccione una categoría</option>
-                    </select>
-    
-                    <label>Asociar al equipo</label>
-                    <input type="text" placeholder="Identificador o nombre">
+                    <label>Anexos</label>
                     <button class="search-btn">🧴</button>
                     </div>
 
                     <!-- Contenido de Tab Tareas-->
                 <div class="tab-vista-Tareas" id="Tareas-vista">
-                    <label>Descripción</label>
-                    <textarea placeholder="Ingrese la descripción"></textarea>
-                    <label>Categoría</label>
-    
-                    <select>
-                    <option>Seleccione una categoría</option>
-                    </select>
-    
-                    <label>Asociar al equipo</label>
-                    <input type="text" placeholder="Identificador o nombre">
+                    <label>Tareas</label>
                     <button class="search-btn">🧭</button>
-                    </div>
-                    
+                    </div>        
         </div>
-   
         <script src="resources/javascript/RegistroEquipos.js"> </script>    
-    </div>
-    
+        </div>
 </body>
 </html>
