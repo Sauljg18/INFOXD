@@ -21,13 +21,8 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-
-app.get("/", (req,res) => {
-    res.render('inicio');
-}); 
-
 //Inicia visualización del proyecto con "node index" en una terminal 
-/*app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     // Consulta para obtener todas las tareas con los datos requeridos
     conexion.query('SELECT cliente, colaborador, descripcion, fecha FROM tareas', (error, results) => {
         if (error) {
@@ -45,7 +40,7 @@ app.get("/", (req,res) => {
             res.render('inicio', { tareas: results });
         }
     });
-});*/
+});
 
 app.get('/api/tareas', (req, res) => {
     conexion.query('SELECT * FROM tareas', (error, results) => {
@@ -205,7 +200,8 @@ app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 
-const port = process.env.PORT || 4000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(3000,function(){
+    console.log("Servidor creado http://localhost:3000");
 });
+
+
