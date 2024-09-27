@@ -21,8 +21,13 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+
+app.get("/", (req,res) => {
+    res.render('inicio');
+}); 
+
 //Inicia visualización del proyecto con "node index" en una terminal 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     // Consulta para obtener todas las tareas con los datos requeridos
     conexion.query('SELECT cliente, colaborador, descripcion, fecha FROM tareas', (error, results) => {
         if (error) {
@@ -40,7 +45,7 @@ app.get('/', (req, res) => {
             res.render('inicio', { tareas: results });
         }
     });
-});
+});*/
 
 app.get('/api/tareas', (req, res) => {
     conexion.query('SELECT * FROM tareas', (error, results) => {
