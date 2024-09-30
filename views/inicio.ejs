@@ -65,62 +65,99 @@
                   <div class="title">Add Event</div>
                   <i class="fas fa-times close"></i>
                 </div>
-                <div class="add-event-body">
+               
+                  <div id="General" >
+                    <form method="post" action="/aceptartarea">
                   <div class="add-event-input">
-                    <select name="cliente" id="cliente" class="event-name">
-                        <% 
-                            const uniqueClientes = [];
-                            results.forEach((row) => {
-                                if (!uniqueClientes.includes(row.clienteNombre)) {
-                                    uniqueClientes.push(row.clienteNombre);
-                        %>
-                            <option value="<%= row.clienteNombre %>"><%= row.clienteNombre %></option>
-                        <% 
-                                }
-                            });
-                        %>
-                    </select>
-                  </div>
-                 
-        <select name="colaborador" id="colaborador" class="event-colaborador"> 
-            <%  
-                const uniqueColaboradores = [];
-                results.forEach((row) => {
-                    if (!uniqueColaboradores.includes(row.colaboradorNombre)) {
-                        uniqueColaboradores.push(row.colaboradorNombre);
-            %>
-                <option value="<%= row.colaboradorNombre %>"><%= row.colaboradorNombre %></option>
-            <% 
-                    }
-                });
-            %>
-                  <div class="add-event-input">
-                    <input
-                      type="text"
-                      placeholder="Event Time From"
-                      class="event-time-from"
-                    />
-                  </div>
-                  <div class="add-event-input">
-                    <input
-                      type="text"
-                      placeholder="Event Time To"
-                      class="event-time-to"
-                    />
-                  </div>
-                </div>
-                <div class="add-event-footer">
-                  <button class="add-event-btn">Add Event</button>
-                </div>
+               
+                      <!-- Filtra los nombres de clientes para evitar duplicados -->
+                      <label for="cliente">Tarea será ejecutada por:</label>
+                      <select name="cliente" id="cliente" class="event-name">
+                          <% 
+                              const uniqueClientes = [];
+                              results.forEach((row) => {
+                                  if (!uniqueClientes.includes(row.clienteNombre)) {
+                                      uniqueClientes.push(row.clienteNombre);
+                          %>
+                              <option value="<%= row.clienteNombre %>"><%= row.clienteNombre %></option>
+                          <% 
+                                  }
+                              });
+                          %>
+                      </select>
+              </div>
+              
+                      <!-- Filtra los nombres de colaboradores para evitar duplicados -->
+                      <div class="add-event-input">
+                      <label for="colaborador">colaborador:</label>
+                      <select name="colaborador" id="colaborador" class="event-colaborador"> 
+                          <%  
+                              const uniqueColaboradores = [];
+                              results.forEach((row) => {
+                                  if (!uniqueColaboradores.includes(row.colaboradorNombre)) {
+                                      uniqueColaboradores.push(row.colaboradorNombre);
+                          %>
+                              <option value="<%= row.colaboradorNombre %>"><%= row.colaboradorNombre %></option>
+                          <% 
+                                  }
+                              });
+                          %>
+                     </div>
+                  </form>
+              
+                              
+                              </select>
+                              <div class="add-event-input">
+                              <label for="fecha">Fecha:</label>
+                              <input type="date" name="fecha" id="fecha">
+                              </div>
+                              <div class="add-event-input">
+                              <label for="hora">Hora:</label>
+                              <input type="time" name="hora" id="hora">
+                              </div>
+                              <div class="add-event-input">
+                              <label for="tipo">Tipo de Tarea:</label>
+                              <select name="tipo" id="tipo">
+                              </div>
+                                  <option value="tipo">Seleccionar Tipo</option>
+                                 <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
+                              </select>
+              
+                              <label for="duracion">Tiempo de duración:</label>
+                              <input type="text" name="duracion" id="duracion">
+              
+                              <label for="prioridad">Prioridad:</label>
+                              <select name="prioridad" id="prioridad">
+                                  <option value="alta">Alta</option>
+                                  <option value="media">Media</option>
+                                  <option value="baja">Baja</option>
+                              </select>
+              
+                              <label for="descripcion">Descripción de la tarea:</label>
+                              <textarea name="descripcion" id="descripcion" rows="4"></textarea>
+              
+                              <label for="satisfaccion">Encuesta de Satisfacción:</label>
+                              <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
+                              <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
+              
+                            </form>
+                              <div class="add-event-footer">
+           
+            <button id="guardar">GUARDAR</button>
+          </div></div>
+          <button class="add-event-btn" id="activar" >CERRAR</button> 
+                        </div>
+                      </div>
+              </div>
               </div>
             </div>
             <button class="add-event">
               <i class="fas fa-plus"></i>
             </button>
-          </div>
+            
+          
       
-      
-          </div>
+         
           <script src="resources/javascript/agenda.js"></script>    
     </main>
    

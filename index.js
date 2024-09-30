@@ -33,14 +33,6 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/api/tareas', (req, res) => {
-    conexion.query('SELECT * FROM tareas', (error, results) => {
-      if (error) {
-        return res.status(500).json({ error: 'Error al obtener tareas' });
-      }
-      res.json(results); // Enviamos las tareas al cliente
-    });
-  });
 
 app.get("/colab", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
