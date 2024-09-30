@@ -230,7 +230,6 @@ app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
            throw error;
        }else{
           console.log("Datos almacenados correctamente"); 
-          res.render('inicio', { results: results });
        }
    });
 });

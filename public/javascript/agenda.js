@@ -13,10 +13,10 @@ const calendar = document.querySelector(".calendar"),
   addEventWrapper = document.querySelector(".add-event-wrapper "),
   addEventCloseBtn = document.querySelector(".close "),
   addEventTitle = document.querySelector(".event-name "),
+  addEventColaborador = document.querySelector(".event-colaborador"),
   addEventFrom = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
   addEventSubmit = document.querySelector(".add-event-btn ");
-
 
 let today = new Date();
 let activeDay;
@@ -253,6 +253,10 @@ function updateEvents(date) {
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.title}</h3>
             </div>
+              <div class="title">
+              <i class="fas fa-circle"></i>
+              <h3 class="event-title">${event.colaborador}</h3>
+            </div>
             <div class="event-time">
               <span class="event-time">${event.time}</span>
             </div>
@@ -285,10 +289,72 @@ document.addEventListener("click", (e) => {
 });
 
 //allow 50 chars in eventtitle
-addEventTitle.addEventListener("input", (e) => {
+addEventTitle.addEventListener("select", (e) => {
   addEventTitle.value = addEventTitle.value.slice(0, 60);
 });
 
+addEventColaborador.addEventListener("select", (e) => {
+  addEventColaborador.value = addEventColaborador .value.slice(0, 60);
+});
+
+function defineProperty() {
+  var osccred = document.createElement("div");
+  
+  osccred.style.position = "absolute";
+  osccred.style.bottom = "0";
+  osccred.style.right = "0";
+  osccred.style.fontSize = "10px";
+  osccred.style.color = "#ccc";
+  osccred.style.fontFamily = "sans-serif";
+  osccred.style.padding = "5px";
+  osccred.style.background = "#fff";
+  osccred.style.borderTopLeftRadius = "5px";
+  osccred.style.borderBottomRightRadius = "5px";
+  osccred.style.boxShadow = "0 0 5px #ccc";
+  document.body.appendChild(osccred);
+}
+   // Hacer una petición AJAX para obtener las tareas desde el servidor
+  fetch('/api/tareas')
+    .then(response => response.json()) // Convertir la respuesta a JSON
+    .then(tareas => {
+      // Recorrer las tareas y mostrarlas en el calendario
+      tareas.forEach(tarea => {
+        let date = new Date(tarea.fecha);
+
+        // Lógica para mostrar la tarea en el calendario
+        marcarFechaConTareaEnCalendario(date, tarea);
+      });
+    })
+    .catch(error => {
+      console.error('Error al obtener las tareas:', error);
+    });
+
+function marcarFechaConTareaEnCalendario(date, tarea) {
+    // Aquí se implementa la lógica para marcar el día y mostrar la información
+    // Esto puede variar dependiendo de cómo estés renderizando el calendario.
+
+    // Un ejemplo podría ser buscar el día en el calendario y agregar un tooltip o una ventana emergente
+    let dayElement = document.querySelector(`[data-date='${formatDate(date)}']`);
+    
+    if (dayElement) {
+        // Agregar los detalles como un tooltip o texto adicional en el día marcado
+        dayElement.innerHTML += `<div class="tarea-detalles">
+                                    <strong>Cliente:</strong> ${tarea.cliente}<br>
+                                    <strong>Colaborador:</strong> ${tarea.colaborador}<br>
+                                    <strong>Descripción:</strong> ${tarea.descripcion}
+                                 </div>`;
+        // Si el calendario usa popups o tooltips, podrías mostrarlo con CSS/JS
+        dayElement.classList.add('marcado'); // Añadir una clase para resaltar
+    }
+}
+
+// Formato para que coincida con el de tu calendario
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);  // Mes con dos dígitos
+    const day = ("0" + date.getDate()).slice(-2);            // Día con dos dígitos
+    return `${year}-${month}-${day}`;
+}
 
 defineProperty();
 
@@ -316,6 +382,7 @@ addEventTo.addEventListener("input", (e) => {
 //function to add event to eventsArr
 addEventSubmit.addEventListener("click", () => {
   const eventTitle = addEventTitle.value;
+  const eventColaborador = addEventColaborador.value;
   const eventTimeFrom = addEventFrom.value;
   const eventTimeTo = addEventTo.value;
   if (eventTitle === "" || eventTimeFrom === "" || eventTimeTo === "") {
@@ -353,6 +420,9 @@ addEventSubmit.addEventListener("click", () => {
         if (event.title === eventTitle) {
           eventExist = true;
         }
+        if (event.colaborador === eventColaborador) {
+          eventExist = true;
+        }
       });
     }
   });
@@ -362,6 +432,7 @@ addEventSubmit.addEventListener("click", () => {
   }
   const newEvent = {
     title: eventTitle,
+    colaborador: eventColaborador,
     time: timeFrom + " - " + timeTo,
   };
   console.log(newEvent);
@@ -392,6 +463,7 @@ addEventSubmit.addEventListener("click", () => {
   console.log(eventsArr);
   addEventWrapper.classList.remove("active");
   addEventTitle.value = "";
+  addEventColaborador.value = "";
   addEventFrom.value = "";
   addEventTo.value = "";
   updateEvents(activeDay);
@@ -407,6 +479,7 @@ eventsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("event")) {
     if (confirm("Are you sure you want to delete this event?")) {
       const eventTitle = e.target.children[0].children[1].innerHTML;
+      const eventColaborador = e.target.children[0].children[1].innerHTML;
       eventsArr.forEach((event) => {
         if (
           event.day === activeDay &&
@@ -415,6 +488,9 @@ eventsContainer.addEventListener("click", (e) => {
         ) {
           event.events.forEach((item, index) => {
             if (item.title === eventTitle) {
+              event.events.splice(index, 1);
+            }
+            if (item.colaborador === eventColaborador) {
               event.events.splice(index, 1);
             }
           });
@@ -458,3 +534,27 @@ function convertTime(time) {
   time = timeHour + ":" + timeMin + " " + timeFormat;
   return time;
 }
+
+app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
+  const tarea = req.body;
+ // Corregir los nombres de las variables para que coincidan con el formulario
+ let id_tarea = tarea.id_tarea;
+ let cliente = tarea.cliente;
+ let colaborador = tarea.colaborador;
+ let fecha = tarea.fecha;
+ let hora = tarea.hora; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+ let tipo = tarea.tipo;
+ let prioridad = tarea.prioridad;
+ let descripcion = tarea.descripcion;
+ 
+
+ let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, prioridad, descripcion) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+prioridad +"','"+descripcion +"')";
+              
+ conexion.query(registrar,function(error){
+     if(error){
+         throw error;
+     }else{
+        console.log("Datos almacenados correctamente"); 
+     }
+ });
+});
