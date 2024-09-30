@@ -24,20 +24,11 @@ app.use(express.urlencoded({extended:false}));
 //Inicia visualización del proyecto con "node index" en una terminal 
 app.get('/', (req, res) => {
     // Consulta para obtener todas las tareas con los datos requeridos
-    conexion.query('SELECT cliente, colaborador, descripcion, fecha FROM tareas', (error, results) => {
+    conexion.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
         if (error) {
-            console.log(error);
-            res.status(500).send("Error al cargar las tareas");
+            throw error;
         } else {
-            // Renderiza la página de inicio con los datos de las tareas
-            const tareas = results.map(row => ({
-                cliente: row.cliente,
-                colaborador: row.colaborador,
-                descripcion: row.descripcion,
-                fecha: row.fecha
-            }));
-
-            res.render('inicio', { tareas: results });
+            res.render('inicio', { results: results });
         }
     });
 });
