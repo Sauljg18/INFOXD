@@ -7,20 +7,25 @@
     <link rel="stylesheet" href="resources/estilo/Loggin.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <form id="loginForm">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" required>
+    
+<div class="login">
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
+<form action="/login" method="POST">
+<h1>Login 🗝</h1>
 
-            <a href="/sesion" type="submit">Iniciar Sesión</a>
-        </form>
-        <p id="message"></p>
-    </div>
-    <script src="resources/javascript/Loggin.js"></script>
+<!--Apartado para nombre de usuario-->
+<label>Username</label>
+<input type="text" id="usuario" name="usuario" required>
+
+<!--Apartado para contraseña-->
+<label>Contraseña</label>
+<input type="Contraseña" id="contraseña" name="contraseña" required>
+
+<!--Boton para enviar formulario-->
+<button type="submit">Aceptar</button>
+</form>
+
+</div>
 
 </body>
 </html>
