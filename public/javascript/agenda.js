@@ -23,15 +23,13 @@ const calendar = document.querySelector(".calendar"),
   let botonactivar = document.getElementById("activar");
   let botonguardar = document.getElementById("guardar");
 
-  botonactivar.style.disabled = true;
+  botonactivar.style.display='none'; 
 
-  botonguardar.addEventListener(
-    "change",
-    (event) => {
-      drinkSelect.disabled = !event.target.checked;
-    },
-    false,
-  );
+  botonguardar.onclick =function(){     //Funcion de boton 01
+    botonactivar.style.display='block';   //Vista reaccion a boton
+  }
+
+
 
 let today = new Date();
 let activeDay;
