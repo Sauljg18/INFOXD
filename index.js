@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Ruta para manejar el login
-app.get("/", (req, res) => {
+app.get("/bb", (req, res) => {
     res.render("Loggin");  // Redirige a la página de inicio
 });
 
@@ -75,18 +75,18 @@ connection.query(query, (error, results) => {
 });
 
 //Inicia visualización del proyecto con "node index" en una terminal 
-app.get('/inicio', (req, res) => {
+app.get('/', (req, res) => {
     // Consulta para obtener todas las tareas 
-    connection.query('SELECT * FROM tareas', (error, results) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send("Error al cargar las tareas");
-        } else {
-            // Renderiza la página de inicio con los datos de las tareas
-            res.render('inicio', { tareas: results });
-        }
-    });
-});;
+  // Realiza la consulta y renderiza la vista con los resultados
+  connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+    if (error) {
+        throw error;
+    } else {
+        res.render('inicio', { results: results });
+    }
+});
+});
+
 app.get("/colab", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
     connection.query('SELECT * FROM colaboradores ', (error, results) => {
