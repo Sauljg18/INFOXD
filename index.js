@@ -128,11 +128,11 @@ app.get("/servicio", (req,res) => {
 
 app.get("/tarea", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+    connection.query('SELECT * FROM tareas ', (error, results) => {
         if (error) {
             throw error;
         } else {
-            res.render('RegistroTareas', { results: results });
+            res.render('TablaTareas', { results: results });
         }
     });
 });
