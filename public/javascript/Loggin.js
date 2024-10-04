@@ -16,7 +16,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         message.textContent = 'Usuario o contraseña incorrectos.';
     }
 });
-
 // Ruta para servir archivos estáticos como HTML, CSS, y JS
 app.use(express.static('public'));
 
