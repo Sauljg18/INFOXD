@@ -1,11 +1,10 @@
 const express = require("express");;
 const path = require('path');
 const bcrypt = require('bcrypt');
-const mysql = require("mysql");
-
+const mysql = require("mysql");;
 const app = express();
 
-
+//PRUEBA ---------------------------------------------------------------------------
 const connection = mysql.createConnection({
     host: 'localhost',     // Cambia esto por tu host (puede ser 'localhost' o un servidor remoto)
     user: 'root',          // Tu usuario de MySQL
@@ -32,6 +31,27 @@ app.use(express.urlencoded({ extended: false }));
 // Ruta para manejar el login
 app.get("/", (req, res) => {
     res.render("Loggin");  // Redirige a la página de inicio
+});
+
+//Verificacion entre ejs loggin y BD
+app.post('/login', (req, res) => {
+    const { usuario, contrasena } = req.body;
+
+    // Consulta para verificar el usuario y la contraseña
+    const query = `SELECT * FROM colaboradores WHERE usuario = ? AND contrasena = ?`;
+
+    connection.query(query, [usuario, contrasena], (err, results) => {
+        if (err) {
+            console.error('Error al consultar la base de datos:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+        // Si se encuentra un colaborador, redirige a una nueva página
+        if (results.length > 0){
+            res.render('inicio', {results: results});
+        } else {
+            res.send('Usuario o contraseña incorrectos');
+        }
+    });
 });
 
 app.get("/sesion",(req, res) => {
