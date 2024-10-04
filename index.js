@@ -47,7 +47,13 @@ app.post('/login', (req, res) => {
         }
         // Si se encuentra un colaborador, redirige a una nueva página
         if (results.length > 0){
-            res.render('inicio', {results: results});
+            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+                if (error) {
+                    throw error;
+                } else {
+                    res.render('inicio', { results: results });
+                }
+            });
         } else {
             res.send('Usuario o contraseña incorrectos');
         }
@@ -166,6 +172,20 @@ app.get("/registrocliente", (req,res) => {
     res.render('registrocliente');
 });
 
+//Este codigo permite verificar el usario que vas a editar
+app.get('/editcliente/:nombre', (req,res) => {
+   const id =req.params.nombre;
+   conexion.query('SELECT * FROM tapcliente WHERE nombre=?',[id],(error,results)=>{
+    if(error){
+        throw error;
+    }else{
+        res.render('EditarCliente',{namecliente:results[0]});
+    }
+})
+    });
+
+
+
 
 app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     const datos = req.body;
@@ -199,6 +219,7 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
 app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
     const client = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
+   let id_cliente = client.id_cliente;
    let namecliente = client.namecliente;
    let identificacion = client.identificacion;
    let razon = client.razon;
@@ -216,7 +237,7 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
    let ciudad = client.ciudad;
    let estado = client.estado;
 
-   let registra = "INSERT INTO tabcliente (nombre, identificacion, razon, codigoext, telefonocorp, correocliente, cliente, responsable, observacion, postal, direccion, num_ext, num_int, region, ciudad, estado) VALUE ('"+namecliente +"','"+identificacion +"','"+razon +"','"+externo +"','"+telefono +"','"+correocorp +"','"+cliente +"','"+responsable +"','"+observacion +"','"+postal +"','"+direccion +"','"+numext +"','"+numint +"','"+region +"','"+ciudad +"','"+estado +"')";
+   let registra = "INSERT INTO tabcliente (Id_cliente, nombre, identificacion, razon, codigoext, telefonocorp, correocliente, cliente, responsable, observacion, postal, direccion, num_ext, num_int, region, ciudad, estado) VALUE ('"+id_cliente+"','"+namecliente +"','"+identificacion +"','"+razon +"','"+externo +"','"+telefono +"','"+correocorp +"','"+cliente +"','"+responsable +"','"+observacion +"','"+postal +"','"+direccion +"','"+numext +"','"+numint +"','"+region +"','"+ciudad +"','"+estado +"')";
                 
    connection.query(registra,function(error){
        if(error){

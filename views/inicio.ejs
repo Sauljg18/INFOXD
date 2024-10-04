@@ -61,6 +61,7 @@
               </div>
               <div class="events"></div>
               <div class="add-event-wrapper">
+                
                 <div class="add-event-header">
                   <div class="title">Add Event</div>
                   <i class="fas fa-times close"></i>
@@ -71,7 +72,7 @@
                   <div class="add-event-input">
                
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
-                      <label for="cliente">Tarea será ejecutada por:</label>
+                      <label for="cliente" style="color:black">Tarea será ejecutada por:</label>
                       <select name="cliente" id="cliente" class="event-name">
                           <% 
                               const uniqueClientes = [];
@@ -89,7 +90,7 @@
               
                       <!-- Filtra los nombres de colaboradores para evitar duplicados -->
                       <div class="add-event-input">
-                      <label for="colaborador">colaborador:</label>
+                      <label for="colaborador" style="color: black">La tarea sera colaborada por:</label>
                       <select name="colaborador" id="colaborador" class="event-colaborador"> 
                           <%  
                               const uniqueColaboradores = [];
@@ -108,34 +109,36 @@
                               
                               </select>
                               <div class="add-event-input">
-                              <label for="fecha">Fecha:</label>
+                              <label for="fecha" style="color: black">Fecha de tarea:</label>
                               <input type="date" name="fecha" id="fecha">
                               </div>
                               <div class="add-event-input">
-                              <label for="hora">Hora:</label>
+                              <label for="hora" style="color: black">Hora:</label>
                               <input type="time" name="hora" id="hora">
                               </div>
                               <div class="add-event-input">
-                              <label for="tipo">Tipo de Tarea:</label>
+                              <label for="tipo" style="color: black">El Tipo de Tarea:</label>
                               <select name="tipo" id="tipo">
                               </div>
                                   <option value="tipo">Seleccionar Tipo</option>
                                  <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
                               </select>
-              
-                              <label for="duracion">Tiempo de duración:</label>
+                              <div class="add-event-input">
+                              <label for="duracion" style="color: black">Tiempo de duración:</label>
                               <input type="text" name="duracion" id="duracion">
-              
-                              <label for="prioridad">Prioridad:</label>
+                              </div>
+                              <div class="add-event-input">
+                              <label for="prioridad" style="color: black">Prioridad:</label>
                               <select name="prioridad" id="prioridad">
                                   <option value="alta">Alta</option>
                                   <option value="media">Media</option>
                                   <option value="baja">Baja</option>
                               </select>
-              
-                              <label for="descripcion">Descripción de la tarea:</label>
+                            </div>
+                            <div class="add-event-input">
+                              <label for="descripcion" style="color: black;">Descripción de la tarea:</label>
                               <textarea name="descripcion" id="descripcion" rows="4"></textarea>
-              
+                            </div>
                               <label for="satisfaccion">Encuesta de Satisfacción:</label>
                               <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
                               <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">

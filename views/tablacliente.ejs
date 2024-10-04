@@ -35,6 +35,7 @@
         
           
         <tr class="bg-primary">
+          <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">indentificiacion</th>
             <th scope="col">Correo</th>
@@ -54,6 +55,7 @@
                 
           
         <tr>
+          <td scope="row" class="table-primary"><%= cliente.id_cliente %></td>
             <td scope="row" class="table-primary"><%= cliente.nombre %></td>
             <td scope="row" ><%= cliente.indentificiacion %></td>
             <td scope="row" class="table-primary"><%= cliente.correocliente %></td>
@@ -65,7 +67,7 @@
             <td scope="row" class="table-primary"><%= cliente.estado %></td>
 
             <td>
-              <a href="/edit" class="btn btn-outline-info">editar</a>
+              <a href="/editcliente/<%= cliente.id_cliente %>" class="btn btn-outline-info">editar</a>
               <a href="/edit" class="btn btn-outline-info">borrar</a>
             </td>
         </tr>
