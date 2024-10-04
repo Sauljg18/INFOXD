@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Ruta para manejar el login
-app.get("/bb", (req, res) => {
+app.get("/", (req, res) => {
     res.render("Loggin");  // Redirige a la página de inicio
 });
 
@@ -75,7 +75,7 @@ connection.query(query, (error, results) => {
 });
 
 //Inicia visualización del proyecto con "node index" en una terminal 
-app.get('/', (req, res) => {
+app.get('/bb', (req, res) => {
     // Consulta para obtener todas las tareas 
   // Realiza la consulta y renderiza la vista con los resultados
   connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
