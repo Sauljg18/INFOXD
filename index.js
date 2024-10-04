@@ -86,7 +86,7 @@ app.get('/bb', (req, res) => {
     }
 });
 });
-
+/*jaaka*/
 app.get("/colab", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
     connection.query('SELECT * FROM colaboradores ', (error, results) => {
