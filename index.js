@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const mysql = require("mysql");;
 const app = express();
 
-//PRUEBA ---------------------------------------------------------------------------
 const connection = mysql.createConnection({
     host: 'localhost',     // Cambia esto por tu host (puede ser 'localhost' o un servidor remoto)
     user: 'root',          // Tu usuario de MySQL
