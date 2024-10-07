@@ -95,9 +95,9 @@ connection.query(query, (error, results) => {
 
 //Inicia visualización del proyecto con "node index" en una terminal 
 app.get('/bb', (req, res) => {
-    // Consulta para obtener todas las tareas 
-  // Realiza la consulta y renderiza la vista con los resultados
-  connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+// Consulta para obtener todas las tareas 
+// Realiza la consulta y renderiza la vista con los resultados
+connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
     if (error) {
         throw error;
     } else {
@@ -105,6 +105,23 @@ app.get('/bb', (req, res) => {
     }
 });
 });
+
+/*Registro de equipos*/
+app.post('/SaveEquipo', (req, res) => {
+    const { Nombre, Identificador, Fecha} = req.body;
+    const query = 'INSERT INTO tablaequipos (Nombre, Identificador, Fecha)  VALUES (?, ?, ?)';
+    console.log('Datos recibidos:', req.body);
+    
+    connection.query(query, [Nombre, Identificador, Fecha], (err, results) => {
+        if (err) {
+            console.error('Error al insertar en la base de datos:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+        res.redirect('views\RegistroEquipos.ejs'); // Redirige a otra página o muestra un mensaje de éxito
+    });
+}); 
+
+
 /*jaaka*/
 app.get("/colab", (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
