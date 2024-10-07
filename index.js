@@ -46,7 +46,13 @@ app.post('/login', (req, res) => {
         }
         // Si se encuentra un colaborador, redirige a una nueva página
         if (results.length > 0){
-            res.render('inicio', {results: results});
+            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+                if (error) {
+                    throw error;
+                } else {
+                    res.render('inicio', { results: results });
+                }
+            });
         } else {
             res.send('Usuario o contraseña incorrectos');
         }
@@ -94,9 +100,9 @@ connection.query(query, (error, results) => {
 });
 
 //Inicia visualización del proyecto con "node index" en una terminal 
-app.get('/bb', (req, res) => {
-// Consulta para obtener todas las tareas 
-// Realiza la consulta y renderiza la vista con los resultados
+app.get('/home', (req, res) => {
+    // Consulta para obtener todas las tareas 
+  // Realiza la consulta y renderiza la vista con los resultados
 connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
     if (error) {
         throw error;
@@ -182,6 +188,20 @@ app.get("/registrocliente", (req,res) => {
     res.render('registrocliente');
 });
 
+//Este codigo permite verificar el usario que vas a editar
+app.get('/editcliente/:id_cliente', (req,res) => {
+   const id =req.params.id_cliente;
+   connection.query('SELECT * FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
+    if(error){
+        throw error;
+    }else{
+        res.render('EditarCliente',{cliente:results[0]});
+    }
+})
+    });
+
+
+
 
 app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     const datos = req.body;
@@ -215,6 +235,7 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
 app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
     const client = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
+   let id_cliente = client.id_cliente;
    let namecliente = client.namecliente;
    let identificacion = client.identificacion;
    let razon = client.razon;
@@ -232,7 +253,7 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
    let ciudad = client.ciudad;
    let estado = client.estado;
 
-   let registra = "INSERT INTO tabcliente (nombre, identificacion, razon, codigoext, telefonocorp, correocliente, cliente, responsable, observacion, postal, direccion, num_ext, num_int, region, ciudad, estado) VALUE ('"+namecliente +"','"+identificacion +"','"+razon +"','"+externo +"','"+telefono +"','"+correocorp +"','"+cliente +"','"+responsable +"','"+observacion +"','"+postal +"','"+direccion +"','"+numext +"','"+numint +"','"+region +"','"+ciudad +"','"+estado +"')";
+   let registra = "INSERT INTO tabcliente (id_cliente, nombre, identificacion, razon, codigoext, telefonocorp, correocliente, cliente, responsable, observacion, postal, direccion, num_ext, num_int, region, ciudad, estado) VALUE ('"+id_cliente+"','"+namecliente +"','"+identificacion +"','"+razon +"','"+externo +"','"+telefono +"','"+correocorp +"','"+cliente +"','"+responsable +"','"+observacion +"','"+postal +"','"+direccion +"','"+numext +"','"+numint +"','"+region +"','"+ciudad +"','"+estado +"')";
                 
    connection.query(registra,function(error){
        if(error){
@@ -242,7 +263,37 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
        }
    });
 
-    
+});
+
+app.post("/update", function(req,res){ //REGISTRO DE CLIENTE
+    const client = req.body;
+    // Corregir los nombres de las variables para que coincidan con el formulario
+    let id_cliente = parseInt(client.id_cliente, 10);
+    let identificacion = parseInt(client.identificacion, 10);
+    let externo = parseInt(client.externo, 10);
+    let telefono = parseInt(client.telefono, 10);
+    let postal = parseInt(client.postal, 10);
+    let numext = parseInt(client.numext, 10);
+    let numint = parseInt(client.numint, 10);
+
+    let namecliente = client.namecliente;
+    let razon = client.razon;
+    let correocorp = client.correocorp;
+    let cliente = client.cliente;
+    let responsable = client.responsable;
+    let observacion = client.observacion;
+    let direccion = client.direccion;
+    let region = client.region;
+    let ciudad = client.ciudad;
+    let estado = client.estado;
+               
+   connection.query("UPDATE tabcliente  SET ? WHERE id_cliente = ?",[{nombre:namecliente, identificacion:identificacion, razon:razon, codigoext:externo, telefonocorp:telefono, correocliente:correocorp, cliente:cliente, responsable:responsable, observacion:observacion, postal:postal, direccion:direccion, num_ext:numext, num_int:numint, region:region, ciudad:ciudad, estado:estado}, id_cliente],(error,results)=>{
+       if(error){
+           throw error;
+       }else{
+          console.log("Datos almacenados actualizado"); 
+       }
+   });
 
 });
 
