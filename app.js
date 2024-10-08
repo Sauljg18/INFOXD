@@ -384,7 +384,8 @@ app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
    });
 });
 
-
+//ruta de archivos estáticos
+app.use('/resources', express.static("public"));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -392,8 +393,7 @@ app.listen(PORT, () => {
 });
 
 
-//ruta de archivos estáticos
-app.use('/resources', express.static("public"));
+
 
 /*
 app.listen(3000,function(){
