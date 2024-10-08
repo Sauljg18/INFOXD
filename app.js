@@ -341,7 +341,7 @@ app.get("/delete/:id_cliente", function(req,res){
      });
 
      //ELIMINAR REGISTRO DE CLIENTE
-app.get("/delete/:idcolaborador", function(req,res){ 
+app.get("/deletes/:idcolaborador", function(req,res){ 
     const id =req.params.idcolaborador;
     connection.query('DELETE FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
      if(error){
