@@ -102,8 +102,8 @@ connection.query(query, (error, results) => {
 //Inicia visualización del proyecto con "node index" en una terminal 
 app.get('/home', (req, res) => {
     // Consulta para obtener todas las tareas 
-  // Realiza la consulta y renderiza la vista con los resultados
-  connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+    // Realiza la consulta y renderiza la vista con los resultados
+    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
     if (error) {
         throw error;
     } else {
@@ -173,8 +173,8 @@ app.get("/registrocliente", (req,res) => {
 
 //Este codigo permite verificar el usuario que vas a editar
 app.get('/editcliente/:id_cliente', (req,res) => {
-   const id =req.params.id_cliente;
-   connection.query('SELECT * FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
+    const id =req.params.id_cliente;
+    connection.query('SELECT * FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
     if(error){
         throw error;
     }else{
@@ -187,42 +187,38 @@ app.get('/editcliente/:id_cliente', (req,res) => {
     app.get('/editcola/:idcolaborador', (req,res) => {
         const id =req.params.idcolaborador;
         connection.query('SELECT * FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
-         if(error){
-             throw error;
-         }else{
-             res.render('EditarColaboradores',{colaborador:results[0]});
-         }
-     })
-         });
-
-         
-
-
+        if(error){
+            throw error;
+        }else{
+            res.render('EditarColaboradores',{colaborador:results[0]});
+        }
+    })
+        });
 
 app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     const datos = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
-   let idcolaborador = datos.idcolaborador;
-   let nombre = datos.nombre;
-   let usuario = datos.usuario;
-   let correo = datos.correo;
-   let carga = datos.cargo; // Cambié de 'carga' a 'cargo' para mejor comprensión.
-   let contacto = datos.contacto;
-   let acceso = datos.acceso;
-   let password = datos.contrasena;
-   let confirmar = datos.confirmar;
-   let valor = datos.valor;
-   let photo = datos.foto;
+    let idcolaborador = datos.idcolaborador;
+    let nombre = datos.nombre;
+    let usuario = datos.usuario;
+    let correo = datos.correo;
+    let carga = datos.cargo; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+    let contacto = datos.contacto;
+    let acceso = datos.acceso;
+    let password = datos.contrasena;
+    let confirmar = datos.confirmar;
+    let valor = datos.valor;
+    let photo = datos.foto;
 
-   let registrar = "INSERT INTO colaboradores (idcolaborador, nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, valor, foto) VALUE ('"+idcolaborador +"','"+nombre +"','"+usuario +"','"+correo +"','"+carga +"','"+contacto +"','"+acceso +"','"+password +"','"+confirmar +"','"+valor +"','"+photo +"')";
+    let registrar = "INSERT INTO colaboradores (idcolaborador, nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, valor, foto) VALUE ('"+idcolaborador +"','"+nombre +"','"+usuario +"','"+correo +"','"+carga +"','"+contacto +"','"+acceso +"','"+password +"','"+confirmar +"','"+valor +"','"+photo +"')";
                 
-   connection.query(registrar,function(error){
-       if(error){
-           throw error;
-       }else{
-          console.log("Datos almacenados correctamente"); 
-       }
-   });
+    connection.query(registrar,function(error){
+    if(error){
+    throw error;
+        }else{
+        console.log("Datos almacenados correctamente"); 
+        }
+    });
 
     
 
@@ -231,24 +227,24 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
 app.post("/updatec", function(req,res){ // REGISTRO DE COLABORADOR
     const datos = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
-   let idcolaborador = datos.idcolaborador;
-   let nombre = datos.nombre;
-   let usuario = datos.usuario;
-   let correo = datos.correo;
-   let carga = datos.cargo; // Cambié de 'carga' a 'cargo' para mejor comprensión.
-   let contacto = datos.contacto;
-   let acceso = datos.acceso;
-   let password = datos.contrasena;
-   let confirmar = datos.confirmar;
-   let valor = datos.valor;
-   let photo = datos.foto;
+    let idcolaborador = datos.idcolaborador;
+    let nombre = datos.nombre;
+    let usuario = datos.usuario;
+    let correo = datos.correo;
+    let carga = datos.cargo; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+    let contacto = datos.contacto;
+    let acceso = datos.acceso;
+    let password = datos.contrasena;
+    let confirmar = datos.confirmar;
+    let valor = datos.valor;
+    let photo = datos.foto;
 
-   
-   connection.query("UPDATE colaboradores  SET ? WHERE idcolaborador = ?",[{nombre:nombre, usuario:usuario, correo:correo, cargo:carga, contacto:contacto, acceso:acceso, contrasena:password, confirmar:confirmar, valor:valor, foto:photo}, idcolaborador],(error,results)=>{
+
+    connection.query("UPDATE colaboradores  SET ? WHERE idcolaborador = ?",[{nombre:nombre, usuario:usuario, correo:correo, cargo:carga, contacto:contacto, acceso:acceso, contrasena:password, confirmar:confirmar, valor:valor, foto:photo}, idcolaborador],(error,results)=>{
     if(error){
         throw error;
     }else{
-       console.log("Datos almacenados actualizado"); 
+        console.log("Datos almacenados actualizado"); 
     }
 });
 

@@ -31,8 +31,8 @@ body{
 }
 
 .card{
-    width: 420px;
-    height: 520px;
+    width: 410px;
+    height: 510px;
     color: white;
     border-radius: 20px;
     /*box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.75);  Caja transparente*/
