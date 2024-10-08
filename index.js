@@ -322,6 +322,43 @@ app.post("/update", function(req,res){ //REGISTRO DE CLIENTE
 });
 
 
+//ELIMINAR REGISTRO DE CLIENTE
+app.get("/delete/:id_cliente", function(req,res){ 
+    const id =req.params.id_cliente;
+    connection.query('DELETE FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
+     if(error){
+         throw error;
+     }else{
+        connection.query('SELECT * FROM tabcliente ', (error, results) => {
+            if (error) {
+                throw error;
+            } else {
+                res.render('tablacliente', { results: results });
+            }
+        });
+     }
+ })
+     });
+
+     //ELIMINAR REGISTRO DE CLIENTE
+app.get("/delete/:idcolaborador", function(req,res){ 
+    const id =req.params.idcolaborador;
+    connection.query('DELETE FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
+     if(error){
+         throw error;
+     }else{
+        connection.query('SELECT * FROM colaboradores ', (error, results) => {
+            if (error) {
+                throw error;
+            } else {
+                res.render('tablacolaboradores', { results: results });
+            }
+        });
+     }
+ })
+     });
+
+
 
 app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
     const tarea = req.body;

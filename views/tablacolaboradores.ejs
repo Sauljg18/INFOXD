@@ -59,7 +59,7 @@
             <td scope="row" class="table-primary"><%= colaboradores.cargo %></td>
             <td>
               <a href="/editcola/<%= colaboradores.idcolaborador %>" class="btn btn-outline-info">editar</a>
-              <a href="/edit" class="btn btn-outline-info">borrar</a>
+              <a href="/delete/<%= colaboradores.idcolaborador %>" class="btn btn-outline-info">borrar</a>
             </td>
         </tr>
         <%  }) %>
