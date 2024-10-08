@@ -33,20 +33,23 @@ configurar.onclick =function(){
           }
       })
 
-      const defaultFile = 'https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg';
-
-const file = document.getElementById( 'foto' );
-const img = document.getElementById( 'img' );
-file.addEventListener( 'change', e => {
-  if( e.target.files[0] ){
-    const reader = new FileReader( );
-    reader.onload = function( e ){
-      img.src = e.target.result;
-      img.style.width ='100%'
-      img.style.height ='100%'
-    }
-    reader.readAsDataURL(e.target.files[0])
-  }else{
-    img.src = defaultFile;
-  }
-} );
+      const defaultFile = 'https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg'; 
+      const file = document.getElementById('foto');
+      const img = document.getElementById('img');
+      
+      // Si la página está en modo edición y existe una imagen previa, usa esa imagen
+      const initialImage = img.src; 
+      
+      file.addEventListener('change', e => {
+        if (e.target.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            img.src = e.target.result;
+            img.style.width = '100%';
+            img.style.height = '100%';
+          }
+          reader.readAsDataURL(e.target.files[0]);
+        } else {
+          img.src = initialImage ? initialImage : defaultFile;
+        }
+      });

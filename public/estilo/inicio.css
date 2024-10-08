@@ -11,7 +11,7 @@ body{
 
 
 .header{
-    background-color: #0958d8;
+    background-color: #08be6c;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 }
@@ -36,7 +36,7 @@ body{
    
 }
 .sidebar{
-    background-color: #5e7fb7;
+    background-color: #005714;
 
     grid-column: 1 / 2;
     grid-row: 1 / 3;

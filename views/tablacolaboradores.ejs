@@ -36,6 +36,7 @@
         
           
         <tr>
+            <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Usuario</th>
             <th scope="col">Correo</th>
@@ -50,13 +51,14 @@
                 
           
         <tr>
+          <td scope="row" class="table-primary"><%= colaboradores.idcolaborador %></td>
             <td scope="row" class="table-primary"><%= colaboradores.nombre %></td>
             <td scope="row" ><%= colaboradores.usuario %></td>
             <td scope="row" class="table-primary"><%= colaboradores.correo %></td>
             <td scope="row" ><%= colaboradores.contacto %></td>
             <td scope="row" class="table-primary"><%= colaboradores.cargo %></td>
             <td>
-              <a href="/edit" class="btn btn-outline-info">editarg</a>
+              <a href="/editcola/<%= colaboradores.idcolaborador %>" class="btn btn-outline-info">editar</a>
               <a href="/edit" class="btn btn-outline-info">borrar</a>
             </td>
         </tr>
