@@ -386,11 +386,15 @@ app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
 
 
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 
 //ruta de archivos estáticos
-app.use('/resources', express.static("public"));
+/*app.use('/resources', express.static("public"));
 
 app.listen(3000,function(){
     console.log("Servidor creado http://localhost:3000");
-});;
+});;*/
