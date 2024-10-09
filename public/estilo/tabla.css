@@ -1,0 +1,89 @@
+
+.fondo1{
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw ;
+    height: 120px ;
+  z-index: 1;
+    background:  rgb(41, 114, 210);
+  }
+  
+  
+  
+  .logo{
+    z-index: 2;
+    display:block;
+    margin-right:auto;
+    top: 0;
+  width: 15% 15%;
+  height: 50%;
+  }
+  
+  .fondo2{
+    z-index: 1;
+    margin: auto;
+    position:fixed;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 80vw ;
+    height: 120px ;
+    background: rgb(18, 66, 130);
+  }
+  
+.disazo{
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+  border-collapse: separate;
+  
+}
+
+.tablew {
+  margin-left: 10%;
+    margin-top: 5%;
+    width: 100%; /* Aumenta el ancho para que cubra más espacio */
+    height: auto;
+    border-collapse: collapse;
+    text-align: left; /* Alinea los textos a la izquierda */
+    box-shadow: 0 2px 15px rgba(64,64,64,.1); /* Aplica una sombra sutil */
+    font-family: 'Arial', sans-serif; /* Cambia el tipo de letra */
+    background-color: #f8f9fa; /* Fondo de la tabla */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para asegurarse de que los bordes se mantengan limpios */
+}
+
+.tablew th, .tablew td {
+  padding: 10px 30px; /* Ajusta el espacio dentro de las celdas */
+  width: auto;
+  border-bottom: 1px solid #ddd; /* Añade una línea divisoria suave */
+  font-size: 0.9em; /* Tamaño de fuente para registros */
+}
+
+.tablew th {
+  font-size: 0.5em; /* Ajusta el tamaño de letra de los encabezados */
+  background-color: #e8e8e8; /* Fondo de los encabezados */
+  color: #333; /* Color del texto en los encabezados */
+  text-transform: uppercase; /* Letras mayúsculas en encabezados */
+}
+
+.tablew tr:hover {
+  background-color: #f1f1f1; /* Efecto hover para las filas */
+}
+
+.tablew .boton {
+  background-color: #007BFF; /* Color de los botones */
+  color: white;
+  padding: 2px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.tablew .boton:hover {
+  background-color: #0056b3; /* Cambia el color cuando pasas el mouse */
+}
+

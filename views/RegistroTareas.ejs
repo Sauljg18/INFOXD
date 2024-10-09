@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Tarea</title>
+    <link rel="stylesheet" href="resources/estilo/RegistroTareas.css">
+    <link rel="stylesheet" href="resources/estilo/mapa.css"/>
+    <script src="resources/estilo/javascript/mapa.js" type="module"></script>
+</head>
+<body>
+    <div class="container">
+
+        <header class="header" >
+        
+        <ul>
+        <li><a href="/clientes">CLIENTE</a></li>
+        <li> <a href="/colab">COLABORADOR</a></h2></li>
+        <li> <a href="/equipo">Equipo</a></h2></ul></li>
+        
+        </header>
+
+        <!-- Navegación entre secciones -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'General')">General</button>
+            <button class="tab-link" onclick="openTab(event, 'Ubicacion')">Ubicación</button>
+            <button class="tab-link" onclick="openTab(event, 'Valores')">Valores</button>
+        </div>
+
+    <!-- Sección General -->
+<div id="General" class="tab-content active">
+    <form method="post" action="/aceptartarea">
+        <!-- Filtra los nombres de clientes para evitar duplicados -->
+        <label for="cliente">Tarea será ejecutada por:</label>
+        <select name="cliente" id="cliente">
+            <% 
+                const uniqueClientes = [];
+                results.forEach((row) => {
+                    if (!uniqueClientes.includes(row.clienteNombre)) {
+                        uniqueClientes.push(row.clienteNombre);
+            %>
+                <option value="<%= row.clienteNombre %>"><%= row.clienteNombre %></option>
+            <% 
+                    }
+                });
+            %>
+        </select>
+
+        <!-- Filtra los nombres de colaboradores para evitar duplicados -->
+        <label for="colaborador">colaborador:</label>
+        <select name="colaborador" id="colaborador"> 
+            <%  
+                const uniqueColaboradores = [];
+                results.forEach((row) => {
+                    if (!uniqueColaboradores.includes(row.colaboradorNombre)) {
+                        uniqueColaboradores.push(row.colaboradorNombre);
+            %>
+                <option value="<%= row.colaboradorNombre %>"><%= row.colaboradorNombre %></option>
+            <% 
+                    }
+                });
+            %>
+       
+    </form>
+</div>
+                
+                </select>
+
+                <label for="fecha">Fecha:</label>
+                <input type="date" name="fecha" id="fecha">
+
+                <label for="hora">Hora:</label>
+                <input type="time" name="hora" id="hora">
+
+                <label for="tipo">Tipo de Tarea:</label>
+                <select name="tipo" id="tipo">
+                    <option value="tipo">Seleccionar Tipo</option>
+                   <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
+                </select>
+
+                <label for="duracion">Tiempo de duración:</label>
+                <input type="text" name="duracion" id="duracion">
+
+                <label for="prioridad">Prioridad:</label>
+                <select name="prioridad" id="prioridad">
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select>
+
+                <label for="descripcion">Descripción de la tarea:</label>
+                <textarea name="descripcion" id="descripcion" rows="4"></textarea>
+
+                <label for="satisfaccion">Encuesta de Satisfacción:</label>
+                <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
+                <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
+
+             
+                <button type="reset">Guardar y agregar otra tarea</></button>
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+
+      
+        <div id="Ubicacion" class="tab-content">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" placeholder="Escribe una dirección">
+
+            <label for="latitud">Latitud:</label>
+            <input type="text" id="latitud">
+
+            <label for="longitud">Longitud:</label>
+            <input type="text" id="longitud">
+
+          
+            <div id="map">
+        </div>
+
+        
+        <div id="Valores" class="tab-content">
+            <h3>Productos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Valor Unitario (MXN)</th>
+                        <th>Descuento</th>
+                        <th>Valor Total (MXN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Ningún producto fue seleccionado</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Incluir Producto</button>
+            <button>Eliminar Todo</button>
+
+            <h3>Servicios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Cantidad</th>
+                        <th>Valor Unitario (MXN)</th>
+                        <th>Descuento</th>
+                        <th>Valor Total (MXN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Ningún servicio fue seleccionado</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Incluir Servicio</button>
+            <button>Eliminar Todo</button>
+        </div>
+    </div>
+
+    <script src="resources/javascript/RegistroTarea.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+document.getElementById('FormularioEquipo').addEventListener('submit', function (e) {
+    e.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
+
+    const formData = new FormData(this);
+
+    fetch('/SaveEquipo', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log('Datos enviados:', data);
+        // Limpiar el formulario
+        document.getElementById('FormularioEquipo').reset();
+    })
+    .catch(error => {
+        console.error('Error al enviar los datos:', error);
+    });
+});

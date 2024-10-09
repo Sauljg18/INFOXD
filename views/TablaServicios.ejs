@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <link rel="stylesheet" href="resources/estilo/TablaServicios.css">
+</head>
+<body>
+
+    <header class="header" >
+        <ul>
+        <li><a href="/clientes">Cliente</a></li>
+        <li> <a href="/colab">Colaborador</a></h2></li>
+        <li> <a href="/equipo">Equipo</a></h2></li>
+        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/servicio">Servicio</a></h2></li>
+        <li> <a href="/tarea">Tarea</a></h2></ul></li>
+        
+        </header>
+       
+        <section class="sidebar">
+             
+        </section>
+
+    <div class="container">
+        <div class="Titulo">
+            <h1>Servicios</h1>
+            <button class="add-service-btn"><a href="">+ Agregar servicio</a></button>
+        </div>
+
+        <!-- Barra para buscar -->
+        <div class="search-bar">
+            <label for="search">Buscar:</label>
+            <input type="text" id="search" placeholder="Buscar servicio...">
+        </div>
+
+        <!-- Tabla de servicios -->
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Servicio</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Configuración de Antivirus</td>
+                    <td><button class="delete-btn"></button></td>
+                </tr>
+                <tr>
+                    <td>Configuración de Paquetería</td>
+                    <td><button class="delete-btn"></button></td>
+                </tr>
+                <tr>
+                    <td>Configuración de Software</td>
+                    <td><button class="delete-btn"></button></td>
+                </tr>
+                <tr>
+                    <td>Inspección Técnica</td>
+                    <td><button class="delete-btn"></button></td>
+                </tr>
+                <tr>
+                    <td>Mantenimiento Correctivo</td>
+                    <td><button class="delete-btn"></button></td>
+                </tr>
+                <tr>
+                    <td>Mantenimiento Preventivo</td>
+                    <td><button class="delete-btn"></button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            <span>Mostrando registros del 1 al .....</span>
+            <div class="pagination-controls">
+                <button class="prev-btn">Anterior</button>
+                <span class="page-number">1</span>
+                <button class="next-btn">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

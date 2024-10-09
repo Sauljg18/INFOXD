@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/resources/estilo/form-cliente.css">
+   <link rel="stylesheet" href="/resources/estilo/inicio.css"> 
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <title>Clientes</title>
+   
+<body>
+  <% if (cliente) { %>
+  <header class="header" >
+  </header>
+  <section class="sidebar">
+    <ul>
+        <li><a href="/cliente">CLIENTE</a></li>
+    <li> <a href="/colab">COLABORADOR</a></h2></li>
+<li> <a href="/equipo">Equipo</a></h2></ul></li>
+</section>
+<main class="main">
+       
+          <!-- Primer formulario a la izquierda -->
+        
+          <div class="offset-md-2">
+            <div class="container">
+
+         <form action="/update" method="post" class="mb-3" id="formulario" >
+           <!-- Contenido del primer formulario -->
+           <input id="id_cliente" name="id_cliente" value="<%=cliente.id_cliente%>" hidden />
+           <ul>
+             <li>
+               <label for="nombrecliente" class="form-label">Nombre:</label>
+               <input class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="namecliente" name="namecliente" value="<%=cliente.nombre%>" />
+             </li>
+             <li>
+               <label for="identificacion" class="form-label">Numero de indentificiacion:</label>
+               <input class="form-control form-control-lg" type="number" aria-label=".form-control-lg example" id="identificacion" name="identificacion" value="<%= cliente.identificacion %>" />
+             
+              </li>
+             <li>
+               <label for="razon" class="form-label">Razón Social:</label>
+               <input class="form-control form-control-lg" type="text" placeholder="Razón Social" aria-label=".form-control-lg example" id="razon" name="razon" value="<%=cliente.razon%>" />
+             </li>
+             <li>
+               <label for="codigo" class="form-label">Codigo Externo:</label>
+               <input class="form-control form-control-lg" type="text" placeholder="Código Externo" aria-label=".form-control-lg example" id="externo" name="externo" value="<%=cliente.codigoext%>" />
+             </li>
+           </ul>
+         </div>
+
+         <div class="container2">
+     <ul>
+         <li><a id="detalle">Detalles</a>
+         <ul id="formu1"><ul>
+             <li>
+               <label for="telefono" class="form-label">Teléfono corporativo:</label>
+               <input  class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="telefono" name="telefono" value="<%=cliente.telefonocorp%>"/><p>
+             </li>
+             <li>
+               <label for="correocorp" class="form-label">Correo corporativo:</label>
+               <input class="form-control form-control-lg" type="email" placeholder="Correo Corporativo" aria-label=".form-control-lg example" id="correocorp" name="correocorp" value="<%=cliente.correocliente%>" /><p>
+             </li>
+             <li>
+               <label for="cliente" class="form-label">Hablar con:</label>
+               <input class="form-control form-control-lg" type="text" placeholder="Cliente" aria-label=".form-control-lg example" id="cliente" name="cliente" value="<%=cliente.cliente%>"/><p>
+             </li>
+             <li>
+               <label for="responsable" class="form-label">Responsable:</label>
+               <input class="form-control form-control-lg" type="text"  aria-label=".form-control-lg example"  id="responsable" name="responsable" value="<%=cliente.responsable%>">
+             </li>
+           <li>
+             <label for="observar" class="form-label">Observación:</label>
+             <input class="form-control form-control-lg" type="text"  aria-label=".form-control-lg example" type="text" id="observacion" name="observacion" value="<%=cliente.observacion%>">
+         </li></ul></ul>
+         </li>
+         <li><a  id="config">Informacion</a>
+         <ul >
+             <li id="formu2">
+                 <div class="mb-3"  id="formu1">
+                     <ul>
+                        <li>
+                          <label for="postal" class="form-label">Codigo Postal:</label>
+                          <input class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" type="text" id="postal" name="postal" value="<%=cliente.postal%>"><p>
+                        </li>
+                         <label for="direcion" class="form-label">Dirección:</label>
+                         <input class="form-control form-control-lg" type="text"  aria-label=".form-control-lg example" id="direccion" name="direccion" value="<%=cliente.direccion%>"/>
+                       <li>
+                         <label for="numeroext" class="form-label">Numero ext:</label>
+                         <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="numext" name="numext" value="<%=cliente.num_ext%>" /><p>
+                       </li>
+                       <li></li>
+                         <label for="numeroint" class="form-label">Numero int:</label>
+                         <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="numint" name="numint" value="<%=cliente.num_int%>" /><p>
+                       </li>
+                       <label for="region" class="form-label">Región:</label><br>
+                       <input class="form-control form-control-lg" aria-label=".form-control-lg example" type="text" id="region" name="region" value="<%=cliente.region%>" /><br>
+                       <label for="ciudad" class="form-label">Ciudad:</label><br>
+                       <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="ciudad" name="ciudad" value="<%=cliente.ciudad%>" /><br>
+                       <label for="estado" class="form-label">Estado:</label><br>
+                       <input class="form-control form-control-lg" aria-label=".form-control-lg example" type="text" id="estado" name="estado" value="<%=cliente.estado%>" /><br>
+                     
+                       </li>
+                     </ul>
+                  
+                  </div>
+         
+ 
+     <input type="submit" class="col" value="ENVIAR">
+         </form>
+             
+     
+    </div>
+
+<% } %> 
+    <script src="/resources/javascript/colab.js"></script>
+    </main>
+</body>
+</head>
+</html>

@@ -1,0 +1,172 @@
+<html lang="en">
+<head class="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
+    <link rel="stylesheet" href="/resources/estilo/agenda.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  
+    <title>inicio</title>
+</head>
+<body>
+    
+    <header class="header" >
+    <ul>
+    <li><a href="/clientes">Cliente</a></li>
+    <li> <a href="/colab">Colaborador</a></h2></li>
+    <li> <a href="/equipo">Equipo</a></h2></li>
+    <li> <a href="/producto">Producto</a></h2></li>
+    <li> <a href="/servicio">Servicio</a></h2></li>
+    <li> <a href="/tarea">Tarea</a></h2></ul></li>
+    
+    </header>
+   
+    <section class="sidebar">
+         
+    </section>
+    
+    <main class="main">
+        <div class="container">
+            <div class="left">
+              <div class="calendar">
+                <div class="month">
+                  <i class="fas fa-angle-left prev"></i>
+                  <div class="date">december 2015</div>
+                  <i class="fas fa-angle-right next"></i>
+                </div>
+                <div class="weekdays">
+                  <div>Sun</div>
+                  <div>Mon</div>
+                  <div>Tue</div>
+                  <div>Wed</div>
+                  <div>Thu</div>
+                  <div>Fri</div>
+                  <div>Sat</div>
+                </div>
+                <div class="days"></div>
+                <div class="goto-today">
+                  <div class="goto">
+                    <input type="text" placeholder="mm/yyyy" class="date-input" />
+                    <button class="goto-btn">Go</button>
+                  </div>
+                  <button class="today-btn">Today</button>
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="today-date">
+                <div class="event-day">wed</div>
+                <div class="event-date">12th december 2022</div>
+              </div>
+              <div class="events"></div>
+              <div class="add-event-wrapper">
+                
+                <div class="add-event-header">
+                  <div class="title">Add Event</div>
+                  <i class="fas fa-times close"></i>
+                </div>
+               
+                  <div id="General" >
+                    <form method="post" action="/aceptartarea">
+                  <div class="add-event-input">
+               
+                      <!-- Filtra los nombres de clientes para evitar duplicados -->
+                      <label for="cliente" style="color:black">Tarea será ejecutada por:</label>
+                      <select name="cliente" id="cliente" class="event-name">
+                          <% 
+                              const uniqueClientes = [];
+                              results.forEach((row) => {
+                                  if (!uniqueClientes.includes(row.clienteNombre)) {
+                                      uniqueClientes.push(row.clienteNombre);
+                          %>
+                              <option value="<%= row.clienteNombre %>"><%= row.clienteNombre %></option>
+                          <% 
+                                  }
+                              });
+                          %>
+                      </select>
+              </div>
+              
+                      <!-- Filtra los nombres de colaboradores para evitar duplicados -->
+                      <div class="add-event-input">
+                      <label for="colaborador" style="color: black">La tarea sera colaborada por:</label>
+                      <select name="colaborador" id="colaborador" class="event-colaborador"> 
+                          <%  
+                              const uniqueColaboradores = [];
+                              results.forEach((row) => {
+                                  if (!uniqueColaboradores.includes(row.colaboradorNombre)) {
+                                      uniqueColaboradores.push(row.colaboradorNombre);
+                          %>
+                              <option value="<%= row.colaboradorNombre %>"><%= row.colaboradorNombre %></option>
+                          <% 
+                                  }
+                              });
+                          %>
+                     </div>
+                  </form>
+              
+                              
+                              </select>
+                              <div class="add-event-input">
+                              <label for="fecha" style="color: black">Fecha de tarea:</label>
+                              <input type="date" name="fecha" id="fecha">
+                              </div>
+                              <div class="add-event-input">
+                              <label for="hora" style="color: black">Hora:</label>
+                              <input type="time" name="hora" id="hora">
+                              </div>
+                              <div class="add-event-input">
+                              <label for="tipo" style="color: black">El Tipo de Tarea:</label>
+                              <select name="tipo" id="tipo">
+                              </div>
+                                  <option value="tipo">Seleccionar Tipo</option>
+                                 <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
+                              </select>
+                              <div class="add-event-input">
+                              <label for="duracion" style="color: black">Tiempo de duración:</label>
+                              <input type="text" name="duracion" id="duracion">
+                              </div>
+                              <div class="add-event-input">
+                              <label for="prioridad" style="color: black">Prioridad:</label>
+                              <select name="prioridad" id="prioridad">
+                                  <option value="alta">Alta</option>
+                                  <option value="media">Media</option>
+                                  <option value="baja">Baja</option>
+                              </select>
+                            </div>
+                            <div class="add-event-input">
+                              <label for="descripcion" style="color: black;">Descripción de la tarea:</label>
+                              <textarea name="descripcion" id="descripcion" rows="4"></textarea>
+                            </div>
+                              <label for="satisfaccion">Encuesta de Satisfacción:</label>
+                              <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
+                              <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
+              
+                              <button id="guardar">GUARDAR</button>
+                            </form>
+                              <div class="add-event-footer">
+           
+            
+          </div></div>
+          <div id="activar" class="display">
+          <a class="add-event-btn"  >CERRAR </a></div> 
+                        </div>
+                      </div>
+              </div>
+              </div>
+            </div>
+            <button class="add-event">
+              <i class="fas fa-plus"></i>
+            </button>
+            
+          
+      
+         
+          <script src="/resources/javascript/agenda.js"></script>    
+    </main>
+   
+
+
+</body> 
+</html>
