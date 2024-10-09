@@ -3,6 +3,14 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const mysql = require("mysql");;
 const app = express();
+const session = require('express-session');
+
+app.use(session({
+    secret: 'tu_clave_secreta',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // Cambia a true si usas HTTPS
+}));
 
 const connection = mysql.createConnection({
     host: 'localhost',     // Cambia esto por tu host (puede ser 'localhost' o un servidor remoto)
@@ -27,10 +35,15 @@ app.use(express.static('public'));  // Para archivos estáticos como CSS, JS
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
+
 // Ruta para manejar el login
 app.get("/", (req, res) => {
     res.render("Loggin");  // Redirige a la página de inicio
 });
+
+
+
 
 //Verificacion entre ejs loggin y BD
 app.post('/login', (req, res) => {
@@ -46,11 +59,12 @@ app.post('/login', (req, res) => {
         }
         // Si se encuentra un colaborador, redirige a una nueva página
         if (results.length > 0){
+            req.session.usuario = results[0];
             connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
                 if (error) {
                     throw error;
                 } else {
-                    res.render('inicio', { results: results });
+                    res.render('inicio',  { results: results });
                 }
             });
         } else {
@@ -99,8 +113,20 @@ connection.query(query, (error, results) => {
 });
 });
 
+//VERIFICAR SI EL USUARIO INICIO SESION
+const authMiddleware = (req, res, next) => {
+    if (req.session && req.session.usuario) {
+        // Si la sesión existe, continúa con la solicitud
+        return next();
+    } else {
+        // Si no hay sesión, redirige a la página de inicio de sesión
+        return res.redirect('/');
+    }
+};
+
+
 //Inicia visualización del proyecto con "node index" en una terminal 
-app.get('/home', (req, res) => {
+app.get('/home',authMiddleware, (req, res) => {
     // Consulta para obtener todas las tareas 
     // Realiza la consulta y renderiza la vista con los resultados
     connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
@@ -112,7 +138,7 @@ app.get('/home', (req, res) => {
 });
 });
 /*jaaka*/
-app.get("/colab", (req, res) => {
+app.get("/colab", authMiddleware, (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
     connection.query('SELECT * FROM colaboradores ', (error, results) => {
         if (error) {
@@ -123,7 +149,7 @@ app.get("/colab", (req, res) => {
     });
 });
 
-app.get("/clientes", (req, res) => {
+app.get("/clientes", authMiddleware, (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
     connection.query('SELECT * FROM tabcliente ', (error, results) => {
         if (error) {
@@ -134,24 +160,37 @@ app.get("/clientes", (req, res) => {
     });
 });
 
+app.get("/ver-equipos", (req, res) => {
+    const query = 'SELECT * FROM tablaequipos'; // Nombre correcto de tu tabla
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error en la base de datos');
+        }
+        console.log(results); // Imprimir para verificar resultados
+        res.render('Equipos', { results: results }); // Pasar 'results' a la vista
+    });
+});
+
+
 app.get("/equipo", (req,res) => {
     res.render('Equipos');
 });
 
-app.get("/resequipo", (req,res) => {
+app.get("/resequipo", authMiddleware, (req,res) => {
     res.render('RegistroEquipos');
 });
 
 
-app.get("/producto", (req,res) => {
+app.get("/producto",authMiddleware, (req,res) => {
     res.render('TablaProductos');
 });
 
-app.get("/servicio", (req,res) => {
+app.get("/servicio",authMiddleware, (req,res) => {
     res.render('TablaServicios');
 });
 
-app.get("/tarea", (req, res) => {
+app.get("/tarea",authMiddleware, (req, res) => {
     // Realiza la consulta y renderiza la vista con los resultados
     connection.query('SELECT * FROM tareas ', (error, results) => {
         if (error) {
@@ -163,16 +202,16 @@ app.get("/tarea", (req, res) => {
 });
     
 
-app.get("/registro", (req,res) => {
+app.get("/registro",authMiddleware, (req,res) => {
     res.render('colaboradores');
 });
 
-app.get("/registrocliente", (req,res) => {
+app.get("/registrocliente",authMiddleware, (req,res) => {
     res.render('registrocliente');
 });
 
 //Este codigo permite verificar el usuario que vas a editar
-app.get('/editcliente/:id_cliente', (req,res) => {
+app.get('/editcliente/:id_cliente',authMiddleware, (req,res) => {
     const id =req.params.id_cliente;
     connection.query('SELECT * FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
     if(error){
@@ -184,7 +223,7 @@ app.get('/editcliente/:id_cliente', (req,res) => {
     });
 
     //Permite editar los datos  del colaborador 
-    app.get('/editcola/:idcolaborador', (req,res) => {
+    app.get('/editcola/:idcolaborador', authMiddleware, (req,res) => {
         const id =req.params.idcolaborador;
         connection.query('SELECT * FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
         if(error){
@@ -285,7 +324,7 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
 
 
 
-app.post("/update", function(req,res){ //REGISTRO DE CLIENTE
+app.post("/update", function(req,res){ //UPDATE DE CLIENTE
     const client = req.body;
     // Corregir los nombres de las variables para que coincidan con el formulario
     let id_cliente = parseInt(client.id_cliente, 10);
@@ -319,7 +358,7 @@ app.post("/update", function(req,res){ //REGISTRO DE CLIENTE
 
 
 //ELIMINAR REGISTRO DE CLIENTE
-app.get("/delete/:id_cliente", function(req,res){ 
+app.get("/delete/:id_cliente", authMiddleware, function(req,res){ 
     const id =req.params.id_cliente;
     connection.query('DELETE FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
      if(error){
@@ -337,7 +376,7 @@ app.get("/delete/:id_cliente", function(req,res){
      });
 
      //ELIMINAR REGISTRO DE CLIENTE
-app.get("/deletes/:idcolaborador", function(req,res){ 
+app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){ 
     const id =req.params.idcolaborador;
     connection.query('DELETE FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
      if(error){
@@ -356,7 +395,7 @@ app.get("/deletes/:idcolaborador", function(req,res){
 
 
 
-app.post("/aceptartarea", function(req,res){ //REGISTRO TAREA
+app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     const tarea = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
    let id_tarea = tarea.id_tarea;
