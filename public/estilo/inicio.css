@@ -9,6 +9,17 @@ body{
     "side main";
 }
 
+@keyframes color{
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
 .header{
     background-color: #08be6c;
@@ -44,7 +55,7 @@ body{
 
 main{
     background-color: #e9e7e7;
-    padding: 30px;
+    padding: 50px;
     grid-area:main;
 
     display: grid;
@@ -52,7 +63,7 @@ main{
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
     "c1 c2";
-    gap:15px;
+    gap:25px;
 }
 
 .card{
