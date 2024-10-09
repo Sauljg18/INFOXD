@@ -19,9 +19,11 @@ const calendar = document.querySelector(".calendar"),
   addEventFrom = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
   addEventSubmit = document.querySelector(".add-event-btn ");
-
+  
+ 
   let botonactivar = document.getElementById("activar");
   let botonguardar = document.getElementById("guardar");
+
 
   botonactivar.style.display='none'; 
 
@@ -454,6 +456,4 @@ function getEvents() {
   }
   eventsArr.push(...JSON.parse(localStorage.getItem("events")));
 }
-
-
 
