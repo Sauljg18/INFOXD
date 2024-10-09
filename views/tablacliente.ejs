@@ -15,68 +15,57 @@
     <header class="header" >
       <ul>
         <li><a href="/clientes" style="color:rgb(0, 187, 255)">CLIENTE</a></li>
-    <li> <a href="/colab" >COLABORADOR</a></h2></li>
-<li> <a href="/equipo">Equipo</a></h2></li>
-<li> <a href="/producto">Producto</a></h2></li>
-<li> <a href="/servicio">Servicio</a></h2></li>
-<li> <a href="/tarea">Tarea</a></h2></ul></li>
-    </header>
-    <section class="sidebar">
-    </section>
-  
-  <main class="main">
-  <div class="cuadro2" >
-    <div class="card"><a href="/registrocliente">Crear</a></div>
-    <div class="card">Crear</div>
-    
-    <div class="tablew">
-<table class="table" >
-    <thead>
+        <li> <a href="/colab" >COLABORADOR</a></h2></li>
+        <li> <a href="/ver-equipos">Equipo</a></h2></li>
+        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/servicio">Servicio</a></h2></li>
+        <li> <a href="/tarea">Tarea</a></h2></ul></li>
+      </header>
+      <section class="sidebar">
+      </section>
+        <main class="main">
+            <div class="cuadro2" >
+                <div class="card"><a href="/registrocliente">Crear</a></div>
+                  <div class="card">Crear</div>
+                  <div class="tablew">
+                    <table class="table" >
+                      <thead>
+                        <tr class="bg-primary">
+                          <th scope="col">Id</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">indentificiacion</th>
+                          <th scope="col">Correo</th>
+                          <th scope="col">Telefono</th>
+                          <th scope="col">Responsable</th>
+                          <th scope="col">Direccion</th>
+                          <th scope="col">Region</th>
+                          <th scope="col">Ciudad</th>
+                          <th scope="col">Estado</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% results.forEach((cliente) => { %>
+                          <tr>
+                            <td scope="row" class="table-primary"><%= cliente.id_cliente %></td>
+                            <td scope="row" class="table-primary"><%= cliente.nombre %></td>
+                            <td scope="row" ><%= cliente.identificacion %></td>
+                            <td scope="row" class="table-primary"><%= cliente.correocliente %></td>
+                            <td scope="row" ><%= cliente.telefonocorp %></td>
+                            <td scope="row" ><%= cliente.responsable %></td>
+                            <td scope="row" class="table-primary"><%= cliente.direccion %></td>
+                            <td scope="row" class="table-primary"><%= cliente.region %></td>
+                            <td scope="row" class="table-primary"><%= cliente.ciudad %></td>
+                            <td scope="row" class="table-primary"><%= cliente.estado %></td>
+                            <td>
+                              <a href="/editcliente/<%= cliente.id_cliente %>" class="btn btn-outline-info">editar</a>
+                            </td>
+                          </tr>
+                          <a href="/delete/<%= cliente.id_cliente%>" class="btn btn-outline-info">borrar</a>
+                          <%  }) %>
+                        </tbody>
+                      </table>
+                  </div>
         
-          
-        <tr class="bg-primary">
-            <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">indentificiacion</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Responsable</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Region</th>
-            <th scope="col">Ciudad</th>
-            <th scope="col">Estado</th>
-
-        </tr>
-        
-    
-    </thead>
-    <tbody>
-            <% results.forEach((cliente) => { %>
-                
-          
-        <tr>
-          <td scope="row" class="table-primary"><%= cliente.id_cliente %></td>
-            <td scope="row" class="table-primary"><%= cliente.nombre %></td>
-            <td scope="row" ><%= cliente.identificacion %></td>
-            <td scope="row" class="table-primary"><%= cliente.correocliente %></td>
-            <td scope="row" ><%= cliente.telefonocorp %></td>
-            <td scope="row" ><%= cliente.responsable %></td>
-            <td scope="row" class="table-primary"><%= cliente.direccion %></td>
-            <td scope="row" class="table-primary"><%= cliente.region %></td>
-            <td scope="row" class="table-primary"><%= cliente.ciudad %></td>
-            <td scope="row" class="table-primary"><%= cliente.estado %></td>
-
-            <td>
-              <a href="/editcliente/<%= cliente.id_cliente %>" class="btn btn-outline-info">editar</a>
-            </td>
-          </tr>
-          <a href="/delete/<%= cliente.id_cliente%>" class="btn btn-outline-info">borrar</a>
-        <%  }) %>
-    </tbody>
-           
-</table>
-</div>
-</main>
-
+        </main>
   </body>
 </html>

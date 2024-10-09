@@ -16,56 +16,47 @@
     <header class="header" >  <ul>
       <li><a href="/clientes">CLIENTE</a></li>
   <li> <a href="/colab" style="color:rgb(0, 187, 255)">COLABORADOR</a></h2></li>
-<li> <a href="/equipo">Equipo</a></h2></li>
+<li> <a href="/ver-equipos">Equipo</a></h2></li>
 <li> <a href="/producto">Producto</a></h2></li>
 <li> <a href="/servicio">Servicio</a></h2></li>
 <li> <a href="/tarea">Tarea</a></h2></ul></li>
-
 </header>
-    <section class="sidebar">
-      
-    </section>
+
+    <section class="sidebar"></section>
     <main class="main">
-    <div class="cuadro2" >
-    <div class="tablew">
-      <div class="cuadro">
-<table class="disazo table-hover" >
-    <thead>
-        
-          
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">CLIENTE</th>
-            <th scope="col">COLABORADOR</th>
-            <th scope="col">FECHA</th>
-            <th scope="col">TIPO</th>
-            <th scope="col">PRIORIDAD</th>
-            <th scope="col">DESCRIPCION</th>
-           
-        </tr>
-        
-    
-    </thead>
-    <tbody>
-            <% results.forEach((tareas) => { %>
-                
-          
-        <tr>
-            <td scope="row" class="table-primary"><%= tareas.id_tarea %></td>
-            <td scope="row" ><%= tareas.cliente %></td>
-            <td scope="row" class="table-primary"><%= tareas.colaborador %></td>
-            <td scope="row" ><%= tareas.fecha %></td>
-              <td scope="row" class="table-primary"><%= tareas.tipo %></td>
-              <td scope="row" class="table-primary"><%= tareas.prioridad %></td>
-              <td scope="row" class="table-primary"><%= tareas.descripcion %></td>
-              <td>
-            <td>
-              <a href="/edit" class="btn btn-outline-info" style="color: green;">ACTIVO</a>
-              <a href="/edit" class="btn btn-outline-info" style="color:red">FINALIZAR</a>
-            </td>
-        </tr>
-        <%  }) %>
-    </tbody>
+      <div class="cuadro2" >
+        <div class="tablew">
+          <div class="cuadro">
+            <table class="disazo table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">CLIENTE</th>
+                  <th scope="col">COLABORADOR</th>
+                  <th scope="col">FECHA</th>
+                  <th scope="col">TIPO</th>
+                  <th scope="col">PRIORIDAD</th>
+                  <th scope="col">DESCRIPCION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% results.forEach((tareas) => { %>
+                <tr>
+                  <td scope="row" class="table-primary"><%= tareas.id_tarea %></td>
+                  <td scope="row" ><%= tareas.cliente %></td>
+                  <td scope="row" class="table-primary"><%= tareas.colaborador %></td>
+                  <td scope="row" ><%= tareas.fecha %></td>
+                  <td scope="row" class="table-primary"><%= tareas.tipo %></td>
+                  <td scope="row" class="table-primary"><%= tareas.prioridad %></td>
+                  <td scope="row" class="table-primary"><%= tareas.descripcion %></td>
+                  <td>
+                    <td>
+                      <a href="/edit" class="btn btn-outline-info" style="color: green;">ACTIVO</a>
+                      <a href="/edit" class="btn btn-outline-info" style="color:red">FINALIZAR</a>
+                    </td>
+                  </tr>
+                  <%  }) %>
+                </tbody>
           
 </table>
 

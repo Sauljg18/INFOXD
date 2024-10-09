@@ -134,6 +134,19 @@ app.get("/clientes", (req, res) => {
     });
 });
 
+app.get("/ver-equipos", (req, res) => {
+    const query = 'SELECT * FROM tablaequipos'; // Nombre correcto de tu tabla
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error en la base de datos');
+        }
+        console.log(results); // Imprimir para verificar resultados
+        res.render('Equipos', { results: results }); // Pasar 'results' a la vista
+    });
+});
+
+
 app.get("/equipo", (req,res) => {
     res.render('Equipos');
 });
