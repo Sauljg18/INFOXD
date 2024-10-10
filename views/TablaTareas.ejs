@@ -51,8 +51,8 @@
                   <td scope="row" class="table-primary"><%= tareas.descripcion %></td>
                   <td>
                     <td>
-                      <a href="/edit" class="btn btn-outline-info" style="color: green;">ACTIVO</a>
-                      <a href="/edit" class="btn btn-outline-info" style="color:red">FINALIZAR</a>
+                      <a id="active" class="btn btn-outline-info" style="color: green;">ACTIVO</a>
+                      <button id="finish" class="btn btn-outline-info" style="color:red">FINALIZAR</button>
                     </td>
                   </tr>
                   <%  }) %>
@@ -60,10 +60,12 @@
           
 </table>
 
+
 </div>
 </div>
 </div>
 
 </main>
+<script script src="/resources/javascript/Tarea.js"></script>
   </body>
 </html>

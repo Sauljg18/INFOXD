@@ -58,9 +58,9 @@
                             <td scope="row" class="table-primary"><%= cliente.estado %></td>
                             <td>
                               <a href="/editcliente/<%= cliente.id_cliente %>" class="btn btn-outline-info">editar</a>
+                              <a href="/delete/<%= cliente.id_cliente%>" class="btn btn-outline-info">borrar</a>
                             </td>
                           </tr>
-                          <a href="/delete/<%= cliente.id_cliente%>" class="btn btn-outline-info">borrar</a>
                           <%  }) %>
                         </tbody>
                       </table>
