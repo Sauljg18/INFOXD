@@ -1,6 +1,6 @@
 body{
     height: 100vh;
-
+    background-color: darkolivegreen;
     display: grid;
     grid-template-columns: 20px 1fr;
     grid-template-rows: 80px 1fr;
@@ -26,18 +26,11 @@ body{
     padding-left:20px ;
 }
 
-.header li{
-    padding-left: 20px;
-}
+.header li{ padding-left: 20px; }
 
-.header a{
-    color: #e9e7e7;
-}
-.sidebar{
-    background-color: #005714;
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-}
+.header a{ color: #e9e7e7; }
+
+.sidebar{ background-color: #005714; grid-column: 1 / 2; grid-row: 1 / 3; }
 
     .Titulo{
         display: flex;

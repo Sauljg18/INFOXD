@@ -1,6 +1,6 @@
 body{
     height: 100vh;
-
+    background-color: darkolivegreen;
     display: grid;
     grid-template-columns: 20px 1fr;
     grid-template-rows: 80px 1fr;
@@ -54,7 +54,7 @@ body{
 }
 
 main{
-    background-color: #e9e7e7;
+    background-color: darkolivegreen;
     padding: 50px;
     grid-area:main;
 

@@ -72,7 +72,7 @@ h1 {
 
 /*Boton de agregar producto*/
 
-.add-service-btn {
+.BotonGr {
     background-color: #48BB78;
     color: white;
     border: none;
@@ -84,7 +84,7 @@ h1 {
     -moz-transition: .5s, color .10s;
 }
 
-.add-service-btn:hover {
+.BotonGr:hover {
     background-color: #38A169;
     box-shadow: 0 8px 8px 0 #bebbbc,0 8px 8px 0 #adadab;
     transform: translate(0px,5px);
