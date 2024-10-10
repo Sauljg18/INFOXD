@@ -172,9 +172,9 @@ select {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
- }
+  }
 
- form{max-width: 350px; margin: 0 auto;}
+  form{max-width: 350px; margin: 0 auto;}
 
 .press{
   z-index: 1;
@@ -182,9 +182,9 @@ select {
   font-size:15px;
   top:5px;
   left: 0%;
- position: relative;
- display: block;
- padding-right: .5em;
+  position: relative;
+  display: block;
+  padding-right: .5em;
 }
 
 .press0{
@@ -204,16 +204,16 @@ select {
   font-size:15px;
   top:60px;
   left: -40%;
- position: relative;
- display: block;
- padding-right: .5em;
+  position: relative;
+  display: block;
+  padding-right: .5em;
 }
 
 
- #mostrarc{
+  #mostrarc{
   cursor:pointer;
 }
 
-button{
+ button{
   border-radius: 10px;
-}
+ }

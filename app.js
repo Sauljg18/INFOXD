@@ -421,6 +421,24 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
 });
 });
 
+app.post('/finalizar-tarea', (req, res) => {
+    const { id_tarea } = req.body;
+  
+    // Aquí actualizamos el estado de la tarea en la base de datos
+    const query = 'UPDATE tareas SET status = ? WHERE id_tarea = ?';
+    const values = ['FINALIZADO', id_tarea];
+  
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.json({ success: false });
+      }
+  
+      // Si la actualización fue exitosa
+      return res.json({ success: true });
+    });
+  });
+  
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 
