@@ -50,12 +50,13 @@
                   <td scope="row" class="table-primary"><%= tareas.tipo %></td>
                   <td scope="row" class="table-primary"><%= tareas.prioridad %></td>
                   <td scope="row" class="table-primary"><%= tareas.descripcion %></td>
-                  <td scope="row" class="table-primary"><%= tareas.status %></td>
+                  <td class="estado" data-status="<%= tareas.status %>">
+                    <%= tareas.status %>
+                  </td>
+                  
                   <td>
-                    <td>
-                      <a id="active" class="btn btn-outline-info" style="color: green;">ACTIVO</a>
-                      <button id="finish" class="btn btn-outline-info" style="color:red">FINALIZAR</button>
-                    </td>
+                    <button class="finalizar-btn btn btn-outline-info" data-id="<%= tareas.id_tarea %>" style="color: red;">FINALIZAR</button>
+                  </td>
                   </tr>
                   <%  }) %>
                 </tbody>

@@ -83,31 +83,30 @@ background: rgba(115, 124, 136, 0.114);
 transition: width 0.3s;
 }
 
-button{
-    margin: 0 auto;
-    border-radius: 10px;
-    left: 20%;
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1%; /* Ajusta este valor según la separación deseada */
+    padding-left: 5px;
 }
 
-.card{
+.card {
     background-color: #ffff;
     border-radius: 10px;
-    width: 80%;
-    padding-left: 100px;
-    height: 20px;
-    margin: 20px;
-    display:inline-block;
+    width: 150px; /* Puedes ajustar el ancho según lo que desees */
+    height: 50px; /* Ajusta la altura */
     transition-duration: 0.5s;
+    margin-left: 150px;
+    margin-top: 50px;
 }
 
 .card:hover{
     background-color: #979595;
-    height: 10px;
 }
 
 .tablew {    
     margin-left: 10%;
-    margin-top: 5%;
+    margin-top: 1%;
     width: 50%; /* Aumenta el ancho para que cubra más espacio */
     height: auto;
     border-collapse: collapse;

@@ -74,8 +74,8 @@ main{
     left: 10% ;
     display:inline-block;
     transition-duration: 0.5s;
-  }
-  
+    }
+
  .card:hover{
     background-color: #979595;
  }
