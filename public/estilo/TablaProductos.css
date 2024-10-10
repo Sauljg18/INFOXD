@@ -1,19 +1,20 @@
 body{
+    margin: 0%;
     height: 100vh;
-
+    background-color: darkolivegreen;
     display: grid;
     grid-template-columns: 20px 1fr;
     grid-template-rows: 80px 1fr;
     grid-template-areas: 
     "side header"
-    "side main";
+    "side main"; 
 }
 
 .header{
-    background-color: #0958d8;
+    background-color: #08be6c;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    }
+}
 
 .header ul{
     display: flex;
@@ -24,13 +25,18 @@ body{
     font-size: 20px;
     padding-left:20px ;
 }
-    
+
 .header li{
-padding-left: 20px;    
+    padding-left: 20px;
 }
-    
+
 .header a{
-color: #e9e7e7;      
+    color: #e9e7e7;
+}
+.sidebar{
+    background-color: #005714;
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
 }
 
 .Titulo{
@@ -40,23 +46,22 @@ color: #e9e7e7;
     margin-bottom: 20px;
 }
 
-.sidebar{
-background-color: #5e7fb7;    
-grid-column: 1 / 2;
-grid-row: 1 / 3;
-}
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    background-color: white;
-    padding: 20px;
+    background-color: gray;
+    padding: 20px;              
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 50%;
+    width: 70%;
+    margin: 10%;
 }
 
 h1 {
     font-size: 24px;
     margin: 0;
+    color: darkolivegreen;
 }
 
 .action-buttons {
@@ -64,6 +69,29 @@ h1 {
     gap: 10px;
     
 }
+
+/*Boton de agregar producto*/
+
+.add-service-btn {
+    background-color: #48BB78;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s, color .10s;
+    -webkit-transition: .5s, color .10s;
+    -moz-transition: .5s, color .10s;
+}
+
+.add-service-btn:hover {
+    background-color: #38A169;
+    box-shadow: 0 8px 8px 0 #bebbbc,0 8px 8px 0 #adadab;
+    transform: translate(0px,5px);
+    -webkit-transform: translate(0px,5px);
+    -moz-transform:translate(0px,5px);
+}
+/*------------------------------*/
 
 .btn {
     background-color: #4299e1;
