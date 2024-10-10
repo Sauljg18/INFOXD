@@ -193,9 +193,9 @@ select {
   font-size:15px;
   top:15px;
   left: 0%;
- position: relative;
- display: block;
- padding-right: .2em;
+  position: relative;
+  display: block;
+  padding-right: .2em;
 }
 
 .press1{
@@ -214,6 +214,6 @@ select {
   cursor:pointer;
 }
 
- button{
+button{
   border-radius: 10px;
- }
+}

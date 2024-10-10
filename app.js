@@ -345,14 +345,15 @@ app.post("/update", function(req,res){ //UPDATE DE CLIENTE
     let region = client.region;
     let ciudad = client.ciudad;
     let estado = client.estado;
-               
-   connection.query("UPDATE tabcliente  SET ? WHERE id_cliente = ?",[{nombre:namecliente, identificacion:identificacion, razon:razon, codigoext:externo, telefonocorp:telefono, correocliente:correocorp, cliente:cliente, responsable:responsable, observacion:observacion, postal:postal, direccion:direccion, num_ext:numext, num_int:numint, region:region, ciudad:ciudad, estado:estado}, id_cliente],(error,results)=>{
-       if(error){
-           throw error;
-       }else{
-          console.log("Datos almacenados actualizado"); 
-       }
-   });
+        
+
+    connection.query("UPDATE tabcliente  SET ? WHERE id_cliente = ?",[{nombre:namecliente, identificacion:identificacion, razon:razon, codigoext:externo, telefonocorp:telefono, correocliente:correocorp, cliente:cliente, responsable:responsable, observacion:observacion, postal:postal, direccion:direccion, num_ext:numext, num_int:numint, region:region, ciudad:ciudad, estado:estado}, id_cliente],(error,results)=>{
+        if(error){
+        throw error;
+        }else{
+        console.log("Datos almacenados actualizado"); 
+        }
+    });
 
 });
 
@@ -361,9 +362,9 @@ app.post("/update", function(req,res){ //UPDATE DE CLIENTE
 app.get("/delete/:id_cliente", authMiddleware, function(req,res){ 
     const id =req.params.id_cliente;
     connection.query('DELETE FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
-     if(error){
-         throw error;
-     }else{
+    if(error){
+        throw error;
+    }else{
         connection.query('SELECT * FROM tabcliente ', (error, results) => {
             if (error) {
                 throw error;
@@ -371,17 +372,17 @@ app.get("/delete/:id_cliente", authMiddleware, function(req,res){
                 res.render('tablacliente', { results: results });
             }
         });
-     }
- })
-     });
+    }
+    })
+    });
 
      //ELIMINAR REGISTRO DE CLIENTE
 app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){ 
     const id =req.params.idcolaborador;
     connection.query('DELETE FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
-     if(error){
-         throw error;
-     }else{
+    if(error){
+        throw error;
+    }else{
         connection.query('SELECT * FROM colaboradores ', (error, results) => {
             if (error) {
                 throw error;
@@ -389,34 +390,35 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
                 res.render('tablacolaboradores', { results: results });
             }
         });
-     }
- })
-     });
+    }
+    })
+    });
 
 
 
 app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     const tarea = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
-   let id_tarea = tarea.id_tarea;
-   let cliente = tarea.cliente;
-   let colaborador = tarea.colaborador;
-   let fecha = tarea.fecha;
-   let hora = tarea.hora; // Cambié de 'carga' a 'cargo' para mejor comprensión.
-   let tipo = tarea.tipo;
-   let prioridad = tarea.prioridad;
-   let descripcion = tarea.descripcion;
-   
+    let id_tarea = tarea.id_tarea;
+    let cliente = tarea.cliente;
+    let colaborador = tarea.colaborador;
+    let fecha = tarea.fecha;
+    let hora = tarea.hora; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+    let tipo = tarea.tipo;
+    let prioridad = tarea.prioridad;
+    let descripcion = tarea.descripcion;
+    let activate = tarea.activo;
 
-   let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, prioridad, descripcion) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+prioridad +"','"+descripcion +"')";
+
+    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
                 
-   connection.query(registrar,function(error){
-       if(error){
-           throw error;
-       }else{
-          console.log("Datos almacenados correctamente"); 
-       }
-   });
+    connection.query(registrar,function(error){
+    if(error){
+    throw error;
+    }else{
+    console.log("Datos almacenados correctamente"); 
+    }
+});
 });
 
 //ruta de archivos estáticos
@@ -424,7 +426,7 @@ app.use('/resources', express.static("public"));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+console.log(`Server is running on port ${PORT}`);
 });
 
 
