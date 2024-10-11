@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Equipo</title>
+    <link rel="stylesheet" href="/resources/estilo/RegistroEquipos.css">
+</head>
+
+    <body>
+    
+    <header class="header" >
+        <ul>
+        <li><a href="/clientes">Cliente</a></li>
+        <li> <a href="/colab">Colaborador</a></h2></li>
+        <li> <a href="/ver-equipos">Equipo</a></h2></li>
+        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/servicio">Servicio</a></h2></li>
+        <li> <a href="/tarea">Tarea</a></h2></ul></li>
+        
+        </header>
+        <section class="sidebar">     </section>
+        <div class="container">
+        <!-- Header -->
+        <% if (equipo){%>
+        <div class="Titulo01">
+            <a href="/equipo" class="back-btn"> Volver</a>
+            
+            <h1>Equipo</h1>;
+        </div>
+        <div class="tabs">
+            <button id="General" class="tab_General" onclick="openTap(event,'General')">General</button>
+            <button id="Especificaciones" class="tab_Especificaciones" onclick="openTap(event,'Especificaciones')">Especificaciones</button>
+            <button id="Anexos" class="tab_Anexos" onclick="openTap(event,'Anexos')">Anexos</button>
+            <button id="Movimientos" class="tab_Movimientos" onclick="openTap(event,'Movimientos')">Movimientos</button>
+            <button id="Tareas" class="tab_Tareas" onclick="openTap(event,'Tareas')">Tareas</button>
+        </div>
+        <!-- Formulario -->
+            <!-- Imagen y Datos del Equipo -->  
+            <!-- Tabs -->
+        <form id="FormularioEquipo" method="post" action="/SaveEquipo">
+        
+        <button type="submit" class="float">Guardar</button>    
+        
+        <div class="image-upload">
+                <div class="image-placeholder" id="imagePreview">Arrastre o haga clic</div>
+                <input type="file" id="imageUpload" name="imagen" accept="image/*" style="display:none;">
+                <label for="imageUpload" class="image-upload-label">Subir Imagen</label>
+            </div>
+            
+            <div>
+                <input type="text" name="IdEquipo" value="<%=equipo.IdEquipo%>"  hidden>
+            <label>Nombre</label>
+            <input type="text" name="Nombre" value="<%=equipo.Nombre%>">
+            <label>Identificador</label>    
+            </div>
+            
+            <div class="identifier">
+                <input type="text" name="Identificador" value="<%=equipo.Identificador%>">
+                <button class="refresh-btn"></button>
+            </div>
+
+            <div>
+            <label>Fecha de validez</label>
+            <input type="date" name="Fecha" value="<%=equipo.Fecha%>">
+            </div>
+
+            <!-- Sección de Tabs -->
+            <div class="right-panel">
+                <!-- Stock y Tabs -->
+                <div class="top-section">
+                    <div class="stock-section">
+                        <div class="stock-icon"></div>
+                        <span>Stock</span>
+                    </div>
+                </div>
+                <!-- Contenido de Tab General-->
+                <div class="tab-Descripción" id="Descripción">
+                    <label>Descripción</label>
+                    <textarea placeholder="Ingrese la descripción"></textarea>
+                    
+                    <label>Categoría</label>
+                    <select>
+                        <option>Seleccione una categoría</option>
+                    </select>
+
+                    <label>Asociar al equipo</label>
+                    <input type="text" placeholder="">
+                    <button class="search-btn"></button>
+                </div>
+
+                <!-- Contenido de Tab Especificaciones-->
+                <div class="tab-vista-Especificaciones" id="Especificaciones-vista">
+                <label>Especificaciones</label>
+                <button class="search-btn"></button>
+                </div>
+
+                <!-- Contenido de Tab Anexos-->
+                <div class="tab_vista_Anexos" id="Anexos-vista">
+                    <label>Anexos</label>
+                    <button class="search-btn"></button>
+                    </div>
+
+                    <!-- Contenido de Tab Tareas-->
+                <div class="tab-vista-Tareas" id="Tareas-vista">
+                    <label>Tareas</label>
+                    <button class="search-btn"></button>
+                </div> 
+        </form>   
+        <% } %>  
+        </div>
+        <script src="/resources/javascript/RegistroEquipos.js"> </script>  
+        </div>
+        <script src="/resources/javascript/FormClean.js"> </script>
+</body>
+</html>

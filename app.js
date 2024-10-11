@@ -160,7 +160,8 @@ app.get("/clientes", authMiddleware, (req, res) => {
     });
 });
 
-app.get("/ver-equipos", (req, res) => {
+//VER TABLA DE EQUIPOS
+app.get("/ver-equipos",authMiddleware, (req, res) => {
     const query = 'SELECT * FROM tablaequipos'; // Nombre correcto de tu tabla
     connection.query(query, (err, results) => {
         if (err) {
@@ -171,7 +172,26 @@ app.get("/ver-equipos", (req, res) => {
         res.render('Equipos', { results: results }); // Pasar 'results' a la vista
     });
 });
+app.get('/editequipo/:IdEquipo', authMiddleware, (req, res) => {
+    const id = req.params.IdEquipo;
+    
+    connection.query('SELECT * FROM tablaequipos WHERE IdEquipo=?', [id], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            let equipo = results[0];
+            
+            // Verifica si existe el campo Fecha en el equipo
+            if (equipo.Fecha) {
+                // Convierte la fecha a formato YYYY-MM-DD si es necesario
+                let fecha = new Date(equipo.Fecha);
+                equipo.Fecha = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+            }
 
+            res.render('EditarEquipos', { equipo: equipo });
+        }
+    });
+});
 
 app.get("/equipo", (req,res) => {
     res.render('Equipos');
