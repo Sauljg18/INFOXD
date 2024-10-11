@@ -20,8 +20,6 @@
     <div class="container">
 <table class="table" >
     <thead>
-        
-          
         <tr class="bg-primary">
             <th scope="col">Nombre</th>
             <th scope="col">indentificiacion</th>
@@ -32,15 +30,10 @@
             <th scope="col">Region</th>
             <th scope="col">Ciudad</th>
             <th scope="col">Estado</th>
-
-        </tr>
-        
-    
+          </tr>
     </thead>
     <tbody>
-            <% results.forEach((cliente) => { %>
-                
-          
+      <% results.forEach((cliente) => { %>
         <tr>
             <td scope="row" class="table-primary"><%= cliente.nombre %></td>
             <td scope="row" ><%= cliente.indentificiacion %></td>
@@ -59,7 +52,6 @@
         </tr>
         <%  }) %>
     </tbody>
-           
 </table>
 </div>
 <button> <a class="nav*links" href="registrocliente">crear</a></button>

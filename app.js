@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const mysql = require("mysql");;
 const app = express();
 const session = require('express-session');
+const res = require("express/lib/response");
 
 app.use(session({
     secret: 'tu_clave_secreta',
@@ -172,10 +173,20 @@ app.get("/ver-equipos", (req, res) => {
     });
 });
 
+app.get("/ver-productos", (req, res) => {
+    const query = 'SELECT * FROM tablaproductos';
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error en la base de datos de Productos')
 
-app.get("/equipo", (req,res) => {
-    res.render('Equipos');
-});
+        }
+    }) //Nombre de la tabla a usar
+})
+
+app.get("/RegistroProductos", authMiddleware, (req,res) => {
+    res.render('RegistroProductos')
+})
 
 app.get("/resequipo", authMiddleware, (req,res) => {
     res.render('RegistroEquipos');
