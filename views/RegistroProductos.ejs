@@ -4,17 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="resources/estilo/RegistroProductos.css">
-    <title>RegistroDeProductos</title>  
+    <script src="/resources/javascript/scripts.js"></script>
+    <title>RegistroDeProductos</title>
 </head>
 
-<nav class="active" id="nav">    
+<body>
+<nav class="active" id="nav">
     <ul>
         <li><a href="/home">Home</a></li>
-        <li><a href="/colab">Cliente</a></li>
-        <li><a href="/ver-equipos">Colaborador</a></li>
-        <li><a href="/ver-productos">Equipo</a></li>
-        <li><a href="/servicio">Productos</a></li>
-        <li><a href="/tarea">Servicios</a></li>
+        <li><a href="/clientes">Cliente</a></li>
+        <li><a href="/colab">Colaborador</a></li>
+        <li><a href="/producto">Producto</a></li>
+        <li><a href="/ver-equipos">Equipos</a></li>
+        <li><a href="/servicio">Servicio</a></li>
+        <li><a href="/tarea">Tarea</a></li>
     </ul>
     
     <button class="icon" id="toggle">
@@ -23,8 +26,36 @@
     </button>
 </nav>
 
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            <input type="hidden" id="codigoequipamiento" value="0">
+            <input type="hidden" id="urlimagen" value>
+            <div class="dropify-wrapper">
+                <div class="dropify message">
+                    <span class="file-icon">
+                        ::before
+                    </span>
+                    <p>Arraste o haga clic</p>
+                    <p class="dropify-error"> Archivo no soportado</p>
+                </div>
+                <div class="dropify-loader"></div>
+                <div class="dropify-errors-container">
+                    <ul></ul>
+                </div>
+                <input style="border:none;" type="">
+            </div>
+        </div>
+    </div>
+</div>
 
-
-<script src="/resources/javascript/scripts.js"></script>
 </body>
 </html>
+<!--
+valor unitario
+cosot unitario
+stock minimo
+stock total
+inventario de la empresa
+colaboradores
+-->

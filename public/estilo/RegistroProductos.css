@@ -99,3 +99,31 @@ nav {
   nav.active .icon .line2 {
     transform: rotate(765deg) translateY(-5.5px);
   }
+
+  .row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 10;
+    background-color: rgb(188, 188, 197);
+  }
+
+  .card {
+    padding-left: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+  }
+  .card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
