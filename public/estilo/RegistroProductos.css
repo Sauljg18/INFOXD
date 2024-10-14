@@ -1,5 +1,9 @@
-body{
-    background-color: darkolivegreen;
+html, body {
+  overflow-x: hidden; /* Oculta el desbordamiento horizontal */
+  margin: 0; /* Asegura que no haya márgenes adicionales */
+  padding: 0;
+  height: 100%;
+  background-color: darkolivegreen;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
@@ -8,25 +12,29 @@ body{
 box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 nav {
     background-color: #fff;
-    padding: 20px;
-    width: 80px;
+    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 3px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: width 1.0s linear;
-    overflow-x: hidden;
-    position: fixed;
-    right: 2%;
-    top: 2%;
-    height: 10%;
+    overflow: hidden;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    height: 2%;
   }
   
   nav.active {
-    width: max-content;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   nav ul {
@@ -37,6 +45,7 @@ nav {
     width: 0;
     transition: width 1.0s linear;
     flex-direction: row;
+
   }
   
   nav.active ul {
@@ -47,6 +56,7 @@ nav {
     transform: rotateY(0deg);
     opacity: 0;
     transition: transform 1.0s linear, opacity 1.0s linear;
+    margin: 0 15px;
   }
   
   nav.active ul li {
@@ -57,9 +67,9 @@ nav {
   nav ul a {
     position: relative;
     color: #000000;
-    font-size: 150%;
+    font-size: 100%;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 0 15px;
 
   }
   
@@ -106,24 +116,235 @@ nav {
     margin-right: 10px;
     margin-left: 10px;
     padding: 10;
-    background-color: rgb(188, 188, 197);
+    background-color: transparent;
   }
 
-  .card {
-    padding-left: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem;
-  }
   .card-body {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
+}
+
+/* Estilo de la tarjeta en forma de barra vertical */
+.card {
+  width: 250px;
+  height: 87%;
+  background-color: #f5f7fa;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: fixed;
+  top: 40px;
+  left: 0;
+  margin: 1%;
+}
+
+
+/* Área de subida de archivos */
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 30px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 20px;
+  height: 200px; /* Ajuste del área de subida */
+}
+
+.upload-area:hover {
+  background-color: #eaeaea;
+}
+
+.upload-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* Estilo del toggle switch */
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background-color: white;
+  bottom: 3px;
+  left: 3px;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Ajustes de texto del estatus */
+#statusText {
+  font-weight: bold;
+  color: green;
+}
+
+.input-group input {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  outline: none; /* Elimina el borde azul predeterminado */
+}
+
+/* Efecto al pasar el ratón por encima */
+.input-group input:hover {
+  border-color: #4caf50;
+}
+
+/* Efecto de enfoque (cuando se selecciona el input) */
+.input-group input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.5); /* Sombra verde suave */
+}
+
+/* Contenedor principal que ocupa el espacio restante */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  height: 100vh; /* Ocupa toda la altura disponible */
+  margin-left: 250px; /* Deja espacio para la barra vertical */
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+/* Cuadros individuales de precios */
+.price-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-box {
+  width: 18%; /* 5 cuadros se distribuyen proporcionalmente */
+  text-align: center;
+}
+
+.price-box h3 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.price-box input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.price-box input:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Formulario del equipo */
+.equipment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.equipment-form h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #4caf50;
+}
+
+.equipment-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.equipment-form input,
+.equipment-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.equipment-form input:focus,
+.equipment-form textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Botón del formulario */
+.equipment-form button {
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.equipment-form button:hover {
+  background-color: #45a049;
+}
+
+.col-md-3 {
+  background-color: transparent; /* Elimina cualquier fondo */
+  box-shadow: none; /* Opcional: Elimina sombras, si las hay */
+  border: none; /* Opcional: Elimina bordes, si no los necesitas */
 }

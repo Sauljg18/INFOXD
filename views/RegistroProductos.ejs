@@ -26,36 +26,68 @@
     </button>
 </nav>
 
+
 <div class="row">
     <div class="col-md-3">
         <div>
-            <input type="hidden" id="codigoequipamiento" value="0">
-            <input type="hidden" id="urlimagen" value>
-            <div class="dropify-wrapper">
-                <div class="dropify message">
-                    <span class="file-icon">
-                        ::before
-                    </span>
-                    <p>Arraste o haga clic</p>
-                    <p class="dropify-error"> Archivo no soportado</p>
-                </div>
-                <div class="dropify-loader"></div>
-                <div class="dropify-errors-container">
-                    <ul></ul>
-                </div>
-                <input style="border:none;" type="">
-            </div>
-        </div>
-    </div>
-</div>
 
-</body>
-</html>
-<!--
-valor unitario
-cosot unitario
-stock minimo
-stock total
-inventario de la empresa
-colaboradores
--->
+            <div class="card">
+                <div class="upload-area">
+                    <label for="fileUpload">
+                        <i class="upload-icon">⬆️</i>
+                        <span>Arrastre o haga clic</span>
+                    </label>
+                    <input type="file" id="fileUpload" hidden />
+                </div>
+                <div class="input-group">
+                    <label for="nombre">Nombre <span>*</span></label>
+                    <input type="text" id="nombre" placeholder="Ingrese nombre" required />
+                </div>
+                
+                <div class="status">
+                    <span id="statusText">Activo</span>
+                    <label class="switch">
+                        <input type="checkbox" id="statusToggle" checked />
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+            </div>
+
+
+<div class="main-content">
+    <div class="price-inputs">
+        <div class="price-box">
+            <h3>Valor Unitario 1</h3>
+            <input type="number" step="0.01" placeholder="0.00" />
+        </div>
+        <div class="price-box">
+            <h3>Costo Unitario 2</h3>
+            <input type="number" step="0.01" placeholder="0.00" />
+        </div>
+        <div class="price-box">
+                    <h3>Stock 3</h3>
+                    <input type="number" step="0.01" placeholder="0.00" />
+                </div>
+                <div class="price-box">
+                    <h3>Inventario 4</h3>
+                    <input type="number" step="0.01" placeholder="0.00" />
+                </div>
+                <div class="price-box">
+                    <h3>Con colaboradores 5</h3>
+                    <input type="number" step="0.01" placeholder="0.00" />
+                </div>
+            </div>
+            <form class="equipment-form">
+                <h2>Información del Equipo</h2>
+                <label for="nombreEquipo">Nombre del Equipo</label>
+                <input type="text" id="nombreEquipo" placeholder="Ingrese nombre del equipo" required />
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" rows="4" placeholder="Descripción breve del equipo"></textarea>
+                <label for="fechaCompra">Fecha de Compra</label>
+                <input type="date" id="fechaCompra" />
+                <button type="submit">Guardar Información</button>
+            </form>
+        </div>
+    </body>
+    </html>
