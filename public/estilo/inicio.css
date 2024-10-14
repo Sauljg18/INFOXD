@@ -24,7 +24,7 @@ body{
 .header{
     background-color: #08be6c;
     grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    grid-row: 1 / 2
 }
 
 .header ul{
