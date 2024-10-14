@@ -61,7 +61,7 @@ app.post('/login', (req, res) => {
         // Si se encuentra un colaborador, redirige a una nueva página
         if (results.length > 0){
             req.session.usuario = results[0];
-            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos  ', (error, results) => {
                 if (error) {
                     throw error;
                 } else {
@@ -439,8 +439,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         let extra = equipo.extra
 
         let registra = "INSERT INTO tablaequipos (IdEquipo, Nombre, Identificador, Fecha, Descripcion, Asociar, Atributo, valor, Atributo_2, valor2, Atributo_3, valor3, Atributo_extra, extra) VALUE ('"+IdEquipo+"','"+Nombre +"','"+Identificador +"','"+Fecha +"','"+Describir +"','"+Asociar +"','"+Atributo +"','"+valor +"','"+Atributo_2 +"','"+valor2 +"','"+Atributo_3 +"','"+valor3 +"','"+Atributo_extra +"','"+extra +"')";
-                    
-    
+
         connection.query(registra,function(error){
             if(error){
             throw error;
@@ -448,8 +447,61 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
             console.log("Datos almacenados correctamente"); 
         }
         });
-    
     });
+    
+        app.post("/updateequipo", function(req,res){ //UPDATE DE EQUIPOS
+            const equipo = req.body;
+            // Corregir los nombres de las variables para que coincidan con el formulario
+            let IdEquipo = equipo.IdEquipo;
+            let Nombre = equipo.Nombre;
+            let Identificador = equipo.Identificador;
+            let Fecha = equipo.Fecha;
+            let Describir = equipo.Describir;
+            let Asociar = equipo.Asociar;
+            let Atributo = equipo.Atributo
+            let valor = equipo.valor;
+            let Atributo_2 = equipo.Atributo_2;
+            let valor2 = equipo.valor2;
+            let Atributo_3 = equipo.Atributo_3;
+            let valor3 = equipo.valor3
+            let Atributo_extra = equipo.Atributo_extra;
+            let extra = equipo.extra
+                
+        
+            connection.query("UPDATE tablaequipos SET ? WHERE IdEquipo = ?",[{Nombre:Nombre, Identificador:Identificador, Fecha:Fecha, Descripcion:Describir, Asociar:Asociar, Atributo:Atributo, valor:valor, Atributo_2:Atributo_2, valor2:valor2, Atributo_3:Atributo_3, valor3:valor3, Atributo_extra:Atributo_extra,extra:extra}, IdEquipo],(error,results)=>{
+                if(error){
+                throw error;
+                }else{
+                    connection.query('SELECT * FROM tablaequipos ', (error, results) => {
+                        if (error) {
+                            throw error;
+                        } else {
+                            res.render('Equipos', { results: results });
+                        }
+                    });
+                }
+            });
+        
+        });
+        
+
+     //ELIMINAR REGISTRO DE Equipo
+    app.get("/deleteequipo/:IdEquipo",authMiddleware, function(req,res){ 
+        const id =req.params.IdEquipo;
+        connection.query('DELETE FROM tablaequipos WHERE IdEquipo=?',[id],(error,results)=>{
+        if(error){
+            throw error;
+        }else{
+            connection.query('SELECT * FROM tablaequipos ', (error, results) => {
+                if (error) {
+                    throw error;
+                } else {
+                    res.render('Equipos', { results: results });
+                }
+            });
+        }
+        })
+        });
 
 app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     const tarea = req.body;
@@ -487,10 +539,29 @@ app.post('/finalizar-tarea', (req, res) => {
         console.error(error);
         return res.json({ success: false });
     }
-    // Si la actualización fue exitosa    
+      // Si la actualización fue exitosa
     return res.json({ success: true });
+    });
 });
-});
+
+app.post('/reactivar-tarea', (req, res) => {
+    const { id_tarea } = req.body;
+  
+    // Aquí actualizamos el estado de la tarea en la base de datos
+    const query = 'UPDATE tareas SET status = ? WHERE id_tarea = ?';
+    const values = ['ACTIVO', id_tarea];
+  
+    connection.query(query, values, (error, results) => {
+    if (error) {
+        console.error(error);
+        return res.json({ success: false });
+    }
+  
+      // Si la actualización fue exitosa
+    return res.json({ success: true });
+    });
+  });
+  
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 const PORT = process.env.PORT || 3000;

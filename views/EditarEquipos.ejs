@@ -36,7 +36,7 @@
         <!-- Formulario -->
             <!-- Imagen y Datos del Equipo -->  
             <!-- Tabs -->
-        <form id="FormularioEquipo" method="post" action="/SaveEquipo">
+        <form action="/updateequipo" id="FormularioEquipo" method="post" >
         
         <button type="submit" class="float">Guardar</button>    
         
@@ -75,7 +75,7 @@
                 <!-- Contenido de Tab General-->
                 <div class="tab-Descripción" id="Descripción">
                     <label>Descripción</label>
-                    <textarea placeholder="Ingrese la descripción"></textarea>
+                    <input type="text" name="Describir" id="Describir" value="<%= equipo.Descripcion %>">
                     
                     <label>Categoría</label>
                     <select>
@@ -83,23 +83,41 @@
                     </select>
 
                     <label>Asociar al equipo</label>
-                    <input type="text" placeholder="">
+                    <input type="text" value="<%= equipo.Asociar %>">
                     <button class="search-btn"></button>
                 </div>
 
                 <!-- Contenido de Tab Especificaciones-->
-                <div class="tab-vista-Especificaciones" id="Especificaciones-vista">
-                <label>Especificaciones</label>
-                <button class="search-btn"></button>
+                
+                    <div class="tab-vista-Especificaciones" id="Especificaciones-vista">
+                        <label>Especificaciones</label>
+                        <label>Atributo 1</label>
+                        <input type="text" name="Atributo" id="Atributo" value="<%= equipo.Atributo %>"><br>
+                            <input type="text" id="valor" name="valor" value="<%= equipo.valor %>">
+                        
+                        <label>Atributo 2</label>
+                        <input type="text" name="Atributo_2" id="Atributo_2" value="<%= equipo.Atributo_2 %>"><br>
+                        <input type="text" id="valor2" name="valor2" value="<%= equipo.valor2 %>"><p>
+                        
+                        
+                        <label>Atributo 3</label>
+                        <input type="text" name="Atributo_3" id="Atributo_3" value="<%= equipo.Atributo_3 %>"><br>
+                        <input type="text" id="valor3" name="valor3" value="<%= equipo.valor3 %>"><p>
+        
+                        <label>Atributo extra</label>
+                        <input type="text" name="Atributo_extra" id="Atributo_extra" value="<%= equipo.Atributo_extra %>"><br>
+                        <input type="text" id="extra" name="extra" value="<%= equipo.extra %>"><p>
+                        </div>
+        
+                            <!-- Contenido de Tab Tareas-->
+                        <div class="tab-vista-Tareas" id="Tareas-vista">
+                            <label>Tareas</label><br>
+                            <label>NO HAY TAREA ASIGNADA</label>
+                        </div> 
                 </div>
-                    <!-- Contenido de Tab Tareas-->
-                <div class="tab-vista-Tareas" id="Tareas-vista">
-                    <label>Tareas</label>
-                    <button class="search-btn"></button>
-                </div> 
         </form>   
-        <% } %>  
         </div>
+        <% } %>  
         <script src="/resources/javascript/RegistroEquipos.js"> </script>  
         </div>
         <script src="/resources/javascript/FormClean.js"> </script>
