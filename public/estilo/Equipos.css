@@ -84,10 +84,9 @@ transition: width 0.3s;
 }
 
 .button-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 1%; /* Ajusta este valor según la separación deseada */
-    padding-left: 5px;
+    display:contents;
+    justify-content:flex-start;
+    margin-bottom: 10%; /* Ajusta este valor según la separación deseada */
 }
 
 .card {
@@ -107,7 +106,7 @@ transition: width 0.3s;
 .tablew {    
     margin-left: 10%;
     margin-top: 1%;
-    width: 50%; /* Aumenta el ancho para que cubra más espacio */
+    width: 80%; /* Aumenta el ancho para que cubra más espacio */
     height: auto;
     border-collapse: collapse;
     text-align: center; /* Alinea los textos a la izquierda */

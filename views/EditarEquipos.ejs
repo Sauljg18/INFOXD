@@ -7,26 +7,25 @@
     <link rel="stylesheet" href="/resources/estilo/RegistroEquipos.css">
 </head>
 
-    
-<body>
-    
+    <body>
     
     <header class="header" >
-    
         <ul>
-            <li><a href="/clientes">Cliente</a></li>
-            <li> <a href="/colab">Colaborador</a></h2></li>
-            <li> <a href="/ver-equipos">Equipo</a></h2></li>
-            <li> <a href="/producto">Producto</a></h2></li>
-            <li> <a href="/servicio">Servicio</a></h2></li>
-            <li> <a href="/tarea">Tarea</a></h2></li>   
-        </ul>
-    </header>
-    <section class="sidebar">     </section>
-    <div class="container">
+        <li><a href="/clientes">Cliente</a></li>
+        <li> <a href="/colab">Colaborador</a></h2></li>
+        <li> <a href="/ver-equipos">Equipo</a></h2></li>
+        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/servicio">Servicio</a></h2></li>
+        <li> <a href="/tarea">Tarea</a></h2></ul></li>
+        
+        </header>
+        <section class="sidebar">     </section>
+        <div class="container">
         <!-- Header -->
+        <% if (equipo){%>
         <div class="Titulo01">
             <a href="/equipo" class="back-btn"> Volver</a>
+            
             <h1>Equipo</h1>;
         </div>
         <div class="tabs">
@@ -38,8 +37,8 @@
             <!-- Imagen y Datos del Equipo -->  
             <!-- Tabs -->
         <form id="FormularioEquipo" method="post" action="/SaveEquipo">
-    
-            <button type="submit" class="float">Guardar</button>    
+        
+        <button type="submit" class="float">Guardar</button>    
         
         <div class="image-upload">
                 <div class="image-placeholder" id="imagePreview">Arrastre o haga clic</div>
@@ -48,19 +47,20 @@
             </div>
             
             <div>
+                <input type="text" name="IdEquipo" value="<%=equipo.IdEquipo%>"  hidden>
             <label>Nombre</label>
-            <input type="text" name="Nombre"  id="Nombre" placeholder="Ingrese el nombre">
+            <input type="text" name="Nombre" value="<%=equipo.Nombre%>">
             <label>Identificador</label>    
             </div>
             
             <div class="identifier">
-                <input type="text" name="Identificador"  placeholder="Num. De Identificador">
+                <input type="text" name="Identificador" value="<%=equipo.Identificador%>">
                 <button class="refresh-btn"></button>
             </div>
 
             <div>
             <label>Fecha de validez</label>
-            <input type="date" name="Fecha" id="Fecha">
+            <input type="date" name="Fecha" value="<%=equipo.Fecha%>">
             </div>
 
             <!-- Sección de Tabs -->
@@ -72,11 +72,10 @@
                         <span>Stock</span>
                     </div>
                 </div>
-                
                 <!-- Contenido de Tab General-->
-                <div class="tab-Descripción"  id="Descripción">
+                <div class="tab-Descripción" id="Descripción">
                     <label>Descripción</label>
-                    <input type="text" placeholder="Ingrese la descripción" name="Describir" id="Describir"></input>
+                    <textarea placeholder="Ingrese la descripción"></textarea>
                     
                     <label>Categoría</label>
                     <select>
@@ -84,40 +83,25 @@
                     </select>
 
                     <label>Asociar al equipo</label>
-                    <input type="text" placeholder="" name="Asociar" id="Asociar">
+                    <input type="text" placeholder="">
                     <button class="search-btn"></button>
                 </div>
 
                 <!-- Contenido de Tab Especificaciones-->
                 <div class="tab-vista-Especificaciones" id="Especificaciones-vista">
                 <label>Especificaciones</label>
-                <label>Atributo 1</label>
-                <input type="text" name="Atributo" placeholder="Atributo" id="Atributo"><br>
-                    <input type="text" id="valor" name="valor" placeholder="Valor">
-                
-                <label>Atributo 2</label>
-                <input type="text" name="Atributo_2" id="Atributo_2" placeholder="Atributo 2"><br>
-                <input type="text" id="valor2" name="valor2" placeholder="Valor"><p>
-                
-                
-                <label>Atributo 3</label>
-                <input type="text" name="Atributo_3" id="Atributo_3" placeholder="Atributo 3"><br>
-                <input type="text" id="valor3" name="valor3" placeholder="Valor"><p>
-
-                <label>Atributo extra</label>
-                <input type="text" name="Atributo_extra" id="Atributo_extra" placeholder="Extra"><br>
-                <input type="text" id="extra" name="extra" placeholder="Valor"><p>
+                <button class="search-btn"></button>
                 </div>
-
                     <!-- Contenido de Tab Tareas-->
                 <div class="tab-vista-Tareas" id="Tareas-vista">
                     <label>Tareas</label>
-                    <label>NO HAY TAREA ASIGNADA</label>
+                    <button class="search-btn"></button>
                 </div> 
-        </form>      
+        </form>   
+        <% } %>  
         </div>
-        <script src="/resources/javascript/RegistroEquipos.js"> </script> 
+        <script src="/resources/javascript/RegistroEquipos.js"> </script>  
         </div>
-        <script src="/resources/javascript/FormClean.js"> </script> 
+        <script src="/resources/javascript/FormClean.js"> </script>
 </body>
 </html>

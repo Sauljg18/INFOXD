@@ -161,9 +161,32 @@ app.get("/clientes", authMiddleware, (req, res) => {
     });
 });
 
-app.get("/ver-equipos", (req, res) => {
+app.get('/editequipo/:IdEquipo', authMiddleware, (req, res) => {
+    const id = req.params.IdEquipo;
+    
+    connection.query('SELECT * FROM tablaequipos WHERE IdEquipo=?', [id], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            let equipo = results[0];
+            
+            // Verifica si existe el campo Fecha en el equipo
+            if (equipo.Fecha) {
+                // Convierte la fecha a formato YYYY-MM-DD si es necesario
+                let fecha = new Date(equipo.Fecha);
+                equipo.Fecha = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+            }
+
+            res.render('EditarEquipos', { equipo: equipo });
+        }
+    });
+});
+
+//VER TABLA DE EQUIPOS
+app.get("/ver-equipos",authMiddleware, (req, res) => {
     const query = 'SELECT * FROM tablaequipos'; // Nombre correcto de tu tabla
     connection.query(query, (err, results) => {
+        
         if (err) {
             console.error(err);
             return res.status(500).send('Error en la base de datos');
@@ -173,20 +196,11 @@ app.get("/ver-equipos", (req, res) => {
     });
 });
 
-app.get("/ver-productos", (req, res) => {
-    const query = 'SELECT * FROM tablaproductos';
-    connection.query(query, (err, results) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Error en la base de datos de Productos')
 
-        }
-    }) //Nombre de la tabla a usar
-})
 
-app.get("/RegistroProductos", authMiddleware, (req,res) => {
-    res.render('RegistroProductos')
-})
+app.get("/equipo", (req,res) => {
+    res.render('Equipos');
+});
 
 app.get("/resequipo", authMiddleware, (req,res) => {
     res.render('RegistroEquipos');
@@ -323,13 +337,14 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
 
    let registra = "INSERT INTO tabcliente (id_cliente, nombre, identificacion, razon, codigoext, telefonocorp, correocliente, cliente, responsable, observacion, postal, direccion, num_ext, num_int, region, ciudad, estado) VALUE ('"+id_cliente+"','"+namecliente +"','"+identificacion +"','"+razon +"','"+externo +"','"+telefono +"','"+correocorp +"','"+cliente +"','"+responsable +"','"+observacion +"','"+postal +"','"+direccion +"','"+numext +"','"+numint +"','"+region +"','"+ciudad +"','"+estado +"')";
                 
-   connection.query(registra,function(error){
-       if(error){
-           throw error;
-       }else{
-          console.log("Datos almacenados correctamente"); 
-       }
-   });
+
+    connection.query(registra,function(error){
+        if(error){
+        throw error;
+        }else{
+        console.log("Datos almacenados correctamente"); 
+    }
+    });
 
 });
 
@@ -405,7 +420,36 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
     })
     });
 
+    app.post("/SaveEquipo", function(req,res){ //REGISTRO DE EQUIPOS
+        const equipo = req.body;
+       // Corregir los nombres de las variables para que coincidan con el formulario
+        let IdEquipo = equipo.IdEquipo;
+        let Nombre = equipo.Nombre;
+        let Identificador = equipo.Identificador;
+        let Fecha = equipo.Fecha;
+        let Describir = equipo.Describir;
+        let Asociar = equipo.Asociar;
+        let Atributo = equipo.Atributo
+        let valor = equipo.valor;
+        let Atributo_2 = equipo.Atributo_2;
+        let valor2 = equipo.valor2;
+        let Atributo_3 = equipo.Atributo_3;
+        let valor3 = equipo.valor3
+        let Atributo_extra = equipo.Atributo_extra;
+        let extra = equipo.extra
 
+        let registra = "INSERT INTO tablaequipos (IdEquipo, Nombre, Identificador, Fecha, Descripcion, Asociar, Atributo, valor, Atributo_2, valor2, Atributo_3, valor3, Atributo_extra, extra) VALUE ('"+IdEquipo+"','"+Nombre +"','"+Identificador +"','"+Fecha +"','"+Describir +"','"+Asociar +"','"+Atributo +"','"+valor +"','"+Atributo_2 +"','"+valor2 +"','"+Atributo_3 +"','"+valor3 +"','"+Atributo_extra +"','"+extra +"')";
+                    
+    
+        connection.query(registra,function(error){
+            if(error){
+            throw error;
+            }else{
+            console.log("Datos almacenados correctamente"); 
+        }
+        });
+    
+    });
 
 app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     const tarea = req.body;
