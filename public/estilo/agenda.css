@@ -9,6 +9,7 @@
 }
 /* nice scroll bar */
 ::-webkit-scrollbar {
+  
   width: 5px;
 }
 ::-webkit-scrollbar-track {
@@ -31,7 +32,7 @@
   display: flex;
 
   border-radius: 34px;
-  background-color: #374f3d;
+  background-color: #00574a;
 }
 .left {
   width: 120%;
