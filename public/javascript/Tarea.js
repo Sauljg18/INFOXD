@@ -13,18 +13,6 @@ window.onload = function() {
         },
         body: JSON.stringify({ id_tarea: taskId })
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // Cambiar el estado en la interfaz
-          const statusElement = document.getElementById('active-' + taskId);
-          statusElement.innerHTML = 'FINALIZADO';
-          statusElement.style.color = 'red';
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    });
-  });
+    })
+  })
 }
