@@ -79,13 +79,22 @@
                 </div>
             </div>
             <form class="equipment-form">
-                <h2>Información del Equipo</h2>
-                <label for="nombreEquipo">Nombre del Equipo</label>
-                <input type="text" id="nombreEquipo" placeholder="Ingrese nombre del equipo" required />
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" rows="4" placeholder="Descripción breve del equipo"></textarea>
+                <h2>Especificaciones del Equipo</h2>
+                <label for="Descripcion">Descripción</label>
+                <input type="text" id="Descripcion" placeholder="Descripcion del equipo" required />
+                
+                <label for="Categoria">Categoria</label>
+                <select type="submit" id="categoria" placeholder="Selecionar alguna categoria">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                
+                
+                </select>
+            
+
                 <label for="fechaCompra">Fecha de Compra</label>
                 <input type="date" id="fechaCompra" />
+                
                 <button type="submit">Guardar Información</button>
             </form>
         </div>

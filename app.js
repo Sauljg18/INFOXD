@@ -6,6 +6,9 @@ const app = express();
 const session = require('express-session');
 const res = require("express/lib/response");
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(session({
     secret: 'tu_clave_secreta',
     resave: false,
@@ -196,7 +199,10 @@ app.get("/ver-equipos",authMiddleware, (req, res) => {
     });
 });
 
-
+app.get('/RegistroProductos', (req, res) => {
+    console.log('Ruta /RegistroProductos solicitada');
+    res.render('RegistroProductos');
+});
 
 app.get("/equipo", (req,res) => {
     res.render('Equipos');
