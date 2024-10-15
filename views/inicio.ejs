@@ -67,11 +67,9 @@
                   <div class="title">Add Event</div>
                   <i class="fas fa-times close"></i>
                 </div>
-               
                   <div id="General" >
                     <form method="post" action="/aceptartarea">
                   <div class="add-event-input">
-               
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
                       <label for="cliente" style="color:black">Tarea será ejecutada por:</label>
                       <select name="cliente" id="cliente" class="event-name">
@@ -125,9 +123,23 @@
                                  <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
                               </select>
                               <div class="add-event-input">
-                              <label for="duracion" style="color: black">Tiempo de duración:</label>
-                              <input type="text" name="duracion" id="duracion">
-                              </div>
+                                <!-- Filtra los nombres de clientes para evitar duplicados -->
+                                <label for="cliente" style="color:black">Tarea será ejecutada por:</label>
+                                <select name="cliente" id="cliente" class="event-name">
+                                  <option value="Ninguno">NINGUNO</option>  
+                                  <% 
+                                        const uniqueEquipos = [];
+                                        results.forEach((row) => {
+                                            if (!uniqueEquipos.includes(row.equipoNombre)) {
+                                                uniqueEquipos.push(row.equipoNombre);
+                                    %>
+                                        <option value="<%= row.equipoNombre %>"><%= row.equipoNombre %></option>
+                                    <% 
+                                            }
+                                        });
+                                    %>
+                                </select>
+                        </div>
                               <div class="add-event-input">
                               <label for="prioridad" style="color: black">Prioridad:</label>
                               <select name="prioridad" id="prioridad">

@@ -4,10 +4,10 @@ body{
     box-sizing: border-box;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(45deg, #5b6353, #153815, #6cc076, #2b3e4d);
+    background: linear-gradient(45deg, #5b6353, #153815, #6cc076, #3d7549,  #43736e, #648eae);
     background-size: 400% 400%;
-    animation: color 10s ease infinite;
-    background-image:"resources/IMAGENES/FondoLogin.jpg";
+    animation: color 15s ease infinite;
+    
     
     /*Apartado de barra superior*/
     display: grid;

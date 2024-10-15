@@ -44,15 +44,15 @@
                 <% if (results && results.length > 0) { %>
                     <% results.forEach((tablaproducto) => { %>
                         <tr>
-                            <td scope="row" class="table-primary"><%= tablaproducto.IdProducto %></td>
-                            <td scope="row" class="table-primary"><%= tablaproducto.Nombre %></td>
-                            <td scope="row" ><%= tablaproducto.Inventario %></td>
-                            <td scope="row" class="table-primary"><%= tablaproducto.Stocks %></td>
-                            <td scope="row" class="table-primary"><%= tablaproducto.Valor %></td>
-                            <td>
+                            <th><%= tablaproducto.Idproducto %></th>
+                            <th><%= tablaproducto.Nombre %></th>
+                            <th><%= tablaproducto.Inventario %></th>
+                            <th><%= tablaproducto.Stocks %></th>
+                            <th><%= tablaproducto.Valor %></th>
+                            <th>
                                 <a href="/editproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">editar</a>
                                 <a href="/deleteproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">borrar</a>
-                            </td>
+                            </th>
                         </tr>
                         <% }) %>
                         <% } else { %>

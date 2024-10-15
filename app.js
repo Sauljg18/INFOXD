@@ -133,7 +133,7 @@ const authMiddleware = (req, res, next) => {
 app.get('/home',authMiddleware, (req, res) => {
     // Consulta para obtener todas las tareas 
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos   ', (error, results) => {
     if (error) {
         throw error;
     } else {
