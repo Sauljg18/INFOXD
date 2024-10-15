@@ -33,6 +33,7 @@
         <table class="products-table">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nombre</th>
                     <th>Stock mínimo</th>
                     <th>Stock</th>
@@ -40,7 +41,25 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <% if (results && results.length > 0) { %>
+                    <% results.forEach((tablaproducto) => { %>
+                        <tr>
+                            <td scope="row" class="table-primary"><%= tablaproducto.IdProducto %></td>
+                            <td scope="row" class="table-primary"><%= tablaproducto.Nombre %></td>
+                            <td scope="row" ><%= tablaproducto.Inventario %></td>
+                            <td scope="row" class="table-primary"><%= tablaproducto.Stocks %></td>
+                            <td scope="row" class="table-primary"><%= tablaproducto.Valor %></td>
+                            <td>
+                                <a href="/editproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">editar</a>
+                                <a href="/deleteproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">borrar</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="5">No hay datos disponibles.</td>
+                            </tr>
+                            <% } %>
             </tbody>
         </table>
     </div>

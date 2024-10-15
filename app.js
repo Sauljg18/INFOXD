@@ -199,8 +199,7 @@ app.get("/ver-equipos",authMiddleware, (req, res) => {
     });
 });
 
-app.get('/RegistroProductos', (req, res) => {
-    console.log('Ruta /RegistroProductos solicitada');
+app.get('/RegistroProductos',authMiddleware, (req, res) => {
     res.render('RegistroProductos');
 });
 
@@ -214,7 +213,15 @@ app.get("/resequipo", authMiddleware, (req,res) => {
 
 
 app.get("/producto",authMiddleware, (req,res) => {
-    res.render('TablaProductos');
+    // Realiza la consulta y renderiza la vista con los resultados
+    connection.query('SELECT * FROM tabproducto ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('TablaProductos', { results: results });
+        }
+    });
+
 });
 
 app.get("/servicio",authMiddleware, (req,res) => {
@@ -507,6 +514,31 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
             });
         }
         })
+        });
+
+        app.post("/validarproducto", function(req,res){ // REGISTRO DE PRODUCTO
+            const producto = req.body;
+           // Corregir los nombres de las variables para que coincidan con el formulario
+            let Idproducto = producto.Idproducto;
+            let Nombre = producto.Nombre;
+            let Valor = producto.Valor;
+            let Costo = producto.Costo;
+            let Stocks = producto.Stocks; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+            let Inventario = producto.Inventario;
+            let Descripcion = producto.Descripcion;
+            let Categoria = producto.Categoria;
+            let Fecha_Compra = producto.Fecha_Compra;
+            let registrar = "INSERT INTO tabproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoría, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
+            connection.query(registrar,function(error){
+            if(error){
+            throw error;
+                }else{
+                console.log("Datos almacenados correctamente"); 
+                }
+            });
+        
+            
+        
         });
 
 app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
