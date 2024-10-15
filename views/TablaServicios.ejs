@@ -8,75 +8,80 @@
 </head>
 <body>
 
-    <header class="header" >
-        <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
-        <ul>
+<header class="header">
+    <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
+    <ul>
         <li><a href="/clientes">Cliente</a></li>
-        <li> <a href="/colab">Colaborador</a></h2></li>
-        <li> <a href="/ver-equipos">Equipo</a></h2></li>
-        <li> <a href="/producto">Producto</a></h2></li>
-        <li> <a href="/servicio">Servicio</a></h2></li>
-        <li> <a href="/tarea">Tarea</a></h2></ul></li>
-        
-        </header> 
-        <section class="sidebar"> </section>
+        <li><a href="/colab">Colaborador</a></li>
+        <li><a href="/ver-equipos">Equipo</a></li>
+        <li><a href="/producto">Producto</a></li>
+        <li><a href="/servicio">Servicio</a></li>
+        <li><a href="/tarea">Tarea</a></li>
+    </ul>
+</header>
 
-    <div class="container">
-        <div class="Titulo">
-            <h1>Servicios</h1>
-            <button class="add-service-btn"><a href="">+ Agregar servicio</a></button>
-        </div>
+<section class="sidebar"></section>
 
-        <!-- Barra para buscar -->
-        <div class="search-bar">
-            <label for="search">Buscar:</label>
-            <input type="text" id="search" placeholder="Buscar servicio...">
-        </div>
+<div class="container">
+    <div class="Titulo">
+        <h1>Servicios</h1>
+        <button class="add-service-btn" onclick="openModal()">Agregar servicio</button>
+    </div>
 
-        <!-- Tabla de servicios -->
-        <table class="services-table">
-            <thead>
-                <tr>
-                    <th>Servicio</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Configuración de Antivirus</td>
-                    <td><button class="delete-btn"></button></td>
-                </tr>
-                <tr>
-                    <td>Configuración de Paquetería</td>
-                    <td><button class="delete-btn"></button></td>
-                </tr>
-                <tr>
-                    <td>Configuración de Software</td>
-                    <td><button class="delete-btn"></button></td>
-                </tr>
-                <tr>
-                    <td>Inspección Técnica</td>
-                    <td><button class="delete-btn"></button></td>
-                </tr>
-                <tr>
-                    <td>Mantenimiento Correctivo</td>
-                    <td><button class="delete-btn"></button></td>
-                </tr>
-                <tr>
-                    <td>Mantenimiento Preventivo</td>
-                    <td><button class="delete-btn"></button></td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Paginación -->
-        <div class="pagination">
-            <span>Mostrando registros del 1 al .....</span>
-            <div class="pagination-controls">
-                <button class="prev-btn">Anterior</button>
-                <span class="page-number">1</span>
-                <button class="next-btn">Siguiente</button>
-            </div>
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+        <label for="search">Buscar:</label>
+        <input type="text" id="search" placeholder="Buscar servicio...">
+    </div>
+
+    <!-- Tabla de servicios -->
+    <table class="services-table">
+        <thead>
+            <tr>
+                <th>Servicio</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Configuración de Antivirus</td>
+                <td><button class="delete-btn">❌</button></td>
+            </tr>
+            <tr>
+                <td>Configuración de Software</td>
+                <td><button class="delete-btn">❌</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <span>Mostrando registros del 1 al 10</span>
+        <div class="pagination-controls">
+            <button class="prev-btn">Anterior</button>
+            <span class="page-number">1</span>
+            <button class="next-btn">Siguiente</button>
         </div>
     </div>
+</div>
+
+<!-- Ventana Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2>Añadir Servicio</h2>
+        <form id="serviceForm" action="/agregar-servicio" method="POST">
+            <label for="nombre">Nombre del Servicio:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required>
+
+            <button type="submit">Añadir</button>
+        </form>
+    </div>
+</div>
+
+<script src="resources/javascript/modal.js"></script>
+
 </body>
 </html>

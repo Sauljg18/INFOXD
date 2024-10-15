@@ -5,9 +5,24 @@ const mysql = require("mysql");;
 const app = express();
 const session = require('express-session');
 const res = require("express/lib/response");
+const bodyParser = require (body-parse);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+// Middleware para procesar los datos del formulario
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Ruta para recibir los datos del formulario
+app.post('/agregar-servicio', (req, res) => {
+    const { nombre, precio } = req.body;
+    
+    // Aquí agregas la lógica para guardar en la BD
+    console.log(`Servicio: ${nombre}, Precio: ${precio}`);
+
+    // Redirigir a la página de servicios
+    res.redirect('/TablaServicios');
+});
 
 app.use(session({
     secret: 'tu_clave_secreta',
