@@ -251,10 +251,10 @@ input:checked + .slider:before {
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  gap: 30px;
+  padding: 90px;
   height: 100vh; /* Ocupa toda la altura disponible */
-  margin-left: 250px; /* Deja espacio para la barra vertical */
+  margin-left: 280px; /* Deja espacio para la barra vertical */
   box-sizing: border-box;
   justify-content: center;
 }
@@ -315,7 +315,7 @@ input:checked + .slider:before {
 .equipment-form input,
 .equipment-form textarea {
   width: 100%;
-  padding: 10px;
+  padding: 5%;
   border: 2px solid #ccc;
   border-radius: 8px;
   transition: border-color 0.3s;
@@ -347,4 +347,18 @@ input:checked + .slider:before {
   background-color: transparent; /* Elimina cualquier fondo */
   box-shadow: none; /* Opcional: Elimina sombras, si las hay */
   border: none; /* Opcional: Elimina bordes, si no los necesitas */
+}
+
+.row {
+  width: 100%; /* Asegúrate de que ocupe el ancho completo */
+  margin: 0;   /* Elimina márgenes que puedan estar afectando el diseño */
+  padding: 0;
+}
+
+.col-md-10 {
+  width: 83%; /* Esto ya debería hacer que la columna ocupe la mayoría del espacio */
+}
+
+.col-md-2 {
+  width: 150%; /* La primera columna será más pequeña */
 }

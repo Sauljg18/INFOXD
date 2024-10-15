@@ -4,9 +4,10 @@ body{
     box-sizing: border-box;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(45deg, #2c3523, #153815, #2c4739, #2b3e4d);
+    background: linear-gradient(45deg, #5b6353, #153815, #6cc076, #3d7549,  #43736e, #648eae);
     background-size: 400% 400%;
-    animation: color 10s ease infinite;
+    animation: color 15s ease infinite;
+    
     
     /*Apartado de barra superior*/
     display: grid;
@@ -62,16 +63,15 @@ body{
 }
 
 main{
-
+   
     padding: 50px;
     grid-area:main;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+
     grid-template-areas:
     "c1 c2";
-    gap:25px;
+    gap:15px;
 }
 
 .card{
@@ -103,4 +103,5 @@ img{
 ul{
     position: absolute;
     left: 30%;
+    top: -3%;
 }
