@@ -6,120 +6,129 @@
     <title>Registro de Equipo</title>
     <link rel="stylesheet" href="/resources/estilo/RegistroEquipos.css">
 </head>
-
-    <body>
-    
-    <header class="header" >
+<body>
+    <header class="header">
         <ul>
-        <li><a href="/clientes">Cliente</a></li>
-        <li> <a href="/colab">Colaborador</a></h2></li>
-        <li> <a href="/ver-equipos">Equipo</a></h2></li>
-        <li> <a href="/producto">Producto</a></h2></li>
-        <li> <a href="/servicio">Servicio</a></h2></li>
-        <li> <a href="/tarea">Tarea</a></h2></ul></li>
-        
-        </header>
-        <section class="sidebar">     </section>
-        <div class="container">
-        <!-- Header -->
-        <% if (equipo){%>
-        <div class="Titulo01">
-            <a href="/equipo" class="back-btn"> Volver</a>
-            
-            <h1>Equipo</h1>;
-        </div>
-        <div class="tabs">
-            <button id="General" class="tab_General" onclick="openTap(event,'General')">General</button>
-            <button id="Especificaciones" class="tab_Especificaciones" onclick="openTap(event,'Especificaciones')">Especificaciones</button>
-            <button id="Tareas" class="tab_Tareas" onclick="openTap(event,'Tareas')">Tareas</button>
-        </div>
-        <!-- Formulario -->
-            <!-- Imagen y Datos del Equipo -->  
-            <!-- Tabs -->
-        <form action="/updateequipo" id="FormularioEquipo" method="post" >
-        
-        <button type="submit" class="float">Guardar</button>    
-        
-        <div class="image-upload">
-                <div class="image-placeholder" id="imagePreview">Arrastre o haga clic</div>
-                <input type="file" id="imageUpload" name="imagen" accept="image/*" style="display:none;">
-                <label for="imageUpload" class="image-upload-label">Subir Imagen</label>
+            <li><a href="/clientes">Cliente</a></li>
+            <li><a href="/colab">Colaborador</a></li>
+            <li><a href="/ver-equipos">Equipo</a></li>
+            <li><a href="/producto">Producto</a></li>
+            <li><a href="/servicio">Servicio</a></li>
+            <li><a href="/tarea">Tarea</a></li>
+        </ul>
+    </header>
+    <section class="sidebar"></section>
+    <div class="container">
+        <% if (equipo) { %>
+            <div class="Titulo01">
+                <a href="/equipo" class="back-btn">Volver</a>
+                <h1>Equipo</h1>
             </div>
-            
-            <div>
-                <input type="text" name="IdEquipo" value="<%=equipo.IdEquipo%>"  hidden>
-            <label>Nombre</label>
-            <input type="text" name="Nombre" value="<%=equipo.Nombre%>">
-            <label>Identificador</label>    
+            <div class="tabs">
+                <button id="General" class="tab_General" onclick="openTap(event,'General')">General</button>
+                <button id="Especificaciones" class="tab_Especificaciones" onclick="openTap(event,'Especificaciones')">Especificaciones</button>
+                <button id="Tareas" class="tab_Tareas" onclick="openTap(event,'Tareas')">Tareas</button>
             </div>
-            
-            <div class="identifier">
-                <input type="text" name="Identificador" value="<%=equipo.Identificador%>">
-                <button class="refresh-btn"></button>
-            </div>
+            <!-- Formulario -->
+            <form action="/updateequipo" id="FormularioEquipo" method="post">
+                <button type="submit" class="float">Guardar</button>    
 
-            <div>
-            <label>Fecha de validez</label>
-            <input type="date" name="Fecha" value="<%=equipo.Fecha%>">
-            </div>
+                <div class="image-upload">
+                    <div class="image-placeholder" id="imagePreview">Arrastre o haga clic</div>
+                    <input type="file" id="imageUpload" name="imagen" accept="image/*" style="display:none;">
+                    <label for="imageUpload" class="image-upload-label">Subir Imagen</label>
+                </div>
 
-            <!-- Sección de Tabs -->
-            <div class="right-panel">
-                <!-- Stock y Tabs -->
-                <div class="top-section">
-                    <div class="stock-section">
-                        <div class="stock-icon"></div>
-                        <span>Stock</span>
+                <input type="hidden" name="IdEquipo" value="<%= equipo.IdEquipo %>">
+                <div>
+                    <label>Nombre</label>
+                    <input type="text" name="Nombre" value="<%= equipo.Nombre %>">
+                    <label>Identificador</label>    
+                    <input type="text" name="Identificador" value="<%= equipo.Identificador %>">
+                </div>
+
+                <div>
+                    <label>Fecha de validez</label>
+                    <input type="date" name="Fecha" value="<%= equipo.Fecha %>">
+                </div>
+
+                <!-- Sección de Tabs -->
+                <div class="right-panel">
+                    <div class="top-section">
+                        <div class="stock-section">
+                            <div class="stock-icon"></div>
+                            <span>Stock</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Contenido de Tab General-->
-                <div class="tab-Descripción" id="Descripción">
-                    <label>Descripción</label>
-                    <input type="text" name="Describir" id="Describir" value="<%= equipo.Descripcion %>">
-                    
-                    <label>Categoría</label>
-                    <select>
-                        <option>Seleccione una categoría</option>
-                    </select>
+                    <!-- Contenido de Tab General -->
+                    <div class="tab-Descripción" id="Descripción">
+                        <label>Descripción</label>
+                        <input type="text" name="Describir" id="Describir" value="<%= equipo.Descripcion %>">
+                        
+                        <label>Categoría</label>
+                        <select>
+                            <option>Seleccione una categoría</option>
+                        </select>
 
-                    <label>Asociar al equipo</label>
-                    <input type="text" value="<%= equipo.Asociar %>">
-                    <button class="search-btn"></button>
-                </div>
+                        <label>Asociar al equipo</label>
+                        <input type="text" value="<%= equipo.Asociar %>">
+                        <button class="search-btn"></button>
+                    </div>
 
-                <!-- Contenido de Tab Especificaciones-->
-                
+                    <!-- Contenido de Tab Especificaciones -->
                     <div class="tab-vista-Especificaciones" id="Especificaciones-vista">
                         <label>Especificaciones</label>
                         <label>Atributo 1</label>
-                        <input type="text" name="Atributo" id="Atributo" value="<%= equipo.Atributo %>"><br>
-                            <input type="text" id="valor" name="valor" value="<%= equipo.valor %>">
+                        <input type="text" name="Atributo" id="Atributo" value="<%= equipo.Atributo %>">
+                        <input type="text" id="valor" name="valor" value="<%= equipo.valor %>">
                         
                         <label>Atributo 2</label>
-                        <input type="text" name="Atributo_2" id="Atributo_2" value="<%= equipo.Atributo_2 %>"><br>
-                        <input type="text" id="valor2" name="valor2" value="<%= equipo.valor2 %>"><p>
-                        
+                        <input type="text" name="Atributo_2" id="Atributo_2" value="<%= equipo.Atributo_2 %>">
+                        <input type="text" id="valor2" name="valor2" value="<%= equipo.valor2 %>">
                         
                         <label>Atributo 3</label>
-                        <input type="text" name="Atributo_3" id="Atributo_3" value="<%= equipo.Atributo_3 %>"><br>
-                        <input type="text" id="valor3" name="valor3" value="<%= equipo.valor3 %>"><p>
+                        <input type="text" name="Atributo_3" id="Atributo_3" value="<%= equipo.Atributo_3 %>">
+                        <input type="text" id="valor3" name="valor3" value="<%= equipo.valor3 %>">
         
                         <label>Atributo extra</label>
-                        <input type="text" name="Atributo_extra" id="Atributo_extra" value="<%= equipo.Atributo_extra %>"><br>
-                        <input type="text" id="extra" name="extra" value="<%= equipo.extra %>"><p>
-                        </div>
-        
-                            <!-- Contenido de Tab Tareas-->
-                        <div class="tab-vista-Tareas" id="Tareas-vista">
-                            <label>Tareas</label><br>
-                            <label>NO HAY TAREA ASIGNADA</label>
-                        </div> 
+                        <input type="text" name="Atributo_extra" id="Atributo_extra" value="<%= equipo.Atributo_extra %>">
+                        <input type="text" id="extra" name="extra" value="<%= equipo.extra %>">
+                    </div>
+
+                    <!-- Contenido de Tab Tareas -->
+                    <div class="tab-vista-Tareas" id="Tareas-vista">
+                        <label>Tareas</label><br>
+                        <% if (tareas && tareas.length > 0) { %>
+                            <table>
+                                <% tareas.forEach(function(tarea) { %>
+                                    <tr>
+                                        <thead>
+                                        <th>Tarea:</th> 
+                                        <th>Colaborador:</th>
+                                        <th>Prioridad:</th>  
+                                        <th>Status:</th> 
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <td> <%= tarea.descripcion %></td>
+                                        <td> <%= tarea.colaborador %></td>
+                                        <td><%= tarea.prioridad %></td>
+                                        <td><%= tarea.status %></td>
+                                    </tr>
+                                    </tbody>
+                                    
+                                <% }) %>
+                            </table>
+                        <% } else { %>
+                            <p>No hay tareas asignadas a este equipo.</p>
+                        <% } %>
+                    </div> 
                 </div>
-        </form>   
-        </div>
+            </form>   
         <% } %>  
-        <script src="/resources/javascript/RegistroEquipos.js"> </script>  
-        </div>
-        <script src="/resources/javascript/FormClean.js"> </script>
+        <script src="/resources/javascript/RegistroEquipos.js"></script>  
+        <script src="/resources/javascript/FormClean.js"></script>
+    </div>
 </body>
 </html>

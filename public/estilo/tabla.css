@@ -30,7 +30,7 @@
     display: block;
     width: 80vw ;
     height: 120px ;
-    background: rgb(18, 66, 130);
+    background: rgb(112, 175, 152);
   }
   
 .disazo{
@@ -42,7 +42,7 @@
 }
 
 .tablew {
-  margin-left: 10%;
+  margin-left: 1%;
     margin-top: 5%;
     width: 100%; /* Aumenta el ancho para que cubra más espacio */
     height: auto;
@@ -69,21 +69,24 @@
   text-transform: uppercase; /* Letras mayúsculas en encabezados */
 }
 
+.desactivado {
+  cursor: not-allowed; /* Cambia el cursor para indicar que no se puede interactuar */
+}
+
 .tablew tr:hover {
   background-color: #f1f1f1; /* Efecto hover para las filas */
 }
 
-.tablew .boton {
-  background-color: #007BFF; /* Color de los botones */
-  color: white;
-  padding: 2px 10px;
-  border: none;
+.tablew button {
+background-color: #f9f9f9;
+  padding: 8px 10px;
+  border-color: #137132;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.8em;
+  font-size: 0.95em;
 }
 
-.tablew .boton:hover {
-  background-color: #0056b3; /* Cambia el color cuando pasas el mouse */
+.tablew button:hover {
+  background-color: #57ae74; /* Cambia el color cuando pasas el mouse */
 }
 

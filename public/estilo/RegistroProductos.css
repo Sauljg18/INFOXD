@@ -1,9 +1,25 @@
-html, body {
-  overflow-x: hidden; /* Oculta el desbordamiento horizontal */
-  margin: 0; /* Asegura que no haya márgenes adicionales */
-  padding: 0;
-  height: 100%;
-  background-color: darkolivegreen;
+ body {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(45deg, #2c3523, #153815, #4d8c6b, #2b3e4d);
+  background-size: 400% 400%;
+  animation: color 12s ease infinite;
+  
+}
+
+@keyframes color{
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
@@ -88,7 +104,7 @@ nav {
   }
   
   .icon .line {
-    background-color: #5290f9;
+    background-color: #00a938;
     height: 2px;
     width: 20px;
     position: absolute;
@@ -230,7 +246,7 @@ input:checked + .slider:before {
   width: 100%; /* Ocupa todo el ancho del contenedor */
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #ccc;
+  border: 2px solid #cccccc;
   border-radius: 8px;
   transition: all 0.3s ease;
   outline: none; /* Elimina el borde azul predeterminado */
