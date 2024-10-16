@@ -1,28 +1,39 @@
-const express = require("express");;
+const express = require("express");
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const mysql = require("mysql");;
 const app = express();
 const session = require('express-session');
 const res = require("express/lib/response");
-const bodyParser = require (body-parse);
+const bodyParser = require ("body-parser");
 
+app.use(express.static('public'));  // Para archivos estáticos como CSS, JS
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware para procesar los datos del formulario
-app.use(bodyParser.urlencoded({ extended: true }));
 
-// Ruta para recibir los datos del formulario
+// Ruta POST para agregar el servicio
 app.post('/agregar-servicio', (req, res) => {
     const { nombre, precio } = req.body;
-    
-    // Aquí agregas la lógica para guardar en la BD
-    console.log(`Servicio: ${nombre}, Precio: ${precio}`);
+    if (!nombre || !precio) {
+        return res.json({ success: false, error: 'Faltan datos del servicio.' });
+    }
 
-    // Redirigir a la página de servicios
-    res.redirect('/TablaServicios');
+    const sql = 'INSERT INTO servicios (Nombre, Precios) VALUES (?, ?)';
+    // Ejecución de la consulta SQL
+    connection.query(sql, [nombre, precio], (err, result) => {
+        if (err) {
+            console.error('Error al insertar en la BD:', err);
+            return res.json({ success: false, error: 'Error al guardar el servicio.' });
+        }
+        console.log('Servicio agregado correctamente:', result);
+        res.json({ success: true });
+    });
+    
 });
+
 
 app.use(session({
     secret: 'tu_clave_secreta',
@@ -47,23 +58,10 @@ connection.connect((err) => {
     console.log('Conectado a la base de datos MySQL.');
 });
 
-// Configuración de vistas y archivos estáticos
-app.set("views", path.join(__dirname, 'views'));
-app.set("view engine", "ejs");
-app.use(express.static('public'));  // Para archivos estáticos como CSS, JS
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-
-
 // Ruta para manejar el login
 app.get("/", (req, res) => {
     res.render("Loggin");  // Redirige a la página de inicio
 });
-
-
-
-
 //Verificacion entre ejs loggin y BD
 app.post('/login', (req, res) => {
     const { usuario, contrasena } = req.body;
@@ -229,7 +227,7 @@ app.get("/resequipo", authMiddleware, (req,res) => {
 
 app.get("/producto",authMiddleware, (req,res) => {
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT * FROM tabproducto ', (error, results) => {
+    connection.query('SELECT * FROM tablaproducto ', (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -543,7 +541,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
             let Descripcion = producto.Descripcion;
             let Categoria = producto.Categoria;
             let Fecha_Compra = producto.Fecha_Compra;
-            let registrar = "INSERT INTO tabproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoría, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
+            let registrar = "INSERT INTO tablaproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoría, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
             connection.query(registrar,function(error){
             if(error){
             throw error;

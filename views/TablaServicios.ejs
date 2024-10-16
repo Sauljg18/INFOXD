@@ -42,14 +42,14 @@
                 <th>Eliminar</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="services-body">
             <tr>
                 <td>Configuración de Antivirus</td>
-                <td><button class="delete-btn">❌</button></td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">❌</button></td>
             </tr>
             <tr>
                 <td>Configuración de Software</td>
-                <td><button class="delete-btn">❌</button></td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">❌</button></td>
             </tr>
         </tbody>
     </table>
@@ -69,12 +69,12 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         <h2>Añadir Servicio</h2>
-        <form id="serviceForm" action="/agregar-servicio" method="POST">
+        <form id="serviceForm">
             <label for="nombre">Nombre del Servicio:</label>
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="IDnombre" name="nombre" required>
 
             <label for="precio">Precio:</label>
-            <input type="number" id="precio" name="precio" required>
+            <input type="number" id="IDprecio" name="precio" required>
 
             <button type="submit">Añadir</button>
         </form>
