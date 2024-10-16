@@ -353,14 +353,11 @@ addEventSubmit.addEventListener("click", () => {
         if (event.colaborador === eventColaborador) {
           eventExist = true;
         }
-     
+
       });
     }
   });
-  if (eventExist) {
-    alert("Event already added");
-    return;
-  }
+  
   const newEvent = {
     title: eventTitle,
     colaborador: eventColaborador,

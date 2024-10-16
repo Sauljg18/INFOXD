@@ -5,7 +5,7 @@ const mysql = require("mysql");;
 const app = express();
 const session = require('express-session');
 const res = require("express/lib/response");
-const bodyParser = require (body-parse);
+const bodyParser = require ("body-parser");
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -133,7 +133,7 @@ connection.query(query, (error, results) => {
 });
 
 //VERIFICAR SI EL USUARIO INICIO SESION
-const authMiddleware = (req, res, next) => {
+const authMiddleware = (req, res, next) => { 
     if (req.session && req.session.usuario) {
         // Si la sesión existe, continúa con la solicitud
         return next();
@@ -181,25 +181,40 @@ app.get("/clientes", authMiddleware, (req, res) => {
 
 app.get('/editequipo/:IdEquipo', authMiddleware, (req, res) => {
     const id = req.params.IdEquipo;
-    
+
     connection.query('SELECT * FROM tablaequipos WHERE IdEquipo=?', [id], (error, results) => {
         if (error) {
-            throw error;
-        } else {
-            let equipo = results[0];
-            
-            // Verifica si existe el campo Fecha en el equipo
-            if (equipo.Fecha) {
-                // Convierte la fecha a formato YYYY-MM-DD si es necesario
-                let fecha = new Date(equipo.Fecha);
-                equipo.Fecha = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
-            }
-
-            res.render('EditarEquipos', { equipo: equipo });
+            return res.status(500).send('Error al obtener el equipo'); // Manejo de errores
         }
+
+        if (results.length === 0) {
+            return res.status(404).send('Equipo no encontrado'); // Manejo de caso sin resultados
+        }
+
+        let equipo = results[0];
+
+        // Verifica si existe el campo Fecha en el equipo
+        if (equipo.Fecha) {
+            // Convierte la fecha a formato YYYY-MM-DD
+            let fecha = new Date(equipo.Fecha);
+            equipo.Fecha = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+        }
+
+        // Segunda consulta para obtener las tareas
+        connection.query(
+            'SELECT * FROM tareas tarea INNER JOIN tablaequipos equipo ON tarea.equipo = equipo.Nombre WHERE equipo.IdEquipo = ?',
+            [id],
+            (error, tareas) => {
+                if (error) {
+                    return res.status(500).send('Error al obtener las tareas'); // Manejo de errores
+                }
+
+                // Renderiza la vista pasando el equipo y las tareas
+                res.render('EditarEquipos', { equipo: equipo, tareas: tareas });
+            }
+        );
     });
 });
-
 //VER TABLA DE EQUIPOS
 app.get("/ver-equipos",authMiddleware, (req, res) => {
     const query = 'SELECT * FROM tablaequipos'; // Nombre correcto de tu tabla
@@ -565,12 +580,13 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     let fecha = tarea.fecha;
     let hora = tarea.hora; // Cambié de 'carga' a 'cargo' para mejor comprensión.
     let tipo = tarea.tipo;
+    let equipo = tarea.equipo;
     let prioridad = tarea.prioridad;
     let descripcion = tarea.descripcion;
     let activate = tarea.activo;
 
 
-    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
+    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, equipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
                 
     connection.query(registrar,function(error){
     if(error){
