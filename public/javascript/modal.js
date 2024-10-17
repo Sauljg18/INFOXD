@@ -9,7 +9,7 @@ function closeModal() {
 document.getElementById('serviceForm').addEventListener('submit', function (event) {
     event.preventDefault(); 
     const nombre = document.getElementById('IDnombre').value;
-    const precio = document.getElementById('IDprecios').value;
+    const precio = document.getElementById('IDprecio').value;
     // Envío de los datos al backend
     fetch('/agregar-servicio', {
         method: 'POST',

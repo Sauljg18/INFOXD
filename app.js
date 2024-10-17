@@ -242,7 +242,7 @@ app.get("/resequipo", authMiddleware, (req,res) => {
 
 app.get("/producto",authMiddleware, (req,res) => {
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT * FROM tablaproducto ', (error, results) => {
+    connection.query('SELECT * FROM tabproducto ', (error, results) => {
         if (error) {
             throw error;
         } else {
@@ -556,7 +556,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
             let Descripcion = producto.Descripcion;
             let Categoria = producto.Categoria;
             let Fecha_Compra = producto.Fecha_Compra;
-            let registrar = "INSERT INTO tablaproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoría, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
+            let registrar = "INSERT INTO tabproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoría, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
             connection.query(registrar,function(error){
             if(error){
             throw error;
