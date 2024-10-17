@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/resources/estilo/tabla.css">
+    <link rel="stylesheet" href="/resources/estilo/tablaColaborador.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -15,7 +15,7 @@
       <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
       <ul>
       <li><a href="/clientes">Cliente</a></li>
-      <li> <a href="/colab">Colaborador</a></h2></li>
+      <li> <a href="/colab" style="color:rgb(2, 178, 40)">Colaborador</a></h2></li>
       <li> <a href="/ver-equipos">Equipo</a></h2></li>
       <li> <a href="/producto">Producto</a></h2></li>
       <li> <a href="/servicio">Servicio</a></h2></li>
@@ -26,10 +26,9 @@
     
     <main class="main">
       <div class="cuadro2" >
-      <div class="card"><a href="/registro">Crear</a></div>
-      <div class="tablew">
-      <div class="cuadro">
-        <table class="disazo table-hover" >
+        <a href="/registro" ><button class="add-service-btn">Agregar</button></a>
+      <div class="diseño">
+        <table class="tablew" >
           <thead>
             <tr>
             <th scope="col">Id</th>
@@ -38,27 +37,27 @@
             <th scope="col">Correo</th>
             <th scope="col">Contacto</th>
             <th scope="col">Cargo</th>
+            <th scope="col">ACCION</th>
           </tr>
         </thead>
         <tbody> 
           <% results.forEach((colaboradores) => { %>
             <tr>
-              <td scope="row" class="table-primary"><%= colaboradores.idcolaborador %></td>
-              <td scope="row" class="table-primary"><%= colaboradores.nombre %></td>
+              <td scope="row" ><%= colaboradores.idcolaborador %></td>
+              <td scope="row" ><%= colaboradores.nombre %></td>
               <td scope="row" ><%= colaboradores.usuario %></td>
-              <td scope="row" class="table-primary"><%= colaboradores.correo %></td>
+              <td scope="row" ><%= colaboradores.correo %></td>
               <td scope="row" ><%= colaboradores.contacto %></td>
-              <td scope="row" class="table-primary"><%= colaboradores.cargo %></td>
+              <td scope="row" ><%= colaboradores.cargo %></td>
               <td>
-                <a href="/editcola/<%= colaboradores.idcolaborador %>" class="btn btn-outline-info">editar</a>
-                <a href="/deletes/<%= colaboradores.idcolaborador %>" class="btn btn-outline-info">borrar</a>
+                <a href="/editcola/<%= colaboradores.idcolaborador %>" class="btn">editar</a>
+                <a href="/deletes/<%= colaboradores.idcolaborador %>" class="btn">borrar</a>
               </td>
             </tr>
             <%  }) %>
           </tbody>
         </table>
       </div>
-    </div>
   </div>
 </main>
 </body>

@@ -1,16 +1,21 @@
 // Abre el modal
 function openModal() {
     document.getElementById('modal').style.display = 'block';
+    console.log('Modal abierto'); // Verifica que se abra correctamente
 }
+
 // Cierra el modal
 function closeModal() {
+    console.log('Cerrando modal'); // Verifica si se ejecuta esta línea
     document.getElementById('modal').style.display = 'none';
 }
+
 document.getElementById('serviceForm').addEventListener('submit', function (event) {
-    event.preventDefault(); 
+   
     const nombre = document.getElementById('IDnombre').value;
     const precio = document.getElementById('IDprecio').value;
     // Envío de los datos al backend
+    
     fetch('/agregar-servicio', {
         method: 'POST',
         headers: {
@@ -18,14 +23,17 @@ document.getElementById('serviceForm').addEventListener('submit', function (even
         },
         body: JSON.stringify({ nombre, precio }),
     })
+    //PENDIENTE COMO NIVEL AVANZADO//
     .then(response => response.json())
     .then(data => {
+        
         if (data.success) {
-            addServiceToTable(nombre);  // Añade el nuevo servicio en la tabla
-            closeModal();  // Cierra el modal solo si se guarda correctamente
+            addServiceToTable(nombre);
+            closeModal();
         } else {
-            alert('Error: ' + data.error);  // Muestra mensaje en caso de error
+            alert('Error: ' + data.error);
         }
     })
     .catch(error => console.error('Error en la solicitud:', error));
 });
+

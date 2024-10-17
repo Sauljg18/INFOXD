@@ -33,40 +33,60 @@
     background: rgb(112, 175, 152);
   }
   
-.disazo{
-  border-spacing: 0;
-  border-collapse: separate;
-  border-radius: 10px;
-  border-collapse: separate;
+
+.tablew {    
+  position: absolute;
+  left: 30px;
+  top: 10px;
+    box-sizing: border-box;
+    text-indent: initial;
+    unicode-bidi: isolate;
+    border-collapse: collapse;
   
 }
 
-.tablew {    
-  margin-left: 10%;
-  margin-top: 1%;
-  width: 80%; /* Aumenta el ancho para que cubra más espacio */
-  height: auto;
-  border-collapse: collapse;
-  text-align: center; /* Alinea los textos a la izquierda */
-  box-shadow: 0 2px 15px rgba(64,64,64,.1); /* Aplica una sombra sutil */
-  font-family: 'Arial', sans-serif; /* Cambia el tipo de letra */
-  background-color: #f8f9fa; /* Fondo de la tabla */
-  border-radius: 8px; /* Bordes redondeados */
-  overflow: hidden; /* Para asegurarse de que los bordes se mantengan limpios */
+.diseño{
+  position: absolute;
+  left: 100px;
+  background-color: #393939;
+  border-radius: 5px;
+  top: 25%;
+  width: 82%;
+  height: 30%;
+}
+
+thead{
+  
+  display: table-header-group;
+    vertical-align: middle;
+    unicode-bidi: isolate;
+    border-color: inherit;
 }
 
 .tablew th, .tablew td {
-  padding: 10px 30px; /* Ajusta el espacio dentro de las celdas */
+  
+  padding: 15px 50px; /* Ajusta el espacio dentro de las celdas */
   width: auto;
   border-bottom: 1px solid #ddd; /* Añade una línea divisoria suave */
   font-size: 0.9em; /* Tamaño de fuente para registros */
 }
 
+.tablew td{
+  font-family: Lato-Bold;
+  font-size: 15px;
+  color: #7b7b7b;
+  line-height: 1.6;
+  text-transform: uppercase;
+  background-color: #393939;
+}
+
 .tablew th {
-  font-size: 0.5em; /* Ajusta el tamaño de letra de los encabezados */
-  background-color: #e8e8e8; /* Fondo de los encabezados */
-  color: #333; /* Color del texto en los encabezados */
-  text-transform: uppercase; /* Letras mayúsculas en encabezados */
+  font-family: Lato-Bold;
+  font-size: 15px;
+  color: #00ad5f;
+  line-height: 1.4;
+  text-transform: uppercase;
+  background-color: #393939;
 }
 
 .tablew tr:hover {
@@ -87,6 +107,31 @@
   background-color: #0056b3; /* Cambia el color cuando pasas el mouse */
 }
 
+.add-service-btn {
+  background-color: #48BB78;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .5s, color .10s;
+  -webkit-transition: .5s, color .10s;
+  -moz-transition: .5s, color .10s;
+  position: absolute;
+  left:6%;
+}
+
+.add-service-btn:hover {
+  background-color: #38A169;
+}
+
+
+.add-service-btn:hover{
+  transform: translatey(-7px);
+      -webkit-transform: translatey(-7x);
+      -moz-transform: translatey(-7px);
+}
+
 img{
   position: absolute;
   width: 8%;
@@ -101,24 +146,17 @@ ul{
   top: -3%;
 }
 
-.desactivado {
-  cursor: not-allowed; /* Cambia el cursor para indicar que no se puede interactuar */
-}
 
-.tablew tr:hover {
-  background-color: #f1f1f1; /* Efecto hover para las filas */
-}
-
-.tablew button {
+.tablew a {
 background-color: #f9f9f9;
-  padding: 8px 10px;
+  padding: 5px 10px;
   border-color: #137132;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 0.95em;
 }
 
-.tablew button:hover {
+.tablew a:hover {
   background-color: #57ae74; /* Cambia el color cuando pasas el mouse */
 }
 
