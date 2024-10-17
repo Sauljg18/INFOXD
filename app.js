@@ -65,27 +65,17 @@ app.get("/", (req, res) => {
 //Verificacion entre ejs loggin y BD
 app.post('/login', (req, res) => {
     const { usuario, contrasena } = req.body;
-
-    // Consulta para verificar el usuario y la contraseña
     const query = `SELECT * FROM colaboradores WHERE usuario = ? AND contrasena = ?`;
-
     connection.query(query, [usuario, contrasena], (err, results) => {
         if (err) {
-            console.error('Error al consultar la base de datos:', err);
-            return res.status(500).send('Error interno del servidor');
+            console.error('Error en la BD:', err);
+            return res.status(500).json({ success: false, error: 'Error interno del servidor' }); // JSON con error 500
         }
-        // Si se encuentra un colaborador, redirige a una nueva página
-        if (results.length > 0){
+        if (results.length > 0) {
             req.session.usuario = results[0];
-            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos  ', (error, results) => {
-                if (error) {
-                    throw error;
-                } else {
-                    res.render('inicio',  { results: results });
-                }
-            });
+            res.json({ success: true }); // Login exitoso
         } else {
-            res.send('Usuario o contraseña incorrectos');
+            res.status(401).json({ success: false, error: 'Usuario o contraseña incorrectos' }); // Error de autenticación
         }
     });
 });

@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="resources/estilo/Loggin.css">
+    <script src="resources/public/javascript/scripts.js"></script>
+    
 </head>
 <body class="body">
 
 <div class="card"></div>
 
 <div class="login">
-<form action="/login" method="POST">
+<form action="/login" id="loginForm" method="POST">
 <h1>Login 🗝</h1>
 
 <!--Apartado para nombre de usuario-->
@@ -21,10 +23,14 @@
 <!--Apartado para contraseña-->
 <label>Contraseña</label>
 <input type="Contrasena" id="contrasena" name="contrasena" required>
+<i class="bx bx-show-alt"></i>
+<box-icon name='low-vision' type='solid' animation='flashing' ></box-icon>
 
 <!--Boton para enviar formulario-->
 <button type="submit">Aceptar</button>
 </form>
+
+<div id="errorNotification" class="hidden">Usuario o contraseña incorrectos</div>
 
 </div>
 

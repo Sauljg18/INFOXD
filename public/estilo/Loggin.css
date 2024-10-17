@@ -30,6 +30,18 @@ body{
     inherits: false;
 }
 
+.hidden {
+    display: none;
+}
+
+
+#errorNotification {
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+
 .card{
     width: 410px;
     height: 510px;
