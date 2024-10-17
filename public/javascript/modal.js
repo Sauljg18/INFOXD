@@ -1,17 +1,20 @@
 // Abre el modal
 function openModal() {
     document.getElementById('modal').style.display = 'block';
+    console.log('Modal abierto'); // Verifica que se abra correctamente
 }
+
 // Cierra el modal
 function closeModal() {
+    console.log('Cerrando modal'); // Verifica si se ejecuta esta línea
     document.getElementById('modal').style.display = 'none';
 }
 
 document.getElementById('serviceForm').addEventListener('submit', function (event) {
-    event.preventDefault();
     const nombre = document.getElementById('IDnombre').value;
     const precio = document.getElementById('IDprecio').value;
-
+    // Envío de los datos al backend
+    
     fetch('/agregar-servicio', {
         method: 'POST',
         headers: {

@@ -243,7 +243,13 @@ app.get("/producto",authMiddleware, (req,res) => {
 });
 
 app.get("/servicio",authMiddleware, (req,res) => {
-    res.render('TablaServicios');
+    connection.query('SELECT * FROM servicios ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('TablaServicios', { results: results });
+        }
+    });
 });
 
 app.get("/tarea",authMiddleware, (req, res) => {
