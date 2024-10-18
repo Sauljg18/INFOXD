@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="resources/estilo/Loggin.css">
-    <script src="resources/public/javascript/scripts.js"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body class="body">
 
@@ -14,25 +14,30 @@
 
 <div class="login">
 <form action="/login" id="loginForm" method="POST">
-<h1>Login 🗝</h1>
+<img loading="lazy" src="/IMAGENES/LOGO.png" class="LogoInfo">  
+
 
 <!--Apartado para nombre de usuario-->
 <label>Username</label>
 <input type="text" id="usuario" name="usuario" required>
 
-<!--Apartado para contraseña-->
 <label>Contraseña</label>
-<input type="Contrasena" id="contrasena" name="contrasena" required>
-<i class="bx bx-show-alt"></i>
-<box-icon name='low-vision' type='solid' animation='flashing' ></box-icon>
+<div class="password-container">
+    <input type="password" id="contrasena" name="contrasena" required>
+
+    <div class="EyeImg" type="buttom" id="viewPassword">
+    <i class="fa fa-eye"></i>    
+    </div>
+    
+</div>
 
 <!--Boton para enviar formulario-->
 <button type="submit">Aceptar</button>
 </form>
 
 <div id="errorNotification" class="hidden">Usuario o contraseña incorrectos</div>
-
 </div>
 
+<script src="/resources/public/javascript/scripts.js"></script>
 </body>
 </html>

@@ -198,6 +198,12 @@ form{max-width: 350px; margin: 0 auto;}
   padding-right: .2em;
 }
 
+#viewPassword{
+cursor:pointer;
+z-index: 1000;
+
+}
+
 .press1{
   z-index: 1;
   border-radius: 35px;

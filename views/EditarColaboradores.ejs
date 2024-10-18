@@ -69,16 +69,20 @@
                   <option <%= colaborador.acceso=='usuario' ? "selected" : ""%> value="usuario">Usuario</option>
                 </select><p>
             </li>
-             <label for="contrasena" class="form-label">Contraseña:</label>
-             <input class="form-control form-control-lg" type="password" aria-label=".form-control-lg example" id="password" name="contrasena" value="<%= colaborador.contrasena %>" required/>
-             <div class="col">
+            
+            <label for="contrasena" class="form-label">Contraseña:</label>
+            <input class="form-control form-control-lg" type="password" aria-label=".form-control-lg example" id="password" name="contrasena" value="<%= colaborador.contrasena %>" required/>
+            
+            <div class="col">
               <div class="press0" type="button" id="viewPassword">Mostrar Contraseña</div><p>
             </div>
-           <li>
-             <label for="confirmar" class="form-label">Confirmar Contraseña:</label>
-             <input class="form-control form-control-lg" type="password" placeholder="Confirmar" aria-label=".form-control-lg example" type="password" id="confirm" name="confirmar" value="<%= colaborador.confirmar %>" required /><p>
-           </li>
-           <li>
+
+            <li>
+              <label for="confirmar" class="form-label">Confirmar Contraseña:</label>
+              <input class="form-control form-control-lg" type="password" placeholder="Confirmar" aria-label=".form-control-lg example" type="password" id="confirm" name="confirmar" value="<%= colaborador.confirmar %>" required /><p>
+              </li>
+              <li>
+                
             <label for="checar" class="form-label">Check-it:</label>
             <select name="checar" id="checar">
                 <option <%= colaborador.checar=='auto' ? "selected" : ""%> value="auto">Automatico</option>
