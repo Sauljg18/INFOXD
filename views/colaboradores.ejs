@@ -4,9 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="resources/estilo/form-colab.css">
     <link rel="stylesheet" href="resources/estilo/inicio.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <title>colaboradores</title>
 <body>
   
@@ -56,7 +53,7 @@
    
     <div class="container2" id="contend" >
       
-     <div class="mb-3"  id="formu1">
+     <div class="mb-4"  id="formu1">
          <ul>
             <li>
               <label for="acceso" class="form-label">Perfil de Acceso:</label>
@@ -66,14 +63,14 @@
                   <option value="usuario">Usuario</option>
                 </select><p>
             </li>
-             <label for="contrasena" class="form-label">Contraseña:</label>
-             <input class="form-control form-control-lg" type="password" placeholder="Contraseña" aria-label=".form-control-lg example" id="password" name="contrasena" required/>
-             <div class="col">
-              <div class="press0" type="button" id="viewPassword">Mostrar Contraseña</div><p>
-            </div>
+            <label for="contrasena" class="form-label">Contraseña:</label>
+            <input class="form-control form-control-lg" type="password" placeholder="Contraseña" aria-label=".form-control-lg example" id="password" name="contrasena" required/>
+            <div class="col">
+             <div class="press0" type="button" id="viewPassword">Mostrar Contraseña</div><p>
+           </div>
            <li>
              <label for="confirmar" class="form-label">Confirmar Contraseña:</label>
-             <input class="form-control form-control-lg" type="password" placeholder="Confirmar" aria-label=".form-control-lg example" type="password" id="confirm" name="confirmar" required /><p>
+             <input class="form-control form-control-lg" type="password" placeholder="Confirmar" aria-label=".form-control-lg example" id="confirm" name="confirmar" required /><p>
            </li>
            <li>
             <label for="checar" class="form-label">Check-it:</label>
@@ -89,64 +86,32 @@
          </ul>
          <ul>
         
-          <li class="col"><nav class="press" id="config">Configuración</nav></li>
+         
         </ul> 
       </div>
      
       </div>
     </div>
-    <div class="lista" id="formu2">
-     <div class="barra">
-      <ul>
-        <li>
-      <label for="opcion1" class="form-label">
-      <input  type="checkbox" id="opcion1" name="username">
-      Puede Crear Tareas</label><p></li>
-        <li><label for="opcion2" class="form-label">
-      <input type="checkbox" id="opcion2" name="tipos">
-       Todos los tipos de Tarea</label><p></li>
-      <li><label for="opcion3" class="form-label">
-       <input type="checkbox" id="opcion3" name="realizar">
-        Puede realizar tareas</label><p></li>
-       <li> <label for="opcion4" class="form-label">   
-      <input type="checkbox" id="opcion4" name="editar">
-      Puede editar tareas</label><p></li>
-     <li> <label for="opcion5" class="form-label">
-      <input type="checkbox" id="opcion5" name="eliminar">
-      Puede eliminar tareas</label><p></li>
-      <li><label for="opcion6" class="form-label">
-        <input type="checkbox"id="opcion6" name="pausar">
-        Pausar tareas</label><p></li>
-        <li> <label for="opcion7" class="form-label">
-    <input type="checkbox" id="opcion7" name="reagendar">
-    Reagendar tareas </label><p></li>
-    <li><label for="opcion8" class="form-label">
-    <input type="checkbox" id="opcion8" name="galerias">
-    Puede utilizar galerias <br> de las tareas</label><p>
-    </li> </ul>
-  </div>
-   <li class="col"><nav class="press" id="detalle">Cerrar</nav></li>
- </div>
     
     
 
-     <div class="container3">
-      <div class="cuadro3"> </div>
-      <nav class= "mb-3" enctype="multipart/form-data">
-        <div>
-          <img src="https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="avatar" id="img" />
-          <input type="file" name="foto" id="foto" accept="image/*" class="imglol" />
-          <label for="foto" name="foto" id="foto" accept="image/*">Cambiar foto</label>
-        </div>
+    <div class="container3">
+      <div class= "mb-5" enctype="multipart/form-data">
+        
+        
+
+          <input type="file" id="foto" name="foto" accept="image/*">
+          <img id="img" src="/resources/IMAGENES/perfil-de-usuario.jpg" alt="Imagen de perfil" width="150px" height="150px">
+
+       
         <input type="submit" value="ENVIAR">
   </div>
- 
-</nav>
 
+  <script src="/resources/javascript/colab.js"></script>
     </form>
-    <script src="resources/javascript/colab.js"></script>
-  </main>
   
+  </main>
+
 </body>
 </head>
 </html>

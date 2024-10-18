@@ -52,6 +52,8 @@ grid-template-areas:
 
 .header a{
     color: #e9e7e7;
+    text-decoration: none;
+    font-family: 'Arial Narrow Bold', sans-serif;
    
 }
 .sidebar{

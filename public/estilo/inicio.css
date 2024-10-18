@@ -53,6 +53,8 @@ body{
 
 .header a{
     color: #e9e7e7;
+    text-decoration: none;
+    font-family: 'Arial Narrow Bold', sans-serif;
    
 }
 .sidebar{
@@ -92,7 +94,7 @@ main{
     display:none;
 }
 
-img{
+.logo {
     position: absolute;
     width: 8%;
     height: 8%;
