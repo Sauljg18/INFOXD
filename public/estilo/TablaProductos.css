@@ -18,6 +18,12 @@
     margin: 10%;
 }
 
+header a{
+    color: #e9e7e7;
+    text-decoration: none;
+    font-family: 'Arial Narrow Bold', sans-serif;
+}
+
 h1 {
     font-size: 24px;
     margin: 0;

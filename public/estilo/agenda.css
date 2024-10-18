@@ -24,7 +24,7 @@
 
 .container {
   position: relative;
-  width: 1500px;
+  width: 1350px;
   min-height: 800px;
   margin: 0 auto;
   padding: 2px;
@@ -341,7 +341,7 @@
 }
 .add-event {
   position: absolute;
-  bottom: 30px;
+  top: 800px;
   right: 30px;
   width: 40px;
   height: 40px;
@@ -349,11 +349,11 @@
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  color: #878895;
+  color: #2dbc70;
   border: 2px solid #878895;
   opacity: 0.5;
   border-radius: 50%;
-  background-color: transparent;
+ 
   cursor: pointer;
 }
 .add-event:hover {

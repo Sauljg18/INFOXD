@@ -46,13 +46,21 @@
 }
 
 .diseño{
-  position: absolute;
-  left: 100px;
+  position: relative;
+  margin: auto;
   background-color: #393939;
   border-radius: 5px;
-  top: 25%;
-  width: 85%;
-  height: 60%;
+  top: 100px;
+  width: 1400px;
+  height: 300px; /* AjustA el tamaño para que se ajuste a los primeros 4 elementos */
+  overflow-y: auto; /* Agrega scroll si la tabla crece más */
+}
+
+.scroll {
+  max-height: 200px; /* Limita la altura máxima del contenido que se desplaza */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  scroll-behavior: smooth;
+
 }
 
 thead{
@@ -65,11 +73,12 @@ thead{
 
 .tablew th, .tablew td {
   
-  padding: 15px 50px; /* Ajusta el espacio dentro de las celdas */
+  padding: 10px 40px; /* Ajusta el espacio dentro de las celdas */
   width: auto;
   border-bottom: 1px solid #ddd; /* Añade una línea divisoria suave */
   font-size: 0.9em; /* Tamaño de fuente para registros */
 }
+
 
 .tablew td{
   font-family: Lato-Bold;
@@ -81,7 +90,12 @@ thead{
 }
 
 .tablew th {
+  position: sticky;
   font-family: Lato-Bold;
+  top: 0;/* Asegurar de que siempre estén pegados de la parte superior */
+  z-index: 1; /* Se asegura de que los encabezados queden por encima del contenido */
+  background-color: #393939; /* Color de fondo del encabezado */
+  color: #00ad5f; /* Color de texto del encabezado */
   font-size: 15px;
   color: #00ad5f;
   line-height: 1.4;
