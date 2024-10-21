@@ -66,10 +66,10 @@
                   <i class="fas fa-times close"></i>
                 </div>
                   <div id="General" >
-                    <form method="post" action="/aceptartarea">
-                  <div class="add-event-input">
+                    <form method="post" class="space" action="/aceptartarea">
+                  
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
-                      <label for="cliente" style="color:black">Tarea será ejecutada por:</label>
+                      <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label>
                       <select name="cliente" id="cliente" class="event-name">
                           <% 
                               const uniqueClientes = [];
@@ -83,11 +83,9 @@
                               });
                           %>
                       </select>
-              </div>
               
                       <!-- Filtra los nombres de colaboradores para evitar duplicados -->
-                      <div class="add-event-input">
-                      <label for="colaborador" style="color: black">La tarea sera colaborada por:</label>
+                      <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label>
                       <select name="colaborador" id="colaborador" class="event-colaborador"> 
                           <%  
                               const uniqueColaboradores = [];
@@ -100,29 +98,26 @@
                                   }
                               });
                           %>
-                     </div>
                   </form>
               
                               
                               </select>
-                              <div class="add-event-input">
-                              <label for="fecha" style="color: black">Fecha de tarea:</label>
+                              <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label>
                               <input type="date" name="fecha" id="fecha">
-                              </div>
-                              <div class="add-event-input">
-                              <label for="hora" style="color: black">Hora:</label>
+
+                              <label for="hora" style="color: rgb(250, 250, 250)">Hora:</label>
                               <input type="time" name="hora" id="hora">
-                              </div>
-                              <div class="add-event-input">
-                              <label for="tipo" style="color: black">El Tipo de Tarea:</label>
+
+
+                              <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label>
                               <select name="tipo" id="tipo">
-                              </div>
+
                                   <option value="tipo">Seleccionar Tipo</option>
                                  <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
                               </select>
                               <div class="add-event-input">
                                 <!-- Filtra los nombres de clientes para evitar duplicados -->
-                                <label for="equipo" style="color:black">Equipo:</label>
+                                <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label>
                                 <select name="equipo" id="equipo" class="event-name">
                                   <option value="Ninguno">NINGUNO</option>  
                                   <% 
@@ -139,7 +134,7 @@
                                 </select>
                         </div>
                               <div class="add-event-input">
-                              <label for="prioridad" style="color: black">Prioridad:</label>
+                              <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label>
                               <select name="prioridad" id="prioridad">
                                   <option value="alta">Alta</option>
                                   <option value="media">Media</option>
@@ -148,7 +143,7 @@
                             </div>
                             <input type="text" name="activo" id="activocliente" value="Activo" hidden>
                             <div class="add-event-input">
-                              <label for="descripcion" style="color: black;">Descripción de la tarea:</label>
+                              <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
                               <textarea name="descripcion" id="descripcion" rows="4"></textarea>
                             </div>
                               <label for="satisfaccion">Encuesta de Satisfacción:</label>

@@ -94,6 +94,10 @@ main{
     display:none;
 }
 
+.space{
+    gap: 50;
+}
+
 .logo {
     position: absolute;
     width: 8%;
