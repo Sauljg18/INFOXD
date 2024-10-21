@@ -8,12 +8,16 @@
 <body>
   
   <header class="header" >
+    <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+    <ul>
+    <li><a href="/clientes">Cliente</a></li>
+    <li> <a href="/colab" style="color:rgb(2, 178, 40)">Colaborador</a></h2></li>
+    <li> <a href="/ver-equipos">Equipo</a></h2></li>
+    <li> <a href="/producto">Producto</a></h2></li>
+    <li> <a href="/servicio">Servicio</a></h2></li>
+    <li> <a href="/tarea">Tarea</a></h2></li></ul>
   </header>
   <section class="sidebar">
-      <ul>
-          <li><a href="/cliente">CLIENTE</a></li>
-      <li> <a href="/colab">COLABORADOR</a></h2></li>
-  <li> <a href="/ver-equipos">Equipos</a></h2></ul></li>
   </section>
   <main class="main">
   
@@ -96,20 +100,18 @@
     
 
     <div class="container3">
-      <div class= "mb-5" enctype="multipart/form-data">
-        
-        
-
-          <input type="file" id="foto" name="foto" accept="image/*">
-          <img id="img" src="/resources/IMAGENES/perfil-de-usuario.jpg" alt="Imagen de perfil" width="150px" height="150px">
-
-       
+      <nav class="mb-5" enctype="multipart/form-data">
+        <div>
+          <img src="https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="avatar" id="img" />
+          <input type="file" name="foto" id="foto" accept="image/*" class="imglol" />
+          <label for="foto" name="foto" id="foto" accept="image/*">Cambiar foto</label>
+        </div>
         <input type="submit" value="ENVIAR">
   </div>
+</nav>
 
-  <script src="/resources/javascript/colab.js"></script>
     </form>
-  
+    <script src="/resources/javascript/colab.js"></script>
   </main>
 
 </body>

@@ -46,13 +46,21 @@
 }
 
 .diseño{
-  position: absolute;
-  left: 100px;
+  position: relative;
+  margin: auto;
   background-color: #393939;
   border-radius: 5px;
-  top: 25%;
-  width: 1300px;
-  height: 72%;
+  top: 70px;
+  width: 1400px;
+  height: 400px; /* AjustA el tamaño para que se ajuste a los primeros 4 elementos */
+  overflow-y: auto; /* Agrega scroll si la tabla crece más */
+}
+
+.scroll {
+  max-height: 200px; /* Limita la altura máxima del contenido que se desplaza */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  scroll-behavior: smooth;
+
 }
 
 thead{

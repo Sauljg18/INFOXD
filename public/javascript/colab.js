@@ -3,7 +3,6 @@ let configurar = document.getElementById("config");
 let formula1= document.getElementById("formu1"); //Primer Formulario
 let formula2= document.getElementById("formu2"); //Segundo Formulario
 
-
 // Selecciona el input y el botón
 let password = document.getElementById('password');
 let viewPassword = document.getElementById('viewPassword');
@@ -32,45 +31,24 @@ if (password && viewPassword) {
     console.log("Error: No se encontraron los elementos 'password' o 'viewPassword'");
 }
 
+const fileInput = document.getElementById('foto');
+const imgPreview = document.getElementById('img');
+const defaultImage = 'https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg';
 
-      formula2.style.display='none';
+// Agregar evento al input file para vista previa
+fileInput.addEventListener('change', function (e) {
+   const file = e.target.files[0]; // Seleccionar el primer archivo
 
-
-      
-detalles.onclick =function(){
-    formula1.style.display='block';
-    formula2.style.display='none';
-
-}
-
-configurar.onclick =function(){
-    formula1.style.display='none';
-    formula2.style.display='block';
-    
-}
-
-
-
-
-      const defaultFile = '/resources/IMAGENES/perfil-de-usuario.jpg'; 
-      const file = document.getElementById('foto');
-      const img = document.getElementById('img');
-      
-      // Si la página está en modo edición y existe una imagen previa, usa esa imagen
-      const initialImage = img.src; 
-
-      file.addEventListener('change', e => {
-        if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                img.src = event.target.result + '?rand=' + Math.random(); // Forzar actualización de imagen
-                img.style.width = '100%';
-                img.style.height = '100%';
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        } else {
-            img.src = initialImage ? initialImage : defaultFile;
-        }
-    });
-    
+if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+         imgPreview.src = e.target.result; // Mostrar la imagen cargada
+         imgPreview.style.width = '300px'; // Ajustar el tamaño según sea necesario
+        imgPreview.style.height = '300px';
+    };
+      reader.readAsDataURL(file); // Leer el archivo como URL de datos
+    } else {
+      imgPreview.src = defaultImage; // Si no hay imagen seleccionada, volver a la imagen por defecto
+    }
+});
     
