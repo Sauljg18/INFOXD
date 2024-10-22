@@ -374,14 +374,14 @@
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 500px;
-  color: #878895;
+  color: #767790;
 }
 .add-event-wrapper {
   position: absolute;
   bottom: 100px;
-  right: -50px;
+  right: -150px;
   top: 10px;
-  width: 900px;
+  width: 990px;
   max-height: 0;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
@@ -389,13 +389,15 @@
   border: 5px solid #ffffff00;
   background-color: #334d6000;
   transform: translateX(-50%);
-  
+  opacity: 0;
   transition: max-height 0.5s ease;
 }
 .add-event-wrapper.active {
   max-height: 1500px;
+  opacity: 1;
   border: 1px solid #ffffff;
-  background-color: #334d607d;
+  background-color: #264154bc;
+  transition: .5s;
 }
 .add-event-header {
   width: 90%;
@@ -404,15 +406,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 50px 80px;
-  color: #373c4f;
+  color: #9eaade;
   border-bottom: 1px solid #f5f5f5;
+  transition: 0.5s ease;
 }
 .add-event-header .close {
   font-size: 1.5rem;
   cursor: pointer;
+  transition: 1s;
+  opacity: 1;
+  
 }
 .add-event-header .close:hover {
   color: var(--primary-clr);
+  transition: 1.5s;
 }
 .add-event-header .title {
   font-size: 1.2rem;

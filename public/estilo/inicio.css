@@ -95,7 +95,37 @@ main{
 }
 
 .space{
-    gap: 50;
+    max-width: 250px;
+    margin-left: 20%;
+    font-size: 20px;
+	position: relative;
+}
+
+
+.space select {
+    
+    display: inline-block;
+	width: 120%;
+	cursor: pointer;
+    margin-left: 100%;
+  	padding: 8px 20px;
+  	height: 42px;
+  	outline: 0; 
+  	border: 0;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+	font-family: 
+	'Quicksand', sans-serif;
+	border:2px solid rgba(0,0,0,0.2);
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.25s ease;
+}
+.space select:hover{
+	background: #B1E8CD;
 }
 
 .logo {
