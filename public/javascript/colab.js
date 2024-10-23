@@ -1,5 +1,4 @@
-let detalles = document.getElementById("detalle");
-let configurar = document.getElementById("config");
+
 let formula1= document.getElementById("formu1"); //Primer Formulario
 let formula2= document.getElementById("formu2"); //Segundo Formulario
 

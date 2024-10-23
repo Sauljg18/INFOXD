@@ -44,14 +44,13 @@
         <tbody>  
           <% results.forEach((colaboradores) => { %>
             <tr>
-              <td scope="row" ><%= colaboradores.idcolaborador %></td>
+              <td scope="row" ><a  href="/editcola/<%= colaboradores.idcolaborador %>"><%= colaboradores.idcolaborador %></a></td>
               <td scope="row" ><%= colaboradores.nombre %></td>
               <td scope="row" ><%= colaboradores.usuario %></td>
               <td scope="row" ><%= colaboradores.correo %></td>
               <td scope="row" ><%= colaboradores.contacto %></td>
               <td scope="row" ><%= colaboradores.cargo %></td>
               <td>
-                <a href="/editcola/<%= colaboradores.idcolaborador %>" class="btn">editar</a>
                 <a href="/deletes/<%= colaboradores.idcolaborador %>" class="btn">borrar</a>
               </td>
             </tr>
