@@ -6,38 +6,48 @@
     <title>Login</title>
     <link rel="stylesheet" href="resources/estilo/Loggin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body class="body">
 
 <div class="card"></div>
 
 <div class="login">
-<form action="/login" id="loginForm" method="POST">
-<img loading="lazy" src="/IMAGENES/LOGO.png" class="LogoInfo">  
+  <form action="/login" id="loginForm" method="POST">
+    <img loading="lazy" src="/IMAGENES/LOGO.png" class="LogoInfo">
 
+    <!-- Apartado para nombre de usuario -->
+    <label>Username</label>
+    <input type="text" id="usuario" name="usuario" required>
 
-<!--Apartado para nombre de usuario-->
-<label>Username</label>
-<input type="text" id="usuario" name="usuario" required>
+    <label>Contraseña</label>
+    <div class="password-container">
+      <input type="password" id="contrasena" name="contrasena" required>
 
-<label>Contraseña</label>
-<div class="password-container">
-    <input type="password" id="contrasena" name="contrasena" required>
-
-    <div class="EyeImg" type="buttom" id="viewPassword">
-    <i class="fa fa-eye"></i>    
+      <!-- Ícono para mostrar/ocultar la contraseña -->
+      <div class="EyeImg" id="viewPassword" style="cursor: pointer;">
+        <i class="fa fa-eye" id="eyeIcon"></i>
+      </div>
     </div>
+
+    <!-- Botón para enviar formulario -->
+    <button type="submit">Aceptar</button>
+  </form>
+</div>
+
+<script>
+  // Lógica para alternar la visibilidad de la contraseña
+  const passwordInput = document.getElementById("contrasena");
+  const toggleButton = document.getElementById("viewPassword");
+  const eyeIcon = document.getElementById("eyeIcon");
+
+  toggleButton.addEventListener("click", () => {
+    const isPasswordVisible = passwordInput.type === "text";
     
-</div>
+    passwordInput.type = isPasswordVisible ? "password" : "text";
+    eyeIcon.classList.toggle("fa-eye-slash", !isPasswordVisible);
+    eyeIcon.classList.toggle("fa-eye", isPasswordVisible);
+  });
+</script>
 
-<!--Boton para enviar formulario-->
-<button type="submit">Aceptar</button>
-</form>
-
-<div id="errorNotification" class="hidden">Usuario o contraseña incorrectos</div>
-</div>
-
-<script src="/resources/public/javascript/scripts.js"></script>
 </body>
 </html>
