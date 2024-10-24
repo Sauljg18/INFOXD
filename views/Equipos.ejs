@@ -41,13 +41,12 @@
                             <% if (results && results.length > 0) { %>
                                 <% results.forEach((tablaequipos) => { %>
                                     <tr>
-                                        <td ><%= tablaequipos.IdEquipo %></td>
+                                        <td > <a href="/editequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info"><%= tablaequipos.IdEquipo %></a></td>
                                         <td ><%= tablaequipos.Nombre %></td>
                                         <td ><%= tablaequipos.Identificador %></td>
                                         <td ><%= tablaequipos.Fecha %></td>
                                         <td ><%= tablaequipos.Descripcion %></td>
                                         <td>
-                                            <a href="/editequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info">editar</a>
                                             <a href="/deleteequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info">borrar</a>
                                         </td>
                                     </tr>

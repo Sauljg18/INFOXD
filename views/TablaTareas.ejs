@@ -45,17 +45,21 @@
               </thead>
               <tbody>
                 <% results.forEach((tareas) => { %>
-                <tr>
-                  <td scope="row" ><%= tareas.id_tarea %></td>
-                  <td scope="row" ><%= tareas.cliente %></td>
-                  <td scope="row" ><%= tareas.colaborador %></td>
-                  <td scope="row" ><%= tareas.fecha %></td>
-                  <td scope="row" ><%= tareas.tipo %></td>
-                  <td scope="row" ><%= tareas.prioridad %></td>
-                  <td scope="row" ><%= tareas.descripcion %></td>
-                  <td class="estado" data-status="<%= tareas.status %>">
-                    <%= tareas.status %>
-                  </td>
+                  <tr>
+                      <td scope="row"><%= tareas.id_tarea %></td>
+                      <td scope="row"><%= tareas.cliente %></td>
+                      <td scope="row">
+                          <a href="/editcola/nombre/<%= tareas.colaborador %>">
+                              <%= tareas.colaborador %>
+                          </a>
+                      </td>
+                      <td scope="row"><%= tareas.fecha %></td>
+                      <td scope="row"><%= tareas.tipo %></td>
+                      <td scope="row"><%= tareas.prioridad %></td>
+                      <td scope="row"><%= tareas.descripcion %></td>
+                      <td class="estado" data-status="<%= tareas.status %>">
+                          <%= tareas.status %>
+                      </td>
                   
                   <td>
                     <button class="finalizar-btn btn "  data-id="<%= tareas.id_tarea %>" style="color: rgb(2, 131, 28);">FINALIZAR</button>

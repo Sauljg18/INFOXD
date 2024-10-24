@@ -293,18 +293,36 @@ app.get('/editcliente/:id_cliente',authMiddleware, (req,res) => {
     }
 })
     });
-
-    //Permite editar los datos  del colaborador 
-    app.get('/editcola/:idcolaborador', authMiddleware, (req,res) => {
-        const id =req.params.idcolaborador;
-        connection.query('SELECT * FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
-        if(error){
+// Permite editar los datos del colaborador basado en el nombre
+app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
+    const nombreColaborador = req.params.colaborador;
+    connection.query('SELECT * FROM colaboradores WHERE nombre=?',[nombreColaborador],(error,results) => {
+        if(error) {
             throw error;
-        }else{
-            res.render('EditarColaboradores',{colaborador:results[0]});
+        } else {
+            res.render('EditarColaboradores', { colaborador: results[0] });
         }
-    })
-        });
+    });
+});
+
+app.get('/editcola/id/:idcolaborador', authMiddleware, (req, res) => {
+    const idColaborador = parseInt(req.params.idcolaborador, 10);  // Verifica que sea un número
+    console.log('ID Colaborador:', idColaborador);  // Depura el valor
+    connection.query('SELECT * FROM colaboradores WHERE idcolaborador=?', [idColaborador], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            console.log('Resultados de la consulta:', results);  // Verifica los resultados
+            if (results.length > 0) {
+                res.render('EditarColaboradores', { colaborador: results[0] });
+            } else {
+                res.status(404).send('Colaborador no encontrado');
+            }
+        }
+    });
+});
+
+
 
 app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     const datos = req.body;
