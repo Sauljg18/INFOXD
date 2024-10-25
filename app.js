@@ -293,6 +293,7 @@ app.get('/editcliente/:id_cliente',authMiddleware, (req,res) => {
     }
 })
     });
+    
 // Permite editar los datos del colaborador basado en el nombre
 app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
     const nombreColaborador = req.params.colaborador;
@@ -305,7 +306,7 @@ app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
     });
 });
 
-app.get('/editcola/id/:idcolaborador', authMiddleware, (req, res) => {
+app.get('/editidcol/id/:idcolaborador', authMiddleware, (req, res) => {
     const idColaborador = parseInt(req.params.idcolaborador, 10);  // Verifica que sea un número
     console.log('ID Colaborador:', idColaborador);  // Depura el valor
     connection.query('SELECT * FROM colaboradores WHERE idcolaborador=?', [idColaborador], (error, results) => {
