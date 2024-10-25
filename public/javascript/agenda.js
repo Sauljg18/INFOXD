@@ -273,7 +273,7 @@ function updateEvents(date) {
       year === event.year
     ) {
       event.events.forEach((event) => {
-        events += `<div class="event">
+        events += `<div class="event" onclick="openModal()">
             <div class="title">
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.title}</h3>
@@ -285,6 +285,8 @@ function updateEvents(date) {
             
         </div>`;
       });
+
+
     }
   });
   if (events === "") {
@@ -412,6 +414,7 @@ addEventSubmit.addEventListener("click", () => {
 });
 
 //function to delete event when clicked on event
+/*
 eventsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("event")) {
     if (confirm("Are you sure you want to delete this event?")) {
@@ -448,7 +451,7 @@ eventsContainer.addEventListener("click", (e) => {
     }
   }
 });
-
+*/
 
 //function to save events in local storage
 function saveEvents() {
