@@ -4,20 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="/resources/estilo/form-cliente.css">
    <link rel="stylesheet" href="/resources/estilo/inicio.css"> 
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <title>Clientes</title>
+ <title>Clientes</title>
    
 <body>
   <% if (cliente) { %>
   <header class="header" >
+    <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
+    <ul>
+    <li><a href="/clientes"  style="color:rgb(2, 178, 40)">Cliente</a></li>
+    <li> <a href="/colab">Colaborador</a></h2></li>
+    <li> <a href="/ver-equipos">Equipo</a></h2></li>
+    <li> <a href="/producto">Producto</a></h2></li>
+    <li> <a href="/servicio">Servicio</a></h2></li>
+    <li> <a href="/tarea">Tarea</a></h2></li></ul>
+    
   </header>
   <section class="sidebar">
-    <ul>
-        <li><a href="/cliente">CLIENTE</a></li>
-    <li> <a href="/colab">COLABORADOR</a></h2></li>
-<li> <a href="/ver-quipos">Equipo</a></h2></ul></li>
 </section>
 <main class="main">
        
@@ -78,43 +80,43 @@
          <li><a  id="config">Informacion</a>
          <ul >
              <li id="formu2">
-                 <div class="mb-3"  id="formu1">
-                     <ul>
+                 
+                    <ul>
                         <li>
                           <label for="postal" class="form-label">Codigo Postal:</label>
                           <input class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" type="text" id="postal" name="postal" value="<%=cliente.postal%>"><p>
                         </li>
-                         <label for="direcion" class="form-label">Dirección:</label>
-                         <input class="form-control form-control-lg" type="text"  aria-label=".form-control-lg example" id="direccion" name="direccion" value="<%=cliente.direccion%>"/>
-                       <li>
-                         <label for="numeroext" class="form-label">Numero ext:</label>
-                         <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="numext" name="numext" value="<%=cliente.num_ext%>" /><p>
-                       </li>
-                       <li></li>
-                         <label for="numeroint" class="form-label">Numero int:</label>
-                         <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="numint" name="numint" value="<%=cliente.num_int%>" /><p>
-                       </li>
-                       <label for="region" class="form-label">Región:</label><br>
-                       <input class="form-control form-control-lg" aria-label=".form-control-lg example" type="text" id="region" name="region" value="<%=cliente.region%>" /><br>
-                       <label for="ciudad" class="form-label">Ciudad:</label><br>
-                       <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="ciudad" name="ciudad" value="<%=cliente.ciudad%>" /><br>
-                       <label for="estado" class="form-label">Estado:</label><br>
-                       <input class="form-control form-control-lg" aria-label=".form-control-lg example" type="text" id="estado" name="estado" value="<%=cliente.estado%>" /><br>
+                        <label for="direcion" class="form-label">Dirección:</label>
+                        <input class="form-control form-control-lg" type="text"  aria-label=".form-control-lg example" id="direccion" name="direccion" value="<%=cliente.direccion%>"/>
+                      <li>
+                        <label for="numeroext" class="form-label">Numero ext:</label>
+                      <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="numext" name="numext" value="<%=cliente.num_ext%>" /><p>
+                      </li>
+                      <li></li>
+                        <label for="numeroint" class="form-label">Numero int:</label>
+                        <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="numint" name="numint" value="<%=cliente.num_int%>" /><p>
+                      </li>
+                      <label for="region" class="form-label">Región:</label><br>
+                      <input class="form-control form-control-lg" aria-label=".form-control-lg example" type="text" id="region" name="region" value="<%=cliente.region%>" /><br>
+                      <label for="ciudad" class="form-label">Ciudad:</label><br>
+                      <input class="form-control form-control-lg"  aria-label=".form-control-lg example" type="text" id="ciudad" name="ciudad" value="<%=cliente.ciudad%>" /><br>
+                      <label for="estado" class="form-label">Estado:</label><br>
+                      <input class="form-control form-control-lg" aria-label=".form-control-lg example" type="text" id="estado" name="estado" value="<%=cliente.estado%>" /><br>
                      
-                       </li>
-                     </ul>
+                    </li>
+                  </ul>
                   
-                  </div>
+               
          
  
-     <input type="submit" class="col" value="ENVIAR">
+    
          </form>
              
-     
+         
     </div>
-
+    <input type="submit" class="col" value="ENVIAR">
 <% } %> 
-    <script src="/resources/javascript/colab.js"></script>
+    <script src="/resources/javascript/cliente.js"></script>
     </main>
 </body>
 </head>

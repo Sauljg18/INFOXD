@@ -30,6 +30,18 @@ body{
     inherits: false;
 }
 
+.hidden {
+    display: none;
+}
+
+
+#errorNotification {
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+
 .card{
     width: 410px;
     height: 510px;
@@ -123,3 +135,52 @@ border-radius: 40px;
 border: none;
 margin: 10px 0px;
 }
+
+.EyeIMG{
+    z-index: 0;
+    background-color: red;
+
+}
+
+.LogoInfo{
+    width: 70%;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    background: rgba(225, 225, 225, 0.3);
+    height: 40px;
+    width: -webkit-fill-available;
+    line-height: 40px;
+    border-radius: 20px;
+    padding: 0px 20px;
+    border: none;
+    margin-bottom: 20px;
+    color: white; /* Espacio para el ícono */
+}
+
+.password-container i {
+    position: absolute;
+    right: 5%;
+    top: 35%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.password-container i:hover {
+    color: #000;
+}
+
+#viewPassword{
+    cursor:pointer;
+    z-index: 1000;
+    }

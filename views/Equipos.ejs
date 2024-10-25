@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Pagina de Equipos</title>
     <link rel="stylesheet" href="/resources/estilo/Equipos.css">
+    <title>Pagina de Equipos</title>
+    
+
 </head>
     <body>
         <header class="header" >
@@ -13,7 +14,7 @@
     <ul>
     <li><a href="/clientes">Cliente</a></li>
     <li> <a href="/colab">Colaborador</a></h2></li>
-    <li> <a href="/ver-equipos">Equipo</a></h2></li>
+    <li> <a href="/ver-equipos" style="color:rgb(2, 178, 40)">Equipo</a></h2></li>
     <li> <a href="/producto">Producto</a></h2></li>
     <li> <a href="/servicio">Servicio</a></h2></li>
     <li> <a href="/tarea">Tarea</a></h2></li></ul>
@@ -28,25 +29,24 @@
                 <div class="tablew">
                     <table class="table" >
                         <thead>
-                            <tr class="bg-primary">
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">indentificiacion</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Descripción</th>
+                            <tr>
+                                <th >Id</th>
+                                <th >Nombre</th>
+                                <th >indentificiacion</th>
+                                <th >Fecha</th>
+                                <th >Descripción</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% if (results && results.length > 0) { %>
                                 <% results.forEach((tablaequipos) => { %>
                                     <tr>
-                                        <td scope="row" class="table-primary"><%= tablaequipos.IdEquipo %></td>
-                                        <td scope="row" class="table-primary"><%= tablaequipos.Nombre %></td>
-                                        <td scope="row" ><%= tablaequipos.Identificador %></td>
-                                        <td scope="row" class="table-primary"><%= tablaequipos.Fecha %></td>
-                                        <td scope="row" class="table-primary"><%= tablaequipos.Descripcion %></td>
+                                        <td > <a href="/editequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info"><%= tablaequipos.IdEquipo %></a></td>
+                                        <td ><%= tablaequipos.Nombre %></td>
+                                        <td ><%= tablaequipos.Identificador %></td>
+                                        <td ><%= tablaequipos.Fecha %></td>
+                                        <td ><%= tablaequipos.Descripcion %></td>
                                         <td>
-                                            <a href="/editequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info">editar</a>
                                             <a href="/deleteequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info">borrar</a>
                                         </td>
                                     </tr>

@@ -4,9 +4,10 @@ body{
     box-sizing: border-box;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(45deg, #2c3523, #153815, #2c4739, #2b3e4d);
+    background: linear-gradient(45deg, #5b6353, #153815, #6cc076, #3d7549,  #43736e, #648eae);
     background-size: 400% 400%;
-    animation: color 10s ease infinite;
+    animation: color 15s ease infinite;
+    
     
     /*Apartado de barra superior*/
     display: grid;
@@ -52,6 +53,8 @@ body{
 
 .header a{
     color: #e9e7e7;
+    text-decoration: none;
+    font-family: 'Arial Narrow Bold', sans-serif;
    
 }
 .sidebar{
@@ -62,16 +65,15 @@ body{
 }
 
 main{
-
+   
     padding: 50px;
     grid-area:main;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+
     grid-template-areas:
     "c1 c2";
-    gap:25px;
+    gap:15px;
 }
 
 .card{
@@ -92,7 +94,41 @@ main{
     display:none;
 }
 
-img{
+.space{
+    max-width: 250px;
+    margin-left: 20%;
+    font-size: 20px;
+	position: relative;
+}
+
+
+.space select {
+    
+    display: inline-block;
+	width: 120%;
+	cursor: pointer;
+    margin-left: 100%;
+  	padding: 8px 20px;
+  	height: 42px;
+  	outline: 0; 
+  	border: 0;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+	font-family: 
+	'Quicksand', sans-serif;
+	border:2px solid rgba(0,0,0,0.2);
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.25s ease;
+}
+.space select:hover{
+	background: #B1E8CD;
+}
+
+.logo {
     position: absolute;
     width: 8%;
     height: 8%;
@@ -103,4 +139,5 @@ img{
 ul{
     position: absolute;
     left: 30%;
+    top: -3%;
 }

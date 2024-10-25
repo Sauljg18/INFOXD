@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
-    <link rel="stylesheet" href="resources/estilo/TablaProductos.css">
+<link rel="stylesheet" href="/resources/estilo/inicio.css">
+    <link rel="stylesheet" href="/resources/estilo/TablaProductos.css">
+    
 </head>
 <body>
 
-    <header class="header" >
+    <header class="header" > 
+        <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
         <ul>
         <li><a href="/clientes">Cliente</a></li>
-        <li> <a href="/colab">Colaborador</a></h2></li>
+        <li> <a href="/colab" >Colaborador</a></h2></li>
         <li> <a href="/ver-equipos">Equipo</a></h2></li>
-        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/producto" style="color:rgb(2, 178, 40)">Producto</a></h2></li>
         <li> <a href="/servicio">Servicio</a></h2></li>
-        <li> <a href="/tarea">Tarea</a></h2></ul></li>
-        
-        </header>
+        <li> <a href="/tarea">Tarea</a></h2></li></ul>
+    </header>
         <section class="sidebar"> </section>
     <div class="container">
         <div class="Titulo">
             <h1>Productos</h1>
             <div class="action-buttons">
-                <button class="BotonGr" href=""> Categorías</button>
+                <button class="BotonGr"style="color:rgb(2, 178, 40)" href=""> Categorías</button>
                 <button class="BotonGr" href=""> Filtros </button>
                 <button class="BotonGr" href=""> Más acciones </button>
                 <button class="BotonGr" onclick="window.location.href='/RegistroProductos'"> Agregar producto ahora </button>
@@ -33,6 +35,7 @@
         <table class="products-table">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nombre</th>
                     <th>Stock mínimo</th>
                     <th>Stock</th>
@@ -40,7 +43,25 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <% if (results && results.length > 0) { %>
+                    <% results.forEach((tablaproducto) => { %>
+                        <tr>
+                            <th><%= tablaproducto.Idproducto %></th>
+                            <th><%= tablaproducto.Nombre %></th>
+                            <th><%= tablaproducto.Inventario %></th>
+                            <th><%= tablaproducto.Stocks %></th>
+                            <th><%= tablaproducto.Valor %></th>
+                            <th>
+                                <a href="/editproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">editar</a>
+                                <a href="/deleteproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">borrar</a>
+                            </th>
+                        </tr>
+                        <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="5">No hay datos disponibles.</td>
+                            </tr>
+                            <% } %>
             </tbody>
         </table>
     </div>

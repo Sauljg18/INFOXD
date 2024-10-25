@@ -1,10 +1,39 @@
-const express = require("express");;
+const express = require("express");
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const mysql = require("mysql");;
 const app = express();
 const session = require('express-session');
 const res = require("express/lib/response");
+const bodyParser = require ("body-parser");
+
+app.use(express.static('public'));  // Para archivos estáticos como CSS, JS
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+
+// Ruta POST para agregar el servicio
+app.post('/agregar-servicio', (req, res) => {
+    const { nombre, precio } = req.body;
+    if (!nombre || !precio) {
+        return res.json({ success: false, error: 'Faltan datos del servicio.' });
+    }
+
+    const sql = 'INSERT INTO servicios (Nombre, Precios) VALUES (?, ?)';
+    // Ejecución de la consulta SQL
+    connection.query(sql, [nombre, precio], (err, result) => {
+        if (err) {
+            console.error('Error al insertar en la BD:', err);
+            return res.json({ success: false, error: 'Error al guardar el servicio.' });
+        }
+        console.log('Servicio agregado correctamente:', result);
+        res.json({ success: true });
+    });
+    
+});
+
 
 app.use(session({
     secret: 'tu_clave_secreta',
@@ -29,23 +58,10 @@ connection.connect((err) => {
     console.log('Conectado a la base de datos MySQL.');
 });
 
-// Configuración de vistas y archivos estáticos
-app.set("views", path.join(__dirname, 'views'));
-app.set("view engine", "ejs");
-app.use(express.static('public'));  // Para archivos estáticos como CSS, JS
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-
-
 // Ruta para manejar el login
 app.get("/", (req, res) => {
     res.render("Loggin");  // Redirige a la página de inicio
 });
-
-
-
-
 //Verificacion entre ejs loggin y BD
 app.post('/login', (req, res) => {
     const { usuario, contrasena } = req.body;
@@ -115,7 +131,7 @@ connection.query(query, (error, results) => {
 });
 
 //VERIFICAR SI EL USUARIO INICIO SESION
-const authMiddleware = (req, res, next) => {
+const authMiddleware = (req, res, next) => { 
     if (req.session && req.session.usuario) {
         // Si la sesión existe, continúa con la solicitud
         return next();
@@ -130,7 +146,7 @@ const authMiddleware = (req, res, next) => {
 app.get('/home',authMiddleware, (req, res) => {
     // Consulta para obtener todas las tareas 
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo FROM colaboradores, tabcliente ', (error, results) => {
+    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos   ', (error, results) => {
     if (error) {
         throw error;
     } else {
@@ -163,25 +179,40 @@ app.get("/clientes", authMiddleware, (req, res) => {
 
 app.get('/editequipo/:IdEquipo', authMiddleware, (req, res) => {
     const id = req.params.IdEquipo;
-    
+
     connection.query('SELECT * FROM tablaequipos WHERE IdEquipo=?', [id], (error, results) => {
         if (error) {
-            throw error;
-        } else {
-            let equipo = results[0];
-            
-            // Verifica si existe el campo Fecha en el equipo
-            if (equipo.Fecha) {
-                // Convierte la fecha a formato YYYY-MM-DD si es necesario
-                let fecha = new Date(equipo.Fecha);
-                equipo.Fecha = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
-            }
-
-            res.render('EditarEquipos', { equipo: equipo });
+            return res.status(500).send('Error al obtener el equipo'); // Manejo de errores
         }
+
+        if (results.length === 0) {
+            return res.status(404).send('Equipo no encontrado'); // Manejo de caso sin resultados
+        }
+
+        let equipo = results[0];
+
+        // Verifica si existe el campo Fecha en el equipo
+        if (equipo.Fecha) {
+            // Convierte la fecha a formato YYYY-MM-DD
+            let fecha = new Date(equipo.Fecha);
+            equipo.Fecha = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+        }
+
+        // Segunda consulta para obtener las tareas
+        connection.query(
+            'SELECT * FROM tareas tarea INNER JOIN tablaequipos equipo ON tarea.equipo = equipo.Nombre WHERE equipo.IdEquipo = ?',
+            [id],
+            (error, tareas) => {
+                if (error) {
+                    return res.status(500).send('Error al obtener las tareas'); // Manejo de errores
+                }
+
+                // Renderiza la vista pasando el equipo y las tareas
+                res.render('EditarEquipos', { equipo: equipo, tareas: tareas });
+            }
+        );
     });
 });
-
 //VER TABLA DE EQUIPOS
 app.get("/ver-equipos",authMiddleware, (req, res) => {
     const query = 'SELECT * FROM tablaequipos'; // Nombre correcto de tu tabla
@@ -196,7 +227,9 @@ app.get("/ver-equipos",authMiddleware, (req, res) => {
     });
 });
 
-
+app.get('/RegistroProductos',authMiddleware, (req, res) => {
+    res.render('RegistroProductos');
+});
 
 app.get("/equipo", (req,res) => {
     res.render('Equipos');
@@ -208,11 +241,25 @@ app.get("/resequipo", authMiddleware, (req,res) => {
 
 
 app.get("/producto",authMiddleware, (req,res) => {
-    res.render('TablaProductos');
+    // Realiza la consulta y renderiza la vista con los resultados
+    connection.query('SELECT * FROM tabproducto ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('TablaProductos', { results: results });
+        }
+    });
+
 });
 
 app.get("/servicio",authMiddleware, (req,res) => {
-    res.render('TablaServicios');
+    connection.query('SELECT * FROM servicios ', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('TablaServicios', { results: results });
+        }
+    });
 });
 
 app.get("/tarea",authMiddleware, (req, res) => {
@@ -246,18 +293,37 @@ app.get('/editcliente/:id_cliente',authMiddleware, (req,res) => {
     }
 })
     });
-
-    //Permite editar los datos  del colaborador 
-    app.get('/editcola/:idcolaborador', authMiddleware, (req,res) => {
-        const id =req.params.idcolaborador;
-        connection.query('SELECT * FROM colaboradores WHERE idcolaborador=?',[id],(error,results)=>{
-        if(error){
+    
+// Permite editar los datos del colaborador basado en el nombre
+app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
+    const nombreColaborador = req.params.colaborador;
+    connection.query('SELECT * FROM colaboradores WHERE nombre=?',[nombreColaborador],(error,results) => {
+        if(error) {
             throw error;
-        }else{
-            res.render('EditarColaboradores',{colaborador:results[0]});
+        } else {
+            res.render('EditarColaboradores', { colaborador: results[0] });
         }
-    })
-        });
+    });
+});
+
+app.get('/editidcol/id/:idcolaborador', authMiddleware, (req, res) => {
+    const idColaborador = parseInt(req.params.idcolaborador, 10);  // Verifica que sea un número
+    console.log('ID Colaborador:', idColaborador);  // Depura el valor
+    connection.query('SELECT * FROM colaboradores WHERE idcolaborador=?', [idColaborador], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            console.log('Resultados de la consulta:', results);  // Verifica los resultados
+            if (results.length > 0) {
+                res.render('EditarColaboradores', { colaborador: results[0] });
+            } else {
+                res.status(404).send('Colaborador no encontrado');
+            }
+        }
+    });
+});
+
+
 
 app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     const datos = req.body;
@@ -503,6 +569,31 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         })
         });
 
+        app.post("/validarproducto", function(req,res){ // REGISTRO DE PRODUCTO
+            const producto = req.body;
+           // Corregir los nombres de las variables para que coincidan con el formulario
+            let Idproducto = producto.Idproducto;
+            let Nombre = producto.Nombre;
+            let Valor = producto.Valor;
+            let Costo = producto.Costo;
+            let Stocks = producto.Stocks; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+            let Inventario = producto.Inventario;
+            let Descripcion = producto.Descripcion;
+            let Categoria = producto.Categoria;
+            let Fecha_Compra = producto.Fecha_Compra;
+            let registrar = "INSERT INTO tabproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoría, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
+            connection.query(registrar,function(error){
+            if(error){
+            throw error;
+                }else{
+                console.log("Datos almacenados correctamente"); 
+                }
+            });
+        
+            
+        
+        });
+
 app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     const tarea = req.body;
    // Corregir los nombres de las variables para que coincidan con el formulario
@@ -512,12 +603,13 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     let fecha = tarea.fecha;
     let hora = tarea.hora; // Cambié de 'carga' a 'cargo' para mejor comprensión.
     let tipo = tarea.tipo;
+    let equipo = tarea.equipo;
     let prioridad = tarea.prioridad;
     let descripcion = tarea.descripcion;
     let activate = tarea.activo;
 
 
-    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
+    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, equipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
                 
     connection.query(registrar,function(error){
     if(error){

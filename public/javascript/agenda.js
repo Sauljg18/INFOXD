@@ -31,7 +31,17 @@ const calendar = document.querySelector(".calendar"),
     botonactivar.style.display='block';   //Vista reaccion a boton
   }
 
+// Abre el modal
+function openModal() {
+  document.getElementById('modal').style.display = 'block';
+  console.log('Modal abierto'); // Verifica que se abra correctamente
+}
 
+// Cierra el modal
+function closeModal() {
+  console.log('Cerrando modal'); // Verifica si se ejecuta esta línea
+  document.getElementById('modal').style.display = 'none';
+}
 
 let today = new Date();
 let activeDay;
@@ -353,14 +363,11 @@ addEventSubmit.addEventListener("click", () => {
         if (event.colaborador === eventColaborador) {
           eventExist = true;
         }
-     
+
       });
     }
   });
-  if (eventExist) {
-    alert("Event already added");
-    return;
-  }
+  
   const newEvent = {
     title: eventTitle,
     colaborador: eventColaborador,

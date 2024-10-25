@@ -1,9 +1,25 @@
-html, body {
-  overflow-x: hidden; /* Oculta el desbordamiento horizontal */
-  margin: 0; /* Asegura que no haya márgenes adicionales */
-  padding: 0;
-  height: 100%;
-  background-color: darkolivegreen;
+ body {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(45deg, #2c3523, #153815, #4d8c6b, #2b3e4d);
+  background-size: 400% 400%;
+  animation: color 12s ease infinite;
+  
+}
+
+@keyframes color{
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
@@ -88,7 +104,7 @@ nav {
   }
   
   .icon .line {
-    background-color: #5290f9;
+    background-color: #00a938;
     height: 2px;
     width: 20px;
     position: absolute;
@@ -230,7 +246,7 @@ input:checked + .slider:before {
   width: 100%; /* Ocupa todo el ancho del contenedor */
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #ccc;
+  border: 2px solid #cccccc;
   border-radius: 8px;
   transition: all 0.3s ease;
   outline: none; /* Elimina el borde azul predeterminado */
@@ -251,10 +267,10 @@ input:checked + .slider:before {
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  gap: 30px;
+  padding: 90px;
   height: 100vh; /* Ocupa toda la altura disponible */
-  margin-left: 250px; /* Deja espacio para la barra vertical */
+  margin-left: 280px; /* Deja espacio para la barra vertical */
   box-sizing: border-box;
   justify-content: center;
 }
@@ -315,7 +331,7 @@ input:checked + .slider:before {
 .equipment-form input,
 .equipment-form textarea {
   width: 100%;
-  padding: 10px;
+  padding: 5%;
   border: 2px solid #ccc;
   border-radius: 8px;
   transition: border-color 0.3s;
@@ -347,4 +363,18 @@ input:checked + .slider:before {
   background-color: transparent; /* Elimina cualquier fondo */
   box-shadow: none; /* Opcional: Elimina sombras, si las hay */
   border: none; /* Opcional: Elimina bordes, si no los necesitas */
+}
+
+.row {
+  width: 100%; /* Asegúrate de que ocupe el ancho completo */
+  margin: 0;   /* Elimina márgenes que puedan estar afectando el diseño */
+  padding: 0;
+}
+
+.col-md-10 {
+  width: 83%; /* Esto ya debería hacer que la columna ocupe la mayoría del espacio */
+}
+
+.col-md-2 {
+  width: 150%; /* La primera columna será más pequeña */
 }

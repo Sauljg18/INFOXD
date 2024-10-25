@@ -1,0 +1,162 @@
+
+.fondo1{
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw ;
+    height: 120px ;
+  z-index: 1;
+    background:  rgb(41, 114, 210);
+  }
+  
+  
+  
+  .logo{
+    z-index: 2;
+    display:block;
+    margin-right:auto;
+    top: 0;
+  width: 15% 15%;
+  height: 50%;
+  }
+  
+  .fondo2{
+    z-index: 1;
+    margin: auto;
+    position:fixed;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 80vw ;
+    height: 120px ;
+    background: rgb(112, 175, 152);
+  }
+  
+
+.tablew {    
+  position: absolute;
+  left: 30px;
+  top: 10px;
+    box-sizing: border-box;
+    text-indent: initial;
+    unicode-bidi: isolate;
+    border-collapse: collapse;
+  
+}
+
+.diseño{
+  position: absolute;
+  left: 100px;
+  background-color: #393939;
+  border-radius: 5px;
+  top: 25%;
+  width: 1300px;
+  height: 72%;
+}
+
+thead{
+  
+  display: table-header-group;
+    vertical-align: middle;
+    unicode-bidi: isolate;
+    border-color: inherit;
+}
+
+.tablew th, .tablew td {
+  
+  padding: 15px 50px; /* Ajusta el espacio dentro de las celdas */
+  width: auto;
+  border-bottom: 1px solid #ddd; /* Añade una línea divisoria suave */
+  font-size: 0.9em; /* Tamaño de fuente para registros */
+}
+
+.tablew td{
+  font-family: Lato-Bold;
+  font-size: 15px;
+  color: #7b7b7b;
+  line-height: 1.6;
+  text-transform: uppercase;
+  background-color: #393939;
+}
+
+.tablew th {
+  font-family: Lato-Bold;
+  font-size: 15px;
+  color: #00ad5f;
+  line-height: 1.4;
+  text-transform: uppercase;
+  background-color: #393939;
+}
+
+.tablew tr:hover {
+  background-color: #f1f1f1; /* Efecto hover para las filas */
+}
+
+.tablew .boton {
+  background-color: #91c7e1; /* Color de los botones */
+  color: white;
+  padding: 2px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.tablew .boton:hover {
+  background-color: #0056b3; /* Cambia el color cuando pasas el mouse */
+}
+
+.add-service-btn {
+  background-color: #48BB78;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .5s, color .10s;
+  -webkit-transition: .5s, color .10s;
+  -moz-transition: .5s, color .10s;
+  position: absolute;
+  left:6%;
+}
+
+.add-service-btn:hover {
+  background-color: #38A169;
+}
+
+
+.add-service-btn:hover{
+  transform: translatey(-7px);
+      -webkit-transform: translatey(-7x);
+      -moz-transform: translatey(-7px);
+}
+
+img{
+  position: absolute;
+  width: 8%;
+  height: 8%;
+  top: 3px;
+  left:3%;
+}
+
+ul{
+  position: absolute;
+  left: 30%;
+  top: -3%;
+}
+
+
+.tablew a {
+background-color: #f9f9f9;
+  padding: 5px 10px;
+  border-color: #137132;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+}
+
+.tablew a:hover {
+  background-color: #57ae74; /* Cambia el color cuando pasas el mouse */
+}
+
