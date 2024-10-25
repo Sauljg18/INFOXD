@@ -1,3 +1,33 @@
+
+// Abre el modal y carga los datos de la tarea seleccionada
+// Abre el modal y carga los datos de la tarea
+function openModal(id_tarea) {
+  // Realiza una solicitud para obtener los datos de la tarea específica
+  fetch(`/tarea/${id_tarea}`)
+      .then(response => response.json())
+      .then(data => {
+          // Llenar los campos del formulario con los datos de la tarea
+          document.getElementById('cliente').value = data.cliente;
+          document.getElementById('colaborador').value = data.colaborador;
+          document.getElementById('fecha').value = data.fecha;
+          document.getElementById('tipo').value = data.tipo;
+          document.getElementById('equipo').value = data.equipo;
+          document.getElementById('prioridad').value = data.prioridad;
+          document.getElementById('descripcion').value = data.descripcion;
+
+          // Mostrar el modal
+          document.getElementById('modal').style.display = 'block';
+      })
+      .catch(error => console.error('Error al cargar los datos de la tarea:', error));
+}
+
+// Cierra el modal
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+
+
+
 window.onload = function() {
   const finalizarBtns = document.querySelectorAll('.finalizar-btn');
   const reactivarBtns = document.querySelectorAll('.reactivar-btn');

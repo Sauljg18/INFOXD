@@ -4,11 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="resources/estilo/tablaTarea.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="resources/estilo/inicio.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <title>Tabla tareas    </title>
+      <link rel="stylesheet" href="resources/estilo/inicio.css">
+  <title>Tabla tareas    </title>
   
   </head>
   <body>
@@ -38,15 +35,13 @@
                   <th scope="col">FECHA</th>
                   <th scope="col">TIPO</th>
                   <th scope="col">PRIORIDAD</th>
-                  <th scope="col">DESCRIPCION</th>
                   <th scope="col">STATUS</th>
-                  <th scope="col">ACCION</th>
                 </tr>
               </thead>
               <tbody>
                 <% results.forEach((tareas) => { %>
                   <tr>
-                      <td scope="row"><%= tareas.id_tarea %></td>
+                    <td scope="row" onclick="openModal('<%= tareas.id_tarea %>')"><%= tareas.id_tarea %></td>
                       <td scope="row"><%= tareas.cliente %></td>
                       <td scope="row">
                           <a href="/editcola/nombre/<%= tareas.colaborador %>">
@@ -56,18 +51,12 @@
                       <td scope="row"><%= tareas.fecha %></td>
                       <td scope="row"><%= tareas.tipo %></td>
                       <td scope="row"><%= tareas.prioridad %></td>
-                      <td scope="row"><%= tareas.descripcion %></td>
                       <td class="estado" data-status="<%= tareas.status %>">
                           <%= tareas.status %>
                       </td>
-                  
-                  <td>
-                    <button class="finalizar-btn btn "  data-id="<%= tareas.id_tarea %>" style="color: rgb(2, 131, 28);">FINALIZAR</button>
-                    <button class="reactivar-btn btn "  data-id="<%= tareas.id_tarea %>" style="color: rgb(0, 255, 68);">REACTIVAR</button>
-                  </td>
                   </tr>
-                  <%  }) %>
-                </tbody>
+              <% }) %>
+              </tbody>
           
 </table>
 
@@ -75,7 +64,44 @@
 </div>
 </div>
 </div>
+<div id="modal" class="modal">
+  <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div class="diseño2">
+       
+        <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
+        <input id="cliente"></input>                      
+        
 
+<label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
+                  <input id="colaborador"></input>        
+              
+                <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
+                <input  name="fecha" id="fecha"><br>
+
+                <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
+                    <input id="tipo"></input><br>
+                  <!-- Filtra los nombres de clientes para evitar duplicados -->
+                  <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
+                
+                    <input id="equipo"></input>  
+                <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
+                    <input value="alta" id="prioridad"></input>
+                <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
+                <input name="descripcion" id="descripcion" rows="4"></input>
+
+        </div>
+      </div>
+      </div>
+                
+          
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
 </main>
 <script script src="/resources/javascript/Tarea.js"></script>
   </body>

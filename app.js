@@ -273,6 +273,22 @@ app.get("/tarea",authMiddleware, (req, res) => {
     });
 });
     
+app.get('/tarea/:id', (req, res) => {
+    const tareaId = req.params.id;
+  
+    // Consulta SQL para obtener la tarea por su ID
+    const query = 'SELECT * FROM tareas WHERE id_tarea = ?';
+    connection.query(query, [tareaId], (err, results) => {
+      if (err) {
+        console.error('Error al obtener los datos de la tarea:', err);
+        res.status(500).send('Error al obtener los datos');
+      } else if (results.length > 0) {
+        res.json(results[0]); // Devuelve la primera tarea encontrada en formato JSON
+      } else {
+        res.status(404).send('Tarea no encontrada');
+      }
+    });
+  });
 
 app.get("/registro",authMiddleware, (req,res) => {
     res.render('colaboradores');
@@ -293,7 +309,7 @@ app.get('/editcliente/:id_cliente',authMiddleware, (req,res) => {
     }
 })
     });
-    
+
 // Permite editar los datos del colaborador basado en el nombre
 app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
     const nombreColaborador = req.params.colaborador;
