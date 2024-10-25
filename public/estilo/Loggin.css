@@ -41,7 +41,6 @@ body{
     font-weight: bold;
 }
 
-
 .card{
     width: 410px;
     height: 510px;
@@ -149,6 +148,7 @@ margin: 10px 0px;
     margin-bottom: auto;
     margin-left: auto;
 }
+
 .password-container {
     position: relative;
     width: 100%;
