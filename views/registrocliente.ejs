@@ -68,7 +68,19 @@
                 </li>
                 <li>
                   <label for="responsable" class="form-label">Responsable:</label>
-                  <input class="form-control form-control-lg" type="text" placeholder="Responsable" aria-label=".form-control-lg example"  id="responsable" name="responsable" required>
+                  <select id="responsable" name="responsable" class="event-colaborador"> 
+                    <%  
+                        const uniqueColaboradores = [];
+                        results.forEach((row) => {
+                            if (!uniqueColaboradores.includes(row.colaboradorNombre)) {
+                                uniqueColaboradores.push(row.colaboradorNombre);
+                    %>
+                        <option value="<%= row.colaboradorNombre %>"><%= row.colaboradorNombre %></option>
+                    <% 
+                            }
+                        });
+                    %>
+                  
                 </li>
               <li>
                 <label for="observar" class="form-label">Observación:</label>
@@ -105,9 +117,9 @@
                 </li>  
               </ul>
     </div>
-
+    <input type="submit" class="col" value="ENVIAR">
 </form>
-<input type="submit" class="col" value="ENVIAR">
+
 
 </div>
 <script src="/resources/javascript/cliente.js"></script>

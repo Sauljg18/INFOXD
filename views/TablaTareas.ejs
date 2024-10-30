@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="resources/estilo/tablaTarea.css">
-      <link rel="stylesheet" href="resources/estilo/inicio.css">
+    <link rel="stylesheet" href="/resources/estilo/tablaTarea.css">
+      <link rel="stylesheet" href="/resources/estilo/inicio.css">
   <title>Tabla tareas    </title>
   
   </head>
@@ -42,7 +42,7 @@
                 <% results.forEach((tareas) => { %>
                   <tr>
                     <td scope="row" onclick="openModal('<%= tareas.id_tarea %>')"><%= tareas.id_tarea %></td>
-                      <td scope="row"><%= tareas.cliente %></td>
+                      <td scope="row"><a href="/editclient/cliente/<%= tareas.cliente %>"><%= tareas.cliente %></a></td>
                       <td scope="row">
                           <a href="/editcola/nombre/<%= tareas.colaborador %>">
                               <%= tareas.colaborador %>
@@ -66,16 +66,16 @@
 </div>
 <div id="modal" class="modal">
   <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
+    <button class="close-btn" onclick="closeModal()">&times;</button>
+
       <div class="diseño2">
-       
         <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
         <input id="cliente"></input>                      
         
+        <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea será colaborada por:</label><br>
+<a id="colaboradorLink" href="" style="color: rgb(249, 247, 247); font-weight: bold; background-color: #333; border: none; padding: 5px; border-radius: 5px;">
+   <span id="colaborador" style="list-style: none;" ></span> </a>
 
-<label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
-                  <input id="colaborador"></input>        
-              
                 <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
                 <input  name="fecha" id="fecha"><br>
 
@@ -103,6 +103,6 @@
 </div>
 </div>
 </main>
-<script script src="/resources/javascript/Tarea.js"></script>
+<script src="/resources/javascript/Tarea.js"></script>
   </body>
 </html>

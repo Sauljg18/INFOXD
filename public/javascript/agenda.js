@@ -280,7 +280,7 @@ function updateEvents(date) {
             </div>
               <div class="title">
               <i class="fas fa-circle"></i>
-              <h3 class="event-title">${event.id_tarea}</h3>
+              <h3 class="event-title">${event.colaborador}</h3>
             </div>
             
         </div>`;
