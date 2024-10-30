@@ -120,9 +120,10 @@ ul {
   top: -3%;
 }
 
-input{pointer-events: none;  width:100%;padding:10px;box-sizing:border-box;background:none;outline:none;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+input{ width:100%;padding:10px;box-sizing:border-box;background:none;outline:none;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
   color: white; font-size: 20px; transition:all .3s;border-bottom:2px solid #bebed2}
 input:focus{border-bottom:2px solid #78788c}
+
 
 /* Modal para detalles emergentes */
 .modal {

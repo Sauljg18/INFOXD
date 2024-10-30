@@ -77,7 +77,7 @@ app.post('/login', (req, res) => {
         // Si se encuentra un colaborador, redirige a una nueva página
         if (results.length > 0){
             req.session.usuario = results[0];
-            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos  ', (error, results) => {
+            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos, tareas  ', (error, results) => {
                 if (error) {
                     throw error;
                 } else {
@@ -146,7 +146,7 @@ const authMiddleware = (req, res, next) => {
 app.get('/home',authMiddleware, (req, res) => {
     // Consulta para obtener todas las tareas 
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos   ', (error, results) => {
+    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos, tareas   ', (error, results) => {
     if (error) {
         throw error;
     } else {

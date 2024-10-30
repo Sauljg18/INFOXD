@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <link rel="stylesheet" href="/resources/estilo/agenda.css">
+    <link rel="stylesheet" href="/resources/estilo/tablaTarea.css">
   
     <title>inicio</title>
 </head>
@@ -166,18 +167,31 @@
             <div id="modal" class="modal">
               <div class="modal-content">
                   <span class="close-btn" onclick="closeModal()">&times;</span>
-                  <h2>Añadir Servicio</h2>
-                  <form id="serviceForm">
-                      <label for="nombre">Nombre del Servicio:</label>
-                      <input type="text" id="IDnombre" name="IDnombre" required>
-          
-                      <label for="precio">Precio:</label>
-                      <input type="number" id="IDprecio" name="IDprecio" required>
-          
-                      <button type="submit">Añadir</button>
-                  </form>
-              </div>
-          </div>
+                  <div class="diseño2">
+                    <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
+                    <input id="cliente"></input>                      
+                    
+            
+            <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
+                              <input id="colaborador"></input>        
+                          
+                            <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
+                            <input  name="fecha" id="fecha"><br>
+            
+                            <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
+                                <input id="tipo"></input><br>
+                              <!-- Filtra los nombres de clientes para evitar duplicados -->
+                              <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
+                            
+                                <input id="equipo"></input>  
+                            <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
+                                <input value="alta" id="prioridad"></input>
+                            <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
+                            <input name="descripcion" id="descripcion" rows="4"></input>
+            
+                    </div>
+                  </div>
+                  </div>
       
          
           <script src="/resources/javascript/agenda.js"></script>    
