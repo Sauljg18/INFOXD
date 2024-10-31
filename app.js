@@ -609,6 +609,50 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         })
         });
 
+        app.get('/api/tareas/:id', async (req, res) => {
+  const tareaId = req.params.id;
+  try {
+    const tarea = await getTareaById(tareaId); // Función para obtener la tarea desde la base de datos
+    if (tarea) {
+      res.json({
+        id: tarea.id,
+        cliente: tarea.cliente,
+        descripcion: tarea.descripcion,
+        colaborador: tarea.colaborador,
+        fecha: tarea.fecha,
+        tipo: tarea.tipo,
+        equipo: tarea.equipo,
+        prioridad: tarea.prioridad,
+      });
+    } else {
+      res.status(404).json({ error: "Tarea no encontrada" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener los datos de la tarea" });
+  }
+});
+
+
+          //ELIMINAR REGISTRO DE SERVICIO
+    app.get("/deleteservicio/:Id",authMiddleware, function(req,res){ 
+        const id =req.params.Id;
+        connection.query('DELETE FROM servicios WHERE Id=?',[id],(error,results)=>{
+        if(error){
+            throw error;
+        }else{
+            connection.query('SELECT * FROM servicios ', (error, results) => {
+                if (error) {
+                    throw error;
+                } else {
+                    res.render('TablaServicios', { results: results });
+                }
+            });
+        }
+        })
+        });
+
+        
         app.post("/validarproducto", function(req,res){ // REGISTRO DE PRODUCTO
             const producto = req.body;
            // Corregir los nombres de las variables para que coincidan con el formulario
