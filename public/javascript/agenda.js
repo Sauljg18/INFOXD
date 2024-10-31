@@ -31,17 +31,46 @@ const calendar = document.querySelector(".calendar"),
     botonactivar.style.display='block';   //Vista reaccion a boton
   }
 
-// Abre el modal
-function openModal() {
-  document.getElementById('modal').style.display = 'block';
-  console.log('Modal abierto'); // Verifica que se abra correctamente
+  function abrirModalTarea(idTarea) {
+    console.log("ID de la tarea seleccionada:", idTarea); // Verifica si el ID llega correctamente
+
+    fetch(`/api/tareas/${idTarea}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la petición a la API');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Datos recibidos:", data); // Verifica si los datos llegan correctamente
+
+            if (data) {
+                // Llenar los campos del modal con los datos recibidos
+                document.getElementById('cliente').value = data.cliente || '';
+                document.getElementById('colaborador').value = data.colaborador || '';
+                document.getElementById('fecha').value = data.fecha || '';
+                document.getElementById('tipo').value = data.tipo || '';
+                document.getElementById('equipo').value = data.equipo || '';
+                document.getElementById('prioridad').value = data.prioridad || '';
+                document.getElementById('descripcion').value = data.descripcion || '';
+                
+                // Mostrar el modal
+                document.getElementById('modal').style.display = 'block';
+            } else {
+                alert('No se encontraron datos para esta tarea.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar la tarea:', error);
+            alert('Hubo un problema al cargar los datos.');
+        });
 }
 
-// Cierra el modal
+// Función para cerrar el modal
 function closeModal() {
-  console.log('Cerrando modal'); // Verifica si se ejecuta esta línea
-  document.getElementById('modal').style.display = 'none';
+    document.getElementById('modal').style.display = 'none';
 }
+
 
 let today = new Date();
 let activeDay;
@@ -266,6 +295,8 @@ function getActiveDay(date) {
 //function update events when a day is active
 function updateEvents(date) {
   let events = "";
+  console.log('Eventos del día:', eventsArr); // Debugging
+
   eventsArr.forEach((event) => {
     if (
       date === event.day &&
@@ -273,22 +304,20 @@ function updateEvents(date) {
       year === event.year
     ) {
       event.events.forEach((event) => {
-        events += `<div class="event" onclick="openModal()">
+        events += `<div class="event" onclick="openModal('${event.title}', '${event.id_tarea}')">
             <div class="title">
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.title}</h3>
             </div>
-              <div class="title">
+            <div class="title">
               <i class="fas fa-circle"></i>
-              <h3 class="event-title">${event.id_tarea}</h3>
+              <h3 class="event-title">${event.colaborador}</h3>
             </div>
-            
         </div>`;
       });
-
-
     }
   });
+
   if (events === "") {
     events = `<div class="no-event">
             <h3>No Events</h3>
@@ -296,6 +325,18 @@ function updateEvents(date) {
   }
   eventsContainer.innerHTML = events;
   saveEvents();
+}
+
+
+function openModal(title, id_tarea) {
+  const modal = document.getElementById('modal');
+  modal.style.display = 'block';
+  
+  // Asignamos los datos al modal
+  document.querySelector('.modal-title').textContent = title;
+  document.querySelector('.modal-id').textContent = id_tarea;
+
+  console.log('Modal abierto con:', { title, id_tarea }); // Debugging
 }
 
 //function to add event

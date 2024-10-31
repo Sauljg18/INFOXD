@@ -9,82 +9,74 @@
     <title>inicio</title>
 </head>
 <body>
-    
     <header class="header" >
-    <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
-    <ul>
-    <li><a href="/clientes">Cliente</a></li>
-    <li> <a href="/colab">Colaborador</a></h2></li>
-    <li> <a href="/ver-equipos">Equipo</a></h2></li>
-    <li> <a href="/producto">Producto</a></h2></li>
-    <li> <a href="/servicio">Servicio</a></h2></li>
-    <li> <a href="/tarea">Tarea</a></h2></li></ul>
-    
-    </header>
-   
-    <section class="sidebar">
-         
-    </section>
-    
-    <main class="main">
-        <div class="container">
-            <div class="left">
-              <div class="calendar">
-                <div class="month">
-                  <i class="fas fa-angle-left prev"></i>
-                  <div class="date">december 2015</div>
-                  <i class="fas fa-angle-right next"></i>
-                </div>
-                <div class="weekdays">
-                  <div>Sun</div>
-                  <div>Mon</div>
-                  <div>Tue</div>
-                  <div>Wed</div>
-                  <div>Thu</div>
-                  <div>Fri</div>
-                  <div>Sat</div>
-                </div>
-                <div class="days"></div>
-                <div class="goto-today">
-                  <div class="goto">
-                    <input type="text" placeholder="mm/yyyy" class="date-input" />
-                    <button class="goto-btn">Go</button>
+          <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+          <ul>
+            <li><a href="/clientes">Cliente</a></li>
+            <li> <a href="/colab">Colaborador</a></h2></li>
+            <li> <a href="/ver-equipos">Equipo</a></h2></li>
+            <li> <a href="/producto">Producto</a></h2></li>
+            <li> <a href="/servicio">Servicio</a></h2></li>
+            <li> <a href="/tarea">Tarea</a></h2></li></ul>
+          </header>
+          <section class="sidebar">
+          </section>
+          <main class="main">
+            <div class="container">
+              <div class="left">
+                <div class="calendar">
+                  <div class="month">
+                    <i class="fas fa-angle-left prev"></i>
+                    <div class="date">december 2015</div>
+                    <i class="fas fa-angle-right next"></i>
                   </div>
-                  <button class="today-btn">Today</button>
+                  <div class="weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                  </div>
+                  <div class="days"></div>
+                  <div class="goto-today">
+                    <div class="goto">
+                      <input type="text" placeholder="mm/yyyy" class="date-input" />
+                      <button class="goto-btn">Go</button>
+                    </div>
+                    <button class="today-btn">Today</button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="right">
-              <div class="today-date">
-                <div class="event-day">wed</div>
-                <div class="event-date">12th december 2022</div>
-              </div>
-              <div class="events"></div>
-              <div class="add-event-wrapper">
-                
-                <div class="add-event-header">
-                  <div class="title">NUEVA TAREA</div>
-                  <i class="fas fa-times close"></i>
+              <div class="right">
+                <div class="today-date">
+                  <div class="event-day">wed</div>
+                  <div class="event-date">12th december 2022</div>
                 </div>
+                <div class="events"></div>
+                <div class="add-event-wrapper">
+                  <div class="add-event-header">
+                    <div class="title">NUEVA TAREA</div>
+                    <i class="fas fa-times close"></i>
+                  </div>
                   <div id="General" class="space">
                     <form method="post" action="/aceptartarea">
-                  
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
                       <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
                       <select name="cliente" id="cliente" class="event-name">
-                          <% 
-                              const uniqueClientes = [];
-                              results.forEach((row) => {
-                                  if (!uniqueClientes.includes(row.clienteNombre)) {
-                                      uniqueClientes.push(row.clienteNombre);
-                          %>
-                              <option value="<%= row.clienteNombre %>"><%= row.clienteNombre %></option>
-                          <% 
-                                  }
-                              });
-                          %>
-                      </select><br>
-              
+                        <% 
+                        const uniqueClientes = [];
+                        results.forEach((row) => {
+                          if (!uniqueClientes.includes(row.clienteNombre)) {
+                            uniqueClientes.push(row.clienteNombre);
+                            %>
+                            <option value="<%= row.clienteNombre %>"><%= row.clienteNombre %></option>
+                            <% 
+                          }
+                        });
+                  %>
+                </select><br>
                       <!-- Filtra los nombres de colaboradores para evitar duplicados -->
                       <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
                       <select name="colaborador" id="colaborador" class="event-colaborador"> 
@@ -100,19 +92,13 @@
                               });
                           %>
                   </form>
-              
-                              
                               </select><br>
                               <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
                               <input type="date" name="fecha" id="fecha"><br>
-
                               <label for="hora" style="color: rgb(250, 250, 250)">Hora:</label><br>
                               <input type="time" name="hora" id="hora"><br>
-
-
                               <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
                               <select name="tipo" id="tipo">
-
                                   <option value="tipo">Seleccionar Tipo</option><br>
                                   <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
                               </select><br>
@@ -146,58 +132,47 @@
                               <label for="satisfaccion">Encuesta de Satisfacción:</label>
                               <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
                               <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
-              
                               <button id="guardar">GUARDAR</button>
                               <div id="activar" class="display">
                                 <a class="add-event-btn">CERRAR </a></div> 
                             </form>
                               <div class="add-event-footer">
-            
-          </div></div>
-         
+                              </div></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-              </div>
-              </div>
-            </div>
-            <button class="add-event">
-              <i class="fas fa-plus"></i>
-            </button>
-            
-            <div id="modal" class="modal">
-              <div class="modal-content">
-                  <span class="close-btn" onclick="closeModal()">&times;</span>
-                  <div class="diseño2">
-                    <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
-                    <input id="cliente"></input>                      
-                    
-            
-            <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
-                              <input id="colaborador"></input>        
-                          
-                            <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
-                            <input  name="fecha" id="fecha"><br>
-            
-                            <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
-                                <input id="tipo"></input><br>
-                              <!-- Filtra los nombres de clientes para evitar duplicados -->
-                              <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
-                            
-                                <input id="equipo"></input>  
-                            <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
-                                <input value="alta" id="prioridad"></input>
-                            <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
-                            <input name="descripcion" id="descripcion" rows="4"></input>
-            
                     </div>
-                  </div>
-                  </div>
-      
-         
-          <script src="/resources/javascript/agenda.js"></script>    
-    </main>
-   
+                    <button class="add-event">
+                      <i class="fas fa-plus"></i>
+                    </button>
 
 
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="diseño2">
+      <label for="cliente" style="color:rgb(175, 41, 41)">Tarea será ejecutada por:</label><br>
+      <input id="cliente"></input>                                          
+      <label for="colaborador" style="color: rgb(141, 77, 77)">La tarea sera colaborada por:</label><br>
+      <input id="colaborador"></input>        
+      <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
+      <input  name="fecha" id="fecha"><br>
+      <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
+      <input id="tipo"></input><br>
+      <!-- Filtra los nombres de clientes para evitar duplicados -->
+      <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
+      <input id="equipo"></input>  
+      <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
+      <input value="alta" id="prioridad"></input>
+      <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
+      <input name="descripcion" id="descripcion" rows="4"></input>
+    </div>
+  </div>
+</div>
+
+
+<script src="/resources/javascript/agenda.js"></script>
+</main>
 </body> 
 </html>
