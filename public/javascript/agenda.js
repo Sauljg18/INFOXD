@@ -32,10 +32,10 @@ const calendar = document.querySelector(".calendar"),
     botonactivar.style.display='block';   //Vista reaccion a boton
   }
 
-  function abrirModalTarea(id_tarea) {
-    console.log("ID de la tarea seleccionada:", id_tarea); // Verifica si el ID llega correctamente
+  function abrirModalTarea(idTarea) {
+    console.log("ID de la tarea seleccionada:", idTarea); // Verifica si el ID llega correctamente
 
-    fetch(`/api/tareas/${id_tarea}`)
+    fetch(`/api/tareas/${idTarea}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error en la petición a la API');
@@ -305,7 +305,7 @@ function updateEvents(date) {
       year === event.year
     ) {
       event.events.forEach((event) => {
-        events += `<div class="event" onclick="abrirModalTarea('${event.id_tarea}')">
+        events += `<div class="event" onclick="openModal('${event.title}', '${event.id_tarea}')">
             <div class="title">
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.title}</h3>

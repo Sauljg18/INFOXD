@@ -62,6 +62,7 @@
                   </div>
                   <div id="General" class="space">
                     <form method="post" action="/aceptartarea">
+                      <input type="text" name="id_tarea" id="id_tarea" hidden>
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
                       <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
                       <select name="cliente" id="cliente" class="event-name">
@@ -171,7 +172,7 @@
   </div>
 </div>
 
-
+<script src="/resources/javascript/GenerarId.js"></script>
 <script src="/resources/javascript/agenda.js"></script>
 </main>
 </body> 
