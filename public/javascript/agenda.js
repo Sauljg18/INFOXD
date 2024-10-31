@@ -14,6 +14,7 @@ const calendar = document.querySelector(".calendar"),
   addEventCloseBtn = document.querySelector(".close "),
   addEventTitle = document.querySelector(".event-name"),
   addEventColaborador = document.querySelector(".event-colaborador"),
+  addEventDescripcion = document.querySelector(".event-descripcion"),
   addEventtipo = document.querySelector(".event-tipo"),
   addEventduracion = document.querySelector(".event-duracion"),
   addEventFrom = document.querySelector(".event-time-from "),
@@ -313,6 +314,10 @@ function updateEvents(date) {
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.colaborador}</h3>
             </div>
+             <div class="title">
+              <i class="fas fa-circle"></i>
+              <h3 class="event-title">${event.descripcion}</h3>
+            </div>
         </div>`;
       });
     }
@@ -363,6 +368,9 @@ addEventColaborador.addEventListener("input", (e) => {
   addEventColaborador.value = addEventColaborador.value.slice(0, 60);
 });
 
+addEventDescripcion.addEventListener("input", (e) => {
+  addEventDescripcion.value = addEventDescripcion.value.slice(0, 60);
+});
 
 
 function defineProperty() {
@@ -387,7 +395,8 @@ addEventSubmit.addEventListener("click", () => {
   
   const eventTitle = addEventTitle.value;
   const eventColaborador = addEventColaborador.value;
-  if ( eventColaborador === "" || eventTitle === "") {
+  const eventDescripcion = addEventDescripcion.value;
+  if ( eventColaborador === "" || eventTitle === "" || eventDescripcion === "") {
     alert("Please fill all the fields");
     return;
   }
@@ -406,7 +415,9 @@ addEventSubmit.addEventListener("click", () => {
         if (event.colaborador === eventColaborador) {
           eventExist = true;
         }
-
+        if (event.descripcion === eventDescripcion) {
+          eventExist = true;
+        }
       });
     }
   });
@@ -414,6 +425,7 @@ addEventSubmit.addEventListener("click", () => {
   const newEvent = {
     title: eventTitle,
     colaborador: eventColaborador,
+    descripcion: eventDescripcion,
   };
   console.log(newEvent);
   console.log(activeDay);
@@ -443,6 +455,7 @@ addEventSubmit.addEventListener("click", () => {
   addEventWrapper.classList.remove("active");
   addEventTitle.value = "";
   addEventColaborador.value = "";
+  addEventDescripcion.value = "";
   const tarea = req.body;
   // Corregir los nombres de las variables para que coincidan con el formulario
 

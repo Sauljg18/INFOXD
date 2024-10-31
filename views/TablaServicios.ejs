@@ -48,7 +48,7 @@
             <% results.forEach((servicio) => { %>
                 <tr>
                 <td scope="row" class="table-primary"><%= servicio.Nombre %></td>
-                <td><button class="delete-btn" onclick="deleteRow(this)">❌</button></td>
+                <td><button> <a href="/deleteservicio/<%= servicio.Id %>  ">❌</a></button></td>
                 <td>
                 </tr>
                 
