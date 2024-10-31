@@ -295,7 +295,15 @@ app.get("/registro",authMiddleware, (req,res) => {
 });
 
 app.get("/registrocliente",authMiddleware, (req,res) => {
-    res.render('registrocliente');
+     // Realiza la consulta y renderiza la vista con los resultados
+     connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre FROM colaboradores', (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.render('registrocliente', { results: results });
+        }
+    });
+   
 });
 
 //Este codigo permite verificar el usuario que vas a editar
@@ -318,6 +326,29 @@ app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
             throw error;
         } else {
             res.render('EditarColaboradores', { colaborador: results[0] });
+        }
+    });
+});
+
+app.get('/editclients/respon/:responsable', authMiddleware, (req,res) => {
+    const nombreColaborador = req.params.responsable;
+    connection.query('SELECT * FROM colaboradores WHERE nombre=?',[nombreColaborador],(error,results) => {
+        if(error) {
+            throw error;
+        } else {
+            res.render('EditarColaboradores', { colaborador: results[0] });
+        }
+    });
+});
+
+
+app.get('/editclient/cliente/:cliente', authMiddleware, (req,res) => {
+    const nombrecliente = req.params.cliente;
+    connection.query('SELECT * FROM tabcliente WHERE nombre=?',[nombrecliente],(error,results) => {
+        if(error) {
+            throw error;
+        } else {
+            res.render('EditarCliente', { cliente: results[0] });
         }
     });
 });

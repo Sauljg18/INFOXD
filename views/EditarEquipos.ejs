@@ -113,7 +113,7 @@
                                     <tbody>
                                         <tr>
                                         <td> <%= tarea.descripcion %></td>
-                                        <td> <%= tarea.colaborador %></td>
+                                        <td><a href="/editcola/nombre/<%= tarea.colaborador %>"> <%= tarea.colaborador %></a></td>
                                         <td><%= tarea.prioridad %></td>
                                         <td><%= tarea.status %></td>
                                     </tr>
@@ -128,6 +128,8 @@
                 </div>
             </form>   
         <% } %>  
+
+        
         <script src="/resources/javascript/RegistroEquipos.js"></script>  
         <script src="/resources/javascript/FormClean.js"></script>
     </div>
