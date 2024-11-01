@@ -62,10 +62,10 @@
                   </div>
                   <div id="General" class="space">
                     <form method="post" action="/aceptartarea">
-                      <input type="text" name="id_tarea" id="id_tarea" hidden>
+                      <input type="text" name="id_tarea" id="id_tarea" class="event-id" hidden>
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
                       <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
-                      <select name="cliente" id="cliente" class="event-name">
+                      <select name="cliente" id="cliente" class="event-cliente">
                         <% 
                         const uniqueClientes = [];
                         results.forEach((row) => {
@@ -144,34 +144,27 @@
                         </div>
                       </div>
                     </div>
+                
+
+                    <div id="eventsContainer" class="events-container"></div>
+
+                    <!-- Modal para mostrar los detalles -->
+                    <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                      <div class="modal-content">
+                        <button class="close-btn" onclick="closeModal()" aria-label="Cerrar modal">&times;</button>
+                        <div class="diseño2">
+                          <label for="cliente" style="color: rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
+                          <input type="text" id="modalCliente" readonly /><br>
+                          <label for="colaborador" style="color: rgb(255, 255, 255)">La tarea será colaborada por:</label><br>
+                          <input type="text" id="modalColaborador" readonly /><br>
+                          <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label><br>
+                          <input type="text" id="modalDescripcion" readonly /><br>
+                        </div>
+                      </div>
+                    </div>
                     <button class="add-event">
                       <i class="fas fa-plus"></i>
                     </button>
-
-
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <div class="diseño2">
-      <label for="cliente" style="color:rgb(175, 41, 41)">Tarea será ejecutada por:</label><br>
-      <input id="cliente"></input>                                          
-      <label for="colaborador" style="color: rgb(141, 77, 77)">La tarea sera colaborada por:</label><br>
-      <input id="colaborador"></input>        
-      <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
-      <input  name="fecha" id="fecha"><br>
-      <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
-      <input id="tipo"></input><br>
-      <!-- Filtra los nombres de clientes para evitar duplicados -->
-      <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
-      <input id="equipo"></input>  
-      <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
-      <input value="alta" id="prioridad"></input>
-      <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
-      <input name="descripcion" id="descripcion" rows="4"></input>
-    </div>
-  </div>
-</div>
-
 <script src="/resources/javascript/GenerarId.js"></script>
 <script src="/resources/javascript/agenda.js"></script>
 </main>

@@ -12,7 +12,8 @@ const calendar = document.querySelector(".calendar"),
   addEventBtn = document.querySelector(".add-event"),
   addEventWrapper = document.querySelector(".add-event-wrapper "),
   addEventCloseBtn = document.querySelector(".close "),
-  addEventTitle = document.querySelector(".event-name"),
+  addEventCliente= document.querySelector(".event-cliente"),
+  addEventid = document.querySelector(".event-id"),
   addEventColaborador = document.querySelector(".event-colaborador"),
   addEventDescripcion = document.querySelector(".event-descripcion"),
   addEventtipo = document.querySelector(".event-tipo"),
@@ -32,46 +33,28 @@ const calendar = document.querySelector(".calendar"),
     botonactivar.style.display='block';   //Vista reaccion a boton
   }
 
-  function abrirModalTarea(idTarea) {
-    console.log("ID de la tarea seleccionada:", idTarea); // Verifica si el ID llega correctamente
-
-    fetch(`/api/tareas/${idTarea}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error en la petición a la API');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Datos recibidos:", data); // Verifica si los datos llegan correctamente
-
-            if (data) {
-                // Llenar los campos del modal con los datos recibidos
-                document.getElementById('cliente').value = data.cliente || '';
-                document.getElementById('colaborador').value = data.colaborador || '';
-                document.getElementById('fecha').value = data.fecha || '';
-                document.getElementById('tipo').value = data.tipo || '';
-                document.getElementById('equipo').value = data.equipo || '';
-                document.getElementById('prioridad').value = data.prioridad || '';
-                document.getElementById('descripcion').value = data.descripcion || '';
-                
-                // Mostrar el modal
-                document.getElementById('modal').style.display = 'block';
-            } else {
-                alert('No se encontraron datos para esta tarea.');
-            }
-        })
-        .catch(error => {
-            console.error('Error al cargar la tarea:', error);
-            alert('Hubo un problema al cargar los datos.');
-        });
-}
-
-// Función para cerrar el modal
-function closeModal() {
+  function openModal(id) {
+    // Realiza una solicitud para obtener los datos de la tarea específica
+    fetch(`/tarea/${id}`)
+      .then(response => {
+        if (!response.ok) throw new Error("No se pudo cargar la tarea");
+        return response.json();
+      })
+      .then(data => {
+        // Llenar los campos del modal con los datos de la tarea
+        document.getElementById('modalCliente').value = data.cliente;
+        document.getElementById('modalColaborador').value = data.colaborador;
+        document.getElementById('modalDescripcion').value = data.descripcion;
+        
+        // Mostrar el modal
+        document.getElementById('modal').style.display = 'block';
+      })
+      .catch(error => console.error('Error al cargar los datos de la tarea:', error));
+  }
+  
+  function closeModal() {
     document.getElementById('modal').style.display = 'none';
-}
-
+  }
 
 let today = new Date();
 let activeDay;
@@ -293,62 +276,12 @@ function getActiveDay(date) {
   eventDate.innerHTML = date + " " + months[month] + " " + year;
 }
 
-//function update events when a day is active
-function updateEvents(date) {
-  let events = "";
-  console.log('Eventos del día:', eventsArr); // Debugging
-
-  eventsArr.forEach((event) => {
-    if (
-      date === event.day &&
-      month + 1 === event.month &&
-      year === event.year
-    ) {
-      event.events.forEach((event) => {
-        events += `<div class="event" onclick="openModal('${event.title}', '${event.id_tarea}')">
-            <div class="title">
-              <i class="fas fa-circle"></i>
-              <h3 class="event-title">${event.title}</h3>
-            </div>
-            <div class="title">
-              <i class="fas fa-circle"></i>
-              <h3 class="event-title">${event.colaborador}</h3>
-            </div>
-             <div class="title">
-              <i class="fas fa-circle"></i>
-              <h3 class="event-title">${event.descripcion}</h3>
-            </div>
-        </div>`;
-      });
-    }
-  });
-
-  if (events === "") {
-    events = `<div class="no-event">
-            <h3>No Events</h3>
-        </div>`;
-  }
-  eventsContainer.innerHTML = events;
-  saveEvents();
-}
-
-
-function openModal(title, id_tarea) {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'block';
-  
-  // Asignamos los datos al modal
-  document.querySelector('.modal-title').textContent = title;
-  document.querySelector('.modal-id').textContent = id_tarea;
-
-  console.log('Modal abierto con:', { title, id_tarea }); // Debugging
-}
-
-//function to add event
+// Evento para abrir el formulario de nueva tarea
 addEventBtn.addEventListener("click", () => {
   addEventWrapper.classList.toggle("active");
 });
 
+// Evento para cerrar el formulario de nueva tarea
 addEventCloseBtn.addEventListener("click", () => {
   addEventWrapper.classList.remove("active");
 });
@@ -359,9 +292,46 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// Función para actualizar los eventos en el contenedor
+function updateEvents(date) {
+  let events = "";
+  eventsArr.forEach((event) => {
+    if (
+      date === event.day &&
+      month + 1 === event.month &&
+      year === event.year
+    ) {
+      event.events.forEach((event) => {
+        events += `<div class="event" onclick="openModal('${event.id}')">
+          <div class="cliente">
+            <h3 class="event-cliente">${event.cliente}</h3>
+          </div>
+          <div class="colaborador">
+            <h3 class="event-colaborador">${event.colaborador}</h3>
+          </div>
+          <div class="descripcion">
+            <h3 class="event-descripcion">${event.descripcion}</h3>
+          </div>
+        </div>`;
+      });
+    }
+  });
+
+  if (events === "") {
+    events = `<div class="no-event"><h3>No Events</h3></div>`;
+  }
+  eventsContainer.innerHTML = events;
+  saveEvents();
+}
+
+
 //allow 50 chars in eventtitle
-addEventTitle.addEventListener("input", (e) => {
-  addEventTitle.value = addEventTitle.value.slice(0, 60);
+addEventid.addEventListener("input", (e) => {
+  addEventid.value = addEventid.value.slice(0, 60);
+});
+
+addEventCliente.addEventListener("input", (e) => {
+  addEventCliente.value = addEventCliente.value.slice(0, 60);
 });
 
 addEventColaborador.addEventListener("input", (e) => {
@@ -392,11 +362,12 @@ function defineProperty() {
 
 //function to add event to eventsArr
 addEventSubmit.addEventListener("click", () => {
-  
-  const eventTitle = addEventTitle.value;
+
+  const eventid = addEventid.value;
+  const eventCliente = addEventCliente.value;
   const eventColaborador = addEventColaborador.value;
   const eventDescripcion = addEventDescripcion.value;
-  if ( eventColaborador === "" || eventTitle === "" || eventDescripcion === "") {
+  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "") {
     alert("Please fill all the fields");
     return;
   }
@@ -409,7 +380,10 @@ addEventSubmit.addEventListener("click", () => {
       event.year === year
     ) {
       event.events.forEach((event) => {
-        if (event.title === eventTitle) {
+        if (event.id === eventid) {
+          eventExist = true;
+        }
+        if (event.cliente === eventCliente) {
           eventExist = true;
         }
         if (event.colaborador === eventColaborador) {
@@ -423,7 +397,8 @@ addEventSubmit.addEventListener("click", () => {
   });
   
   const newEvent = {
-    title: eventTitle,
+    id: eventid,
+    cliente: eventCliente,
     colaborador: eventColaborador,
     descripcion: eventDescripcion,
   };
@@ -453,7 +428,8 @@ addEventSubmit.addEventListener("click", () => {
   }
   console.log(eventsArr);
   addEventWrapper.classList.remove("active");
-  addEventTitle.value = "";
+  addEventid.value = "";
+  addEventCliente.value = "";
   addEventColaborador.value = "";
   addEventDescripcion.value = "";
   const tarea = req.body;
@@ -467,57 +443,14 @@ addEventSubmit.addEventListener("click", () => {
   }
 });
 
-//function to delete event when clicked on event
-/*
-eventsContainer.addEventListener("click", (e) => {
-  if (e.target.classList.contains("event")) {
-    if (confirm("Are you sure you want to delete this event?")) {
-      const eventTitle = e.target.children[0].children[1].innerHTML;
-      const eventColaborador = e.target.children[0].children[1].innerHTML;
-    
-      eventsArr.forEach((event) => {
-        if (
-          event.day === activeDay &&
-          event.month === month + 1 &&
-          event.year === year
-        ) {
-          event.events.forEach((item, index) => {
-            if (item.title === eventTitle) {
-              event.events.splice(index, 1);
-            }
-            if (item.colaborador === eventColaborador) {
-              event.events.splice(index, 1);
-            }
-            
-          });
-          //if no events left in a day then remove that day from eventsArr
-          if (event.events.length === 0) {
-            eventsArr.splice(eventsArr.indexOf(event), 1);
-            //remove event class from day
-            const activeDayEl = document.querySelector(".day.active");
-            if (activeDayEl.classList.contains("event")) {
-              activeDayEl.classList.remove("event");
-            }
-          }
-        }
-      });
-      updateEvents(activeDay);
-    }
-  }
-});
-*/
-
-//function to save events in local storage
+// Funciones de almacenamiento
 function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventsArr));
 }
 
-//function to get events from local storage
 function getEvents() {
-  //check if events are already saved in local storage then return event else nothing
   if (localStorage.getItem("events") === null) {
     return;
   }
   eventsArr.push(...JSON.parse(localStorage.getItem("events")));
 }
-
