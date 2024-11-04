@@ -13,6 +13,18 @@ app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.get("/event/:id", (req, res) => {
+    const eventId = req.params.id;
+    db.query("SELECT * FROM tarea WHERE id = ?", [eventId], (err, result) => {
+        if (err) {
+            res.status(500).json({ error: "Error al obtener el evento" });
+        } else if (result.length > 0) {
+            res.json(result[0]);
+        } else {
+            res.status(404).json({ error: "Evento no encontrado" });
+        }
+    });
+});
 
 // Ruta POST para agregar el servicio
 app.post('/agregar-servicio', (req, res) => {

@@ -21,7 +21,6 @@ const calendar = document.querySelector(".calendar"),
   addEventTo = document.querySelector(".event-time-to "),
   addEventSubmit = document.querySelector(".add-event-btn ");
   
- 
   let botonactivar = document.getElementById("activar");
   let botonguardar = document.getElementById("guardar");
 
@@ -31,46 +30,6 @@ const calendar = document.querySelector(".calendar"),
   botonguardar.onclick =function(){     //Funcion de boton 01
     botonactivar.style.display='block';   //Vista reaccion a boton
   }
-
-  function abrirModalTarea(id_tarea) {
-    console.log("ID de la tarea seleccionada:", id_tarea); // Verifica si el ID llega correctamente
-
-    fetch(`/api/tareas/${id_tarea}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error en la petición a la API');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Datos recibidos:", data); // Verifica si los datos llegan correctamente
-
-            if (data) {
-                // Llenar los campos del modal con los datos recibidos
-                document.getElementById('cliente').value = data.cliente || '';
-                document.getElementById('colaborador').value = data.colaborador || '';
-                document.getElementById('fecha').value = data.fecha || '';
-                document.getElementById('tipo').value = data.tipo || '';
-                document.getElementById('equipo').value = data.equipo || '';
-                document.getElementById('prioridad').value = data.prioridad || '';
-                document.getElementById('descripcion').value = data.descripcion || '';
-                
-                // Mostrar el modal
-                document.getElementById('modal').style.display = 'block';
-            } else {
-                alert('No se encontraron datos para esta tarea.');
-            }
-        })
-        .catch(error => {
-            console.error('Error al cargar la tarea:', error);
-            alert('Hubo un problema al cargar los datos.');
-        });
-}
-
-// Función para cerrar el modal
-function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-}
 
 
 let today = new Date();
@@ -305,7 +264,7 @@ function updateEvents(date) {
       year === event.year
     ) {
       event.events.forEach((event) => {
-        events += `<div class="event" onclick="abrirModalTarea('${event.id_tarea}')">
+        events += `<div class="event" onclick="abriModalTarea('${event.id_tarea}')">
             <div class="title">
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.title}</h3>
@@ -330,18 +289,6 @@ function updateEvents(date) {
   }
   eventsContainer.innerHTML = events;
   saveEvents();
-}
-
-
-function openModal(title, id_tarea) {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'block';
-  
-  // Asignamos los datos al modal
-  document.querySelector('.modal-title').textContent = title;
-  document.querySelector('.modal-id').textContent = id_tarea;
-
-  console.log('Modal abierto con:', { title, id_tarea }); // Debugging
 }
 
 //function to add event
@@ -392,7 +339,7 @@ function defineProperty() {
 
 //function to add event to eventsArr
 addEventSubmit.addEventListener("click", () => {
-  
+
   const eventTitle = addEventTitle.value;
   const eventColaborador = addEventColaborador.value;
   const eventDescripcion = addEventDescripcion.value;
@@ -465,6 +412,49 @@ addEventSubmit.addEventListener("click", () => {
   if (!activeDayEl.classList.contains("event")) {
     activeDayEl.classList.add("event");
   }
+});
+
+document.querySelectorAll(".day.event").forEach(dayEl => {
+  dayEl.addEventListener("click", async () => {
+    const eventId = dayEl.dataset.eventId; // ID del evento
+
+    try {
+      const response = await fetch(`/event/${eventId}`);
+      const eventData = await response.json();
+
+      if (eventData) {
+        showEventModal(eventData);
+      } else {
+        alert("Evento no encontrado");
+      }
+    } catch (error) {
+      console.error("Error al obtener el evento:", error);
+    }
+  });
+});
+
+function showEventModal(event) {
+  document.getElementById("cliente").value = event.cliente;
+  document.getElementById("colaborador").value = event.colaborador;
+  document.getElementById("fecha").value = event.fecha;
+  document.getElementById("tipo").value = event.tipo;
+  document.getElementById("equipo").value = event.equipo;
+  document.getElementById("prioridad").value = event.prioridad;
+  document.getElementById("descripcion").value = event.descripcion;
+
+  document.getElementById("modal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+document.querySelectorAll('.event-item').forEach(item => {
+  item.addEventListener('click', (event) => {
+    const eventId = item.getAttribute('data-id');
+    console.log("ID del evento seleccionado:", eventId);
+    // Aquí puedes hacer la petición al servidor usando el ID
+  });
 });
 
 //function to delete event when clicked on event
