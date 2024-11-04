@@ -16,6 +16,7 @@ const calendar = document.querySelector(".calendar"),
   addEventid = document.querySelector(".event-id"),
   addEventColaborador = document.querySelector(".event-colaborador"),
   addEventDescripcion = document.querySelector(".event-descripcion"),
+  addEventfecha = document.querySelector(".event-fecha"),
   addEventtipo = document.querySelector(".event-tipo"),
   addEventduracion = document.querySelector(".event-duracion"),
   addEventFrom = document.querySelector(".event-time-from "),
@@ -45,6 +46,8 @@ const calendar = document.querySelector(".calendar"),
         document.getElementById('modalCliente').value = data.cliente;
         document.getElementById('modalColaborador').value = data.colaborador;
         document.getElementById('modalDescripcion').value = data.descripcion;
+        document.getElementById('modalfecha').value = data.fecha;
+        document.getElementById('modaltipo').value = data.tipo;
         
         // Mostrar el modal
         document.getElementById('modal').style.display = 'block';
@@ -312,6 +315,12 @@ function updateEvents(date) {
           <div class="descripcion">
             <h3 class="event-descripcion">${event.descripcion}</h3>
           </div>
+          <div class="fecha" hidden>
+            <h3 class="event-fecha">${event.fecha}</h3>
+          </div>
+          <div class="tipo" hidden>
+            <h3 class="event-tipo">${event.tipo}</h3>
+          </div>
         </div>`;
       });
     }
@@ -342,6 +351,14 @@ addEventDescripcion.addEventListener("input", (e) => {
   addEventDescripcion.value = addEventDescripcion.value.slice(0, 60);
 });
 
+addEventfecha.addEventListener("input", (e) => {
+  addEventfecha.value = addEventfecha.value.slice(0, 60);
+});
+
+addEventtipo.addEventListener("select", (e) => {
+  addEventtipo.value = addEventtipo.value.slice(0, 60);
+});
+
 
 function defineProperty() {
   var osccred = document.createElement("div");
@@ -367,7 +384,9 @@ addEventSubmit.addEventListener("click", () => {
   const eventCliente = addEventCliente.value;
   const eventColaborador = addEventColaborador.value;
   const eventDescripcion = addEventDescripcion.value;
-  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "") {
+  const eventfecha= addEventfecha.value;
+  const eventtipo= addEventtipo.value;
+  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "" || eventtipo === "") {
     alert("Please fill all the fields");
     return;
   }
@@ -392,6 +411,12 @@ addEventSubmit.addEventListener("click", () => {
         if (event.descripcion === eventDescripcion) {
           eventExist = true;
         }
+        if (event.fecha === eventfecha) {
+          eventExist = true;
+        }
+        if (event.tipo === eventtipo) {
+          eventExist = true;
+        }
       });
     }
   });
@@ -401,6 +426,8 @@ addEventSubmit.addEventListener("click", () => {
     cliente: eventCliente,
     colaborador: eventColaborador,
     descripcion: eventDescripcion,
+    fecha: eventfecha,
+    tipo: eventtipo,
   };
   console.log(newEvent);
   console.log(activeDay);
@@ -432,6 +459,8 @@ addEventSubmit.addEventListener("click", () => {
   addEventCliente.value = "";
   addEventColaborador.value = "";
   addEventDescripcion.value = "";
+  addEventfecha.value = "";
+  addEventtipo.value = "";
   const tarea = req.body;
   // Corregir los nombres de las variables para que coincidan con el formulario
 

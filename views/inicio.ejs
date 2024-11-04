@@ -95,11 +95,9 @@
                   </form>
                               </select><br>
                               <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
-                              <input type="date" name="fecha" id="fecha"><br>
-                              <label for="hora" style="color: rgb(250, 250, 250)">Hora:</label><br>
-                              <input type="time" name="hora" id="hora"><br>
+                              <input type="date" name="fecha" id="fecha" class="event-fecha"><br>
                               <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
-                              <select name="tipo" id="tipo">
+                              <select name="tipo" id="tipo" class="event-tipo">
                                   <option value="tipo">Seleccionar Tipo</option><br>
                                   <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
                               </select><br>
@@ -157,6 +155,10 @@
                           <input type="text" id="modalCliente" readonly /><br>
                           <label for="colaborador" style="color: rgb(255, 255, 255)">La tarea será colaborada por:</label><br>
                           <input type="text" id="modalColaborador" readonly /><br>
+                          <label for="fecha" style="color: rgb(255, 255, 255);">Fecha de la tarea:</label><br>
+                          <input type="text" id="modalfecha" readonly /><br>
+                          <label for="tipo" style="color: rgb(255, 255, 255);">Tipo de la tarea:</label><br>
+                          <input type="text" id="modaltipo" readonly /><br>
                           <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label><br>
                           <input type="text" id="modalDescripcion" readonly /><br>
                         </div>
