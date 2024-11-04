@@ -272,23 +272,22 @@ app.get("/tarea",authMiddleware, (req, res) => {
         }
     });
 });
-    
+
 app.get('/tarea/:id', (req, res) => {
     const tareaId = req.params.id;
-  
     // Consulta SQL para obtener la tarea por su ID
     const query = 'SELECT * FROM tareas WHERE id_tarea = ?';
     connection.query(query, [tareaId], (err, results) => {
-      if (err) {
+    if (err) {
         console.error('Error al obtener los datos de la tarea:', err);
         res.status(500).send('Error al obtener los datos');
-      } else if (results.length > 0) {
+    } else if (results.length > 0) {
         res.json(results[0]); // Devuelve la primera tarea encontrada en formato JSON
-      } else {
+    } else {
         res.status(404).send('Tarea no encontrada');
-      }
-    });
-  });
+    }
+});
+});
 
 app.get("/registro",authMiddleware, (req,res) => {
     res.render('colaboradores');
@@ -296,14 +295,13 @@ app.get("/registro",authMiddleware, (req,res) => {
 
 app.get("/registrocliente",authMiddleware, (req,res) => {
      // Realiza la consulta y renderiza la vista con los resultados
-     connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre FROM colaboradores', (error, results) => {
+    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre FROM colaboradores', (error, results) => {
         if (error) {
             throw error;
         } else {
             res.render('registrocliente', { results: results });
         }
     });
-   
 });
 
 //Este codigo permite verificar el usuario que vas a editar
@@ -316,7 +314,7 @@ app.get('/editcliente/:id_cliente',authMiddleware, (req,res) => {
         res.render('EditarCliente',{cliente:results[0]});
     }
 })
-    });
+});
 
 // Permite editar los datos del colaborador basado en el nombre
 app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
@@ -547,17 +545,15 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         let valor3 = equipo.valor3
         let Atributo_extra = equipo.Atributo_extra;
         let extra = equipo.extra
-
         let registra = "INSERT INTO tablaequipos (IdEquipo, Nombre, Identificador, Fecha, Descripcion, Asociar, Atributo, valor, Atributo_2, valor2, Atributo_3, valor3, Atributo_extra, extra) VALUE ('"+IdEquipo+"','"+Nombre +"','"+Identificador +"','"+Fecha +"','"+Describir +"','"+Asociar +"','"+Atributo +"','"+valor +"','"+Atributo_2 +"','"+valor2 +"','"+Atributo_3 +"','"+valor3 +"','"+Atributo_extra +"','"+extra +"')";
-
         connection.query(registra,function(error){
             if(error){
-            throw error;
+                throw error;
             }else{
-            console.log("Datos almacenados correctamente"); 
+                console.log("Datos almacenados correctamente"); 
         }
-        });
     });
+});
     
         app.post("/updateequipo", function(req,res){ //UPDATE DE EQUIPOS
             const equipo = req.body;
@@ -726,22 +722,18 @@ app.post('/finalizar-tarea', (req, res) => {
 
 app.post('/reactivar-tarea', (req, res) => {
     const { id_tarea } = req.body;
-  
     // Aquí actualizamos el estado de la tarea en la base de datos
     const query = 'UPDATE tareas SET status = ? WHERE id_tarea = ?';
     const values = ['ACTIVO', id_tarea];
-  
     connection.query(query, values, (error, results) => {
     if (error) {
         console.error(error);
         return res.json({ success: false });
     }
-  
       // Si la actualización fue exitosa
     return res.json({ success: true });
     });
-  });
-  
+});
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 const PORT = process.env.PORT || 3000;
