@@ -24,7 +24,7 @@
   background-color: #393939; /* Fondo oscuro para resaltar contenido */
   border-radius: 10px;
   top: 10px;
-  width: 100%;
+  width: 110%;
   height: 400px;
   overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
 }
@@ -88,7 +88,7 @@
 }
 
 .containert {
-    max-width: 1000px;
+    width: 110%;
     margin: 0 auto;
     background-color: rgb(208, 208, 208);
     padding: 40px;
