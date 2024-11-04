@@ -697,7 +697,6 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     let cliente = tarea.cliente;
     let colaborador = tarea.colaborador;
     let fecha = tarea.fecha;
-    let hora = tarea.hora; // Cambié de 'carga' a 'cargo' para mejor comprensión.
     let tipo = tarea.tipo;
     let equipo = tarea.equipo;
     let prioridad = tarea.prioridad;
@@ -705,7 +704,7 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     let activate = tarea.activo;
 
 
-    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, hora, tipo, equipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+hora +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
+    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, tipo, equipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
                 
     connection.query(registrar,function(error){
     if(error){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2024 a las 17:56:31
+-- Tiempo de generación: 04-11-2024 a las 19:26:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -47,13 +47,12 @@ CREATE TABLE `colaboradores` (
 --
 
 INSERT INTO `colaboradores` (`idcolaborador`, `nombre`, `usuario`, `correo`, `cargo`, `contacto`, `acceso`, `contrasena`, `confirmar`, `checar`, `valor`, `foto`) VALUES
-(1, 'Rafa', 'Uwu', 'rafa@gmail.com', 'volvo', 998957662, 'usuario', '123456', '123456', 'auto', 42, 'Sousou-no-Frieren.jpg'),
 (2, 'Saul', 'Sauljg', 'sauljeje@gmail.com', 'volvo', 98555412, 'admin', '123456789', '123456789', 'auto', 32, 'dragon-ball-fighterz-logo-2B22AC6F48-seeklogo.com.png'),
 (3, 'Rafa1', 'aguaUwu', 'uwu@gmail.com', 'volvo', 998957662, 'super', '12345678', '12364587', 'manual', 787798, ''),
 (4, 'Rafa', 'Uwu', 'rafa@gmail.com', 'administrador', 99895471, 'supervisor', '12345678', '12364587', 'auto', 42, 'dragon-ball-fighterz-logo-2B22AC6F48-seeklogo.com.png'),
 (5, 'sdsd', 'admon.info', 'djeidj', 'administrador', 79878744, 'supervisor', '12345678', '12364587', 'manual', 42, '6c79d385bfdc8def563ea5bce8dc2d23.png'),
 (6, 'ccccc', 'ccc', 'cccc', 'administrador', 0, 'administrador', 'cdcdc', 'cxcx', 'auto', 444, ''),
-(7, 'g', 'Uwu', 'senajaja@gmail.com', 'supervisor', 7879848, 'supervisor', 'wdwddwd', 'dwdwdwd', 'manual', 34, '6c79d385bfdc8def563ea5bce8dc2d23.png');
+(7, 'Felipe', 'Uwu', 'senajaja@gmail.com', 'administrador', 7879848, 'supervisor', 'wdwddwd', 'dwdwdwd', 'manual', 34, '');
 
 -- --------------------------------------------------------
 
@@ -72,17 +71,12 @@ CREATE TABLE `servicios` (
 --
 
 INSERT INTO `servicios` (`Id`, `Nombre`, `Precios`) VALUES
-(1, 'lolilo', 25),
-(2, 'lolilo', 220),
 (3, 'lolilo', 320),
-(4, 'pupu', 150),
 (5, 'RAFAAAA', 552),
 (6, 'joe', 200),
 (7, 'lolilo', 500),
 (8, 'joe', 500),
-(9, 'pupu', 200),
-(10, 'lolilo', 220),
-(11, 'lolilo', 220);
+(9, 'pupu', 200);
 
 -- --------------------------------------------------------
 
@@ -117,7 +111,8 @@ CREATE TABLE `tabcliente` (
 INSERT INTO `tabcliente` (`id_cliente`, `nombre`, `identificacion`, `razon`, `codigoext`, `telefonocorp`, `correocliente`, `cliente`, `responsable`, `observacion`, `postal`, `direccion`, `num_ext`, `num_int`, `region`, `ciudad`, `estado`) VALUES
 (1, 'Luis', 0, '3', 77534, 2147483647, 'dewer@gmail.com', 'duudud', 'd', 'd', 77534, 'av. kibi', 0, 0, 'quintana roo', 'CANCUN', 'quintana roo'),
 (2, 'GUSTABO', 0, 'PDO', 22321, 99857472, 'jorge@gmail.com', 'dingon', 'ojo', 'wuapo', 76654, 'av.colav', 0, 0, 'quintana roo', 'CANCUN', 'quintana roo'),
-(3, 'lopez', 0, 'fjejd', 5311, 9987948, 'sifi@gmail.com', 'fufu', 'fheudcc', 'finjicnudnc', 784521, 'av. pupu', 0, 0, 'quintana roo', 'CANCUN', 'quintana roo');
+(3, 'lopez', 0, 'fjejd', 5311, 9987948, 'sifi@gmail.com', 'fufu', 'fheudcc', 'finjicnudnc', 784521, 'av. pupu', 0, 0, 'quintana roo', 'CANCUN', 'quintana roo'),
+(4, 'Rodrigo', 43, 'nose', 12, 2147483647, 'jueg@gmail.com', 'fufu', 'Saul', 'mjefmjfnjenfje', 77421, 'av. kghb', 0, 5, 'quintana roo', 'CANCUN', 'quintana roo');
 
 -- --------------------------------------------------------
 
@@ -194,11 +189,10 @@ INSERT INTO `tabproducto` (`Idproducto`, `Nombre`, `Valor`, `Costo`, `Stocks`, `
 --
 
 CREATE TABLE `tareas` (
-  `id_tarea` int(100) NOT NULL,
+  `id_tarea` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `cliente` text NOT NULL,
   `colaborador` text NOT NULL,
   `fecha` date NOT NULL,
-  `hora` time(6) NOT NULL,
   `tipo` text NOT NULL,
   `equipo` varchar(150) NOT NULL,
   `prioridad` text NOT NULL,
@@ -210,19 +204,34 @@ CREATE TABLE `tareas` (
 -- Volcado de datos para la tabla `tareas`
 --
 
-INSERT INTO `tareas` (`id_tarea`, `cliente`, `colaborador`, `fecha`, `hora`, `tipo`, `equipo`, `prioridad`, `descripcion`, `status`) VALUES
-(1, 'GUSTABO', 'Saul', '2024-09-12', '00:00:00.000000', '', '0', 'alta', 'Unos Pedillos', 'FINALIZADO'),
-(2, 'GUSTABO', 'Saul', '2024-09-12', '23:43:00.000000', '', '0', 'alta', 'Unos Pedillos', 'ACTIVO'),
-(3, 'x', 'Rafa', '2024-09-27', '20:44:00.000000', 'Actualizacion de Base de datos', '0', 'alta', 'jejeeeeeeeeee', 'FINALIZADO'),
-(4, 'GUSTABO', 'Rafa1', '2024-10-16', '21:02:00.000000', 'Actualizacion de Base de datos', 'Pc de Saul', 'alta', 'golazo', 'ACTIVO'),
-(5, 'Luis', 'Rafa1', '2024-10-16', '13:08:00.000000', 'Actualizacion de Base de datos', 'Alexis PC', 'alta', 'jejeeeee', 'ACTIVO'),
-(6, 'lopez', 'Rafa1', '2024-10-16', '13:08:00.000000', 'Actualizacion de Base de datos', 'Alexis PC', 'media', 'jejeo', 'ACTIVO'),
-(7, 'GUSTABO', 'Saul', '2024-10-16', '16:20:00.000000', 'Actualizacion de Base de datos', 'Pc de Saul', 'media', 'prueba tarea/equipo', 'ACTIVO'),
-(8, 'GUSTABO', 'sdsd', '2024-10-22', '17:17:00.000000', 'Actualizacion de Base de datos', 'EquipoDeJared', 'baja', 'ijijijijijij', 'Activo'),
-(9, 'GUSTABO', 'g', '2024-10-22', '13:53:00.000000', 'Actualizacion de Base de datos', 'Cine', 'media', 'Pasado de uva', 'Activo'),
-(10, 'Luis', 'sdsd', '2024-10-23', '13:57:00.000000', 'Actualizacion de Base de datos', 'Alexis PC', 'alta', 'juju', 'Activo'),
-(11, 'Luis', 'Rafa', '2024-10-22', '18:56:00.000000', 'Actualizacion de Base de datos', 'Rafa PC', 'alta', 'juaz', 'Activo'),
-(12, 'Luis', 'Rafa', '2024-10-30', '23:41:00.000000', 'Actualizacion de Base de datos', 'Cine', 'baja', 'gg', 'Activo');
+INSERT INTO `tareas` (`id_tarea`, `cliente`, `colaborador`, `fecha`, `tipo`, `equipo`, `prioridad`, `descripcion`, `status`) VALUES
+('', 'GUSTABO', 'Rafa1', '2024-11-05', 'Actualizacion de Base de datos', 'Mariana PC', 'alta', 'viene viene', 'Activo'),
+('0', 'Rodrigo', 'Rafa1', '2024-10-31', 'Actualizacion de Base de datos', 'Alexis PC', 'baja', 'huuuuu', 'Activo'),
+('1', 'GUSTABO', 'Saul', '2024-09-12', '', '0', 'alta', 'Unos Pedillos', 'FINALIZADO'),
+('10', 'Luis', 'sdsd', '2024-10-23', 'Actualizacion de Base de datos', 'Alexis PC', 'alta', 'juju', 'Activo'),
+('11', 'Luis', 'Rafa', '2024-10-22', 'Actualizacion de Base de datos', 'Rafa PC', 'alta', 'juaz', 'Activo'),
+('12', 'Luis', 'Rafa', '2024-10-30', 'Actualizacion de Base de datos', 'Cine', 'baja', 'gg', 'Activo'),
+('13', 'Rodrigo', 'Saul', '0000-00-00', 'Actualizacion de Base de datos', 'Master PC', 'media', 'domingo por la tarde', 'Activo'),
+('14', 'Rodrigo', 'Saul', '2024-10-31', 'Actualizacion de Base de datos', 'Alexis PC', 'media', 'debe de funcionar', 'Activo'),
+('15', 'Rodrigo', 'Saul', '2024-10-31', 'Actualizacion de Base de datos', 'Cine', 'media', 'poooorfavooor', 'Activo'),
+('16', 'Rodrigo', 'Saul', '2024-10-31', 'Actualizacion de Base de datos', 'EquipoDeOficina', 'media', 'locooooooooooooo', 'Activo'),
+('16667', 'GUSTABO', 'Rafa', '2024-11-04', 'Actualizacion de Base de datos', 'EquipoDeOficina', 'media', 'MAMAHUEVO', 'Activo'),
+('17', 'Rodrigo', 'sdsd', '2024-10-31', 'Actualizacion de Base de datos', 'Mariana PC', 'alta', 'locooooooooooooo2', 'Activo'),
+('2', 'GUSTABO', 'Saul', '2024-09-12', '', '0', 'alta', 'Unos Pedillos', 'ACTIVO'),
+('2541', 'GUSTABO', 'g', '2024-10-31', 'Actualizacion de Base de datos', 'EquipoDeOficina', 'media', 'viene viene', 'Activo'),
+('25824', 'Rodrigo', 'Rafa', '2024-11-04', 'Actualizacion de Base de datos', 'Alexis PC', 'media', 'kokokok', 'Activo'),
+('3', 'x', 'Rafa', '2024-09-27', 'Actualizacion de Base de datos', '0', 'alta', 'jejeeeeeeeeee', 'FINALIZADO'),
+('4', 'GUSTABO', 'Rafa1', '2024-10-16', 'Actualizacion de Base de datos', 'Pc de Saul', 'alta', 'golazo', 'ACTIVO'),
+('40634', 'GUSTABO', 'Rafa', '2024-11-04', 'Actualizacion de Base de datos', 'Alexis PC', 'media', 'MAMAHUEVO', 'Activo'),
+('5', 'Luis', 'Rafa1', '2024-10-16', 'Actualizacion de Base de datos', 'Alexis PC', 'alta', 'jejeeeee', 'ACTIVO'),
+('52691', 'GUSTABO', 'ccccc', '2024-11-05', 'Actualizacion de Base de datos', 'Cine', 'alta', 'MAMAHUEVO2', 'Activo'),
+('6', 'lopez', 'Rafa1', '2024-10-16', 'Actualizacion de Base de datos', 'Alexis PC', 'media', 'jejeo', 'ACTIVO'),
+('61596', 'Luis', 'Saul', '2024-11-05', 'Actualizacion de Base de datos', 'Alexis PC', 'alta', 'MAMAHUEVO', 'Activo'),
+('7', 'GUSTABO', 'Saul', '2024-10-16', 'Actualizacion de Base de datos', 'Pc de Saul', 'media', 'prueba tarea/equipo', 'ACTIVO'),
+('8', 'GUSTABO', 'sdsd', '2024-10-22', 'Actualizacion de Base de datos', 'EquipoDeJared', 'baja', 'ijijijijijij', 'Activo'),
+('89038', 'Rodrigo', 'Rafa1', '2024-10-31', 'Actualizacion de Base de datos', 'EquipoDeJared', 'alta', 'jijijijja', 'Activo'),
+('9', 'GUSTABO', 'g', '2024-10-22', 'Actualizacion de Base de datos', 'Cine', 'media', 'Pasado de uva', 'Activo'),
+('96679', 'Rodrigo', 'Rafa1', '2024-10-31', 'Actualizacion de Base de datos', 'EquipoDeJared', 'alta', '96 pesos', 'Activo');
 
 --
 -- Índices para tablas volcadas
@@ -284,7 +293,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `tabcliente`
 --
 ALTER TABLE `tabcliente`
-  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tablaequipos`
@@ -297,12 +306,6 @@ ALTER TABLE `tablaequipos`
 --
 ALTER TABLE `tabproducto`
   MODIFY `Idproducto` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `tareas`
---
-ALTER TABLE `tareas`
-  MODIFY `id_tarea` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
