@@ -315,11 +315,11 @@ function updateEvents(date) {
           <div class="descripcion">
             <h3 class="event-descripcion">${event.descripcion}</h3>
           </div>
-          <div class="fecha" hidden>
-            <h3 class="event-fecha">${event.fecha}</h3>
+          <div class="fecha" >
+            <h3 class="event-fecha"></h3>
           </div>
-          <div class="tipo" hidden>
-            <h3 class="event-tipo">${event.tipo}</h3>
+          <div class="tipo" >
+            <h3 class="event-tipo"></h3>
           </div>
         </div>`;
       });
