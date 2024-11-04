@@ -23,7 +23,7 @@
   background-color: #393939; /* Fondo oscuro para resaltar contenido */
   border-radius: 10px;
   top: 10px;
-  width: 1400px;
+  width: 100%;
   height: 400px;
   overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
 }
