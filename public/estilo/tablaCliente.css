@@ -87,21 +87,6 @@
   background-color: #38a169; /* Color más oscuro al hacer hover */
 }
 
-.containert {
-  width: 80%;
-  margin: 0 auto;
-  background-color: rgb(208, 208, 208);
-  padding: 40px;
-  height: 720px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  top: -3%;
-  right: 0;
-  bottom: 2%;
-  left: 5%;
-  position: relative;
-}
-
 /* Botón de añadir servicio */
 .add-service-btn {
   background-color: #00ad5f;
