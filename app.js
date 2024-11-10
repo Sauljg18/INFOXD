@@ -273,20 +273,48 @@ app.get("/tarea",authMiddleware, (req, res) => {
     });
 });
 
+// Ruta para actualizar el comentario
+app.put('/tarea/:id', (req, res) => {
+    const idTarea = req.params.id;
+    const { comentario } = req.body;
+  
+    // Llama a la función para actualizar el comentario en la base de datos
+    actualizarComentarioEnBD(idTarea, comentario)
+      .then(result => {
+        res.json({ success: true, message: 'Comentario actualizado' });
+      })
+      .catch(error => {
+        console.error('Error al actualizar el comentario:', error);
+        res.status(500).json({ success: false, message: 'Error al actualizar el comentario' });
+      });
+  });
+  
+  // Función para actualizar el comentario en la base de datos
+  function actualizarComentarioEnBD(id, comentario) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE tareas SET comentario = ? WHERE id_tarea = ?';
+      connection.query(query, [comentario, id], (err, results) => {
+        if (err) return reject(err);
+        resolve(results);
+      });
+    });
+  }
+// Ruta para obtener los datos de una tarea específica por su ID
 app.get('/tarea/:id', (req, res) => {
     const tareaId = req.params.id;
-    // Consulta SQL para obtener la tarea por su ID
+
+    // Consulta SQL para seleccionar la tarea con el ID proporcionado
     const query = 'SELECT * FROM tareas WHERE id_tarea = ?';
     connection.query(query, [tareaId], (err, results) => {
-    if (err) {
-        console.error('Error al obtener los datos de la tarea:', err);
-        res.status(500).send('Error al obtener los datos');
-    } else if (results.length > 0) {
-        res.json(results[0]); // Devuelve la primera tarea encontrada en formato JSON
-    } else {
-        res.status(404).send('Tarea no encontrada');
-    }
-});
+        if (err) {
+            console.error('Error al obtener los datos de la tarea:', err);
+            res.status(500).send('Error al obtener los datos');
+        } else if (results.length > 0) {
+            res.json(results[0]); // Devuelve la primera tarea encontrada en formato JSON
+        } else {
+            res.status(404).send('Tarea no encontrada');
+        }
+    });
 });
 
 app.get("/registro",authMiddleware, (req,res) => {
@@ -609,29 +637,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         })
         });
 
-        app.get('/api/tareas/:id', async (req, res) => {
-  const tareaId = req.params.id;
-  try {
-    const tarea = await getTareaById(tareaId); // Función para obtener la tarea desde la base de datos
-    if (tarea) {
-      res.json({
-        id: tarea.id,
-        cliente: tarea.cliente,
-        descripcion: tarea.descripcion,
-        colaborador: tarea.colaborador,
-        fecha: tarea.fecha,
-        tipo: tarea.tipo,
-        equipo: tarea.equipo,
-        prioridad: tarea.prioridad,
-      });
-    } else {
-      res.status(404).json({ error: "Tarea no encontrada" });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener los datos de la tarea" });
-  }
-});
+  
 
 
           //ELIMINAR REGISTRO DE SERVICIO
@@ -690,9 +696,9 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     let prioridad = tarea.prioridad;
     let descripcion = tarea.descripcion;
     let activate = tarea.activo;
+    let comentario = tarea.comentario;
 
-
-    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, tipo, equipo, prioridad, descripcion, status) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"')";
+    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, tipo, equipo, prioridad, descripcion, status, comentario) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"', '"+ comentario+"')";
                 
     connection.query(registrar,function(error){
     if(error){

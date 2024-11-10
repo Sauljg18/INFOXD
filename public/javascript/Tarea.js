@@ -1,34 +1,41 @@
 
 // Abre el modal y carga los datos de la tarea seleccionada
-function openModal(id_tarea) {
-  // Realiza una solicitud para obtener los datos de la tarea específica
-  fetch(`/tarea/${id_tarea}`)
+function openModal(id) {
+  fetch(`/tarea/${id}`)
       .then(response => response.json())
       .then(data => {
-          // Llenar los campos del formulario con los datos de la tarea
-          document.getElementById('cliente').value = data.cliente;
-          document.getElementById('colaborador').textContent = data.colaborador;
-          document.getElementById('fecha').value = data.fecha;
-          document.getElementById('tipo').value = data.tipo;
-          document.getElementById('equipo').value = data.equipo;
-          document.getElementById('prioridad').value = data.prioridad;
-          document.getElementById('descripcion').value = data.descripcion;
+          document.getElementById('modalCliente').value = data.cliente;
+          document.getElementById('modalColaborador').value = data.colaborador;
+          document.getElementById('modalFecha').value = data.fecha;
+          document.getElementById('modalTipo').value = data.tipo;
+          document.getElementById('modalDescripcion').value = data.descripcion;
+          document.getElementById('modalComentario').value = data.comentario;
 
-          // Establecer el enlace de colaborador
-          const colaboradorLink = document.getElementById('colaboradorLink');
-          colaboradorLink.href = `/editcola/nombre/${encodeURIComponent(data.colaborador)}`;
-
-          // Mostrar el modal
           document.getElementById('modal').style.display = 'block';
       })
       .catch(error => console.error('Error al cargar los datos de la tarea:', error));
 }
 
-// Cierra el modal
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
 }
 
+function guardarComentario() {
+  const idTarea = document.getElementById('modalCliente').value;  // Obtén el ID de tarea según tu lógica
+  const comentario = document.getElementById('modalComentario').value;
+
+  fetch(`/tarea/${idTarea}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comentario: comentario })
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Comentario actualizado:', data);
+      closeModal();
+  })
+  .catch(error => console.error('Error al actualizar el comentario:', error));
+}
 
 
 window.onload = function() {

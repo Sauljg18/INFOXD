@@ -18,6 +18,7 @@ const calendar = document.querySelector(".calendar"),
   addEventDescripcion = document.querySelector(".event-descripcion"),
   addEventfecha = document.querySelector(".event-fecha"),
   addEventtipo = document.querySelector(".event-tipo"),
+  addEventcomentario = document.querySelector(".event-comentario"),
   addEventduracion = document.querySelector(".event-duracion"),
   addEventFrom = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
@@ -34,27 +35,52 @@ const calendar = document.querySelector(".calendar"),
     botonactivar.style.display='block';   //Vista reaccion a boton
   }
 
+  // Función para abrir el modal y cargar los datos de la tarea
   function openModal(id) {
-    // Realiza una solicitud para obtener los datos de la tarea específica
     fetch(`/tarea/${id}`)
       .then(response => {
         if (!response.ok) throw new Error("No se pudo cargar la tarea");
         return response.json();
       })
       .then(data => {
-        // Llenar los campos del modal con los datos de la tarea
         document.getElementById('modalCliente').value = data.cliente;
         document.getElementById('modalColaborador').value = data.colaborador;
+        document.getElementById('modalFecha').value = data.fecha;
+        document.getElementById('modalTipo').value = data.tipo;
         document.getElementById('modalDescripcion').value = data.descripcion;
-        document.getElementById('modalfecha').value = data.fecha;
-        document.getElementById('modaltipo').value = data.tipo;
+        document.getElementById('modalComentario').value = data.comentario || "Sin comentario";
         
-        // Mostrar el modal
+        // Asigna el ID de la tarea al atributo 'event-id' para usarlo al guardar el comentario
+        document.getElementById('modalTareaId').setAttribute('event-id', id);
+  
         document.getElementById('modal').style.display = 'block';
       })
       .catch(error => console.error('Error al cargar los datos de la tarea:', error));
   }
   
+  // Función para guardar el comentario
+  function guardarComentario() {
+    const id = document.getElementById('modalTareaId').getAttribute('event-id'); // Obtener el ID de la tarea
+    const comentario = document.getElementById('modalComentario').value;
+  
+    fetch(`/tarea/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comentario })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        closeModal();
+        updateEvents(); // Refresca los eventos en el calendario
+      } else {
+        console.error(data.message);
+      }
+    })
+    .catch(error => console.error('Error al guardar el comentario:', error));
+  }
+  
+  // Función para cerrar el modal
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
   }
@@ -359,6 +385,10 @@ addEventtipo.addEventListener("select", (e) => {
   addEventtipo.value = addEventtipo.value.slice(0, 60);
 });
 
+addEventcomentario.addEventListener("input", (e) => {
+  addEventcomentario.value = addEventcomentario.value.slice(0, 60);
+});
+
 
 function defineProperty() {
   var osccred = document.createElement("div");
@@ -386,7 +416,8 @@ addEventSubmit.addEventListener("click", () => {
   const eventDescripcion = addEventDescripcion.value;
   const eventfecha= addEventfecha.value;
   const eventtipo= addEventtipo.value;
-  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "" || eventtipo === "") {
+  const eventcomentario= addEventcomentario.value;
+  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "" || eventtipo === "" || eventcomentario === "" ) {
     alert("Please fill all the fields");
     return;
   }
@@ -417,6 +448,9 @@ addEventSubmit.addEventListener("click", () => {
         if (event.tipo === eventtipo) {
           eventExist = true;
         }
+        if (event.comentario === eventcomentario) {
+          eventExist = true;
+        }
       });
     }
   });
@@ -428,6 +462,7 @@ addEventSubmit.addEventListener("click", () => {
     descripcion: eventDescripcion,
     fecha: eventfecha,
     tipo: eventtipo,
+    comentario: eventcomentario,
   };
   console.log(newEvent);
   console.log(activeDay);
@@ -461,6 +496,7 @@ addEventSubmit.addEventListener("click", () => {
   addEventDescripcion.value = "";
   addEventfecha.value = "";
   addEventtipo.value = "";
+  addEventcomentario.value = "";
   const tarea = req.body;
   // Corregir los nombres de las variables para que coincidan con el formulario
 
