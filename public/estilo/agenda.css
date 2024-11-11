@@ -577,10 +577,10 @@
 /* Modal */
 .modal {
   display: none; /* Oculto por defecto */
-  position: fixed;
+  position: relative;
   z-index: 1;
   left: 0;
-  top: 0;
+  top: 12%;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
@@ -589,10 +589,12 @@
 /* Contenido del Modal */
 .modal-content {
   background-color: white;
-  margin: 20% auto;
-  padding: 20px;
+  margin: 10% auto;
+  padding: 10px;
   border-radius: 8px;
-  width: 120%;
+  width: 80%; /* Ajustar al 80% para dar espacio en los lados */
+  max-height: 80vh; /* Altura máxima del contenido */
+  overflow-y: auto; /* Habilita el scroll vertical */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
