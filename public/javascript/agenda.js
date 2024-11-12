@@ -16,13 +16,14 @@ const calendar = document.querySelector(".calendar"),
   addEventid = document.querySelector(".event-id"),
   addEventColaborador = document.querySelector(".event-colaborador"),
   addEventDescripcion = document.querySelector(".event-descripcion"),
+  addEventfecha = document.querySelector(".event-fecha"),
   addEventtipo = document.querySelector(".event-tipo"),
+  addEventcomentario = document.querySelector(".event-comentario"),
   addEventduracion = document.querySelector(".event-duracion"),
   addEventFrom = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
   addEventSubmit = document.querySelector(".add-event-btn ");
   
- 
   let botonactivar = document.getElementById("activar");
   let botonguardar = document.getElementById("guardar");
 
@@ -33,25 +34,52 @@ const calendar = document.querySelector(".calendar"),
     botonactivar.style.display='block';   //Vista reaccion a boton
   }
 
+  // Función para abrir el modal y cargar los datos de la tarea
   function openModal(id) {
-    // Realiza una solicitud para obtener los datos de la tarea específica
     fetch(`/tarea/${id}`)
       .then(response => {
         if (!response.ok) throw new Error("No se pudo cargar la tarea");
         return response.json();
       })
       .then(data => {
-        // Llenar los campos del modal con los datos de la tarea
         document.getElementById('modalCliente').value = data.cliente;
         document.getElementById('modalColaborador').value = data.colaborador;
+        document.getElementById('modalFecha').value = data.fecha;
+        document.getElementById('modalTipo').value = data.tipo;
         document.getElementById('modalDescripcion').value = data.descripcion;
+        document.getElementById('modalComentario').value = data.comentario || "Sin comentario";
         
-        // Mostrar el modal
+        // Asigna el ID de la tarea al atributo 'event-id' para usarlo al guardar el comentario
+        document.getElementById('modalTareaId').setAttribute('event-id', id);
+  
         document.getElementById('modal').style.display = 'block';
       })
       .catch(error => console.error('Error al cargar los datos de la tarea:', error));
   }
   
+  // Función para guardar el comentario
+  function guardarComentario() {
+    const id = document.getElementById('modalTareaId').getAttribute('event-id'); // Obtener el ID de la tarea
+    const comentario = document.getElementById('modalComentario').value;
+  
+    fetch(`/tarea/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comentario })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        closeModal();
+        updateEvents(); // Refresca los eventos en el calendario
+      } else {
+        console.error(data.message);
+      }
+    })
+    .catch(error => console.error('Error al guardar el comentario:', error));
+  }
+  
+  // Función para cerrar el modal
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
   }
@@ -312,6 +340,12 @@ function updateEvents(date) {
           <div class="descripcion">
             <h3 class="event-descripcion">${event.descripcion}</h3>
           </div>
+          <div class="fecha" >
+            <h3 class="event-fecha"></h3>
+          </div>
+          <div class="tipo" >
+            <h3 class="event-tipo"></h3>
+          </div>
         </div>`;
       });
     }
@@ -342,6 +376,18 @@ addEventDescripcion.addEventListener("input", (e) => {
   addEventDescripcion.value = addEventDescripcion.value.slice(0, 60);
 });
 
+addEventfecha.addEventListener("input", (e) => {
+  addEventfecha.value = addEventfecha.value.slice(0, 60);
+});
+
+addEventtipo.addEventListener("select", (e) => {
+  addEventtipo.value = addEventtipo.value.slice(0, 60);
+});
+
+addEventcomentario.addEventListener("input", (e) => {
+  addEventcomentario.value = addEventcomentario.value.slice(0, 60);
+});
+
 
 function defineProperty() {
   var osccred = document.createElement("div");
@@ -367,7 +413,10 @@ addEventSubmit.addEventListener("click", () => {
   const eventCliente = addEventCliente.value;
   const eventColaborador = addEventColaborador.value;
   const eventDescripcion = addEventDescripcion.value;
-  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "") {
+  const eventfecha= addEventfecha.value;
+  const eventtipo= addEventtipo.value;
+  const eventcomentario= addEventcomentario.value;
+  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "" || eventtipo === "" || eventcomentario === "" ) {
     alert("Please fill all the fields");
     return;
   }
@@ -392,6 +441,15 @@ addEventSubmit.addEventListener("click", () => {
         if (event.descripcion === eventDescripcion) {
           eventExist = true;
         }
+        if (event.fecha === eventfecha) {
+          eventExist = true;
+        }
+        if (event.tipo === eventtipo) {
+          eventExist = true;
+        }
+        if (event.comentario === eventcomentario) {
+          eventExist = true;
+        }
       });
     }
   });
@@ -401,6 +459,9 @@ addEventSubmit.addEventListener("click", () => {
     cliente: eventCliente,
     colaborador: eventColaborador,
     descripcion: eventDescripcion,
+    fecha: eventfecha,
+    tipo: eventtipo,
+    comentario: eventcomentario,
   };
   console.log(newEvent);
   console.log(activeDay);
@@ -432,6 +493,9 @@ addEventSubmit.addEventListener("click", () => {
   addEventCliente.value = "";
   addEventColaborador.value = "";
   addEventDescripcion.value = "";
+  addEventfecha.value = "";
+  addEventtipo.value = "";
+  addEventcomentario.value = "";
   const tarea = req.body;
   // Corregir los nombres de las variables para que coincidan con el formulario
 

@@ -54,7 +54,18 @@
                   <div class="event-day">wed</div>
                   <div class="event-date">12th december 2022</div>
                 </div>
-                <div class="events"></div>
+
+                <div class="events">
+                  <!-- Itera sobre los eventos y los muestra con data-id -->
+                  <% results.forEach(event => { %>
+                    <div class="event-item" data-id="<%= event.id_tarea %>">
+                      <span><%= event.clienteNombre %></span> <!-- Cliente asociado -->
+                      <span><%= event.fecha %></span> <!-- Fecha del evento -->
+                      <span><%= event.tipo %></span> <!-- Tipo de tarea -->
+                    </div>
+                  <% }) %>
+                </div>    
+
                 <div class="add-event-wrapper">
                   <div class="add-event-header">
                     <div class="title">NUEVA TAREA</div>
@@ -62,6 +73,7 @@
                   </div>
                   <div id="General" class="space">
                     <form method="post" action="/aceptartarea">
+                      <input name="comentario" id="comentario" class="event-comentario" value="Sin comentario" hidden>
                       <input type="text" name="id_tarea" id="id_tarea" class="event-id" hidden>
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
                       <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
@@ -95,11 +107,9 @@
                   </form>
                               </select><br>
                               <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
-                              <input type="date" name="fecha" id="fecha"><br>
-                              <label for="hora" style="color: rgb(250, 250, 250)">Hora:</label><br>
-                              <input type="time" name="hora" id="hora"><br>
+                              <input type="date" name="fecha" id="fecha" class="event-fecha"><br>
                               <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
-                              <select name="tipo" id="tipo">
+                              <select name="tipo" id="tipo" class="event-tipo">
                                   <option value="tipo">Seleccionar Tipo</option><br>
                                   <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
                               </select><br>
@@ -130,8 +140,7 @@
                               <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
                               <input name="descripcion" id="descripcion" class="event-descripcion"></input>
                             </div>
-                              <label for="satisfaccion">Encuesta de Satisfacción:</label>
-                              <input type="checkbox" id="satisfaccion" onclick="toggleEmailField()">
+                            
                               <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
                               <button id="guardar">GUARDAR</button>
                               <div id="activar" class="display">
@@ -151,17 +160,25 @@
                     <!-- Modal para mostrar los detalles -->
                     <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                       <div class="modal-content">
-                        <button class="close-btn" onclick="closeModal()" aria-label="Cerrar modal">&times;</button>
-                        <div class="diseño2">
-                          <label for="cliente" style="color: rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
-                          <input type="text" id="modalCliente" readonly /><br>
-                          <label for="colaborador" style="color: rgb(255, 255, 255)">La tarea será colaborada por:</label><br>
-                          <input type="text" id="modalColaborador" readonly /><br>
-                          <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label><br>
-                          <input type="text" id="modalDescripcion" readonly /><br>
-                        </div>
+                          <button class="close-btn" onclick="closeModal()" aria-label="Cerrar modal">&times;</button>
+                          <form id="updateForm" method="post">
+                            <input type="hidden" id="modalTareaId" name="idTarea">
+                              <label for="cliente" style="color: rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
+                              <input type="text" id="modalCliente" readonly /><br>
+                              <label for="colaborador" style="color: rgb(255, 255, 255)">La tarea será colaborada por:</label><br>
+                              <input type="text" id="modalColaborador" readonly /><br>
+                              <label for="fecha" style="color: rgb(255, 255, 255);">Fecha de la tarea:</label><br>
+                              <input type="text" id="modalFecha" readonly /><br>
+                              <label for="tipo" style="color: rgb(255, 255, 255);">Tipo de la tarea:</label><br>
+                              <input type="text" id="modalTipo" readonly /><br>
+                              <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label><br>
+                              <input type="text" id="modalDescripcion" readonly /><br>
+                              <label for="comentario" style="color: rgb(255, 255, 255);">Comentario:</label><br>
+                              <textarea id="modalComentario" name="comentario" class="event-comentario"></textarea>
+                              <button type="button" onclick="guardarComentario()">Guardar Cambios</button>
+                          </form>
                       </div>
-                    </div>
+                  </div>
                     <button class="add-event">
                       <i class="fas fa-plus"></i>
                     </button>
