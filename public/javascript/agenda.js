@@ -24,6 +24,8 @@ const calendar = document.querySelector(".calendar"),
   addEventTo = document.querySelector(".event-time-to "),
   addEventSubmit = document.querySelector(".add-event-btn ");
   
+  let AddEventEditar = document.getElementById("editar");
+  
   let botonactivar = document.getElementById("activar");
   let botonguardar = document.getElementById("guardar");
 
@@ -60,12 +62,16 @@ const calendar = document.querySelector(".calendar"),
   // Función para guardar el comentario
   function guardarComentario() {
     const id = document.getElementById('modalTareaId').getAttribute('event-id'); // Obtener el ID de la tarea
+    const cliente = document.getElementById('modalCliente').value;
+    const colaborador = document.getElementById('modalColaborador').value;
+    const tipo = document.getElementById('modalColaborador').value;
     const comentario = document.getElementById('modalComentario').value;
   
     fetch(`/tarea/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comentario })
+      body: JSON.stringify({ cliente, colaborador, tipo, comentario })
+      
     })
     .then(response => response.json())
     .then(data => {

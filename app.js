@@ -288,10 +288,10 @@ app.get("/tarea",authMiddleware, (req, res) => {
 // Ruta para actualizar el comentario
 app.put('/tarea/:id', (req, res) => {
     const idTarea = req.params.id;
-    const { comentario } = req.body;
+    const { cliente, colaborador, tipo, comentario } = req.body;
   
     // Llama a la función para actualizar el comentario en la base de datos
-    actualizarComentarioEnBD(idTarea, comentario)
+    actualizarComentarioEnBD(idTarea, cliente, colaborador, tipo, comentario)
       .then(result => {
         res.json({ success: true, message: 'Comentario actualizado' });
       })
@@ -302,10 +302,10 @@ app.put('/tarea/:id', (req, res) => {
   });
   
   // Función para actualizar el comentario en la base de datos
-  function actualizarComentarioEnBD(id, comentario) {
+  function actualizarComentarioEnBD(id, cliente, colaborador, tipo , comentario) {
     return new Promise((resolve, reject) => {
-      const query = 'UPDATE tareas SET comentario = ? WHERE id_tarea = ?';
-      connection.query(query, [comentario, id], (err, results) => {
+      const query = 'UPDATE tareas SET cliente= ?, colaborador= ?, tipo = ?, comentario = ? WHERE id_tarea = ?';
+      connection.query(query, [cliente , colaborador, tipo, comentario, id], (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });

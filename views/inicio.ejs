@@ -161,18 +161,19 @@
                     <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                       <div class="modal-content">
                           <button class="close-btn" onclick="closeModal()" aria-label="Cerrar modal">&times;</button>
+                          <div class="edit" id="editar"><div>Editar</div></div>
                           <form id="updateForm" method="post">
                             <input type="hidden" id="modalTareaId" name="idTarea">
                               <label for="cliente" style="color: rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
-                              <input type="text" id="modalCliente" readonly /><br>
+                              <input type="text" id="modalCliente"  /><br>
                               <label for="colaborador" style="color: rgb(255, 255, 255)">La tarea será colaborada por:</label><br>
-                              <input type="text" id="modalColaborador" readonly /><br>
+                              <input type="text" id="modalColaborador"  /><br>
                               <label for="fecha" style="color: rgb(255, 255, 255);">Fecha de la tarea:</label><br>
                               <input type="text" id="modalFecha" readonly /><br>
                               <label for="tipo" style="color: rgb(255, 255, 255);">Tipo de la tarea:</label><br>
-                              <input type="text" id="modalTipo" readonly /><br>
+                              <input type="text" id="modalTipo"  /><br>
                               <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label><br>
-                              <input type="text" id="modalDescripcion" readonly /><br>
+                              <input type="text" id="modalDescripcion" /><br>
                               <label for="comentario" style="color: rgb(255, 255, 255);">Comentario:</label><br>
                               <textarea id="modalComentario" name="comentario" class="event-comentario"></textarea>
                               <button type="button" onclick="guardarComentario()">Guardar Cambios</button>
