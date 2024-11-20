@@ -29,6 +29,7 @@
     <form action="/updatec" method="post"  class="mb-3" id="formulario">
         <ul>
           <input id="idcolaborador" name="idcolaborador" value="<%=colaborador.idcolaborador%>" hidden />
+          <input type="hidden" name="old_nombre" value="<%= colaborador.nombre %>" />
           <li>
             <label for="nombre" class="form-label">Nombre:</label>
             <input  class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="name" name="nombre" value="<%=colaborador.nombre%>" required/><p>

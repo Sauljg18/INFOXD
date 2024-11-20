@@ -28,49 +28,51 @@
           <div class="offset-md-2">
             <div class="container">
 
-         <form action="/update" method="post" class="mb-3" id="formulario" >
-           <!-- Contenido del primer formulario -->
-           <input id="id_cliente" name="id_cliente" value="<%=cliente.id_cliente%>" hidden />
-           <ul>
-             <li>
-               <label for="nombrecliente" class="form-label">Nombre:</label>
-               <input class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="namecliente" name="namecliente" value="<%=cliente.nombre%>" />
-             </li>
-             <li>
-               <label for="identificacion" class="form-label">Numero de indentificiacion:</label>
-               <input class="form-control form-control-lg" type="number" aria-label=".form-control-lg example" id="identificacion" name="identificacion" value="<%= cliente.identificacion %>" />
-             
-              </li>
-             <li>
-               <label for="razon" class="form-label">Razón Social:</label>
-               <input class="form-control form-control-lg" type="text" placeholder="Razón Social" aria-label=".form-control-lg example" id="razon" name="razon" value="<%=cliente.razon%>" />
-             </li>
-             <li>
-               <label for="codigo" class="form-label">Codigo Externo:</label>
-               <input class="form-control form-control-lg" type="text" placeholder="Código Externo" aria-label=".form-control-lg example" id="externo" name="externo" value="<%=cliente.codigoext%>" />
-             </li>
-           </ul>
-         </div>
+        <form action="/update" method="post" class="mb-3" id="formulario" >
+          <!-- Contenido del primer formulario -->
+          <input id="id_cliente" name="id_cliente" value="<%= cliente.id_cliente %>" hidden />
+          <input type="hidden" name="old_namecliente" value="<%= cliente.nombre %>" />
+          <ul>
+              <li>
+                  <label for="nombrecliente" class="form-label">Nombre:</label>
+                  <input class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="namecliente" name="namecliente" value="<%= cliente.nombre %>" />
 
-         <div class="container2">
-     <ul>
-         <li><a id="detalle">Detalles</a>
-         <ul id="formu1"><ul>
-             <li>
-               <label for="telefono" class="form-label">Teléfono corporativo:</label>
-               <input  class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="telefono" name="telefono" value="<%=cliente.telefonocorp%>"/><p>
-             </li>
-             <li>
-               <label for="correocorp" class="form-label">Correo corporativo:</label>
-               <input class="form-control form-control-lg" type="email" placeholder="Correo Corporativo" aria-label=".form-control-lg example" id="correocorp" name="correocorp" value="<%=cliente.correocliente%>" /><p>
-             </li>
-             <li>
-               <label for="cliente" class="form-label">Hablar con:</label>
-               <input class="form-control form-control-lg" type="text" placeholder="Cliente" aria-label=".form-control-lg example" id="cliente" name="cliente" value="<%=cliente.cliente%>"/><p>
-             </li>
-             <li>
-               <label for="responsable" class="form-label">Responsable:</label>
-               <input class="form-control form-control-lg" type="text"  aria-label=".form-control-lg example"  id="responsable" name="responsable" value="<%=cliente.responsable%>">
+              </li>
+            <li>
+              <label for="identificacion" class="form-label">Numero de indentificiacion:</label>
+              <input class="form-control form-control-lg" type="number" aria-label=".form-control-lg example" id="identificacion" name="identificacion" value="<%= cliente.identificacion %>" />
+            
+            </li>
+            <li>
+              <label for="razon" class="form-label">Razón Social:</label>
+              <input class="form-control form-control-lg" type="text" placeholder="Razón Social" aria-label=".form-control-lg example" id="razon" name="razon" value="<%=cliente.razon%>" />
+            </li>
+            <li>
+              <label for="codigo" class="form-label">Codigo Externo:</label>
+              <input class="form-control form-control-lg" type="text" placeholder="Código Externo" aria-label=".form-control-lg example" id="externo" name="externo" value="<%=cliente.codigoext%>" />
+            </li>
+          </ul>
+        </div>
+
+        <div class="container2">
+      <ul>
+        <li><a id="detalle">Detalles</a>
+        <ul id="formu1"><ul>
+            <li>
+              <label for="telefono" class="form-label">Teléfono corporativo:</label>
+              <input  class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="telefono" name="telefono" value="<%=cliente.telefonocorp%>"/><p>
+            </li>
+            <li>
+              <label for="correocorp" class="form-label">Correo corporativo:</label>
+              <input class="form-control form-control-lg" type="email" placeholder="Correo Corporativo" aria-label=".form-control-lg example" id="correocorp" name="correocorp" value="<%=cliente.correocliente%>" /><p>
+            </li>
+            <li>
+              <label for="cliente" class="form-label">Hablar con:</label>
+              <input class="form-control form-control-lg" type="text" placeholder="Cliente" aria-label=".form-control-lg example" id="cliente" name="cliente" value="<%=cliente.cliente%>"/><p>
+            </li>
+            <li>
+              <label for="responsable" class="form-label">Responsable:</label>
+              <input class="form-control form-control-lg" type="text"  aria-label=".form-control-lg example"  id="responsable" name="responsable" value="<%=cliente.responsable%>">
              </li>
            <li>
              <label for="observar" class="form-label">Observación:</label>
@@ -108,13 +110,13 @@
                   
                
          
- 
+                  <input type="submit" class="col" value="ENVIAR">
     
          </form>
              
          
     </div>
-    <input type="submit" class="col" value="ENVIAR">
+
 <% } %> 
     <script src="/resources/javascript/cliente.js"></script>
   </header>
