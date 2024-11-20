@@ -89,7 +89,7 @@ app.post('/login', (req, res) => {
         // Si se encuentra un colaborador, redirige a una nueva página
         if (results.length > 0){
             req.session.usuario = results[0];
-            connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos, tareas  ', (error, results) => {
+            connection.query('SELECT DISTINCT servicios.Nombre As servinombre, colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos, tareas , servicios ', (error, results) => {
                 if (error) {
                     throw error;
                 } else {
@@ -345,17 +345,17 @@ app.get("/registrocliente",authMiddleware, (req,res) => {
 });
 
 //Este codigo permite verificar el usuario que vas a editar
-app.get('/editcliente/:id_cliente',authMiddleware, (req,res) => {
-    const id =req.params.id_cliente;
-    connection.query('SELECT * FROM tabcliente WHERE id_cliente=?',[id],(error,results)=>{
-    if(error){
-        throw error;
-    }else{
-        res.render('EditarCliente',{cliente:results[0]});
-    }
-})
+app.get('/editcliente/:id_cliente', authMiddleware, (req, res) => {
+    const id = req.params.id_cliente;
+    connection.query('SELECT * FROM tabcliente WHERE id_cliente = ?', [id], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            console.log(results); // Asegúrate de que se están recibiendo los datos correctamente
+            res.render('EditarCliente', { cliente: results[0] });
+        }
+    });
 });
-
 // Permite editar los datos del colaborador basado en el nombre
 app.get('/editcola/nombre/:colaborador', authMiddleware, (req,res) => {
     const nombreColaborador = req.params.colaborador;
@@ -436,31 +436,42 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     });
 });
 
-app.post("/updatec", function(req,res){ // REGISTRO DE COLABORADOR
-    const datos = req.body;
-   // Corregir los nombres de las variables para que coincidan con el formulario
-    let idcolaborador = datos.idcolaborador;
-    let nombre = datos.nombre;
-    let usuario = datos.usuario;
-    let correo = datos.correo;
-    let carga = datos.cargo; // Cambié de 'carga' a 'cargo' para mejor comprensión.
-    let contacto = datos.contacto;
-    let acceso = datos.acceso;
-    let password = datos.contrasena;
-    let confirmar = datos.confirmar;
-    let valor = datos.valor;
-    let photo = datos.foto;
+app.post('/updatec', (req, res) => {
+    const { idcolaborador, nombre, old_nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, valor, foto } = req.body;
 
+    console.log("Nuevo nombre:", nombre);
+    console.log("Nombre anterior:", old_nombre); // Este valor ahora estará disponible
 
-    connection.query("UPDATE colaboradores  SET ? WHERE idcolaborador = ?",[{nombre:nombre, usuario:usuario, correo:correo, cargo:carga, contacto:contacto, acceso:acceso, contrasena:password, confirmar:confirmar, valor:valor, foto:photo}, idcolaborador],(error,results)=>{
-    if(error){
-        throw error;
-    }else{
-        console.log("Datos almacenados actualizado"); 
-    }
+    connection.query(
+        "UPDATE colaboradores SET nombre = ?, usuario = ?, correo = ?, cargo = ?, contacto = ?, acceso = ?, contrasena = ?, confirmar = ?, valor = ?, foto = ? WHERE idcolaborador = ?",
+        [nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, valor, foto, idcolaborador],
+        (error, results) => {
+            if (error) {
+                console.error("Error al actualizar colaborador:", error);
+                return res.status(500).send("Error al actualizar colaborador.");
+            }
+
+            // Ahora actualizamos la tabla tareas
+            connection.query(
+                "UPDATE tareas SET colaborador = ? WHERE colaborador = ?",
+                [nombre, old_nombre],
+                (error, results) => {
+                    if (error) {
+                        console.error("Error al actualizar tareas:", error);
+                        return res.status(500).send("Error al actualizar tareas.");
+                    }
+
+                    console.log("Filas afectadas en tareas:", results.affectedRows);
+                    res.status(200).send("Actualización completa.");
+                }
+            );
+        }
+    );
 });
 
-});
+
+
+
 
 app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
     const client = req.body;
@@ -497,20 +508,12 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
 });
 
 
-
-app.post("/update", function(req,res){ //UPDATE DE CLIENTE
+app.post('/update', (req, res) => {
     const client = req.body;
-    // Corregir los nombres de las variables para que coincidan con el formulario
     let id_cliente = parseInt(client.id_cliente, 10);
-    let identificacion = parseInt(client.identificacion, 10);
-    let externo = parseInt(client.externo, 10);
-    let telefono = parseInt(client.telefono, 10);
-    let postal = parseInt(client.postal, 10);
-    let numext = parseInt(client.numext, 10);
-    let numint = parseInt(client.numint, 10);
-
     let namecliente = client.namecliente;
     let razon = client.razon;
+    let telefono = parseInt(client.telefono, 10);
     let correocorp = client.correocorp;
     let cliente = client.cliente;
     let responsable = client.responsable;
@@ -519,18 +522,43 @@ app.post("/update", function(req,res){ //UPDATE DE CLIENTE
     let region = client.region;
     let ciudad = client.ciudad;
     let estado = client.estado;
-        
+    let postal = parseInt(client.postal, 10);
+    let numext = parseInt(client.numext, 10);
+    let numint = parseInt(client.numint, 10);
+    let identificacion = parseInt(client.identificacion, 10);
+    let externo = parseInt(client.externo, 10);
 
-    connection.query("UPDATE tabcliente  SET ? WHERE id_cliente = ?",[{nombre:namecliente, identificacion:identificacion, razon:razon, codigoext:externo, telefonocorp:telefono, correocliente:correocorp, cliente:cliente, responsable:responsable, observacion:observacion, postal:postal, direccion:direccion, num_ext:numext, num_int:numint, region:region, ciudad:ciudad, estado:estado}, id_cliente],(error,results)=>{
-        if(error){
-        throw error;
-        }else{
-        console.log("Datos almacenados actualizado"); 
+    // Consulta SQL para actualizar el cliente en la base de datos
+    connection.query(
+        "UPDATE tabcliente SET ? WHERE id_cliente = ?",
+        [{
+            nombre: namecliente,
+            identificacion: identificacion,
+            razon: razon,
+            codigoext: externo,
+            telefonocorp: telefono,
+            correocliente: correocorp,
+            cliente: cliente,
+            responsable: responsable,
+            observacion: observacion,
+            postal: postal,
+            direccion: direccion,
+            num_ext: numext,
+            num_int: numint,
+            region: region,
+            ciudad: ciudad,
+            estado: estado
+        }, id_cliente],
+        (error, results) => {
+            if (error) {
+                throw error;
+            } else {
+                console.log("Datos del cliente actualizados");
+                res.redirect('/clientes'); // Redirige después de actualizar
+            }
         }
-    });
-
+    );
 });
-
 
 //ELIMINAR REGISTRO DE CLIENTE
 app.get("/delete/:id_cliente", authMiddleware, function(req,res){ 

@@ -111,7 +111,17 @@
                               <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
                               <select name="tipo" id="tipo" class="event-tipo">
                                   <option value="tipo">Seleccionar Tipo</option><br>
-                                  <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
+                                  <% 
+                                        const uniqueServicio = [];
+                                        results.forEach((row) => {
+                                            if (!uniqueServicio.includes(row.servinombre)) {
+                                                uniqueServicio.push(row.servinombre);
+                                    %>
+                                        <option value="<%= row.servinombre %>"><%= row.servinombre %></option>
+                                    <% 
+                                            }
+                                        });
+                                    %>
                               </select><br>
                                 <!-- Filtra los nombres de clientes para evitar duplicados -->
                                 <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
