@@ -85,6 +85,27 @@
     </div>
 </div>
 
+<script>
+    document.getElementById('search').addEventListener('input', function() {
+        const searchValue = this.value.toLowerCase();
+        // Selecciona todas las filas del cuerpo de la tabla de servicios
+        const rows = document.querySelectorAll('#services-body tr');
+        
+        rows.forEach(row => {
+            // Obtén el texto de la columna de "Servicio" (primera columna)
+            const servicioNombre = row.cells[0]?.textContent.toLowerCase() || '';
+            
+            // Verifica si el texto incluye el valor buscado
+            if (servicioNombre.includes(searchValue)) {
+                row.style.display = ''; // Muestra la fila
+            } else {
+                row.style.display = 'none'; // Oculta la fila
+            }
+        });
+    });
+    
+</script>
+
 <script src="/resources/javascript/modal.js"></script>
 
 </body>

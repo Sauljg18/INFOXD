@@ -125,6 +125,29 @@
 </div>
 </div>
 </main>
+
+<script>
+  document.getElementById('search').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase();
+    // Selecciona todas las filas del cuerpo de la tabla
+    const rows = document.querySelectorAll('.disazo tbody tr');
+    
+    rows.forEach(row => {
+        // Obtén los valores de las columnas "Cliente" (columna 2) y "Colaborador" (columna 3)
+        const cliente = row.cells[1]?.textContent.toLowerCase() || '';
+        const colaborador = row.cells[2]?.textContent.toLowerCase() || '';
+        
+        // Comprueba si el valor ingresado coincide con alguno de ellos
+        if (cliente.includes(searchValue) || colaborador.includes(searchValue)) {
+            row.style.display = ''; // Muestra la fila
+        } else {
+            row.style.display = 'none'; // Oculta la fila
+        }
+    });
+});
+
+</script>
+
 <script src="/resources/javascript/Tarea.js"></script>
   </body>
 </html>
