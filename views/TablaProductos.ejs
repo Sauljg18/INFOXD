@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
     <link rel="stylesheet" href="/resources/estilo/TablaProductos.css">
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
 </head>
 <body>
-
-    <header class="header"> 
+    <header class="header" >
         <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+        <div class="lista">
         <ul>
-            <li><a href="/clientes">Cliente</a></li>
-            <li><a href="/colab">Colaborador</a></li>
-            <li><a href="/ver-equipos">Equipo</a></li>
-            <li><a href="/producto" style="color:rgb(2, 178, 40)">Producto</a></li>
-            <li><a href="/servicio">Servicio</a></li>
-            <li><a href="/tarea">Tarea</a></li>
-        </ul>
-    </header>
-
-    <section class="sidebar"></section>
-    <main class="main">
+          <li><a href="/clientes">Cliente</a></li>
+          <li> <a href="/colab">Colaborador</a></h2></li>
+          <li> <a href="/ver-equipos">Equipo</a></h2></li>
+          <li> <a href="/producto">Producto</a></h2></li>
+          <li> <a href="/servicio">Servicio</a></h2></li>
+          <li> <a href="/tarea">Tarea</a></h2></li></ul>
+        </div>
+        </header>
+        <section class="sidebar">
+        </section>
+    <main>
         <div class="container">
             <div class="Titulo">
                 <h1>Productos</h1>
@@ -31,10 +32,10 @@
                     <button class="BotonGr" href="">Más acciones</button>
                     <button class="BotonGr" onclick="window.location.href='/RegistroProductos'">Agregar producto ahora</button>
                 </div>
-                <input type="text" id="search" placeholder="Buscar producto por nombre...">
+                <input type="text" id="search" style="color: black;" placeholder="Buscar producto por nombre...">
             </div>
             <!-- Tabla de productos -->
-            <div class="diseño2">
+            <div class="diseño">
                 <div class="tablew">
                     <table class="table">
                         <thead>
