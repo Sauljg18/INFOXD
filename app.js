@@ -436,7 +436,7 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     });
 });
 
-app.post('/updatec', (req, res) => {
+app.post('/updatec', (req, res) => { // UPDARTE COLABORADOR
     const { idcolaborador, nombre, old_nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, valor, foto } = req.body;
 
     console.log("Nuevo nombre:", nombre);

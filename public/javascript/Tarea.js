@@ -1,16 +1,24 @@
 
 // Abre el modal y carga los datos de la tarea seleccionada
-function openModal(id) {
-  fetch(`/tarea/${id}`)
+function openModal(id_tarea) {
+  // Realiza una solicitud para obtener los datos de la tarea específica
+  fetch(`/tarea/${id_tarea}`)
       .then(response => response.json())
       .then(data => {
-          document.getElementById('modalCliente').value = data.cliente;
-          document.getElementById('modalColaborador').value = data.colaborador;
-          document.getElementById('modalFecha').value = data.fecha;
-          document.getElementById('modalTipo').value = data.tipo;
-          document.getElementById('modalDescripcion').value = data.descripcion;
-          document.getElementById('modalComentario').value = data.comentario;
+          // Llenar los campos del formulario con los datos de la tarea
+          document.getElementById('cliente').value = data.cliente;
+          document.getElementById('colaborador').textContent = data.colaborador;
+          document.getElementById('fecha').value = data.fecha;
+          document.getElementById('tipo').value = data.tipo;
+          document.getElementById('equipo').value = data.equipo;
+          document.getElementById('prioridad').value = data.prioridad;
+          document.getElementById('descripcion').value = data.descripcion;
 
+          // Establecer el enlace de colaborador
+          const colaboradorLink = document.getElementById('colaboradorLink');
+          colaboradorLink.href = `/editcola/nombre/${encodeURIComponent(data.colaborador)}`;
+
+          // Mostrar el modal
           document.getElementById('modal').style.display = 'block';
       })
       .catch(error => console.error('Error al cargar los datos de la tarea:', error));
@@ -19,24 +27,6 @@ function openModal(id) {
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
 }
-
-function guardarComentario() {
-  const idTarea = document.getElementById('modalCliente').value;  // Obtén el ID de tarea según tu lógica
-  const comentario = document.getElementById('modalComentario').value;
-
-  fetch(`/tarea/${idTarea}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comentario: comentario })
-  })
-  .then(response => response.json())
-  .then(data => {
-      console.log('Comentario actualizado:', data);
-      closeModal();
-  })
-  .catch(error => console.error('Error al actualizar el comentario:', error));
-}
-
 
 window.onload = function() {
   const finalizarBtns = document.querySelectorAll('.finalizar-btn');
@@ -141,5 +131,24 @@ window.onload = function() {
     });
   });
 };
+
+document.getElementById('search').addEventListener('input', function() {
+  const searchValue = this.value.toLowerCase();
+  // Selecciona todas las filas del cuerpo de la tabla
+  const rows = document.querySelectorAll('.disazo tbody tr');
+  
+  rows.forEach(row => {
+      // Obtén los valores de las columnas "Cliente" (columna 2) y "Colaborador" (columna 3)
+      const cliente = row.cells[1]?.textContent.toLowerCase() || '';
+      const colaborador = row.cells[2]?.textContent.toLowerCase() || '';
+      
+      // Comprueba si el valor ingresado coincide con alguno de ellos
+      if (cliente.includes(searchValue) || colaborador.includes(searchValue)) {
+          row.style.display = ''; // Muestra la fila
+      } else {
+          row.style.display = 'none'; // Oculta la fila
+      }
+  });
+});
 
 

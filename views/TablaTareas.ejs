@@ -3,32 +3,36 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/resources/estilo/tablaTarea.css">
+    <link rel="stylesheet" href="/resources/estilo/tablaTarea2.css">
       <link rel="stylesheet" href="/resources/estilo/inicio.css">
-      <link rel="stylesheet" href="/resources/estilo/Cuadrocontainer.css">
+
   <title>Tabla tareas</title>
   
   </head>
   <body>
-  
-    <header class="header" >  
+    <header class="header" >
       <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+      <div class="lista">
       <ul>
-      <li><a href="/clientes">Cliente</a></li>
-  <li> <a href="/colab" >Colaborador</a></h2></li>
-<li> <a href="/ver-equipos">Equipo</a></h2></li>
-<li> <a href="/producto">Producto</a></h2></li>
-<li> <a href="/servicio">Servicio</a></h2></li>
-<li> <a href="/tarea" style="color:rgb(2, 178, 40)">Tarea</a></h2></ul></li>
-</header>
-
-    <section class="sidebar"></section>
-    <main class="main">
-      <h1>TAREAS</h1>
-      <input type="text" id="search" placeholder="Buscar servicio...">
-      <div class="containert" >
+        <li><a href="/clientes">Cliente</a></li>
+        <li> <a href="/colab">Colaborador</a></h2></li>
+        <li> <a href="/ver-equipos">Equipo</a></h2></li>
+        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/servicio">Servicio</a></h2></li>
+        <li> <a href="/tarea">Tarea</a></h2></li></ul>
+      </div>
+      </header>
+      <section class="sidebar">
+      </section>
+    <main>
+      
+      <div class="container" >
+        <a>TAREAS</a>
+          <input type="text" id="search" placeholder="Buscar servicio...">
         <div class="diseño">
+          
         <div class="tablew">
+          
             <table class="disazo table-hover" >
               <thead>
                 <tr>
@@ -71,7 +75,7 @@
   <div class="modal-content">
     <button class="close-btn" onclick="closeModal()">&times;</button>
 
-      <div class="diseño2">
+
         <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
         <input id="cliente"></input>                      
         
@@ -93,61 +97,16 @@
                 <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
                 <input name="descripcion" id="descripcion" rows="4"></input>
 
-        </div>
+        
       </div>
-      <div id="modal" class="modal">
+</div>
 
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <div class="diseño2">
-      <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
-      <input id="cliente"></input>
-      <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
-      <input id="colaborador"></input>        
-      <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
-      <input  name="fecha" id="fecha"><br>
-      <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
-      <input id="tipo"></input><br>
-      <!-- Filtra los nombres de clientes para evitar duplicados -->
-      <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
-      <input id="equipo"></input>  
-      <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
-      <input value="alta" id="prioridad"></input>
-      <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
-      <input name="descripcion" id="descripcion" rows="4"></input>
-    </div>
-  </div>
-</div>   
 
-</div>
-</div>
-</div>
-</div>
-</div>
+
 </main>
 
-<script>
-  document.getElementById('search').addEventListener('input', function() {
-    const searchValue = this.value.toLowerCase();
-    // Selecciona todas las filas del cuerpo de la tabla
-    const rows = document.querySelectorAll('.disazo tbody tr');
-    
-    rows.forEach(row => {
-        // Obtén los valores de las columnas "Cliente" (columna 2) y "Colaborador" (columna 3)
-        const cliente = row.cells[1]?.textContent.toLowerCase() || '';
-        const colaborador = row.cells[2]?.textContent.toLowerCase() || '';
-        
-        // Comprueba si el valor ingresado coincide con alguno de ellos
-        if (cliente.includes(searchValue) || colaborador.includes(searchValue)) {
-            row.style.display = ''; // Muestra la fila
-        } else {
-            row.style.display = 'none'; // Oculta la fila
-        }
-    });
-});
 
-</script>
 
-<script src="/resources/javascript/Tarea.js"></script>
   </body>
+  <script src="/resources/javascript/Tarea.js"></script>
 </html>

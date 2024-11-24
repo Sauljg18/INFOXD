@@ -42,8 +42,8 @@ if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
          imgPreview.src = e.target.result; // Mostrar la imagen cargada
-         imgPreview.style.width = '300px'; // Ajustar el tamaño según sea necesario
-        imgPreview.style.height = '300px';
+         imgPreview.style.width = '250px'; // Ajustar el tamaño según sea necesario
+        imgPreview.style.height = '250px';
     };
       reader.readAsDataURL(file); // Leer el archivo como URL de datos
     } else {

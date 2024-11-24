@@ -1,27 +1,29 @@
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/estilo/form-colab.css">
-    <link rel="stylesheet" href="resources/estilo/inicio.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
+    <link rel="stylesheet" href="/resources/estilo/form-colab.css">
     <title>colaboradores</title>
+    </head>
 <body>
   
   <header class="header" >
     <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+    <div class="lista">
     <ul>
-    <li><a href="/clientes">Cliente</a></li>
-    <li> <a href="/colab" style="color:rgb(2, 178, 40)">Colaborador</a></h2></li>
-    <li> <a href="/ver-equipos">Equipo</a></h2></li>
-    <li> <a href="/producto">Producto</a></h2></li>
-    <li> <a href="/servicio">Servicio</a></h2></li>
-    <li> <a href="/tarea">Tarea</a></h2></li></ul>
-  </header>
-  <section class="sidebar">
-  </section>
-  <header>
-  
-    <a>
+      <li><a href="/clientes">Cliente</a></li>
+      <li> <a href="/colab">Colaborador</a></h2></li>
+      <li> <a href="/ver-equipos">Equipo</a></h2></li>
+      <li> <a href="/producto">Producto</a></h2></li>
+      <li> <a href="/servicio">Servicio</a></h2></li>
+      <li> <a href="/tarea">Tarea</a></h2></li></ul>
+    </div>
+    </header>
+    <section class="sidebar">
+    </section>
+  <main>
     <div class="container" >
 
     <form action="/validar" method="post" class="mb-3" id="formulario">
@@ -52,11 +54,11 @@
         </ul>
         
       
-    </div>
-    </div>
+    
+    
    
-    <div class="container2" id="contend" >
-      
+    
+      <div class="container2">
      <div class="mb-4"  id="formu1">
          <ul>
             <li>
@@ -93,16 +95,15 @@
          
         </ul> 
       </div>
-     
-      </div>
     </div>
+      </div>
     
     
 
     <div class="container3">
       <nav class="mb-5" enctype="multipart/form-data">
         <div>
-          <img src="https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="avatar" id="img" />
+          <img src="https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="avatar" id="img" class="img" />
           <input type="file" name="foto" id="foto" accept="image/*" class="imglol" />
           <label for="foto" name="foto" id="foto" accept="image/*">Cambiar foto</label>
         </div>
@@ -112,8 +113,7 @@
 
     </form>
     <script src="/resources/javascript/colab.js"></script>
-  </header>
+  </main>
 
 </body>
-</head>
 </html>
