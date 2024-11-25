@@ -62,21 +62,50 @@ body{
   height: auto;
 }
 
+
+
+@media (max-width: 2000px) {
+    .header li {
+        padding: 50px 10%;
+    }
+}
+
+
+@media (max-width: 1900px) {
+    .header li {
+        padding: 50px 9.32%;
+    }
+}
+
+
+@media (max-width: 1800px) {
+    .header li {
+        padding: 50px 9.32%;
+    }
+}
+
+@media (max-width: 1700px) {
+    .header li {
+        padding: 50px 9.32%;
+    }
+}
+
 @media (max-width: 1500px) {
     .header li {
-        padding: 40px 8%;
+        padding: 50px 8.2%;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .header li {
-        padding: 30px 6%;
+        padding: 50px 2.2%;
     }
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 1000px) {
     .header li {
-        padding: 20px 4%;
+        padding: 50px 2.32%;
     }
 }
 
@@ -186,10 +215,53 @@ body{
     transition: transform 0.5s ease;
 }
 
+@media (max-width: 2000px) {
+    .logo {
+        position: absolute;
+    width: 200px;
+    height: 10%;
+    top: 2px;
+    left:0%;
+    margin: 0;
+    transition: transform 0.5s ease;
+    }
+}
+
+
+@media (max-width: 1800px) {
+    .logo {
+        position: absolute;
+    width: 200px;
+    height: 10%;
+    top: 2px;
+    left:0%;
+    margin: 0;
+    transition: transform 0.5s ease;
+    }
+}
+
+@media (max-width: 1200px) {
+    .logo {
+        position: absolute;
+    width: 200px;
+    height: 18%;
+    top: 2px;
+    left:0%;
+    margin: 0;
+    transition: transform 0.5s ease;
+    }
+
+    
+}
 @media (max-width: 1500px) {
     .logo {
-        left: 80%;
-        z-index: 1;
+        position: absolute;
+    width: 200px;
+    height: 15%;
+    top: 2px;
+    left:0%;
+    margin: 0;
+    transition: transform 0.5s ease;
     }
 }
 
