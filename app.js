@@ -508,57 +508,79 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
 });
 
 
-app.post('/update', (req, res) => {
-    const client = req.body;
-    let id_cliente = parseInt(client.id_cliente, 10);
-    let namecliente = client.namecliente;
-    let razon = client.razon;
-    let telefono = parseInt(client.telefono, 10);
-    let correocorp = client.correocorp;
-    let cliente = client.cliente;
-    let responsable = client.responsable;
-    let observacion = client.observacion;
-    let direccion = client.direccion;
-    let region = client.region;
-    let ciudad = client.ciudad;
-    let estado = client.estado;
-    let postal = parseInt(client.postal, 10);
-    let numext = parseInt(client.numext, 10);
-    let numint = parseInt(client.numint, 10);
-    let identificacion = parseInt(client.identificacion, 10);
-    let externo = parseInt(client.externo, 10);
+app.post('/update', (req, res) => { // UPDATE CLIENTE
+    const {
+        id_cliente,
+        namecliente: nombre,
+        old_nombre, // Usaremos este para el nombre anterior, similar al colaborador
+        identificacion,
+        razon,
+        externo: codigoext,
+        telefono: telefonocorp,
+        correocorp: correocliente,
+        cliente,
+        responsable,
+        observacion,
+        postal,
+        direccion,
+        numext: num_ext,
+        numint: num_int,
+        region,
+        ciudad,
+        estado
+    } = req.body;
+
+    console.log("Nuevo nombre del cliente:", nombre);
+    console.log("Nombre anterior del cliente:", old_nombre); // Este valor estará disponible
 
     // Consulta SQL para actualizar el cliente en la base de datos
     connection.query(
-        "UPDATE tabcliente SET ? WHERE id_cliente = ?",
-        [{
-            nombre: namecliente,
-            identificacion: identificacion,
-            razon: razon,
-            codigoext: externo,
-            telefonocorp: telefono,
-            correocliente: correocorp,
-            cliente: cliente,
-            responsable: responsable,
-            observacion: observacion,
-            postal: postal,
-            direccion: direccion,
-            num_ext: numext,
-            num_int: numint,
-            region: region,
-            ciudad: ciudad,
-            estado: estado
-        }, id_cliente],
+        "UPDATE tabcliente SET nombre = ?, identificacion = ?, razon = ?, codigoext = ?, telefonocorp = ?, correocliente = ?, cliente = ?, responsable = ?, observacion = ?, postal = ?, direccion = ?, num_ext = ?, num_int = ?, region = ?, ciudad = ?, estado = ? WHERE id_cliente = ?",
+        [
+            nombre,
+            identificacion,
+            razon,
+            codigoext,
+            telefonocorp,
+            correocliente,
+            cliente,
+            responsable,
+            observacion,
+            postal,
+            direccion,
+            num_ext,
+            num_int,
+            region,
+            ciudad,
+            estado,
+            id_cliente
+        ],
         (error, results) => {
             if (error) {
-                throw error;
-            } else {
-                console.log("Datos del cliente actualizados");
-                res.redirect('/clientes'); // Redirige después de actualizar
+                console.error("Error al actualizar cliente:", error);
+                return res.status(500).send("Error al actualizar cliente.");
             }
+
+            console.log("Datos del cliente actualizados");
+
+            // Actualización relacionada: ejemplo para actualizar otra tabla basada en el nombre
+            connection.query(
+                "UPDATE tareas SET cliente = ? WHERE cliente = ?",
+                [nombre, old_nombre],
+                (error, results) => {
+                    if (error) {
+                        console.error("Error al actualizar facturas:", error);
+                        return res.status(500).send("Error al actualizar facturas.");
+                    }
+
+                    console.log("Filas afectadas en facturas:", results.affectedRows);
+                    res.status(200).send("Actualización completa.");
+                }
+            );
         }
     );
 });
+
 
 //ELIMINAR REGISTRO DE CLIENTE
 app.get("/delete/:id_cliente", authMiddleware, function(req,res){ 
