@@ -23,6 +23,7 @@
         <section class="sidebar">
         </section>
     <main>
+        
         <div class="container">
             <div class="Titulo">
                 <h1>Productos</h1>
@@ -57,8 +58,8 @@
                                         <td><%= tablaproducto.Stocks %></td>
                                         <td><%= tablaproducto.Valor %></td>
                                         <td>
-                                            <a href="/editproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">editar</a>
-                                            <a href="/deleteproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">borrar</a>
+                                            <a href="/editproducto/<%= tablaproducto.Idproducto %>" class="btn btn-outline-info">editar</a>
+                                            <a href="/deleteproducto/<%= tablaproducto.Idproducto %>" class="btn btn-outline-info">borrar</a>
                                         </td>
                                     </tr>
                                 <% }) %>

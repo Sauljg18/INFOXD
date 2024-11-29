@@ -243,6 +243,33 @@ app.get('/RegistroProductos',authMiddleware, (req, res) => {
     res.render('RegistroProductos');
 });
 
+//Este codigo permite verificar el usuario que vas a editar
+app.get('/editproducto/:Idproducto', authMiddleware, (req, res) => {
+    const id = req.params.Idproducto;
+    connection.query('SELECT * FROM tabproducto WHERE Idproducto = ?', [id], (error, results) => {
+            if (error) {
+                return res.status(500).send('Error al obtener el equipo'); // Manejo de errores
+            }
+    
+            if (results.length === 0) {
+                return res.status(404).send('Producto no encontrado'); // Manejo de caso sin resultados
+            }
+    
+            let producto = results[0];
+    
+            // Verifica si existe el campo Fecha en el equipo
+            if (producto.Fecha_Compra) {
+                // Convierte la fecha a formato YYYY-MM-DD
+                let fecha = new Date(producto.Fecha_Compra);
+                producto.Fecha_Compra = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+            }
+            console.log(results); // Asegúrate de que se están recibiendo los datos correctamente
+            res.render('EditarProductos', { producto: results[0] });
+        
+    });
+});
+
+
 app.get("/equipo", (req,res) => {
     res.render('Equipos');
 });
@@ -721,7 +748,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         });
 
         
-        app.post("/validarproducto", function(req,res){ // REGISTRO DE PRODUCTO
+        app.post("/validarproducto", function(req,res){ // REGISTRAR  PRODUCTO
             const producto = req.body;
            // Corregir los nombres de las variables para que coincidan con el formulario
             let Idproducto = producto.Idproducto;
@@ -733,7 +760,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
             let Descripcion = producto.Descripcion;
             let Categoria = producto.Categoria;
             let Fecha_Compra = producto.Fecha_Compra;
-            let registrar = "INSERT INTO tabproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoría, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
+            let registrar = "INSERT INTO tabproducto (Idproducto, Nombre, Valor, Costo, Stocks, Inventario, Descripcion, Categoria, Fecha_Compra) VALUE ('"+Idproducto +"','"+Nombre +"','"+Valor +"','"+Costo +"','"+Stocks +"','"+Inventario +"','"+Descripcion +"','"+Categoria +"','"+Fecha_Compra +"')"
             connection.query(registrar,function(error){
             if(error){
             throw error;
@@ -745,6 +772,38 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
             
         
         });
+
+        app.post("/updateproducto", function(req,res){ // REGISTRO DE PRODUCTO
+            const producto = req.body;
+           // Corregir los nombres de las variables para que coincidan con el formulario
+            let Idproducto = producto.Idproducto;
+            let Nombre = producto.Nombre;
+            let Valor = producto.Valor;
+            let Costo = producto.Costo;
+            let Stocks = producto.Stocks; // Cambié de 'carga' a 'cargo' para mejor comprensión.
+            let Inventario = producto.Inventario;
+            let Descripcion = producto.Descripcion;
+            let Categoria = producto.Categoria;
+            let Fecha_Compra = producto.Fecha_Compra;
+
+            connection.query("UPDATE tabproducto SET ? WHERE Idproducto = ?",[{Nombre:Nombre, Valor:Valor, Costo:Costo, Stocks:Stocks, Inventario:Inventario, Descripcion:Descripcion, Categoria:Categoria, Fecha_Compra:Fecha_Compra}, Idproducto],(error,results)=>{
+                if(error){
+                throw error;
+                }else{
+                    connection.query('SELECT * FROM tabproducto ', (error, results) => {
+                        if (error) {
+                            throw error;
+                        } else {
+                            res.render('TablaProductos', { results: results });
+                        }
+                    });
+                }
+            });
+        
+            });
+        
+            
+
 
 app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     const tarea = req.body;

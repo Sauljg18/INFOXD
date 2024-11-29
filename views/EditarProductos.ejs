@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/resources/estilo/RegistroProductos.css">
     <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <script src="/resources/javascript/scripts.js"></script>
-    <title>RegistroDeProductos</title>
+    <title>EDITARDeProductos</title>
 </head>
 
 <body>
@@ -24,11 +24,13 @@
         </header>
         <section class="sidebar">
         </section>
+        <% if (producto) { %>
 <div class="row">
     <div class="col-md-2">
         <div>
             <div class="cuadroimg">
-                <form method="post" action="/validarproducto">
+                <form method="post" action="/updateproducto">
+                    <input id="Idproducto" name="Idproducto" value="<%=producto.Idproducto%>" hidden />
                 <div class="upload-area">
                     <label for="fileUpload">
                         <i class="upload-icon">⬆️</i>
@@ -38,7 +40,7 @@
                 </div>
                 <div class="input-group">
                     <label for="nombre">Nombre <span>*</span></label>
-                    <input type="text" id="nombre" placeholder="Ingrese nombre" required />
+                    <input type="text" id="nombre" value="<%= producto.Nombre %>" required />
                 </div>    
                 <div class="status">
                     <span id="statusText">Activo</span>
@@ -53,19 +55,19 @@
                 <div class="price-inputs">
                     <div class="price-box">
                         <h3>Valor Unitario 1</h3>
-                        <input type="number" step="0.01" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Valor %>" />
                     </div>
                     <div class="price-box">
                         <h3>Costo Unitario 2</h3>
-                        <input type="number" step="0.01" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Costo %>" />
                     </div>
                     <div class="price-box">
                         <h3>Stock 3</h3>
-                        <input type="number" step="0.01" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Stocks %>"/>
                     </div>
                     <div class="price-box">
                         <h3>Inventario 4</h3>
-                        <input type="number" step="0.01" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Inventario %>" />
                     </div>
                     <div class="price-box">
                         <h3>Con colaboradores 5</h3>
@@ -75,20 +77,21 @@
                 <div class="equipment-form">
                     <h2>Especificaciones del Equipo</h2>
                     <label for="Descripcion">Descripción</label>
-                    <input type="text" id="Descripcion" placeholder="Descripcion del equipo" required />
+                    <input type="text" id="Descripcion" value="<%= producto.Descripcion %>" required />
                     <label for="Categoria">Categoria</label>
-                    <select type="submit" id="categoria" placeholder="Selecionar alguna categoria">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                    <select type="submit" id="categoria">
+                        <option <%= producto.Categoria=='1' ? "selected" : ""%> value="1">1</option>
+                        <option <%= producto.Categoria=='2' ? "selected" : ""%>value="2">2</option>
                     </select>
                     <label for="fechaCompra">Fecha de Compra</label>
-                    <input type="date" id="fechaCompra" />
+                    <input type="date" id="fechaCompra" value="<%= producto.Fecha_Compra %>"/>
                 <button type="submit">Guardar Información</button>
             </div>
             </div>
             </form>
         </div>
         </div>
+        <% } %>
     </div>
     </body>
     </html>

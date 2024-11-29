@@ -1,26 +1,4 @@
- body {
-  padding: 0%;
-  margin: 0%;
-  box-sizing: border-box;
-  height: 100vh;
-  width: 100%;
-  background: linear-gradient(45deg, #2c3523, #153815, #4d8c6b, #2b3e4d);
-  background-size: 400% 400%;
-  animation: color 12s ease infinite;
-  
-}
 
-@keyframes color{
-  0% {
-      background-position: 0% 50%;
-  }
-  50% {
-      background-position: 100% 50%;
-  }
-  100% {
-      background-position: 0% 50%;
-  }
-}
 
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
@@ -142,26 +120,26 @@ nav {
 }
 
 /* Estilo de la tarjeta en forma de barra vertical */
-.card {
-  width: 250px;
-  height: 87%;
-  background-color: #f5f7fa;
+.cuadroimg {
+  width: 300px;
+  height: 40%;
+  background-color: #f5f7fa00;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
-  display: flex;
+  display:inline;
   flex-direction: column;
-  justify-content: space-evenly;
-  position: fixed;
-  top: 40px;
-  left: 0;
-  margin: 1%;
+  position: absolute;
+  top: 30%;
+  right: 80%;
+  
 }
 
 
 /* Área de subida de archivos */
 .upload-area {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,8 +149,8 @@ nav {
   padding: 30px;
   cursor: pointer;
   text-align: center;
-  margin-bottom: 20px;
-  height: 200px; /* Ajuste del área de subida */
+  margin-bottom: 50px;
+  height: 300px; /* Ajuste del área de subida */
 }
 
 .upload-area:hover {
@@ -267,10 +245,11 @@ input:checked + .slider:before {
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 90px;
-  height: 100vh; /* Ocupa toda la altura disponible */
-  margin-left: 280px; /* Deja espacio para la barra vertical */
+  gap: 20px;
+  padding: 100px;
+  height: 80vh; /* Ocupa toda la altura disponible */
+  margin-left: 480px; /* Deja espacio para la barra vertical */
+  width: 80%;
   box-sizing: border-box;
   justify-content: center;
 }
