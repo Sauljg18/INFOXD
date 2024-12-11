@@ -57,6 +57,8 @@ body{
     z-index: 1;
 }
 
+
+
 .card::after, .card::before{
     content: '';
     position: absolute;
@@ -72,18 +74,59 @@ body{
     animation: 3s spin linear infinite;
 }
 
+.cardin {
+    width: 410px;
+    height: 510px;
+    color: white;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+ .cardin::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), #00000000, #ff0000df, #006aff00, #ff0000, #0bc23f00);
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 10px;
+    animation: spin 3s linear infinite;
+    transition: background-image 0.5s ease; /* Transición suave cuando cambie */
+}
+
+.cardin.stopped::before {
+    animation: none; /* Detener animación */
+    
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+        
+    }
+    to {
+        --angle: 360deg;
+    }
+ 
+   
+}
+
+.cardin::after{
+    background-image: conic-gradient(from var(--angle), #00000000, #00ff37df, #006aff00, #00ff15, #0bc23f00);
+}
+
 .card::before{
     filter: blur(1.5rem);
     opacity: 0.5;
-}
-
-@keyframes spin{
-    from{
-        --angle: 0deg;
-    }
-    to{
-        --angle: 360deg;
-    }
 }
 
 form{

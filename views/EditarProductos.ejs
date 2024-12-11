@@ -40,7 +40,7 @@
                 </div>
                 <div class="input-group">
                     <label for="nombre">Nombre <span>*</span></label>
-                    <input type="text" id="nombre" value="<%= producto.Nombre %>" required />
+                    <input type="text" id="Nombre" name="Nombre" value="<%= producto.Nombre %>" required />
                 </div>    
                 <div class="status">
                     <span id="statusText">Activo</span>
@@ -55,19 +55,19 @@
                 <div class="price-inputs">
                     <div class="price-box">
                         <h3>Valor Unitario 1</h3>
-                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Valor %>" />
+                        <input type="number" step="0.01" placeholder="0.00" id="Valor" name="Valor" value="<%= producto.Valor %>" />
                     </div>
                     <div class="price-box">
                         <h3>Costo Unitario 2</h3>
-                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Costo %>" />
+                        <input type="number" step="0.01" placeholder="0.00" id="Costo" name="Costo" value="<%= producto.Costo %>" />
                     </div>
                     <div class="price-box">
                         <h3>Stock 3</h3>
-                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Stocks %>"/>
+                        <input type="number" step="0.01" placeholder="0.00" id="Stocks" name="Stocks" value="<%= producto.Stocks %>"/>
                     </div>
                     <div class="price-box">
                         <h3>Inventario 4</h3>
-                        <input type="number" step="0.01" placeholder="0.00" value="<%= producto.Inventario %>" />
+                        <input type="number" step="0.01" placeholder="0.00" id="Inventario" name="Inventario" value="<%= producto.Inventario %>" />
                     </div>
                     <div class="price-box">
                         <h3>Con colaboradores 5</h3>
@@ -77,14 +77,14 @@
                 <div class="equipment-form">
                     <h2>Especificaciones del Equipo</h2>
                     <label for="Descripcion">Descripción</label>
-                    <input type="text" id="Descripcion" value="<%= producto.Descripcion %>" required />
+                    <input type="text" id="Descripcion" name="Descripcion" value="<%= producto.Descripcion %>" required />
                     <label for="Categoria">Categoria</label>
-                    <select type="submit" id="categoria">
+                    <select type="submit" id="Categoria" name="Categoria">
                         <option <%= producto.Categoria=='1' ? "selected" : ""%> value="1">1</option>
                         <option <%= producto.Categoria=='2' ? "selected" : ""%>value="2">2</option>
                     </select>
                     <label for="fechaCompra">Fecha de Compra</label>
-                    <input type="date" id="fechaCompra" value="<%= producto.Fecha_Compra %>"/>
+                    <input type="date" id="Fecha_Compra" name="Fecha_Compra" value="<%= producto.Fecha_Compra %>"/>
                 <button type="submit">Guardar Información</button>
             </div>
             </div>

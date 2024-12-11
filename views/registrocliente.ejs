@@ -2,22 +2,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="/resources/estilo/form-cliente.css">
+   <link rel="stylesheet" href="/resources/estilo/RegistroEquipos.css">
    <link rel="stylesheet" href="/resources/estilo/inicio.css"> 
     <title>Clientes</title>
    
 <body>
   <header class="header" >
-    <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
+    <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+    <div class="lista">
     <ul>
-    <li><a href="/clientes"  style="color:rgb(2, 178, 40)">Cliente</a></li>
-    <li> <a href="/colab">Colaborador</a></h2></li>
-    <li> <a href="/ver-equipos">Equipo</a></h2></li>
-    <li> <a href="/producto">Producto</a></h2></li>
-    <li> <a href="/servicio">Servicio</a></h2></li>
-    <li> <a href="/tarea">Tarea</a></h2></li></ul>
-    
-  </header>
+      <li><a href="/clientes">Cliente</a></li>
+      <li> <a href="/colab">Colaborador</a></h2></li>
+      <li> <a href="/ver-equipos">Equipo</a></h2></li>
+      <li> <a href="/producto">Producto</a></h2></li>
+      <li> <a href="/servicio">Servicio</a></h2></li>
+      <li> <a href="/tarea">Tarea</a></h2></li></ul>
+    </div>
+    </header>
   <section class="sidebar">
 </section>
 <header>
@@ -25,7 +26,7 @@
           <!-- Primer formulario a la izquierda -->
           <div class="offset-md-2">
             <div class="container">
-
+              <h2>CLIENTE</h2>
             <form action="/aceptar" method="post" class="mb-3" id="formulario">
               <!-- Contenido del primer formulario -->
               <ul>
@@ -46,9 +47,8 @@
                   <input class="form-control form-control-lg" type="text" placeholder="Código Externo" aria-label=".form-control-lg example" id="externo" name="externo" required />
                 </li>
               </ul>
-            </div>
+           
 
-            <div class="container2">
       
     
         <ul>
@@ -113,13 +113,13 @@
                       </li>
                         </ul></ul>
                           </li>
-                      </div>
+                      
                 </li>  
               </ul>
-    </div>
+   
     <input type="submit" class="col" value="ENVIAR">
 </form>
-
+</div>
 
 </div>
 <script src="/resources/javascript/cliente.js"></script>

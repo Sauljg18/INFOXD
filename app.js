@@ -97,7 +97,7 @@ app.post('/login', (req, res) => {
                 }
             });
         } else {
-            res.send('Usuario o contraseña incorrectos');
+            res.render('Logginincorrect');
         }
     });
 });
@@ -158,8 +158,8 @@ const authMiddleware = (req, res, next) => {
 app.get('/home',authMiddleware, (req, res) => {
     // Consulta para obtener todas las tareas 
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT DISTINCT colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos, tareas   ', (error, results) => {
-    if (error) {
+    connection.query('SELECT DISTINCT servicios.Nombre As servinombre, colaboradores.nombre AS colaboradorNombre, tabcliente.nombre AS clienteNombre, tabcliente.codigoext AS clientecodigo, tablaequipos.Nombre AS equipoNombre FROM colaboradores, tabcliente, tablaequipos, tareas , servicios ', (error, results) => {
+        if (error) {
         throw error;
     } else {
         res.render('inicio', { results: results });
