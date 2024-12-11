@@ -27,7 +27,7 @@
       <div class="container" >
         <a href="/registro" ><button class="add-service-btn">Agregar</button></a>
         <a>Colaborador</a>
-          <input type="text" id="search" placeholder="Buscar servicio...">
+          <input type="text" style="color: black;" id="searchColabo" placeholder="Buscar servicio...">
       <div class="diseño">
         <div class="scroll">
         <table class="tablew" >
@@ -42,7 +42,7 @@
             <th scope="col">ACCION</th>
           </tr>
         </thead>      
-        <tbody>  
+        <tbody id="colaTable">  
           <% results.forEach((colaboradores) => { %>
             <tr>
               <td scope="row" ><a  href="/editidcol/id/<%= colaboradores.idcolaborador %>"><%= colaboradores.idcolaborador %></a></td>
@@ -63,5 +63,19 @@
       </div>
   </div>
 </main>
+<script>
+  document.getElementById('searchColabo').addEventListener('input', function () {
+      const searchValue = this.value.toLowerCase();
+      const rows = document.querySelectorAll('#colaTable tr'); // Selecciona solo las filas del cuerpo
+      rows.forEach(row => {
+          const ColabName = row.cells[1]?.textContent.toLowerCase(); // Verifica si la celda existe
+          if (ColabName && ColabName.includes(searchValue)) {
+              row.style.display = ''; // Muestra la fila
+          } else {
+              row.style.display = 'none'; // Oculta la fila
+          }
+      });
+  });
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
             <div class="container" >
                 <a href="/registrocliente" ><button class="add-service-btn">Agregar</button></a>
                 <a>Cliente</a>
-          <input type="text" id="search" placeholder="Buscar servicio...">
+          <input type="text" style="color:black" id="searchCliente" placeholder="Buscar servicio...">
                 <div class="diseño">
                   <div class="tablew">
                     <table class="table" >
@@ -43,11 +43,10 @@
                           <th scope="col">Direccion</th>
                           <th scope="col">Region</th>
                           <th scope="col">Ciudad</th>
-                          <th scope="col">Estado</th>
                           <th scope="col">ACCION</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="clientTable">
                         <% results.forEach((cliente) => { %>
                           <tr>
                             <td scope="row" class="table-primary"><%= cliente.id_cliente %></td>
@@ -71,6 +70,20 @@
                   </div>
                 </div>
         </main>
+        <script>
+           document.getElementById('searchCliente').addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#clientTable tr'); // Selecciona solo las filas del cuerpo
+            rows.forEach(row => {
+                const clientName = row.cells[1]?.textContent.toLowerCase(); // Verifica si la celda existe
+                if (clientName && clientName.includes(searchValue)) {
+                    row.style.display = ''; // Muestra la fila
+                } else {
+                    row.style.display = 'none'; // Oculta la fila
+                }
+            });
+        });
+        </script>
         <div class="barra"></div>
   </body>
 </html>
