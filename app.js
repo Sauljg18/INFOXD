@@ -26,6 +26,41 @@ app.get("/event/:id", (req, res) => {
     });
 });
 
+app.get('/servicio', (req, res) => {
+    const page = parseInt(req.query.page) || 1; // Página actual
+    const limit = 5; // Servicios por página
+    const offset = (page - 1) * limit; // Calcular el desplazamiento
+
+    // Consulta para obtener servicios con paginación
+    const sql = 'SELECT * FROM servicios LIMIT ? OFFSET ?';
+    const countSql = 'SELECT COUNT(*) as total FROM servicios';
+
+    connection.query(sql, [limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error al obtener servicios:', err);
+            return res.status(500).json({ success: false, error: 'Error al obtener servicios.' });
+        }
+
+        // Obtener el total de servicios para calcular las páginas
+        connection.query(countSql, (err, countResult) => {
+            if (err) {
+                console.error('Error al contar servicios:', err);
+                return res.status(500).json({ success: false, error: 'Error al contar servicios.' });
+            }
+
+            const total = countResult[0].total;
+            const totalPages = Math.ceil(total / limit);
+
+            res.render('TablaServicios', {
+                results,
+                currentPage: page,
+                totalPages
+            });
+        });
+    });
+});
+
+
 // Ruta POST para agregar el servicio
 app.post('/agregar-servicio', (req, res) => {
     const { nombre, precio } = req.body;
@@ -41,11 +76,11 @@ app.post('/agregar-servicio', (req, res) => {
             return res.json({ success: false, error: 'Error al guardar el servicio.' });
         }
         console.log('Servicio agregado correctamente:', result);
-        res.json({ success: true });
+        
+        res.redirect('/servicio?page=1');
     });
     
 });
-
 
 app.use(session({
     secret: 'tu_clave_secreta',
@@ -291,27 +326,41 @@ app.get("/producto",authMiddleware, (req,res) => {
 
 });
 
-app.get("/servicio",authMiddleware, (req,res) => {
-    connection.query('SELECT * FROM servicios ', (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            res.render('TablaServicios', { results: results });
-        }
-    });
-});
 
-app.get("/tarea",authMiddleware, (req, res) => {
-    // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT * FROM tareas ', (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            res.render('TablaTareas', { results: results });
-        }
+app.get("/tarea",authMiddleware, (req, res) =>  {
+        const page = parseInt(req.query.page) || 1; // Página actual
+        const limit = 5; // Servicios por página
+        const offset = (page - 1) * limit; // Calcular el desplazamiento
+    
+        // Consulta para obtener servicios con paginación
+        const sql = 'SELECT * FROM tareas LIMIT ? OFFSET ?';
+        const countSql = 'SELECT COUNT(*) as total FROM tareas';
+    
+        connection.query(sql, [limit, offset], (err, results) => {
+            if (err) {
+                console.error('Error al obtener servicios:', err);
+                return res.status(500).json({ success: false, error: 'Error al obtener servicios.' });
+            }
+    
+            // Obtener el total de servicios para calcular las páginas
+            connection.query(countSql, (err, countResult) => {
+                if (err) {
+                    console.error('Error al contar servicios:', err);
+                    return res.status(500).json({ success: false, error: 'Error al contar servicios.' });
+                }
+    
+                const total = countResult[0].total;
+                const totalPages = Math.ceil(total / limit);
+    
+                res.render('TablaTareas', {
+                    results,
+                    currentPage: page,
+                    totalPages
+                });
+            });
+        });
     });
-});
-
+ 
 // Ruta para actualizar el comentario
 app.put('/tarea/:id', (req, res) => {
     const idTarea = req.params.id;

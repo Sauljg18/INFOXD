@@ -69,7 +69,32 @@
 </div>
 
 </div>
+<div class="pagination" id="pagination">
+  <% if (currentPage > 1) { %>
+      <a href="/tarea?page=<%= currentPage - 1 %>" class="prev">&laquo; Anterior</a>
+  <% } else { %>
+      <span class="prev disabled">&laquo; Anterior</span>
+  <% } %>
+  <% 
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(totalPages, currentPage + 2); 
+  %>
+  
+  <% for (let i = startPage; i <= endPage; i++) { %>
+      <a href="/tarea?page=<%= i %>" class="page <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+  <% } %>
+
+  <% if (currentPage < totalPages) { %>
+      <a href="/tarea?page=<%= currentPage + 1 %>" class="next">Siguiente &raquo;</a>
+  <% } else { %>
+      <span class="next disabled">Siguiente &raquo;</span>
+  <% } %>
 </div>
+</div>
+
+
+
+
 
 <div id="modal" class="modal">
   <div class="modal-content">

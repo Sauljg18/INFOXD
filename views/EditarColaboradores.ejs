@@ -28,7 +28,7 @@
     <% if (colaborador) { %>
     <a>
     <div class="container" >
-
+      <h1>COLABORADOR</h1>
     <form action="/updatec" method="post"  class="mb-3" id="formulario">
         <ul>
           <input id="idcolaborador" name="idcolaborador" value="<%=colaborador.idcolaborador%>" hidden />
@@ -98,18 +98,7 @@
         <ul>
         </div>
         </div>
-        
-    
-         
-            <nav class="mb-5" enctype="multipart/form-data">
-              <div>
-                <img src="https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="avatar" id="img" class="img" />
-                <input type="file" name="foto" id="foto" accept="image/*" class="imglol" />
-                <label for="foto" name="foto" id="foto" accept="image/*">Cambiar foto</label>
-              </div>
-              <input type="submit" value="ENVIAR">
-       
-      </nav>
+               <input type="submit" value="ENVIAR">      
 
     </form>
   </div>
