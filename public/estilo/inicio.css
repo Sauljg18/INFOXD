@@ -103,11 +103,13 @@ body{
 }
 
 
-@media (max-width: 1150px) {
+@media (max-width: 1000px) {
     .header li {
         padding: 33px 2.2%;
     }
 }
+
+
 
 .header li:hover{
     background-color: #094b0f;
