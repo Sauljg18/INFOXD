@@ -79,7 +79,7 @@
                       <input name="comentario" id="comentario" class="event-comentario" value="Sin comentario" hidden>
                       <input type="text" name="id_tarea" id="id_tarea" class="event-id" hidden>
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
-                      <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
+                      <label for="cliente" style="color:rgb(0, 0, 0)">Tarea será ejecutada por:</label><br>
                       <select name="cliente" id="cliente" class="event-cliente">
                         <% 
                         const uniqueClientes = [];
@@ -94,7 +94,7 @@
                   %>
                 </select><br>
                       <!-- Filtra los nombres de colaboradores para evitar duplicados -->
-                      <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
+                      <label for="colaborador" style="color: rgb(0, 0, 0)">La tarea sera colaborada por:</label><br>
                       <select name="colaborador" id="colaborador" class="event-colaborador"> 
                           <%  
                               const uniqueColaboradores = [];
@@ -109,9 +109,9 @@
                           %>
                   </form>
                               </select><br>
-                              <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
+                              <label for="fecha" style="color: rgb(0, 0, 0)">Fecha de tarea:</label><br>
                               <input type="date" name="fecha" id="fecha" class="event-fecha"><br>
-                              <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
+                              <label for="tipo" style="color: rgb(0, 0, 0)">El Tipo de Tarea:</label><br>
                               <select name="tipo" id="tipo" class="event-tipo">
                                   <option value="tipo">Seleccionar Tipo</option><br>
                                   <% 
@@ -127,7 +127,7 @@
                                     %>
                               </select><br>
                                 <!-- Filtra los nombres de clientes para evitar duplicados -->
-                                <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
+                                <label for="equipo" style="color:rgb(0, 0, 0)">Equipo:</label><br>
                                 <select name="equipo" id="equipo" class="event-name">
                                   <option value="Ninguno">NINGUNO</option>  
                                   <% 
@@ -142,7 +142,7 @@
                                         });
                                     %>
                                 </select><br>
-                              <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
+                              <label for="prioridad" style="color: rgb(0, 0, 0)">Prioridad:</label><br>
                               <select name="prioridad" id="prioridad"><br>
                                   <option value="alta">Alta</option>
                                   <option value="media">Media</option>
@@ -150,7 +150,7 @@
                               </select>
                             <input type="text" name="activo" id="activocliente" value="Activo" hidden>
                             <div class="add-event-input">
-                              <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
+                              <label for="descripcion" style="color: rgb(0, 0, 0);">Descripción de la tarea:</label>
                               <input name="descripcion" id="descripcion" class="event-descripcion"></input>
                             </div>
                             

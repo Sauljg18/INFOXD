@@ -377,11 +377,13 @@
 }
 .add-event-wrapper {
   position: absolute;
-  bottom: 100px;
-  right: -150px;
-  top: 10px;
-  width: 1000px;
-  max-height: 0;
+  bottom: 10px;
+  padding: 10px 0px;
+  top: 20px;
+  align-content: center;
+  left: 50%;
+  width: 800px;
+  max-height: 100;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
   border-radius: 5px;
@@ -392,14 +394,14 @@
   transition: max-height 0.5s ease;
 }
 .add-event-wrapper.active {
-  max-height: 1500px;
+  max-height: 2000px;
   opacity: 1;
-  border: 1px solid #ffffff;
-  background-color: #264154bc;
+  border: 1px solid #002705;
+  background-color: #dadada;
   transition: .5s;
 }
 .add-event-header {
-  width: 90%;
+  width: 20%;
   height: 100px;
   display: flex;
   align-items: center;
@@ -550,7 +552,7 @@
     padding-bottom: 340px;
   }
   .add-event-wrapper {
-    bottom: 100px;
+    bottom: 10px;
   }
 }
 @media screen and (max-width: 500px) {
