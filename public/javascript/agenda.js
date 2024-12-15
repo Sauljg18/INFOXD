@@ -16,9 +16,6 @@ const calendar = document.querySelector(".calendar"),
   addEventid = document.querySelector(".event-id"),
   addEventColaborador = document.querySelector(".event-colaborador"),
   addEventDescripcion = document.querySelector(".event-descripcion"),
-  addEventfecha = document.querySelector(".event-fecha"),
-  addEventtipo = document.querySelector(".event-tipo"),
-  addEventcomentario = document.querySelector(".event-comentario"),
   addEventduracion = document.querySelector(".event-duracion"),
   addEventFrom = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
@@ -346,12 +343,6 @@ function updateEvents(date) {
           <div class="descripcion">
             <h3 class="event-descripcion">${event.descripcion}</h3>
           </div>
-          <div class="fecha" >
-            <h3 class="event-fecha"></h3>
-          </div>
-          <div class="tipo" >
-            <h3 class="event-tipo"></h3>
-          </div>
         </div>`;
       });
     }
@@ -382,17 +373,7 @@ addEventDescripcion.addEventListener("input", (e) => {
   addEventDescripcion.value = addEventDescripcion.value.slice(0, 60);
 });
 
-addEventfecha.addEventListener("input", (e) => {
-  addEventfecha.value = addEventfecha.value.slice(0, 60);
-});
 
-addEventtipo.addEventListener("select", (e) => {
-  addEventtipo.value = addEventtipo.value.slice(0, 60);
-});
-
-addEventcomentario.addEventListener("input", (e) => {
-  addEventcomentario.value = addEventcomentario.value.slice(0, 60);
-});
 
 
 function defineProperty() {
@@ -420,9 +401,7 @@ addEventSubmit.addEventListener("click", () => {
   const eventColaborador = addEventColaborador.value;
   const eventDescripcion = addEventDescripcion.value;
   const eventfecha= addEventfecha.value;
-  const eventtipo= addEventtipo.value;
-  const eventcomentario= addEventcomentario.value;
-  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "" || eventtipo === "" || eventcomentario === "" ) {
+  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "") {
     alert("Please fill all the fields");
     return;
   }
@@ -447,12 +426,6 @@ addEventSubmit.addEventListener("click", () => {
         if (event.descripcion === eventDescripcion) {
           eventExist = true;
         }
-        if (event.fecha === eventfecha) {
-          eventExist = true;
-        }
-        if (event.tipo === eventtipo) {
-          eventExist = true;
-        }
         if (event.comentario === eventcomentario) {
           eventExist = true;
         }
@@ -466,8 +439,6 @@ addEventSubmit.addEventListener("click", () => {
     colaborador: eventColaborador,
     descripcion: eventDescripcion,
     fecha: eventfecha,
-    tipo: eventtipo,
-    comentario: eventcomentario,
   };
   console.log(newEvent);
   console.log(activeDay);
@@ -499,9 +470,6 @@ addEventSubmit.addEventListener("click", () => {
   addEventCliente.value = "";
   addEventColaborador.value = "";
   addEventDescripcion.value = "";
-  addEventfecha.value = "";
-  addEventtipo.value = "";
-  addEventcomentario.value = "";
   const tarea = req.body;
   // Corregir los nombres de las variables para que coincidan con el formulario
 

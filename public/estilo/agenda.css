@@ -447,7 +447,7 @@
   height: 100%;
   outline: none;
   border: none;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #0fa134;
   padding: 0 10px;
   font-size: 1rem;
   font-weight: 400;
@@ -477,7 +477,7 @@
 }
 
 .add-event-body .add-event-input select::placeholder {
-  color: #fcfcfc;
+  color: #2ab40e;
 }
 .add-event-body .add-event-input select:focus {
   border-bottom: 3px solid var(--primary-clr);
