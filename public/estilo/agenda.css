@@ -391,10 +391,12 @@
   background-color: #334d6000;
   transform: translateX(-50%);
   opacity: 0;
+  display: none;
   transition: max-height 0.5s ease;
 }
 .add-event-wrapper.active {
   max-height: 2000px;
+  display: block;
   opacity: 1;
   border: 1px solid #002705;
   background-color: #dadada;

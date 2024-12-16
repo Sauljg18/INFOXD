@@ -121,7 +121,7 @@ ul {
 }
 
 input, span{  width:100%;padding:10px;box-sizing:border-box;background:none;outline:auto;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-  color: rgb(0, 0, 0); font-size: 20px; transition:all .3s;border-bottom:2px solid #bebed2}
+  color: white; font-size: 20px; transition:all .3s;border-bottom:2px solid #bebed2}
 input:focus{border-bottom:2px solid #78788c}
 
 /* Modal para detalles emergentes */
@@ -158,7 +158,7 @@ input:focus{border-bottom:2px solid #78788c}
     display: block;
     margin: 5px 0;
     font-weight: bold;
-    color: #000000; /* Color blanco para el texto */
+    color: #fff; /* Color blanco para el texto */
 }
 
 .modal-content a {

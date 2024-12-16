@@ -19,7 +19,7 @@ const calendar = document.querySelector(".calendar"),
   addEventduracion = document.querySelector(".event-duracion"),
   addEventFrom = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
-  addEventSubmit = document.querySelector(".add-event-btn ");
+  addEventSubmit = document.querySelector(".add-event-btn");
   
   let AddEventEditar = document.getElementById("editar");
   
@@ -61,7 +61,7 @@ const calendar = document.querySelector(".calendar"),
     const id = document.getElementById('modalTareaId').getAttribute('event-id'); // Obtener el ID de la tarea
     const cliente = document.getElementById('modalCliente').value;
     const colaborador = document.getElementById('modalColaborador').value;
-    const tipo = document.getElementById('modalColaborador').value;
+    const tipo = document.getElementById('modalTipo').value;
     const comentario = document.getElementById('modalComentario').value;
   
     fetch(`/tarea/${id}`, {
@@ -93,18 +93,18 @@ let month = today.getMonth();
 let year = today.getFullYear();
 
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
 ];
 
 // const eventsArr = [
@@ -400,8 +400,7 @@ addEventSubmit.addEventListener("click", () => {
   const eventCliente = addEventCliente.value;
   const eventColaborador = addEventColaborador.value;
   const eventDescripcion = addEventDescripcion.value;
-  const eventfecha= addEventfecha.value;
-  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "") {
+  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "") {
     alert("Please fill all the fields");
     return;
   }
@@ -426,9 +425,7 @@ addEventSubmit.addEventListener("click", () => {
         if (event.descripcion === eventDescripcion) {
           eventExist = true;
         }
-        if (event.comentario === eventcomentario) {
-          eventExist = true;
-        }
+    
       });
     }
   });
@@ -438,7 +435,7 @@ addEventSubmit.addEventListener("click", () => {
     cliente: eventCliente,
     colaborador: eventColaborador,
     descripcion: eventDescripcion,
-    fecha: eventfecha,
+    
   };
   console.log(newEvent);
   console.log(activeDay);
