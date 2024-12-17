@@ -914,14 +914,14 @@ app.use('/resources', express.static("public"));
 const PORT = process.env.PORT || 3000;
 // Cambia a la IP de tu servidor o deja 0.0.0.0 para aceptar cualquier conexión
 const HOST = '192.168.0.10';
-
+/*
 app.listen(PORT, HOST, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
 });
+*/
 
 
 
-/*
 app.listen(3000,function(){
     console.log("Servidor creado http://localhost:3000");
-});;*/
+});;
