@@ -120,9 +120,9 @@ ul {
   top: -3%;
 }
 
-input, span{  width:100%;padding:10px;box-sizing:border-box;background:none;outline:auto;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-  color: white; font-size: 20px; transition:all .3s;border-bottom:2px solid #bebed2}
-input:focus{border-bottom:2px solid #78788c}
+input, span{  width:100%;padding:5px;box-sizing:border-box;background:none;outline:auto;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+  color: rgb(0, 0, 0); font-size: 10px; transition:all .3s;border-bottom:2px solid #bebed2}
+input:focus{border-bottom:0px solid #78788c}
 
 /* Modal para detalles emergentes */
 .modal {

@@ -86,19 +86,19 @@ body{
 
 @media (max-width: 1700px) {
     .header li {
-        padding: 33px 2.2%;
+        padding: 33px 10.2%;
     }
 }
 
 @media (max-width: 1500px) {
     .header li {
-        padding: 33px 2.2%;
+        padding: 33px 10.2%;
     }
 }
 
 @media (max-width: 1200px) {
     .header li {
-        padding: 33px 2.2%;
+        padding: 33px 10.2%;
     }
 }
 
@@ -109,7 +109,11 @@ body{
     }
 }
 
-
+@media (max-width: 1000px) {
+    .header li {
+        padding: 33px 12.2%;
+    }
+}
 
 .header li:hover{
     background-color: #094b0f;
