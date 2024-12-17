@@ -912,10 +912,12 @@ app.post('/reactivar-tarea', (req, res) => {
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Cambia a la IP de tu servidor o deja 0.0.0.0 para aceptar cualquier conexión
+const HOST = '192.168.0.10';
 
+app.listen(PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
+});
 
 
 
