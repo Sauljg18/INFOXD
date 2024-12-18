@@ -627,7 +627,6 @@ app.post('/updatec', (req, res) => { // UPDARTE COLABORADOR
                     }
 
                     console.log("Filas afectadas en tareas:", results.affectedRows);
-                    res.status(200).send("Actualización completa.");
                     res.redirect('/colab');
                 }
             );
