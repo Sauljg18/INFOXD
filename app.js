@@ -508,6 +508,7 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     throw error;
         }else{
         console.log("Datos almacenados correctamente"); 
+        res.render('tablacolaboradores');
         }
     });
 });
@@ -539,6 +540,13 @@ app.post('/updatec', (req, res) => { // UPDARTE COLABORADOR
 
                     console.log("Filas afectadas en tareas:", results.affectedRows);
                     res.status(200).send("Actualización completa.");
+                    connection.query('SELECT * FROM colaboradores ', (error, results) => {
+                        if (error) {
+                            throw error;
+                        } else {
+                            res.post('tablacolaboradores', { results: results });
+                        }
+                    });
                 }
             );
         }
@@ -578,6 +586,13 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
         throw error;
         }else{
         console.log("Datos almacenados correctamente"); 
+        connection.query('SELECT * FROM tabcliente ', (error, results) => {
+            if (error) {
+                throw error;
+            } else {
+                res.post('tablacliente', { results: results });
+            }
+        });
     }
     });
 
