@@ -203,25 +203,71 @@ app.get('/home',authMiddleware, (req, res) => {
 });
 /*jaaka*/
 app.get("/colab", authMiddleware, (req, res) => {
-    // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT * FROM colaboradores ', (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            res.render('tablacolaboradores', { results: results });
-        }
-    });
+    const page = parseInt(req.query.page) || 1; // Página actual
+        const limit = 5; // Servicios por página
+        const offset = (page - 1) * limit; // Calcular el desplazamiento
+    
+        // Consulta para obtener servicios con paginación
+        const sql = 'SELECT * FROM colaboradores LIMIT ? OFFSET ?';
+        const countSql = 'SELECT COUNT(*) as total FROM colaboradores';
+    
+        connection.query(sql, [limit, offset], (err, results) => {
+            if (err) {
+                console.error('Error al obtener servicios:', err);
+                return res.status(500).json({ success: false, error: 'Error al obtener servicios.' });
+            }
+    
+            // Obtener el total de servicios para calcular las páginas
+            connection.query(countSql, (err, countResult) => {
+                if (err) {
+                    console.error('Error al contar servicios:', err);
+                    return res.status(500).json({ success: false, error: 'Error al contar servicios.' });
+                }
+    
+                const total = countResult[0].total;
+                const totalPages = Math.ceil(total / limit);
+    
+                res.render('tablacolaboradores', {
+                    results,
+                    currentPage: page,
+                    totalPages
+                });
+            });
+        });
 });
 
 app.get("/clientes", authMiddleware, (req, res) => {
-    // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT * FROM tabcliente ', (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            res.render('tablacliente', { results: results });
+    const page = parseInt(req.query.page) || 1; // Página actual
+    const limit = 5; // Servicios por página
+    const offset = (page - 1) * limit; // Calcular el desplazamiento
+
+    // Consulta para obtener servicios con paginación
+    const sql = 'SELECT * FROM tabcliente LIMIT ? OFFSET ?';
+    const countSql = 'SELECT COUNT(*) as total FROM tabcliente';
+
+    connection.query(sql, [limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error al obtener servicios:', err);
+            return res.status(500).json({ success: false, error: 'Error al obtener servicios.' });
         }
-    });
+
+        // Obtener el total de servicios para calcular las páginas
+        connection.query(countSql, (err, countResult) => {
+            if (err) {
+                console.error('Error al contar servicios:', err);
+                return res.status(500).json({ success: false, error: 'Error al contar servicios.' });
+            }
+
+            const total = countResult[0].total;
+            const totalPages = Math.ceil(total / limit);
+
+            res.render('tablacliente', {
+                results,
+                currentPage: page,
+                totalPages
+            });
+        });
+});
 });
 
 app.get('/editequipo/:IdEquipo', authMiddleware, (req, res) => {
@@ -262,16 +308,36 @@ app.get('/editequipo/:IdEquipo', authMiddleware, (req, res) => {
 });
 //VER TABLA DE EQUIPOS
 app.get("/ver-equipos",authMiddleware, (req, res) => {
-    const query = 'SELECT * FROM tablaequipos'; // Nombre correcto de tu tabla
-    connection.query(query, (err, results) => {
-        
+    const page = parseInt(req.query.page) || 1; // Página actual
+    const limit = 5; // Servicios por página
+    const offset = (page - 1) * limit; // Calcular el desplazamiento
+     // Consulta para obtener servicios con paginación
+     const sql = 'SELECT * FROM tablaequipos LIMIT ? OFFSET ?';
+     const countSql = 'SELECT COUNT(*) as total FROM tablaequipos';
+     connection.query(sql, [limit, offset], (err, results) => {
         if (err) {
-            console.error(err);
-            return res.status(500).send('Error en la base de datos');
+            console.error('Error al obtener servicios:', err);
+            return res.status(500).json({ success: false, error: 'Error al obtener servicios.' });
         }
-        console.log(results); // Imprimir para verificar resultados
-        res.render('Equipos', { results: results }); // Pasar 'results' a la vista
+
+        // Obtener el total de servicios para calcular las páginas
+        connection.query(countSql, (err, countResult) => {
+            if (err) {
+                console.error('Error al contar servicios:', err);
+                return res.status(500).json({ success: false, error: 'Error al contar servicios.' });
+            }
+
+            const total = countResult[0].total;
+            const totalPages = Math.ceil(total / limit);
+
+            res.render('Equipos', {
+                results,
+                currentPage: page,
+                totalPages
+            });
+        });
     });
+
 });
 
 app.get('/RegistroProductos',authMiddleware, (req, res) => {
@@ -316,12 +382,34 @@ app.get("/resequipo", authMiddleware, (req,res) => {
 
 app.get("/producto",authMiddleware, (req,res) => {
     // Realiza la consulta y renderiza la vista con los resultados
-    connection.query('SELECT * FROM tabproducto ', (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            res.render('TablaProductos', { results: results });
+    const page = parseInt(req.query.page) || 1; // Página actual
+    const limit = 5; // Servicios por página
+    const offset = (page - 1) * limit; // Calcular el desplazamiento
+     // Consulta para obtener servicios con paginación
+     const sql = 'SELECT * FROM tabproducto LIMIT ? OFFSET ?';
+     const countSql = 'SELECT COUNT(*) as total FROM tabproducto';
+     connection.query(sql, [limit, offset], (err, results) => {
+        if (err) {
+            console.error('Error al obtener servicios:', err);
+            return res.status(500).json({ success: false, error: 'Error al obtener servicios.' });
         }
+
+        // Obtener el total de servicios para calcular las páginas
+        connection.query(countSql, (err, countResult) => {
+            if (err) {
+                console.error('Error al contar servicios:', err);
+                return res.status(500).json({ success: false, error: 'Error al contar servicios.' });
+            }
+
+            const total = countResult[0].total;
+            const totalPages = Math.ceil(total / limit);
+
+            res.render('TablaProductos', {
+                results,
+                currentPage: page,
+                totalPages
+            });
+        });
     });
 
 });
@@ -508,7 +596,7 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     throw error;
         }else{
         console.log("Datos almacenados correctamente"); 
-        res.render('tablacolaboradores');
+        res.redirect('/colab');
         }
     });
 });
@@ -540,13 +628,7 @@ app.post('/updatec', (req, res) => { // UPDARTE COLABORADOR
 
                     console.log("Filas afectadas en tareas:", results.affectedRows);
                     res.status(200).send("Actualización completa.");
-                    connection.query('SELECT * FROM colaboradores ', (error, results) => {
-                        if (error) {
-                            throw error;
-                        } else {
-                            res.render('tablacolaboradores', { results: results });
-                        }
-                    });
+                    res.redirect('/colab');
                 }
             );
         }
@@ -586,13 +668,7 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
         throw error;
         }else{
         console.log("Datos almacenados correctamente"); 
-        connection.query('SELECT * FROM tabcliente ', (error, results) => {
-            if (error) {
-                throw error;
-            } else {
-                res.render('tablacliente', { results: results });
-            }
-        });
+        res.redirect('/clientes');
     }
     });
 
@@ -665,14 +741,7 @@ app.post('/update', (req, res) => { // UPDATE CLIENTE
                     }
 
                     console.log("Filas afectadas en facturas:", results.affectedRows);
-                    res.status(200).send("Actualización completa.");
-                    connection.query('SELECT * FROM tabcliente ', (error, results) => {
-                        if (error) {
-                            throw error;
-                        } else {
-                            res.render('tablacliente', { results: results });
-                        }
-                    });
+                    res.redirect('/clientes');
                 }
             );
         }
@@ -687,13 +756,7 @@ app.get("/delete/:id_cliente", authMiddleware, function(req,res){
     if(error){
         throw error;
     }else{
-        connection.query('SELECT * FROM tabcliente ', (error, results) => {
-            if (error) {
-                throw error;
-            } else {
-                res.render('tablacliente', { results: results });
-            }
-        });
+        res.redirect('/clientes');
     }
     })
     });
@@ -705,13 +768,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
     if(error){
         throw error;
     }else{
-        connection.query('SELECT * FROM colaboradores ', (error, results) => {
-            if (error) {
-                throw error;
-            } else {
-                res.render('tablacolaboradores', { results: results });
-            }
-        });
+        res.redirect('/colab');
     }
     })
     });
@@ -739,6 +796,9 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
                 throw error;
             }else{
                 console.log("Datos almacenados correctamente"); 
+               
+                        res.redirect('/ver-equipos');
+                
         }
     });
 });
@@ -766,18 +826,10 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
                 if(error){
                 throw error;
                 }else{
-                    connection.query('SELECT * FROM tablaequipos ', (error, results) => {
-                        if (error) {
-                            throw error;
-                        } else {
-                            res.render('Equipos', { results: results });
-                        }
-                    });
+                   res.redirect('/ver-equipos');
                 }
-            });
-        
         });
-        
+    });
 
      //ELIMINAR REGISTRO DE Equipo
     app.get("/deleteequipo/:IdEquipo",authMiddleware, function(req,res){ 
@@ -786,13 +838,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         if(error){
             throw error;
         }else{
-            connection.query('SELECT * FROM tablaequipos ', (error, results) => {
-                if (error) {
-                    throw error;
-                } else {
-                    res.render('Equipos', { results: results });
-                }
-            });
+            res.redirect('/ver-equipos');
         }
         })
         });
@@ -837,6 +883,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
             throw error;
                 }else{
                 console.log("Datos almacenados correctamente"); 
+                res.redirect('/producto');
                 }
             });
         
@@ -844,7 +891,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         
         });
 
-        app.post("/updateproducto", function(req,res){ // REGISTRO DE PRODUCTO
+        app.post("/updateproducto", function(req,res){ // ACTUALIZACION DE PRODUCTO
             const producto = req.body;
            // Corregir los nombres de las variables para que coincidan con el formulario
             let Idproducto = producto.Idproducto;
@@ -861,13 +908,7 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
                 if(error){
                 throw error;
                 }else{
-                    connection.query('SELECT * FROM tabproducto ', (error, results) => {
-                        if (error) {
-                            throw error;
-                        } else {
-                            res.render('TablaProductos', { results: results });
-                        }
-                    });
+                    res.redirect('/ver-equipos');
                 }
             });
         
@@ -897,6 +938,7 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     throw error;
     }else{
     console.log("Datos almacenados correctamente"); 
+    res.redirect('/home');
     }
 });
 });
@@ -935,7 +977,7 @@ app.post('/reactivar-tarea', (req, res) => {
 
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
-
+/*
 const PORT = process.env.PORT || 3000;
 // Cambia a la IP de tu servidor o deja 0.0.0.0 para aceptar cualquier conexión
 const HOST = '192.168.100.21';
@@ -943,10 +985,10 @@ const HOST = '192.168.100.21';
 app.listen(PORT, HOST, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
 });
+*/
 
 
 
-/*
 app.listen(3000,function(){
     console.log("Servidor creado http://localhost:3000");
-});;*/
+});;

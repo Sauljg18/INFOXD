@@ -38,7 +38,7 @@
             <!-- Tabla de productos -->
             <div class="diseño">
                 <div class="tablew">
-                    <table class="table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -72,6 +72,27 @@
                     </table>
                 </div>
             </div>
+            <div class="pagination" id="pagination">
+                <% if (currentPage > 1) { %>
+                    <a href="/producto?page=<%= currentPage - 1 %>" class="prev">&laquo; Anterior</a>
+                <% } else { %>
+                    <span class="prev disabled">&laquo; Anterior</span>
+                <% } %>
+                <% 
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, currentPage + 2); 
+                %>
+                
+                <% for (let i = startPage; i <= endPage; i++) { %>
+                    <a href="/producto?page=<%= i %>" class="page <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+              
+                <% if (currentPage < totalPages) { %>
+                    <a href="/producto?page=<%= currentPage + 1 %>" class="next">Siguiente &raquo;</a>
+                <% } else { %>
+                    <span class="next disabled">Siguiente &raquo;</span>
+                <% } %>
+              </div>
         </div>
     </main>
     <!--Script relacionado al filtrado por nombre-->

@@ -66,52 +66,45 @@ body{
 
 @media (max-width: 3200px) {
     .header li {
-        padding: 35px 13.2%;
+        padding: 40px 13.2%;
     }
 }
 
 
 @media (max-width: 2000px) {
     .header li {
-        padding: 35px 13.05%;
+        padding: 40px 9.7%;
     }
 }
 
 
 @media (max-width: 1800px) {
     .header li {
-        padding: 33px 22%;
+        padding: 40px 9.7%;
     }
 }
 
 @media (max-width: 1700px) {
     .header li {
-        padding: 33px 10.2%;
+        padding: 40px 9.2%;
     }
 }
 
 @media (max-width: 1500px) {
     .header li {
-        padding: 33px 10.2%;
+        padding: 40px 9.2%;
     }
 }
 
 @media (max-width: 1200px) {
     .header li {
-        padding: 33px 10.2%;
-    }
-}
-
-
-@media (max-width: 1000px) {
-    .header li {
-        padding: 33px 2.2%;
+        padding: 40px 10.2%;
     }
 }
 
 @media (max-width: 1000px) {
     .header li {
-        padding: 33px 12.2%;
+        padding: 40px 10.2%;
     }
 }
 

@@ -13,19 +13,19 @@
 .diseño {
   position: relative;
   display: block;
-  top: 5px;
+  top: 1px;
   margin: auto;
   background-color: #393939; /* Fondo oscuro para resaltar contenido */
   border-radius: 10px;
   width: 100%;
-  height:500px;
+  height: 72%;
   overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
 }
 
 .container {
   max-width: 1000px;
-  width: 1000px;
-  height: 100%;
+  width: 100%;
+  height: 530px;
   margin: 0 auto;
   background-color: white;
   padding: 20px;
@@ -37,6 +37,7 @@
   left: 0;
   position: relative;
 }
+
 
 /* Para las celdas de la tabla */
 .tablew th, .tablew td {
