@@ -68,8 +68,9 @@
                         </tbody>
                       </table>
                   </div>
-                  
+                 
                 </div>
+                <h4>Para buscar primero selecciona el numero de la pagina y al final escribes a la persona</h4>
                 <div class="pagination" id="pagination">
                   <% if (currentPage > 1) { %>
                       <a href="/clientes?page=<%= currentPage - 1 %>" class="prev">&laquo; Anterior</a>
@@ -93,7 +94,9 @@
                       <span class="next disabled">Siguiente &raquo;</span>
                   <% } %>
               </div>
+              
         </main>
+       
         <script>
            document.getElementById('searchCliente').addEventListener('input', function () {
             const searchValue = this.value.toLowerCase();

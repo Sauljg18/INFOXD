@@ -930,14 +930,14 @@ app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
     let activate = tarea.activo;
     let comentario = tarea.comentario;
 
-    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, tipo, equipo, prioridad, descripcion, status, comentario) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"', '"+ comentario+"')";
+    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, tipo, equipo, prioridad, descripcion, status, comentario) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"', '"+ comentario +"')";
                 
     connection.query(registrar,function(error){
     if(error){
     throw error;
     }else{
     console.log("Datos almacenados correctamente"); 
-    res.redirect('/home');
+   
     }
 });
 });

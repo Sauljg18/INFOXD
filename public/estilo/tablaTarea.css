@@ -138,8 +138,8 @@ input:focus{border-bottom:0px solid #78788c}
 
 .modal-content {
   background-color: rgb(97, 97, 97);
-  margin: 10% auto;
-  padding: 20px;
+  margin: 0% auto;
+  padding: 10px;
   border-radius: 8px;
   width: 80%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
