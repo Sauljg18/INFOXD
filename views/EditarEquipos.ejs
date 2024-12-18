@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Equipo</title>
     <link rel="stylesheet" href="/resources/estilo/RegistroEquipos.css">
-    <link rel="stylesheet" href="/resources/estilo/Equipos.css">
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
 </head>
 <body>
     <header class="header">
@@ -33,12 +33,6 @@
             <!-- Formulario -->
             <form action="/updateequipo" id="FormularioEquipo" method="post">
                 <button type="submit" class="float">Guardar</button>    
-
-                <div class="image-upload">
-                    <div class="image-placeholder" id="imagePreview">Arrastre o haga clic</div>
-                    <input type="file" id="imageUpload" name="imagen" accept="image/*" style="display:none;">
-                    <label for="imageUpload" class="image-upload-label">Subir Imagen</label>
-                </div>
 
                 <input type="hidden" name="IdEquipo" value="<%= equipo.IdEquipo %>">
                 <div>

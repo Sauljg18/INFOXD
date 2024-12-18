@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/resources/estilo/RegistroProductos.css">
     <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <script src="/resources/javascript/scripts.js"></script>
-    <title>RegistroDeProductos</title>
+    <title>EDITARDeProductos</title>
 </head>
 
 <body>
@@ -24,11 +24,15 @@
         </header>
         <section class="sidebar">
         </section>
+        <% if (producto) { %>
 <div class="row">
     <div class="col-md-2">
         <div>
             <div class="cuadroimg">
-                <form method="post" action="/validarproducto">
+                <h2>Gráfico de Producto</h2>
+                <canvas id="grafica" width="300" height="300" style="display: block;"></canvas> 
+                <form method="post" action="/updateproducto">
+                    <input id="Idproducto" name="Idproducto" value="<%=producto.Idproducto%>" hidden />
                 <div class="upload-area">
                     <label for="fileUpload">
                         <i class="upload-icon">⬆️</i>
@@ -38,7 +42,7 @@
                 </div>
                 <div class="input-group">
                     <label for="nombre">Nombre <span>*</span></label>
-                    <input type="text" id="Nombre" name="Nombre" placeholder="Ingrese nombre" required />
+                    <input type="text" id="Nombre" name="Nombre" value="<%= producto.Nombre %>" required />
                 </div>    
                 <div class="status">
                     <span id="statusText">Activo</span>
@@ -48,24 +52,25 @@
                     </div>
                 </div>
             </div>
-            
+           
             <div class="main-content">
+                
                 <div class="price-inputs">
                     <div class="price-box">
                         <h3>Valor Unitario 1</h3>
-                        <input type="number" step="0.01" id="Valor" name="Valor" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" id="Valor" name="Valor" value="<%= producto.Valor %>" />
                     </div>
                     <div class="price-box">
                         <h3>Costo Unitario 2</h3>
-                        <input type="number" step="0.01" id="Costo" name="Costo" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" id="Costo" name="Costo" value="<%= producto.Costo %>" />
                     </div>
                     <div class="price-box">
                         <h3>Stock 3</h3>
-                        <input type="number" step="0.01" id="Stocks" name="Stocks" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" id="Stocks" name="Stocks" value="<%= producto.Stocks %>"/>
                     </div>
                     <div class="price-box">
                         <h3>Inventario 4</h3>
-                        <input type="number" step="0.01" id="Inventario" name="Inventario" placeholder="0.00" />
+                        <input type="number" step="0.01" placeholder="0.00" id="Inventario" name="Inventario" value="<%= producto.Inventario %>" />
                     </div>
                     <div class="price-box">
                         <h3>Con colaboradores 5</h3>
@@ -75,20 +80,62 @@
                 <div class="equipment-form">
                     <h2>Especificaciones del Equipo</h2>
                     <label for="Descripcion">Descripción</label>
-                    <input type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del equipo" required />
+                    <input type="text" id="Descripcion" name="Descripcion" value="<%= producto.Descripcion %>" required />
                     <label for="Categoria">Categoria</label>
-                    <select type="submit" id="Categoria" name="Categoria" placeholder="Selecionar alguna categoria">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                    <select type="submit" id="Categoria" name="Categoria">
+                        <option <%= producto.Categoria=='1' ? "selected" : ""%> value="1">1</option>
+                        <option <%= producto.Categoria=='2' ? "selected" : ""%>value="2">2</option>
                     </select>
                     <label for="fechaCompra">Fecha de Compra</label>
-                    <input type="date"id="Fecha_Compra" name="Fecha_Compra" />
+                    <input type="date" id="Fecha_Compra" name="Fecha_Compra" value="<%= producto.Fecha_Compra %>"/>
                 <button type="submit">Guardar Información</button>
             </div>
             </div>
+            
             </form>
+            <% } %>
+          
         </div>
+  
         </div>
-    </div>
+       
+
+        
+    <!-- Gráfico con Chart.js -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script>
+        const producto = {
+            Valor: '<%= producto.Valor %>',
+            Costo: '<%= producto.Costo %>',
+            Stocks: '<%= producto.Stocks %>',
+            Inventario: '<%= producto.Inventario %>'
+        };
+
+        const labels = ['Valor', 'Costo', 'Stocks', 'Inventario'];
+        const colors = ['rgb(69,177,223)', 'rgb(99,201,122)', 'rgb(203,82,82)', 'rgb(229,224,88)'];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                data: [producto.Valor, producto.Costo, producto.Stocks, producto.Inventario],
+                backgroundColor: colors
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+        responsive: false, // Desactiva la responsividad de Chart.js
+        maintainAspectRatio: true, // Permite cambiar la proporción de aspecto
+    }
+        };
+
+        const grafica = document.getElementById('grafica').getContext('2d');
+grafica.canvas.width = 400;  // Ancho del canvas
+grafica.canvas.height = 400; // Alto del canvas
+new Chart(grafica, config);
+    </script>
     </body>
     </html>

@@ -4,24 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <link rel="stylesheet" href="/resources/estilo/TablaServicios.css">
 </head>
 <body>
 
-<header class="header">
-    <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
-    <ul>
-        <li><a href="/clientes">Cliente</a></li>
-        <li><a href="/colab">Colaborador</a></li>
-        <li><a href="/ver-equipos">Equipo</a></li>
-        <li><a href="/producto">Producto</a></li>
-        <li><a href="/servicio" style="color:rgb(2, 178, 40)">Servicio</a></li>
-        <li><a href="/tarea">Tarea</a></li>
-    </ul>
-</header>
-
-<section class="sidebar"></section>
+    <header class="header" >
+        <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+        <div class="lista">
+        <ul>
+          <li><a href="/clientes">Cliente</a></li>
+          <li> <a href="/colab">Colaborador</a></h2></li>
+          <li> <a href="/ver-equipos">Equipo</a></h2></li>
+          <li> <a href="/producto">Producto</a></h2></li>
+          <li> <a href="/servicio">Servicio</a></h2></li>
+          <li> <a href="/tarea">Tarea</a></h2></li></ul>
+        </div>
+        </header>
+        <section class="sidebar">
+        </section>
 
 <div class="container">
     <div class="Titulo">
@@ -35,55 +36,89 @@
         <input type="text" id="search" placeholder="Buscar servicio...">
     </div>
 
-    <!-- Tabla de servicios -->
-     <div class="diseño2">
-    <table class="tablew">
-        <thead>
-            <tr>
-                <th>Servicio</th>
-                <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody id="services-body">
-            <% results.forEach((servicio) => { %>
+      <!-- Tabla de servicios -->
+      <div class="diseño">
+        <table class="tablew">
+            <thead>
                 <tr>
-                <td scope="row" class="table-primary"><%= servicio.Nombre %></td>
-                <td><button> <a href="/deleteservicio/<%= servicio.Id %>  ">❌</a></button></td>
-                <td>
+                    <th>Servicio</th>
+                    <th>Precio</th>
+                    <th>Eliminar</th>
                 </tr>
-                
-                
-                </tr>
-                <%  }) %>
-        </tbody>
-    </table>
-</div>
-    <div class="pagination">
-        <span>Mostrando registros del 1 al 10</span>
-        <div class="pagination-controls">
-            <button class="prev-btn">Anterior</button>
-            <span class="page-number">1</span>
-            <button class="next-btn">Siguiente</button>
-        </div>
+            </thead>
+            <tbody id="services-body">
+                <% results.forEach((servicio) => { %>
+                    <tr>
+                        <td scope="row" class="table-primary"><%= servicio.Nombre %></td>
+                        <td><button> <a href="/deleteservicio/<%= servicio.Id %>  ">❌</a></button></td>
+                        <td>
+                        </tr>
+                <% }) %>
+            </tbody>
+        </table>
     </div>
-</div>
+
+    <div class="pagination" id="pagination">
+        <% if (currentPage > 1) { %>
+            <a href="/servicio?page=<%= currentPage - 1 %>" class="prev">&laquo; Anterior</a>
+        <% } else { %>
+            <span class="prev disabled">&laquo; Anterior</span>
+        <% } %>
+    
+        <% 
+            // Limitar el número de páginas mostradas a un máximo de 4
+            let startPage = Math.max(1, currentPage - 2); // Página de inicio (2 páginas antes de la actual)
+            let endPage = Math.min(totalPages, startPage + 3); // Página final (max 4 páginas)
+    
+            for (let i = startPage; i <= endPage; i++) { 
+        %>
+            <a href="/servicio?page=<%= i %>" class="page <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+    
+        <% if (currentPage < totalPages) { %>
+            <a href="/servicio?page=<%= currentPage + 1 %>" class="next">Siguiente &raquo;</a>
+        <% } else { %>
+            <span class="next disabled">Siguiente &raquo;</span>
+        <% } %>
+    </div>
 
 <!-- Ventana Modal -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         <h2>Añadir Servicio</h2>
-        <form id="serviceForm">
+        <form id="serviceForm" action="/agregar-servicio" method="POST">
             <label for="nombre">Nombre del Servicio:</label>
-            <input type="text" id="IDnombre" name="IDnombre" required>
+            <input type="text" id="nombre" name="nombre" required>
 
             <label for="precio">Precio:</label>
-            <input type="number" id="IDprecio" name="IDprecio" required>
+            <input type="number" id="precio" name="precio" required>
 
             <button type="submit">Añadir</button>
         </form>
     </div>
 </div>
+
+<script>
+    document.getElementById('search').addEventListener('input', function() {
+        const searchValue = this.value.toLowerCase();
+        // Selecciona todas las filas del cuerpo de la tabla de servicios
+        const rows = document.querySelectorAll('#services-body tr');
+        
+        rows.forEach(row => {
+            // Obtén el texto de la columna de "Servicio" (primera columna)
+            const servicioNombre = row.cells[0]?.textContent.toLowerCase() || '';
+            
+            // Verifica si el texto incluye el valor buscado
+            if (servicioNombre.includes(searchValue)) {
+                row.style.display = ''; // Muestra la fila
+            } else {
+                row.style.display = 'none'; // Oculta la fila
+            }
+        });
+    });
+    
+</script>
 
 <script src="/resources/javascript/modal.js"></script>
 

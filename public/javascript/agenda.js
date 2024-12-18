@@ -16,13 +16,12 @@ const calendar = document.querySelector(".calendar"),
   addEventid = document.querySelector(".event-id"),
   addEventColaborador = document.querySelector(".event-colaborador"),
   addEventDescripcion = document.querySelector(".event-descripcion"),
-  addEventfecha = document.querySelector(".event-fecha"),
-  addEventtipo = document.querySelector(".event-tipo"),
-  addEventcomentario = document.querySelector(".event-comentario"),
   addEventduracion = document.querySelector(".event-duracion"),
   addEventFrom = document.querySelector(".event-time-from "),
   addEventTo = document.querySelector(".event-time-to "),
-  addEventSubmit = document.querySelector(".add-event-btn ");
+  addEventSubmit = document.querySelector(".add-event-btn");
+  
+  let AddEventEditar = document.getElementById("editar");
   
   let botonactivar = document.getElementById("activar");
   let botonguardar = document.getElementById("guardar");
@@ -60,12 +59,16 @@ const calendar = document.querySelector(".calendar"),
   // Función para guardar el comentario
   function guardarComentario() {
     const id = document.getElementById('modalTareaId').getAttribute('event-id'); // Obtener el ID de la tarea
+    const cliente = document.getElementById('modalCliente').value;
+    const colaborador = document.getElementById('modalColaborador').value;
+    const tipo = document.getElementById('modalTipo').value;
     const comentario = document.getElementById('modalComentario').value;
   
     fetch(`/tarea/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comentario })
+      body: JSON.stringify({ cliente, colaborador, tipo, comentario })
+      
     })
     .then(response => response.json())
     .then(data => {
@@ -90,18 +93,18 @@ let month = today.getMonth();
 let year = today.getFullYear();
 
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
 ];
 
 // const eventsArr = [
@@ -340,12 +343,6 @@ function updateEvents(date) {
           <div class="descripcion">
             <h3 class="event-descripcion">${event.descripcion}</h3>
           </div>
-          <div class="fecha" >
-            <h3 class="event-fecha"></h3>
-          </div>
-          <div class="tipo" >
-            <h3 class="event-tipo"></h3>
-          </div>
         </div>`;
       });
     }
@@ -376,17 +373,7 @@ addEventDescripcion.addEventListener("input", (e) => {
   addEventDescripcion.value = addEventDescripcion.value.slice(0, 60);
 });
 
-addEventfecha.addEventListener("input", (e) => {
-  addEventfecha.value = addEventfecha.value.slice(0, 60);
-});
 
-addEventtipo.addEventListener("select", (e) => {
-  addEventtipo.value = addEventtipo.value.slice(0, 60);
-});
-
-addEventcomentario.addEventListener("input", (e) => {
-  addEventcomentario.value = addEventcomentario.value.slice(0, 60);
-});
 
 
 function defineProperty() {
@@ -413,10 +400,7 @@ addEventSubmit.addEventListener("click", () => {
   const eventCliente = addEventCliente.value;
   const eventColaborador = addEventColaborador.value;
   const eventDescripcion = addEventDescripcion.value;
-  const eventfecha= addEventfecha.value;
-  const eventtipo= addEventtipo.value;
-  const eventcomentario= addEventcomentario.value;
-  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "" || eventfecha === "" || eventtipo === "" || eventcomentario === "" ) {
+  if (eventid === ""|| eventColaborador === "" || eventCliente === "" || eventDescripcion === "") {
     alert("Please fill all the fields");
     return;
   }
@@ -441,15 +425,7 @@ addEventSubmit.addEventListener("click", () => {
         if (event.descripcion === eventDescripcion) {
           eventExist = true;
         }
-        if (event.fecha === eventfecha) {
-          eventExist = true;
-        }
-        if (event.tipo === eventtipo) {
-          eventExist = true;
-        }
-        if (event.comentario === eventcomentario) {
-          eventExist = true;
-        }
+    
       });
     }
   });
@@ -459,9 +435,7 @@ addEventSubmit.addEventListener("click", () => {
     cliente: eventCliente,
     colaborador: eventColaborador,
     descripcion: eventDescripcion,
-    fecha: eventfecha,
-    tipo: eventtipo,
-    comentario: eventcomentario,
+    
   };
   console.log(newEvent);
   console.log(activeDay);
@@ -493,9 +467,6 @@ addEventSubmit.addEventListener("click", () => {
   addEventCliente.value = "";
   addEventColaborador.value = "";
   addEventDescripcion.value = "";
-  addEventfecha.value = "";
-  addEventtipo.value = "";
-  addEventcomentario.value = "";
   const tarea = req.body;
   // Corregir los nombres de las variables para que coincidan con el formulario
 

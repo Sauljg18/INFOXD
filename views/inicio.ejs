@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 <head class="">
     <meta charset="UTF-8">
@@ -11,6 +12,7 @@
 <body>
     <header class="header" >
           <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+          <div class="lista">
           <ul>
             <li><a href="/clientes">Cliente</a></li>
             <li> <a href="/colab">Colaborador</a></h2></li>
@@ -18,6 +20,7 @@
             <li> <a href="/producto">Producto</a></h2></li>
             <li> <a href="/servicio">Servicio</a></h2></li>
             <li> <a href="/tarea">Tarea</a></h2></li></ul>
+          </div>
           </header>
           <section class="sidebar">
           </section>
@@ -76,7 +79,7 @@
                       <input name="comentario" id="comentario" class="event-comentario" value="Sin comentario" hidden>
                       <input type="text" name="id_tarea" id="id_tarea" class="event-id" hidden>
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
-                      <label for="cliente" style="color:rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
+                      <label for="cliente" style="color:rgb(0, 0, 0)">Tarea será ejecutada por:</label>
                       <select name="cliente" id="cliente" class="event-cliente">
                         <% 
                         const uniqueClientes = [];
@@ -91,7 +94,7 @@
                   %>
                 </select><br>
                       <!-- Filtra los nombres de colaboradores para evitar duplicados -->
-                      <label for="colaborador" style="color: rgb(249, 247, 247)">La tarea sera colaborada por:</label><br>
+                      <label for="colaborador" style="color: rgb(0, 0, 0)">La tarea sera colaborada por:</label><br>
                       <select name="colaborador" id="colaborador" class="event-colaborador"> 
                           <%  
                               const uniqueColaboradores = [];
@@ -104,17 +107,27 @@
                                   }
                               });
                           %>
-                  </form>
+                  
                               </select><br>
-                              <label for="fecha" style="color: rgb(255, 255, 255)">Fecha de tarea:</label><br>
+                              <label for="fecha" style="color: rgb(0, 0, 0)">Fecha de tarea:</label><br>
                               <input type="date" name="fecha" id="fecha" class="event-fecha"><br>
-                              <label for="tipo" style="color: rgb(245, 237, 237)">El Tipo de Tarea:</label><br>
+                              <label for="tipo" style="color: rgb(0, 0, 0)">El Tipo de Tarea:</label><br>
                               <select name="tipo" id="tipo" class="event-tipo">
                                   <option value="tipo">Seleccionar Tipo</option><br>
-                                  <option value="Actualizacion de Base de datos"> Actualización de Base de datos</option>
+                                  <% 
+                                        const uniqueServicio = [];
+                                        results.forEach((row) => {
+                                            if (!uniqueServicio.includes(row.servinombre)) {
+                                                uniqueServicio.push(row.servinombre);
+                                    %>
+                                        <option value="<%= row.servinombre %>"><%= row.servinombre %></option>
+                                    <% 
+                                            }
+                                        });
+                                    %>
                               </select><br>
                                 <!-- Filtra los nombres de clientes para evitar duplicados -->
-                                <label for="equipo" style="color:rgb(255, 255, 255)">Equipo:</label><br>
+                                <label for="equipo" style="color:rgb(0, 0, 0)">Equipo:</label><br>
                                 <select name="equipo" id="equipo" class="event-name">
                                   <option value="Ninguno">NINGUNO</option>  
                                   <% 
@@ -129,7 +142,7 @@
                                         });
                                     %>
                                 </select><br>
-                              <label for="prioridad" style="color: rgb(255, 255, 255)">Prioridad:</label><br>
+                              <label for="prioridad" style="color: rgb(0, 0, 0)">Prioridad:</label><br>
                               <select name="prioridad" id="prioridad"><br>
                                   <option value="alta">Alta</option>
                                   <option value="media">Media</option>
@@ -137,7 +150,7 @@
                               </select>
                             <input type="text" name="activo" id="activocliente" value="Activo" hidden>
                             <div class="add-event-input">
-                              <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label>
+                              <label for="descripcion" style="color: rgb(0, 0, 0);">Descripción de la tarea:</label>
                               <input name="descripcion" id="descripcion" class="event-descripcion"></input>
                             </div>
                             
@@ -161,18 +174,19 @@
                     <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                       <div class="modal-content">
                           <button class="close-btn" onclick="closeModal()" aria-label="Cerrar modal">&times;</button>
+                          <div class="edit" id="editar"><div>Editar</div></div>
                           <form id="updateForm" method="post">
                             <input type="hidden" id="modalTareaId" name="idTarea">
                               <label for="cliente" style="color: rgb(255, 255, 255)">Tarea será ejecutada por:</label><br>
-                              <input type="text" id="modalCliente" readonly /><br>
+                              <input type="text" id="modalCliente"  /><br>
                               <label for="colaborador" style="color: rgb(255, 255, 255)">La tarea será colaborada por:</label><br>
-                              <input type="text" id="modalColaborador" readonly /><br>
+                              <input type="text" id="modalColaborador"  /><br>
                               <label for="fecha" style="color: rgb(255, 255, 255);">Fecha de la tarea:</label><br>
                               <input type="text" id="modalFecha" readonly /><br>
                               <label for="tipo" style="color: rgb(255, 255, 255);">Tipo de la tarea:</label><br>
-                              <input type="text" id="modalTipo" readonly /><br>
+                              <input type="text" id="modalTipo"  /><br>
                               <label for="descripcion" style="color: rgb(255, 255, 255);">Descripción de la tarea:</label><br>
-                              <input type="text" id="modalDescripcion" readonly /><br>
+                              <input type="text" id="modalDescripcion" /><br>
                               <label for="comentario" style="color: rgb(255, 255, 255);">Comentario:</label><br>
                               <textarea id="modalComentario" name="comentario" class="event-comentario"></textarea>
                               <button type="button" onclick="guardarComentario()">Guardar Cambios</button>

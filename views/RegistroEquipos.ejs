@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Equipo</title>
     <link rel="stylesheet" href="/resources/estilo/RegistroEquipos.css">
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
 </head>
 
     
 <body>
-    
-    
     <header class="header" >
-    
+        <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+        <div class="lista">
         <ul>
-            <li><a href="/clientes">Cliente</a></li>
-            <li> <a href="/colab">Colaborador</a></h2></li>
-            <li> <a href="/ver-equipos">Equipo</a></h2></li>
-            <li> <a href="/producto">Producto</a></h2></li>
-            <li> <a href="/servicio">Servicio</a></h2></li>
-            <li> <a href="/tarea">Tarea</a></h2></li>   
-        </ul>
-    </header>
-    <section class="sidebar">     </section>
+        <li><a href="/clientes">Cliente</a></li>
+        <li> <a href="/colab">Colaborador</a></h2></li>
+        <li> <a href="/ver-equipos">Equipo</a></h2></li>
+        <li> <a href="/producto">Producto</a></h2></li>
+        <li> <a href="/servicio">Servicio</a></h2></li>
+        <li> <a href="/tarea">Tarea</a></h2></li></ul>
+        </div>
+        </header>
+        <section class="sidebar">
+        </section> 
     <div class="container">
         <!-- Header -->
         <div class="Titulo01">
@@ -40,12 +41,6 @@
         <form id="FormularioEquipo" method="post" action="/SaveEquipo">
     
             <button type="submit" class="float">Guardar</button>    
-        
-        <div class="image-upload">
-                <div class="image-placeholder" id="imagePreview">Arrastre o haga clic</div>
-                <input type="file" id="imageUpload" name="imagen" accept="image/*" style="display:none;">
-                <label for="imageUpload" class="image-upload-label">Subir Imagen</label>
-            </div>
             
             <div>
             <label>Nombre</label>

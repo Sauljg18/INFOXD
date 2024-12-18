@@ -1,72 +1,31 @@
-body{
-padding: 0%;
-margin: 0%;
-box-sizing: border-box;
-height: 100vh;
-width: 100%;
-background: linear-gradient(45deg, #2c3523, #153815, #2c4739, #2b3e4d);
-background-size: 400% 400%;
-animation: color 10s ease infinite;
-
-/*Apartado de barra superior*/
-display: grid;
-grid-template-columns: 20px 1fr;
-grid-template-rows: 80px 1fr;
-grid-template-areas: 
-"side header"
-"side main";
-}
-@keyframes color{
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+*{
+  box-sizing: border-box;
 }
 
-.header{
-    background-color: #003817;
-    box-shadow:inset 0px -2px 0px 0px white;
-    grid-column: 2 / 3;
-    grid-row: 1 / 2
+/* Estilo para la primera tabla */
+.tablew {
+  position: relative;
+  box-sizing: border-box;
+  border-collapse: separate; /* Separa los bordes para un diseño más limpio */
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
 }
 
-.header ul{
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    text-align: center;
-    margin: 50px;
-    font-size: 20px;
-    padding-left:20px ;
+.diseño {
+  position: relative;
+  display: block;
+  top: 10px;
+  margin: auto;
+  background-color: #393939; /* Fondo oscuro para resaltar contenido */
+  border-radius: 10px;
+  width: 100%;
+  height: 72%;
+  overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
 }
 
-.header li{
-    padding-left: 20px;
-   
-}
-
-.header a{
-    color: #e9e7e7;
-    text-decoration: none;
-    font-family: 'Arial Narrow Bold', sans-serif;
-   
-}
-.sidebar{
-    background-color:#006832;
-
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-}
-
-
-main{
-   
+.container {
   max-width: 1000px;
+  width:100%;
+  height: 580px;
   margin: 0 auto;
   background-color: white;
   padding: 20px;
@@ -79,165 +38,153 @@ main{
   position: relative;
 }
 
+/* Para las celdas de la tabla */
+.tablew th, .tablew td {
+  padding: 12px 20px; /* Ajusta el espacio dentro de las celdas para más aire */
+  border-bottom: 1px solid #484848; /* Línea sutil sólo debajo de las filas */
+  font-size: 1em; /* Ajusta el tamaño del texto */
+  text-align: left; /* Texto alineado a la izquierda para un estilo limpio */
+  color: #f1f1f1; /* Texto blanco suave */
+}
 
-.contenedor-boton{
-    text-align: right;
-    padding-right: 15px;
+/* Encabezado de la tabla */
+.tablew th {
+  font-family: Lato-Bold;
+  font-size: 16px;
+  color: #00ad5f; /* Color del texto del encabezado */
+  background-color: transparent; /* Sin fondo sólido para un look minimalista */
+  border-bottom: 2px solid #00ad5f; /* Sutil línea verde bajo el encabezado */
+}
+
+/* Celdas del cuerpo de la tabla */
+.tablew td {
+  font-family: Lato-Regular;
+  font-size: 14px;
+  color: #e0e0e0; /* Un tono gris claro para el texto */
+  background-color: transparent; /* Sin fondo sólido */
+}
+
+/* Hover en las filas */
+.tablew tr:hover {
+  background-color: #4a4a4a; /* Un cambio sutil de fondo en hover */
+}
+
+/* Estilo para los enlaces */
+.tablew a {
+  color: #00ad5f; /* Enlaces verdes sutiles */
+  text-decoration: none; /* Sin subrayado para un diseño más limpio */
+  font-weight: bold;
+}
+
+.tablew a:hover {
+  color: #48bb78; /* Cambia ligeramente el color al pasar el mouse */
+}
+
+/* Botón minimalista */
+.tablew .boton {
+  background-color: #48bb78; /* Color verde suave */
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: background-color 0.3s ease;
+}
+
+.tablew .boton:hover {
+  background-color: #38a169; /* Color más oscuro al hacer hover */
+}
+
+/* Botón de añadir servicio */
+.add-service-btn {
+  background-color: #00ad5f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  transition: transform 0.5s ease;
+  position: absolute;
+  left: 80%;
+  transform:translateY(-0px) ;
+}
+
+.add-service-btn:hover {
+  background-color: #38A169;
+  transform: translateY(-5px);
 }
 
 
-.brand{
-    margin-right: 1%;
-    line-height: 1vh;
+/* Para listas dentro del diseño */
+ul {
+  position: absolute;
+  left: 30%;
+  top: -3%;
 }
 
-.brand a{
-    color: white;
-    font-size: 20px;
+img {
+  position: absolute;
+  width: 8%;
+  height: 8%;
+  top: 3px;
+  left: 3%;
+}
+
+input, span{  width:100%;padding:10px;box-sizing:border-box;background:none;outline:auto;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+  color: white; font-size: 20px; transition:all .3s;border-bottom:2px solid #bebed2}
+input:focus{border-bottom:2px solid #78788c}
+
+.barra{
+  position:absolute;
+  background-color: #232524b7;
+  width: 100%;
+  height: 35px;
+  top: 97.3%;
+  z-index: -1;
+ 
 }
 
 
-
-.button-container {
-    display:contents;
-    justify-content:flex-start;
-    margin-bottom: 10%; /* Ajusta este valor según la separación deseada */
+.pagination {
+  position: absolute;
+  text-align: center;
+  width: 50%; /* Define un ancho */
+  margin-left: auto; /* Empuja el elemento hacia la derecha */
+  display: inline-block;
+  top: 90%;
+  
 }
 
-.card {
-    background-color: #ffff;
-    border-radius: 10px;
-    width: 150px; /* Puedes ajustar el ancho según lo que desees */
-    height: 50px; /* Ajusta la altura */
-    transition-duration: 0.5s;
-    margin-left: 5px;
-    margin-top: 10px;
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  transition: background-color 0.3s;
 }
 
-.card:hover{
-    background-color: #979595;
+.pagination a:hover {
+  background-color: #ddd;
 }
 
-/* Estilo para la primera tabla */
-.tablew {
-    position: relative;
-    box-sizing: border-box;
-    border-collapse: separate; /* Separa los bordes para un diseño más limpio */
-    width: 90%; /* Asegura que la tabla ocupe todo el ancho disponible */
-  }
-  
-  .diseño {
-    position: relative;
-    margin: auto;
-    background-color: #393939; /* Fondo oscuro para resaltar contenido */
-    border-radius: 10px;
-    top: 70px;
-    width: 1000px;
-    height: 500px;
-    overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
-  }
-  
-  .diseño2 {
-    position: relative;
-    margin: 0 auto;
-    background-color: #393939; /* Fondo oscuro para resaltar contenido */
-    border-radius: 10px;
-    top: 5px;
-    width: 1000px;
-    height: 600px;
-    overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
-  }
-  
-  /* Para las celdas de la tabla */
-  .tablew th, .tablew td {
-    padding: 12px 20px; /* Ajusta el espacio dentro de las celdas para más aire */
-    border-bottom: 1px solid #484848; /* Línea sutil sólo debajo de las filas */
-    font-size: 1em; /* Ajusta el tamaño del texto */
-    text-align: left; /* Texto alineado a la izquierda para un estilo limpio */
-    color: #f1f1f1; /* Texto blanco suave */
-  }
-  
-  /* Encabezado de la tabla */
-  .tablew th {
-    font-family: Lato-Bold;
-    font-size: 16px;
-    color: #00ad5f; /* Color del texto del encabezado */
-    background-color: transparent; /* Sin fondo sólido para un look minimalista */
-    border-bottom: 2px solid #00ad5f; /* Sutil línea verde bajo el encabezado */
-  }
-  
-  /* Celdas del cuerpo de la tabla */
-  .tablew td {
-    font-family: Lato-Regular;
-    font-size: 14px;
-    color: #e0e0e0; /* Un tono gris claro para el texto */
-    background-color: transparent; /* Sin fondo sólido */
-  }
-  
-  /* Hover en las filas */
-  .tablew tr:hover {
-    background-color: #4a4a4a; /* Un cambio sutil de fondo en hover */
-  }
-  
-  /* Estilo para los enlaces */
-  .tablew a {
-    color: #00ad5f; /* Enlaces verdes sutiles */
-    text-decoration: none; /* Sin subrayado para un diseño más limpio */
-    font-weight: bold;
-  }
-  
-  .tablew a:hover {
-    color: #48bb78; /* Cambia ligeramente el color al pasar el mouse */
-  }
-  
-  /* Botón minimalista */
-  .tablew .boton {
-    background-color: #48bb78; /* Color verde suave */
-    color: white;
-    padding: 5px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.85em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .tablew .boton:hover {
-    background-color: #38a169; /* Color más oscuro al hacer hover */
-  }
-  
-  /* Botón de añadir servicio */
-  .add-service-btn {
-    background-color: #00ad5f;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.5s ease;
-    position: absolute;
-    left: 6%;
-  }
-  
-  .add-service-btn:hover {
-    background-color: #38A169;
-    transform: translateY(-5px);
-  }
-  
-  /* Estilo para imágenes */
-  img {
-    position: absolute;
-    width: 8%;
-    height: 8%;
-    top: 3px;
-    left: 3%;
-  }
-  
-  /* Para listas dentro del diseño */
-  ul {
-    position: absolute;
-    left: 30%;
-    top: -3%;
-  }
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
 
+.pagination a.prev,
+.pagination a.next {
+  font-weight: bold;
+}
 
+.pagination .disabled {
+  display: none;
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}

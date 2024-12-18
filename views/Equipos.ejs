@@ -4,68 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resources/estilo/Equipos.css">
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <title>Pagina de Equipos</title>
-    
-
 </head>
-    <body>
-        <header class="header" >
-    <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
-    <ul>
-    <li><a href="/clientes">Cliente</a></li>
-    <li> <a href="/colab">Colaborador</a></h2></li>
-    <li> <a href="/ver-equipos" style="color:rgb(2, 178, 40)">Equipo</a></h2></li>
-    <li> <a href="/producto">Producto</a></h2></li>
-    <li> <a href="/servicio">Servicio</a></h2></li>
-    <li> <a href="/tarea">Tarea</a></h2></li></ul>
-    
+<body>
+    <header class="header" >
+        <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+        <div class="lista">
+        <ul>
+          <li><a href="/clientes">Cliente</a></li>
+          <li> <a href="/colab">Colaborador</a></h2></li>
+          <li> <a href="/ver-equipos">Equipo</a></h2></li>
+          <li> <a href="/producto">Producto</a></h2></li>
+          <li> <a href="/servicio">Servicio</a></h2></li>
+          <li> <a href="/tarea">Tarea</a></h2></li></ul>
+        </div>
         </header>
-        <section class="sidebar"></section>
-        <main class="main">
-            <div class="container">
-                <h1>EQUIPO</h1>
-                <div class="button-container">
-                    <a href="/resequipo"> <button class="card">Agregar</button></a>
-                </div>
-                <input type="text" id="search" placeholder="Buscar servicio...">
-                <div class="diseño2" >
+        <section class="sidebar">
+        </section>
+    <main>
+        <div class="container">
+            <h1>EQUIPO</h1>
+            <div class="button-container">
+                <a href="/resequipo"><button class="card">Agregar</button></a>
+            </div>
+            <input type="text" style="color:black" id="searchEquipo" placeholder="Buscar servicio...">
+            <div class="diseño">
                 <div class="tablew">
-                    <table class="table" >
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th >Id</th>
-                                <th >Nombre</th>
-                                <th >indentificiacion</th>
-                                <th >Fecha</th>
-                                <th >Descripción</th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Identificacion</th>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="productTable">
                             <% if (results && results.length > 0) { %>
                                 <% results.forEach((tablaequipos) => { %>
                                     <tr>
-                                        <td > <a href="/editequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info"><%= tablaequipos.IdEquipo %></a></td>
-                                        <td ><%= tablaequipos.Nombre %></td>
-                                        <td ><%= tablaequipos.Identificador %></td>
-                                        <td ><%= tablaequipos.Fecha %></td>
-                                        <td ><%= tablaequipos.Descripcion %></td>
+                                        <td><a href="/editequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info"><%= tablaequipos.IdEquipo %></a></td>
+                                        <td><%= tablaequipos.Nombre %></td>
+                                        <td><%= tablaequipos.Identificador %></td>
+                                        <td><%= tablaequipos.Fecha %></td>
+                                        <td><%= tablaequipos.Descripcion %></td>
                                         <td>
                                             <a href="/deleteequipo/<%= tablaequipos.IdEquipo %>" class="btn btn-outline-info">borrar</a>
                                         </td>
                                     </tr>
-                                    <% }) %>
-                                    <% } else { %>
-                                        <tr>
-                                            <td colspan="5">No hay datos disponibles.</td>
-                                        </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        </div>
-                        </main>   
-        </header>
-        <section class="sidebar"> </section>
-    </body>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="6">No hay datos disponibles.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="pagination" id="pagination">
+                <% if (currentPage > 1) { %>
+                    <a href="/ver-equipos?page=<%= currentPage - 1 %>" class="prev">&laquo; Anterior</a>
+                <% } else { %>
+                    <span class="prev disabled">&laquo; Anterior</span>
+                <% } %>
+                <% 
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, currentPage + 2); 
+                %>
+                
+                <% for (let i = startPage; i <= endPage; i++) { %>
+                    <a href="/ver-equipos?page=<%= i %>" class="page <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+              
+                <% if (currentPage < totalPages) { %>
+                    <a href="/ver-equipos?page=<%= currentPage + 1 %>" class="next">Siguiente &raquo;</a>
+                <% } else { %>
+                    <span class="next disabled">Siguiente &raquo;</span>
+                <% } %>
+              </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('searchEquipo').addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#productTable tr'); // Selecciona solo las filas del cuerpo
+            rows.forEach(row => {
+                const productName = row.cells[1]?.textContent.toLowerCase(); // Verifica si la celda existe
+                if (productName && productName.includes(searchValue)) {
+                    row.style.display = ''; // Muestra la fila
+                } else {
+                    row.style.display = 'none'; // Oculta la fila
+                }
+            });
+        });
+    </script>
+</body>
 </html>

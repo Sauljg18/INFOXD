@@ -4,73 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
-
     <link rel="stylesheet" href="/resources/estilo/TablaProductos.css">
-    
+    <link rel="stylesheet" href="/resources/estilo/inicio.css">
 </head>
 <body>
-
-    <header class="header" > 
+    <header class="header" >
         <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+        <div class="lista">
         <ul>
-        <li><a href="/clientes">Cliente</a></li>
-        <li> <a href="/colab" >Colaborador</a></h2></li>
-        <li> <a href="/ver-equipos">Equipo</a></h2></li>
-        <li> <a href="/producto" style="color:rgb(2, 178, 40)">Producto</a></h2></li>
-        <li> <a href="/servicio">Servicio</a></h2></li>
-        <li> <a href="/tarea">Tarea</a></h2></li></ul>
-    </header>
-        <section class="sidebar"> </section>
-        <main class="main">
-    <div class="container">
-        <div class="Titulo">
-            <h1>Productos</h1>
-            <div class="action-buttons">
-                <button class="BotonGr"style="color:rgb(2, 178, 40)" href=""> Categorías</button>
-                <button class="BotonGr" href=""> Filtros </button>
-                <button class="BotonGr" href=""> Más acciones </button>
-                <button class="BotonGr" onclick="window.location.href='/RegistroProductos'"> Agregar producto ahora </button>
+          <li><a href="/clientes">Cliente</a></li>
+          <li> <a href="/colab">Colaborador</a></h2></li>
+          <li> <a href="/ver-equipos">Equipo</a></h2></li>
+          <li> <a href="/producto">Producto</a></h2></li>
+          <li> <a href="/servicio">Servicio</a></h2></li>
+          <li> <a href="/tarea">Tarea</a></h2></li></ul>
+        </div>
+        </header>
+        <section class="sidebar">
+        </section>
+    <main>
+        
+        <div class="container">
+            <div class="Titulo">
+                <h1>Productos</h1>
+                <div class="action-buttons">
+                    <button class="BotonGr" style="color:rgb(2, 178, 40)" href="">Categorías</button>
+                    <button class="BotonGr" href="">Filtros</button>
+                    <button class="BotonGr" href="">Más acciones</button>
+                    <button class="BotonGr" onclick="window.location.href='/RegistroProductos'">Agregar producto ahora</button>
+                </div>
+                <input type="text" id="search" style="color: black;" placeholder="Buscar producto por nombre...">
             </div>
-            <input type="text" id="search" placeholder="Buscar servicio...">
-        </div>
-        <!-- Tabla de productos -->
-        <div class="diseño2" >
-            <div class="tablew">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Stock mínimo</th>
-                    <th>Stock</th>
-                    <th>Valor Unitario MXN $</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (results && results.length > 0) { %>
-                    <% results.forEach((tablaproducto) => { %>
-                        <tr>
-                            <td><%= tablaproducto.Idproducto %></td>
-                            <td><%= tablaproducto.Nombre %></td>
-                            <td><%= tablaproducto.Inventario %></td>
-                            <td><%= tablaproducto.Stocks %></td>
-                            <td><%= tablaproducto.Valor %></td>
-                            <td>
-                                <a href="/editproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">editar</a>
-                                <a href="/deleteproducto/<%= tablaproducto.IdProducto %>" class="btn btn-outline-info">borrar</a>
-                            </td>
-                        </tr>
-                        <% }) %>
-                        <% } else { %>
+            <!-- Tabla de productos -->
+            <div class="diseño">
+                <div class="tablew">
+                    <table>
+                        <thead>
                             <tr>
-                                <td colspan="5">No hay datos disponibles.</td>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Stock mínimo</th>
+                                <th>Stock</th>
+                                <th>Valor Unitario MXN $</th>
                             </tr>
+                        </thead>
+                        <tbody id="productTable">
+                            <% if (results && results.length > 0) { %>
+                                <% results.forEach((tablaproducto) => { %>
+                                    <tr>
+                                        <td><%= tablaproducto.Idproducto %></td>
+                                        <td><%= tablaproducto.Nombre %></td>
+                                        <td><%= tablaproducto.Inventario %></td>
+                                        <td><%= tablaproducto.Stocks %></td>
+                                        <td><%= tablaproducto.Valor %></td>
+                                        <td>
+                                            <a href="/editproducto/<%= tablaproducto.Idproducto %>" class="btn btn-outline-info">editar</a>
+                                            <a href="/deleteproducto/<%= tablaproducto.Idproducto %>" class="btn btn-outline-info">borrar</a>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">No hay datos disponibles.</td>
+                                </tr>
                             <% } %>
-            </tbody>
-        </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="pagination" id="pagination">
+                <% if (currentPage > 1) { %>
+                    <a href="/producto?page=<%= currentPage - 1 %>" class="prev">&laquo; Anterior</a>
+                <% } else { %>
+                    <span class="prev disabled">&laquo; Anterior</span>
+                <% } %>
+                <% 
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, currentPage + 2); 
+                %>
+                
+                <% for (let i = startPage; i <= endPage; i++) { %>
+                    <a href="/producto?page=<%= i %>" class="page <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+              
+                <% if (currentPage < totalPages) { %>
+                    <a href="/producto?page=<%= currentPage + 1 %>" class="next">Siguiente &raquo;</a>
+                <% } else { %>
+                    <span class="next disabled">Siguiente &raquo;</span>
+                <% } %>
+              </div>
         </div>
-        </div>
-    </div>
-</main>  
+    </main>
+    <!--Script relacionado al filtrado por nombre-->
+    <script>
+        document.getElementById('search').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#productTable tr');
+            rows.forEach(row => {
+                const productName = row.cells[1]?.textContent.toLowerCase();
+                if (productName && productName.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+        
 </body>
 </html>

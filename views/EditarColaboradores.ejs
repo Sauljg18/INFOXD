@@ -1,34 +1,38 @@
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/resources/estilo/form-colab.css">
+  <link rel="stylesheet" href="/resources/estilo/RegistroEquipos.css">
   <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <title>Colaboradores</title>
 
 <body>
   
   <header class="header" >
-    <a href="/home"><img  class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+    <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+    <div class="lista">
     <ul>
-    <li><a href="/clientes">Cliente</a></li>
-    <li> <a href="/colab" style="color:rgb(2, 178, 40)">Colaborador</a></h2></li>
-    <li> <a href="/ver-equipos">Equipo</a></h2></li>
-    <li> <a href="/producto">Producto</a></h2></li>
-    <li> <a href="/servicio">Servicio</a></h2></li>
-    <li> <a href="/tarea">Tarea</a></h2></li></ul>
-  </header>
-  <section class="sidebar">
-  </section>
-  <header>
+      <li><a href="/clientes">Cliente</a></li>
+      <li> <a href="/colab">Colaborador</a></h2></li>
+      <li> <a href="/ver-equipos">Equipo</a></h2></li>
+      <li> <a href="/producto">Producto</a></h2></li>
+      <li> <a href="/servicio">Servicio</a></h2></li>
+      <li> <a href="/tarea">Tarea</a></h2></li></ul>
+    </div>
+    </header>
+    <section class="sidebar">
+    </section>
+  
 
     <% if (colaborador) { %>
     <a>
     <div class="container" >
-
+      <h1>COLABORADOR</h1>
     <form action="/updatec" method="post"  class="mb-3" id="formulario">
         <ul>
           <input id="idcolaborador" name="idcolaborador" value="<%=colaborador.idcolaborador%>" hidden />
+          <input type="hidden" name="old_nombre" value="<%= colaborador.nombre %>" />
           <li>
             <label for="nombre" class="form-label">Nombre:</label>
             <input  class="form-control form-control-lg" type="text" aria-label=".form-control-lg example" id="name" name="nombre" value="<%=colaborador.nombre%>" required/><p>
@@ -54,10 +58,6 @@
           </li>
         </ul>
         
-      
-    </div>
-    </div>
-   
     <div class="container2" id="contend" >
       
     <div class="mb-4" id="formu1">
@@ -96,25 +96,15 @@
           </li>
         </ul>
         <ul>
-        
-          
-    
-    
-          <div class="container4">
-            <nav class="mb-5" enctype="multipart/form-data">
-              <div>
-                <img src="https://i.pinimg.com/236x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg" alt="avatar" id="img" />
-                <input type="file" name="foto" id="foto" accept="image/*" class="imglol" />
-                <label for="foto" name="foto" id="foto" accept="image/*">Cambiar foto</label>
-              </div>
-              <input type="submit" value="ENVIAR">
         </div>
-      </nav>
+        </div>
+               <input type="submit" value="ENVIAR">      
 
     </form>
+  </div>
     <% } %>
     <script src="/resources/javascript/colab.js"></script>
-  </header>
+  
   
 </body>
 </head>

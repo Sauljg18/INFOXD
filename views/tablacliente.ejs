@@ -10,21 +10,24 @@
   </head>
   <body>
     <header class="header" >
-      <a href="/home"><img src="/resources/IMAGENES/LOGO.PNG"></a>
+      <a href="/home"><img class="logo" src="/resources/IMAGENES/LOGO.PNG"></a>
+      <div class="lista">
       <ul>
-        <li><a href="/clientes" style="color:rgb(2, 178, 40)">Cliente</a></li>
+        <li><a href="/clientes">Cliente</a></li>
         <li> <a href="/colab">Colaborador</a></h2></li>
         <li> <a href="/ver-equipos">Equipo</a></h2></li>
         <li> <a href="/producto">Producto</a></h2></li>
         <li> <a href="/servicio">Servicio</a></h2></li>
         <li> <a href="/tarea">Tarea</a></h2></li></ul>
-        
+      </div>
       </header>
       <section class="sidebar">
       </section>
-        <main class="main">
-            <div class="containert" >
+        <main>
+            <div class="container" >
                 <a href="/registrocliente" ><button class="add-service-btn">Agregar</button></a>
+                <a>Cliente</a>
+          <input type="text" style="color:black" id="searchCliente" placeholder="Buscar servicio...">
                 <div class="diseño">
                   <div class="tablew">
                     <table class="table" >
@@ -40,11 +43,10 @@
                           <th scope="col">Direccion</th>
                           <th scope="col">Region</th>
                           <th scope="col">Ciudad</th>
-                          <th scope="col">Estado</th>
                           <th scope="col">ACCION</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="clientTable">
                         <% results.forEach((cliente) => { %>
                           <tr>
                             <td scope="row" class="table-primary"><%= cliente.id_cliente %></td>
@@ -66,7 +68,46 @@
                         </tbody>
                       </table>
                   </div>
+                  
                 </div>
+                <div class="pagination" id="pagination">
+                  <% if (currentPage > 1) { %>
+                      <a href="/colab?page=<%= currentPage - 1 %>" class="prev">&laquo; Anterior</a>
+                  <% } else { %>
+                      <span class="prev disabled">&laquo; Anterior</span>
+                  <% } %>
+              
+                  <% 
+                      // Limitar el número de páginas mostradas a un máximo de 4
+                      let startPage = Math.max(1, currentPage - 2); // Página de inicio (2 páginas antes de la actual)
+                      let endPage = Math.min(totalPages, startPage + 3); // Página final (max 4 páginas)
+              
+                      for (let i = startPage; i <= endPage; i++) { 
+                  %>
+                      <a href="/colab?page=<%= i %>" class="page <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                  <% } %>
+              
+                  <% if (currentPage < totalPages) { %>
+                      <a href="/colab?page=<%= currentPage + 1 %>" class="next">Siguiente &raquo;</a>
+                  <% } else { %>
+                      <span class="next disabled">Siguiente &raquo;</span>
+                  <% } %>
+              </div>
         </main>
+        <script>
+           document.getElementById('searchCliente').addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#clientTable tr'); // Selecciona solo las filas del cuerpo
+            rows.forEach(row => {
+                const clientName = row.cells[1]?.textContent.toLowerCase(); // Verifica si la celda existe
+                if (clientName && clientName.includes(searchValue)) {
+                    row.style.display = ''; // Muestra la fila
+                } else {
+                    row.style.display = 'none'; // Oculta la fila
+                }
+            });
+        });
+        </script>
+        <div class="barra"></div>
   </body>
 </html>

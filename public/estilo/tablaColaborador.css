@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 
 /* Estilo para la primera tabla */
 .tablew {
@@ -9,24 +12,30 @@
 
 .diseño {
   position: relative;
+  display: block;
+  top: 10px;
   margin: auto;
   background-color: #393939; /* Fondo oscuro para resaltar contenido */
   border-radius: 10px;
-  top: 70px;
   width: 100%;
-  height: 500px;
+  height: 72%;
   overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
 }
 
-.diseño2 {
+.container {
+  max-width: 1000px;
+  width:100%;
+  height: 520px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  top: 5%;
+  right: 0;
+  bottom: 1%;
+  left: 0;
   position: relative;
-  margin: auto;
-  background-color: #393939; /* Fondo oscuro para resaltar contenido */
-  border-radius: 10px;
-  top: 10px;
-  width: 110%;
-  height: 400px;
-  overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
 }
 
 /* Para las celdas de la tabla */
@@ -87,7 +96,6 @@
   background-color: #38a169; /* Color más oscuro al hacer hover */
 }
 
-
 /* Botón de añadir servicio */
 .add-service-btn {
   background-color: #00ad5f;
@@ -97,8 +105,10 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.5s ease;
-  position: absolute;
-  left: 6%;
+  transition: transform 0.5s ease;
+  position: relative;
+  left: 20;
+  transform:translateY(-0px) ;
 }
 
 .add-service-btn:hover {
@@ -106,14 +116,6 @@
   transform: translateY(-5px);
 }
 
-/* Estilo para imágenes */
-img {
-  position: absolute;
-  width: 8%;
-  height: 8%;
-  top: 3px;
-  left: 3%;
-}
 
 /* Para listas dentro del diseño */
 ul {
@@ -122,7 +124,57 @@ ul {
   top: -3%;
 }
 
-input, span{  width:100%;padding:10px;box-sizing:border-box;background:none;outline:none;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+img {
+  position: absolute;
+  width: 8%;
+  height: 90px;
+  top: 3px;
+  left: 3%;
+}
+
+input, span{  width:100%;padding:10px;box-sizing:border-box;background:none;outline:auto;resize:none;border:0;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
   color: white; font-size: 20px; transition:all .3s;border-bottom:2px solid #bebed2}
 input:focus{border-bottom:2px solid #78788c}
 
+
+.pagination {
+  position: absolute;
+  text-align: center;
+  width: 50%; /* Define un ancho */
+  margin-left: auto; /* Empuja el elemento hacia la derecha */
+  display: inline-block;
+  top: 90%;
+  
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+  background-color: #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a.prev,
+.pagination a.next {
+  font-weight: bold;
+}
+
+.pagination .disabled {
+  display: none;
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
