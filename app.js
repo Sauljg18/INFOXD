@@ -544,7 +544,7 @@ app.post('/updatec', (req, res) => { // UPDARTE COLABORADOR
                         if (error) {
                             throw error;
                         } else {
-                            res.post('tablacolaboradores', { results: results });
+                            res.render('tablacolaboradores', { results: results });
                         }
                     });
                 }
@@ -590,7 +590,7 @@ app.post("/aceptar", function(req,res){ //REGISTRO DE CLIENTE
             if (error) {
                 throw error;
             } else {
-                res.post('tablacliente', { results: results });
+                res.render('tablacliente', { results: results });
             }
         });
     }
@@ -666,6 +666,13 @@ app.post('/update', (req, res) => { // UPDATE CLIENTE
 
                     console.log("Filas afectadas en facturas:", results.affectedRows);
                     res.status(200).send("Actualización completa.");
+                    connection.query('SELECT * FROM tabcliente ', (error, results) => {
+                        if (error) {
+                            throw error;
+                        } else {
+                            res.render('tablacliente', { results: results });
+                        }
+                    });
                 }
             );
         }
