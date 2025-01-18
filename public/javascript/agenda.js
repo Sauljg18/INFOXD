@@ -23,15 +23,7 @@ const calendar = document.querySelector(".calendar"),
   
   let AddEventEditar = document.getElementById("editar");
   
-  let botonactivar = document.getElementById("activar");
-  let botonguardar = document.getElementById("guardar");
-
-
-  botonactivar.style.display='none'; 
-
-  botonguardar.onclick =function(){     //Funcion de boton 01
-    botonactivar.style.display='block';   //Vista reaccion a boton
-  }
+ 
 
   // Función para abrir el modal y cargar los datos de la tarea
   function openModal(id) {
@@ -396,6 +388,7 @@ function defineProperty() {
 //function to add event to eventsArr
 addEventSubmit.addEventListener("click", () => {
 
+
   const eventid = addEventid.value;
   const eventCliente = addEventCliente.value;
   const eventColaborador = addEventColaborador.value;
@@ -453,6 +446,21 @@ addEventSubmit.addEventListener("click", () => {
     });
   }
 
+  const formData = {
+    id_tarea: document.getElementById("id_tarea").value,
+    cliente: document.getElementById("cliente").value,
+    colaborador: document.getElementById("colaborador").value,
+    fecha: document.getElementById("fecha").value,
+    tipo: document.getElementById("tipo").value,
+    equipo: document.getElementById("equipo").value,
+    prioridad: document.getElementById("prioridad").value,
+    descripcion: document.getElementById("descripcion").value,
+    activo: document.getElementById("activocliente").value,
+    comentario: document.getElementById("comentario").value,
+};
+
+
+
   if (!eventAdded) {
     eventsArr.push({
       day: activeDay,
@@ -461,26 +469,53 @@ addEventSubmit.addEventListener("click", () => {
       events: [newEvent],
     });
   }
-  console.log(eventsArr);
-  addEventWrapper.classList.remove("active");
-  addEventid.value = "";
-  addEventCliente.value = "";
-  addEventColaborador.value = "";
-  addEventDescripcion.value = "";
-  const tarea = req.body;
-  // Corregir los nombres de las variables para que coincidan con el formulario
 
+  fetch("/aceptartarea", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(data => {
+        if (data.redirect) {
+            window.location.href = data.redirect; // Redirige a la URL especificada
+        } else {
+          console.log(eventsArr);
+          addEventWrapper.classList.remove("active");
+          addEventid.value = "";
+          addEventCliente.value = "";
+          addEventColaborador.value = "";
+          addEventDescripcion.value = "";
+          const tarea = req.body;
+          // Corregir los nombres de las variables para que coincidan con el formulario
+            alert("Tarea registrada correctamente");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Error al registrar la tarea");
+    });
+
+ 
   updateEvents(activeDay);
   //select active day and add event class if not added
   const activeDayEl = document.querySelector(".day.active");
   if (!activeDayEl.classList.contains("event")) {
     activeDayEl.classList.add("event");
   }
+
+
+  
 });
 
 // Funciones de almacenamiento
 function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventsArr));
+
+
+
 }
 
 function getEvents() {
@@ -489,3 +524,5 @@ function getEvents() {
   }
   eventsArr.push(...JSON.parse(localStorage.getItem("events")));
 }
+
+

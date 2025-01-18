@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="/resources/estilo/inicio.css">
     <link rel="stylesheet" href="/resources/estilo/agenda.css">
     <link rel="stylesheet" href="/resources/estilo/tablaTarea.css">
-  
+    
+   
+
     <title>inicio</title>
 </head>
 <body>
@@ -76,9 +78,9 @@
                     <i class="fas fa-times close"></i>
                   </div>
                   <div id="General" class="space">
-                    <form method="post" action="/aceptartarea">
-                      <input name="comentario" id="comentario" class="event-comentario" value="Sin comentario" hidden>
-                      <input type="text" name="id_tarea" id="id_tarea" class="event-id" hidden>
+                    <form method="post" action="/aceptartarea" id="tareaForm">
+                      <input type="text" name="id_tarea" id="id_tarea" class="event-id">
+                      
                       <!-- Filtra los nombres de clientes para evitar duplicados -->
                       <label for="cliente" style="color:rgb(0, 0, 0)">Tarea será ejecutada por:</label>
                       <select name="cliente" id="cliente" class="event-cliente">
@@ -149,19 +151,17 @@
                                   <option value="media">Media</option>
                                   <option value="baja">Baja</option>
                               </select>
+                              <div class="add-event-input">
+                                <label for="descripcion" style="color: rgb(0, 0, 0);">Descripción de la tarea:</label>
+                                <input name="descripcion" id="descripcion" class="event-descripcion"></input>
+                              </div> 
                             <input type="text" name="activo" id="activocliente" value="Activo" hidden>
-                            <div class="add-event-input">
-                              <label for="descripcion" style="color: rgb(0, 0, 0);">Descripción de la tarea:</label>
-                              <input name="descripcion" id="descripcion" class="event-descripcion"></input>
-                            </div>
-                            
-                              <input type="email" id="emailEncuesta" placeholder="Email" style="display: none;">
-                              <button id="guardar">GUARDAR</button>
-                              <div id="activar" class="display">
-                              <a class="add-event-btn" >CERRAR</a></div> 
-                              <h4 style="color:black">Para que se registre presione el boton de guardar, cerrar y después presione en el botón de Actualizar</h4>
+                              <input name="comentario" id="comentario" class="event-comentario" value="Sin comentario" hidden>
+                              <button id="guardar" >GUARDAR</button>
+                             <a  class="add-event-btn">CERRAR</a>
+                             
                             </form>
-                            
+                    
                               <div class="add-event-footer">
                                
                               </div></div>
@@ -201,8 +201,31 @@
                     <button class="add-event">
                       <i class="fas fa-plus"></i>
                     </button>
-<script src="/resources/javascript/GenerarId.js"></script>
-<script src="/resources/javascript/agenda.js"></script>
+                    
+                    <script src="/resources/javascript/agenda.js"></script>   
+                       
 </main>
+<script>
+   // Set to store previously generated IDs
+   const generatedIDs = new Set();
+
+function generarIDUnico() {
+    let id;
+    do {
+        // Genera un número de 5 dígitos
+        id = Math.floor(10000 + Math.random() * 90000);
+    } while (generatedIDs.has(id)); // Repite si el número ya existe en el Set
+    
+    // Agrega el ID al Set para marcarlo como usado
+    generatedIDs.add(id);
+
+    // Asigna el ID al input
+    document.getElementById("id_tarea").value = id;
+}
+
+// Llamada a la función para establecer el valor del input
+generarIDUnico();
+
+</script>   
 </body> 
 </html>

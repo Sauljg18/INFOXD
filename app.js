@@ -588,9 +588,26 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
     let confirmar = datos.confirmar;
     let valor = datos.valor;
     let photo = datos.foto;
+  
+    let buscar = "SELECT * FROM colaboradores WHERE correo = '"+correo+"'";
 
+    connection.query(buscar,[correo],function(error,row){    
+    if(error){
+        throw error;
+    }else{
+        if(row.length>0){
+            res.send(`
+                <script>
+                    alert('El correo ya existe en el registro.');
+                    window.history.back(); // Regresar al formulario
+                </script>
+            `);
+        }else{
+
+ 
     let registrar = "INSERT INTO colaboradores (idcolaborador, nombre, usuario, correo, cargo, contacto, acceso, contrasena, confirmar, valor, foto) VALUE ('"+idcolaborador +"','"+nombre +"','"+usuario +"','"+correo +"','"+carga +"','"+contacto +"','"+acceso +"','"+password +"','"+confirmar +"','"+valor +"','"+photo +"')";
-                
+    
+
     connection.query(registrar,function(error){
     if(error){
     throw error;
@@ -599,6 +616,10 @@ app.post("/validar", function(req,res){ // REGISTRO DE COLABORADOR
         res.redirect('/colab');
         }
     });
+}
+}
+
+});
 });
 
 app.post('/updatec', (req, res) => { // UPDARTE COLABORADOR
@@ -915,33 +936,26 @@ app.get("/deletes/:idcolaborador",authMiddleware, function(req,res){
         
             
 
-
-app.post("/aceptartarea",  function(req,res){ //REGISTRO TAREA
-    const tarea = req.body;
-   // Corregir los nombres de las variables para que coincidan con el formulario
-    let id_tarea = tarea.id_tarea;
-    let cliente = tarea.cliente;
-    let colaborador = tarea.colaborador;
-    let fecha = tarea.fecha;
-    let tipo = tarea.tipo;
-    let equipo = tarea.equipo;
-    let prioridad = tarea.prioridad;
-    let descripcion = tarea.descripcion;
-    let activate = tarea.activo;
-    let comentario = tarea.comentario;
-
-    let registrar = "INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, tipo, equipo, prioridad, descripcion, status, comentario) VALUE ('"+id_tarea +"','"+cliente +"','"+colaborador +"','"+fecha +"','"+tipo +"','"+ equipo +"','"+prioridad +"','"+descripcion +"','"+ activate +"', '"+ comentario +"')";
-                
-    connection.query(registrar,function(error){
-    if(error){
-    throw error;
-    }else{
-    console.log("Datos almacenados correctamente"); 
-   
-    }
-});
-});
-
+            app.post("/aceptartarea", (req, res) => {
+                const tarea = req.body;
+            
+                // Procesar la tarea...
+                let registrar = `
+                    INSERT INTO tareas (id_tarea, cliente, colaborador, fecha, tipo, equipo, prioridad, descripcion, status, comentario)
+                    VALUES ('${tarea.id_tarea}', '${tarea.cliente}', '${tarea.colaborador}', '${tarea.fecha}', '${tarea.tipo}', '${tarea.equipo}', '${tarea.prioridad}', '${tarea.descripcion}', '${tarea.activo}', '${tarea.comentario}')
+                `;
+            
+                connection.query(registrar, (error) => {
+                    if (error) {
+                        console.error("Error al registrar la tarea:", error);
+                        return res.status(500).json({ error: "Error al registrar la tarea" });
+                    }
+            
+                    console.log("Datos almacenados correctamente");
+                    res.json({ redirect: "/home" }); // Devuelve la URL para redirigir
+                });
+            });
+            
 app.post('/finalizar-tarea', (req, res) => {
     const { id_tarea } = req.body;
 
@@ -977,6 +991,7 @@ app.post('/reactivar-tarea', (req, res) => {
 //ruta de archivos estáticos
 app.use('/resources', express.static("public"));
 
+/*
 const PORT = process.env.PORT || 3000;
 // Cambia a la IP de tu servidor o deja 0.0.0.0 para aceptar cualquier conexión
 const HOST = '192.168.100.21';
@@ -984,10 +999,10 @@ const HOST = '192.168.100.21';
 app.listen(PORT, HOST, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
 });
+*/
 
 
 
-/*
 app.listen(3000,function(){
     console.log("Servidor creado http://localhost:3000");
-});;*/
+});;
